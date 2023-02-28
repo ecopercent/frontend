@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./style.css";
 
 export default function Profile({ user }) {
   const [edit, setEdit] = useState(false);
@@ -23,10 +24,10 @@ export default function Profile({ user }) {
 function ProfileImage({ edit, src }) {
   if (edit)
     return (
-      <img src={src} alt="user_profile_image_edit" width="100" height="100" />
+      <img className="profile-image" src={src} alt="user_profile_image_edit" />
     );
   else
-    return <img src={src} alt="user_profile_image" width="100" height="100" />;
+    return <img className="profile-image" src={src} alt="user_profile_image" />;
 }
 
 function ProfileEditButton({ edit, handleEdit }) {
