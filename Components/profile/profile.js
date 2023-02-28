@@ -3,6 +3,7 @@ import "./style.css";
 
 export default function Profile({ user }) {
   const [edit, setEdit] = useState(false);
+  const [nickname, setNickname] = useState(user.nickname);
 
   function handleEdit() {
     setEdit(!edit);
@@ -14,7 +15,8 @@ export default function Profile({ user }) {
       <ProfileEditButton edit={edit} handleEdit={handleEdit} />
       <ProfileMessage
         edit={edit}
-        nickname={user.nickname}
+        nickname={nickname}
+        setNickname={setNickname}
         text={user.profileMessage}
       />
     </>
@@ -36,11 +38,21 @@ function ProfileEditButton({ edit, handleEdit }) {
   return <button onClick={handleEdit}>{buttonMessage}</button>;
 }
 
-function ProfileMessage({ edit, nickname, text }) {
+function ProfileMessage({ edit, nickname, setNickname, text }) {
+  function handleNickname(e) {
+    setNickname(e.target.value);
+  }
+
   if (edit)
     return (
       <form>
-        <input type="text" minLength="1" maxLength="8" value={nickname} />
+        <input
+          type="text"
+          minLength="1"
+          maxLength="8"
+          value={nickname}
+          onChange={handleNickname}
+        />
         <input type="text" maxLength="30" value={text} />
       </form>
     );
