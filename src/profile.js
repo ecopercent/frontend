@@ -3,7 +3,7 @@ export default function Profile({ user }) {
   return (
     <>
       <ProfileImage src={user.profile_image} />
-      {/* 프로필 편집 버튼 */}
+      <ProfileEditButton />
       <ProfileMessage nickname={user.nickname} text={user.profile_message} />
     </>
   );
@@ -11,6 +11,10 @@ export default function Profile({ user }) {
 
 function ProfileImage({ src }) {
   return <img src={src} alt="user_profile_image" />;
+}
+
+function ProfileEditButton() {
+  return <button>프로필 편집</button>;
 }
 
 function ProfileMessage({ nickname, text }) {
