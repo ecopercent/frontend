@@ -1,5 +1,12 @@
-// user -> 유저 데이터 받아온 객체
+import { useState } from "react";
+
 export default function Profile({ user }) {
+  const [edit, setEdit] = useState(false);
+
+  function handleEdit() {
+    setEdit(!edit);
+  }
+
   return (
     <>
       <ProfileImage src={user.profile_image} />
