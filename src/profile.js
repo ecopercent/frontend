@@ -1,3 +1,4 @@
+// user -> 유저 데이터 받아온 객체
 export default function Profile({ user }) {
   return (
     <>
