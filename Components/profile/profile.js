@@ -39,11 +39,10 @@ function ProfileEditButton({ edit, handleEdit }) {
 function ProfileMessage({ edit, nickname, text }) {
   if (edit)
     return (
-      <>
-        <p>편집중!</p>
-        <p>{nickname}</p>
-        <p>{text}</p>
-      </>
+      <form>
+        <input type="text" minLength="1" maxLength="8" value={nickname} />
+        <input type="text" maxLength="30" value={text} />
+      </form>
     );
   else
     return (
