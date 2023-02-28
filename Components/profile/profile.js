@@ -31,8 +31,9 @@ function ProfileImage({ edit, src }) {
 }
 
 function ProfileEditButton({ edit, handleEdit }) {
-  if (edit) return <button onClick={handleEdit}>완료</button>;
-  else return <button onClick={handleEdit}>프로필 편집</button>;
+  let buttonMessage = "프로필 편집";
+  if (edit) buttonMessage = "완료";
+  return <button onClick={handleEdit}>{buttonMessage}</button>;
 }
 
 function ProfileMessage({ edit, nickname, text }) {
