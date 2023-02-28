@@ -4,6 +4,7 @@ import "./style.css";
 export default function Profile({ user }) {
   const [edit, setEdit] = useState(false);
   const [nickname, setNickname] = useState(user.nickname);
+  const [message, setMessage] = useState(user.profileMessage);
 
   function handleEdit() {
     setEdit(!edit);
@@ -17,7 +18,8 @@ export default function Profile({ user }) {
         edit={edit}
         nickname={nickname}
         setNickname={setNickname}
-        text={user.profileMessage}
+        message={message}
+        setMessage={setMessage}
       />
     </>
   );
@@ -38,9 +40,13 @@ function ProfileEditButton({ edit, handleEdit }) {
   return <button onClick={handleEdit}>{buttonMessage}</button>;
 }
 
-function ProfileMessage({ edit, nickname, setNickname, text }) {
+function ProfileMessage({ edit, nickname, setNickname, message, setMessage }) {
   function handleNickname(e) {
     setNickname(e.target.value);
+  }
+
+  function handleMessage(e) {
+    setMessage(e.target.value);
   }
 
   if (edit)
@@ -53,14 +59,19 @@ function ProfileMessage({ edit, nickname, setNickname, text }) {
           value={nickname}
           onChange={handleNickname}
         />
-        <input type="text" maxLength="30" value={text} />
+        <input
+          type="text"
+          maxLength="30"
+          value={message}
+          onChange={handleMessage}
+        />
       </form>
     );
   else
     return (
       <>
         <p>{nickname}</p>
-        <p>{text}</p>
+        <p>{message}</p>
       </>
     );
 }
