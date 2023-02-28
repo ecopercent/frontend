@@ -10,12 +10,12 @@ export default function Profile({ user }) {
 
   return (
     <>
-      <ProfileImage src={user.profile_image} />
+      <ProfileImage src={user.profileImage} />
       <ProfileEditButton edit={edit} handleEdit={handleEdit} />
       <ProfileMessage
         edit={edit}
         nickname={user.nickname}
-        text={user.profile_message}
+        text={user.profileMessage}
       />
     </>
   );
@@ -24,10 +24,10 @@ export default function Profile({ user }) {
 function ProfileImage({ edit, src }) {
   if (edit)
     return (
-      <img className="profile-image" src={src} alt="user_profile_image_edit" />
+      <img className="profile-image" src={src} alt="user_profileImage_edit" />
     );
   else
-    return <img className="profile-image" src={src} alt="user_profile_image" />;
+    return <img className="profile-image" src={src} alt="user_profileImage" />;
 }
 
 function ProfileEditButton({ edit, handleEdit }) {
