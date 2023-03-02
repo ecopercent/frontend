@@ -1,21 +1,23 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./style.css";
 
-export default function Profile({ user }) {
-  const [edit, setEdit] = useState(false);
+const user = {
+	nickname: "유저닉네임",
+	profileImage: "https://avatars.githubusercontent.com/u/75291932?v=4",
+	profileMessage: "Hello Ecopercent!"
+  };
+
+export default function Profile() {
+  const [isEditing, setIsEditing] = useState(false);
   const [nickname, setNickname] = useState(user.nickname);
   const [message, setMessage] = useState(user.profileMessage);
-
-  function handleEdit() {
-    setEdit(!edit);
-  }
 
   return (
     <>
       <ProfileImage src={user.profileImage} />
-      <ProfileEditButton edit={edit} handleEdit={handleEdit} />
+      <ProfileEditButton isEditing={isEditing} handleEdit={() => {setIsEditing(!isEditing);}} />
       <ProfileMessage
-        edit={edit}
+        isEditing={isEditing}
         nickname={nickname}
         setNickname={setNickname}
         message={message}
@@ -25,22 +27,19 @@ export default function Profile({ user }) {
   );
 }
 
-function ProfileImage({ edit, src }) {
-  if (edit)
+function ProfileImage({ isEditing, src }) {
     return (
-      <img className="profile-image" src={src} alt="user_profileImage_edit" />
+      <img className="profile-image" src={src} alt={isEditing ? "user_profileImage_edit" : "user_profileImage"} />
     );
-  else
-    return <img className="profile-image" src={src} alt="user_profileImage" />;
 }
 
-function ProfileEditButton({ edit, handleEdit }) {
+function ProfileEditButton({ isEditing, handleEdit }) {
   let buttonMessage = "프로필 편집";
-  if (edit) buttonMessage = "완료";
+  if (isEditing) buttonMessage = "완료";
   return <button onClick={handleEdit}>{buttonMessage}</button>;
 }
 
-function ProfileMessage({ edit, nickname, setNickname, message, setMessage }) {
+function ProfileMessage({ isEditing, nickname, setNickname, message, setMessage }) {
   function handleNickname(e) {
     setNickname(e.target.value);
   }
@@ -49,7 +48,7 @@ function ProfileMessage({ edit, nickname, setNickname, message, setMessage }) {
     setMessage(e.target.value);
   }
 
-  if (edit)
+  if (isEditing)
     return (
       <form>
         <input
@@ -67,11 +66,10 @@ function ProfileMessage({ edit, nickname, setNickname, message, setMessage }) {
         />
       </form>
     );
-  else
-    return (
-      <>
-        <p>{nickname}</p>
-        <p>{message}</p>
-      </>
-    );
+return (
+	<>
+	<p>{nickname}</p>
+	<p>{message}</p>
+	</>
+);
 }
