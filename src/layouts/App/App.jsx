@@ -3,9 +3,15 @@ import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import loadable from "@loadable/component";
 
-const Login = loadable(() => import("../Login/Login"));
-const Home = loadable(() => import("../Home/Home"));
-const Error = loadable(() => import("../Error/Error"));
+const Login = loadable(() => {
+  return import("../Login/Login");
+});
+const Home = loadable(() => {
+  return import("../Home/Home");
+});
+const Error = loadable(() => {
+  return import("../Error/Error");
+});
 
 function App() {
   return (
