@@ -34,20 +34,10 @@ function ProfileImage({ isEditing, src }) {
 }
 
 function ProfileEditButton({ isEditing, handleEdit }) {
-  let buttonMessage = "프로필 편집";
-  if (isEditing) buttonMessage = "완료";
-  return <button onClick={handleEdit}>{buttonMessage}</button>;
+  return <button onClick={handleEdit}>{isEditing ? "완료" : "프로필 편집"}</button>;
 }
 
 function ProfileMessage({ isEditing, nickname, setNickname, message, setMessage }) {
-  function handleNickname(e) {
-    setNickname(e.target.value);
-  }
-
-  function handleMessage(e) {
-    setMessage(e.target.value);
-  }
-
   if (isEditing)
     return (
       <form>
@@ -56,13 +46,13 @@ function ProfileMessage({ isEditing, nickname, setNickname, message, setMessage 
           minLength="1"
           maxLength="8"
           value={nickname}
-          onChange={handleNickname}
+          onChange={(e) => {setNickname(e.target.value);}}
         />
         <input
           type="text"
           maxLength="30"
           value={message}
-          onChange={handleMessage}
+          onChange={(e) => {setMessage(e.target.value);}}
         />
       </form>
     );
