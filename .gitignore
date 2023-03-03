@@ -1,4 +1,3 @@
-.gitmessage.txt
 ### macOS ###
 # General
 .DS_Store
@@ -56,4 +55,6 @@ ecopercent/node_modules
 dist
 dist/*
 .idea
+.gitmessage.txt
+launch.json
 # End of https://www.toptal.com/developers/gitignore/api/react,macos
