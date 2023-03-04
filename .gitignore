@@ -57,4 +57,5 @@ dist/*
 .idea
 .gitmessage.txt
 launch.json
+.vscode
 # End of https://www.toptal.com/developers/gitignore/api/react,macos
