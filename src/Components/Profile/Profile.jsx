@@ -85,13 +85,14 @@ function ProfileText({ isEditing, setUser, user }) {
   if (isEditing)
     return (
       <form className="ProfileText-container ProfileText-container--editing">
-        <input
-          type="text"
-          className="ProfileText__input font-input"
+        <textarea
+          className="ProfileText__textarea font-input"
           value={user.nickname}
           onChange={(e) => {
             setUser({ ...user, nickname: e.target.value });
           }}
+          rows="1"
+          maxLength="8"
         />
         <textarea
           className="ProfileText__textarea font-input"
@@ -99,16 +100,17 @@ function ProfileText({ isEditing, setUser, user }) {
           onChange={(e) => {
             setUser({ ...user, profileMessage: e.target.value });
           }}
-          maxLength="26"
+          rows="3"
+          maxLength="50"
         />
       </form>
     );
   return (
     <div className="ProfileText-container">
-      <p className="ProfileText__text-nickname font-bold-body">
+      <p className="ProfileText__text-nickname font-body-bold">
         {user.nickname}
       </p>
-      <p className="ProfileText__text-msg font-regular-body">
+      <p className="ProfileText__text-msg font-body-regular">
         {user.profileMessage}
       </p>
     </div>
