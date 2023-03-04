@@ -5,7 +5,7 @@ import "./style.css";
 const initialUser = {
   nickname: "유저닉네임",
   profileImage: "https://avatars.githubusercontent.com/u/75291932?v=4",
-  profileMessage: "Hello Ecopercent!",
+  profileMessage: "Hello Ecopercent! ㅁㄴㅇㄹㅇㄴㄹㅇㄴㄹㄴㅇㅁㄹㅁ",
 };
 
 export default function Profile() {
@@ -14,8 +14,8 @@ export default function Profile() {
   const savedUser = { ...initialUser };
 
   return (
-    <div>
-      <div>
+    <div className="Profile">
+      <div className="ProfileImg-ProfileText-container">
         <ProfileImg
           isEditing={isEditing}
           user={user}
@@ -39,6 +39,7 @@ function ProfileImg({ isEditing, user, setImg }) {
   function onUpload(e) {
     const uploadedImg = e.target.files[0];
     const reader = new FileReader();
+
     reader.readAsDataURL(uploadedImg);
     return new Promise((resolve) => {
       reader.onload = () => {
@@ -53,12 +54,13 @@ function ProfileImg({ isEditing, user, setImg }) {
       <form>
         <label htmlFor="profile-img-input">
           <img
-            className="profile-img"
+            className="ProfileImg__img"
             src={user.profileImage}
             alt="User profile preview"
           />
         </label>
         <input
+          className="ProfileImg__form__input"
           id="profile-img-input"
           type="file"
           accept="image/*"
@@ -71,44 +73,56 @@ function ProfileImg({ isEditing, user, setImg }) {
     );
   }
   return (
-    <img className="profile-img" src={user.profileImage} alt="User profile" />
+    <img
+      className="ProfileImg__img"
+      src={user.profileImage}
+      alt="User profile"
+    />
   );
 }
 
 function ProfileText({ isEditing, setUser, user }) {
+  if (isEditing)
+    return (
+      <form className="ProfileText-container ProfileText-container--editing">
+        <input
+          type="text"
+          className="ProfileText__input font-input"
+          value={user.nickname}
+          onChange={(e) => {
+            setUser({ ...user, nickname: e.target.value });
+          }}
+        />
+        <textarea
+          className="ProfileText__textarea font-input"
+          value={user.profileMessage}
+          onChange={(e) => {
+            setUser({ ...user, profileMessage: e.target.value });
+          }}
+          maxLength="26"
+        />
+      </form>
+    );
   return (
-    <div>
-      {isEditing ? (
-        <form>
-          <input
-            value={user.nickname}
-            onChange={(e) => {
-              setUser({ ...user, nickname: e.target.value });
-            }}
-          />
-          <input
-            value={user.profileMessage}
-            onChange={(e) => {
-              setUser({ ...user, profileMessage: e.target.value });
-            }}
-          />
-        </form>
-      ) : (
-        <>
-          <p>{user.nickname}</p>
-          <p>{user.profileMessage}</p>
-        </>
-      )}
+    <div className="ProfileText-container">
+      <p className="ProfileText__text-nickname font-bold-body">
+        {user.nickname}
+      </p>
+      <p className="ProfileText__text-msg font-regular-body">
+        {user.profileMessage}
+      </p>
     </div>
   );
 }
 
 function ProfileBtns({ isEditing, setIsEditing, setUser, savedUser }) {
   return (
-    <div>
+    <div className="ProfileBtns-container">
       <button
         type="button"
-        className={`btn-edit ${isEditing ? "btn-replace" : ""}`}
+        className={`ProfileBtns__btn ${
+          isEditing ? "ProfileBtns__btn--replaced" : ""
+        }`}
         onClick={() => {
           setIsEditing(!isEditing);
         }}
@@ -117,7 +131,9 @@ function ProfileBtns({ isEditing, setIsEditing, setUser, savedUser }) {
       </button>
       <button
         type="submit"
-        className={`btn-edit ${isEditing ? "" : "btn-replace"}`}
+        className={`ProfileBtns__btn--featured ${
+          isEditing ? "" : "ProfileBtns__btn--replaced"
+        }`}
         onClick={() => {
           setIsEditing(!isEditing);
           // POST
@@ -127,7 +143,9 @@ function ProfileBtns({ isEditing, setIsEditing, setUser, savedUser }) {
       </button>
       <button
         type="button"
-        className={`btn-cancel ${isEditing ? "" : "hidden"}`}
+        className={`ProfileBtns__btn ${
+          isEditing ? "" : "ProfileBtns__btn--hidden"
+        }`}
         onClick={() => {
           setIsEditing(!isEditing);
           setUser(savedUser);
