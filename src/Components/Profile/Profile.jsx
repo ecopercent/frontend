@@ -16,7 +16,13 @@ export default function Profile() {
   return (
     <div>
       <div>
-        <img src={user.profileImage} alt="User profile" />
+        <ProfileImg
+          isEditing={isEditing}
+          user={user}
+          setImg={(src) => {
+            setUser({ ...user, profileImage: src });
+          }}
+        />
         <ProfileText isEditing={isEditing} setUser={setUser} user={user} />
       </div>
       <ProfileBtns
@@ -26,6 +32,46 @@ export default function Profile() {
         savedUser={savedUser}
       />
     </div>
+  );
+}
+
+function ProfileImg({ isEditing, user, setImg }) {
+  function onUpload(e) {
+    const uploadedImg = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(uploadedImg);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImg(reader.result || null);
+        resolve();
+      };
+    });
+  }
+
+  if (isEditing) {
+    return (
+      <form>
+        <label htmlFor="profile-img-input">
+          <img
+            className="profile-img"
+            src={user.profileImage}
+            alt="User profile preview"
+          />
+        </label>
+        <input
+          id="profile-img-input"
+          type="file"
+          accept="image/*"
+          src={user.profileImage}
+          onChange={(e) => {
+            return onUpload(e);
+          }}
+        />
+      </form>
+    );
+  }
+  return (
+    <img className="profile-img" src={user.profileImage} alt="User profile" />
   );
 }
 
