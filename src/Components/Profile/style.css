@@ -1,6 +1,18 @@
-.profile-image {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  border: 0.5px solid;
+.profile-img {
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	border: 0.5px solid;
+}
+
+#profile-img-input {
+	display: none;
+}
+
+.btn-replace {
+	display: none;
+}
+
+.hidden {
+	visibility: hidden;
 }

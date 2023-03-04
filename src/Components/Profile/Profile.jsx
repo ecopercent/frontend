@@ -1,65 +1,140 @@
 import React, { useState } from "react";
 import "./style.css";
 
-const user = {
-	nickname: "유저닉네임",
-	profileImage: "https://avatars.githubusercontent.com/u/75291932?v=4",
-	profileMessage: "Hello Ecopercent!"
-  };
+// GET
+const initialUser = {
+  nickname: "유저닉네임",
+  profileImage: "https://avatars.githubusercontent.com/u/75291932?v=4",
+  profileMessage: "Hello Ecopercent!",
+};
 
 export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
-  const [nickname, setNickname] = useState(user.nickname);
-  const [message, setMessage] = useState(user.profileMessage);
+  const [user, setUser] = useState(initialUser);
+  const savedUser = { ...initialUser };
 
   return (
-    <>
-      <ProfileImage src={user.profileImage} />
-      <ProfileEditButton isEditing={isEditing} handleEdit={() => {setIsEditing(!isEditing);}} />
-      <ProfileMessage
+    <div>
+      <div>
+        <ProfileImg
+          isEditing={isEditing}
+          user={user}
+          setImg={(src) => {
+            setUser({ ...user, profileImage: src });
+          }}
+        />
+        <ProfileText isEditing={isEditing} setUser={setUser} user={user} />
+      </div>
+      <ProfileBtns
         isEditing={isEditing}
-        nickname={nickname}
-        setNickname={setNickname}
-        message={message}
-        setMessage={setMessage}
+        setIsEditing={setIsEditing}
+        setUser={setUser}
+        savedUser={savedUser}
       />
-    </>
+    </div>
   );
 }
 
-function ProfileImage({ isEditing, src }) {
-    return (
-      <img className="profile-image" src={src} alt={isEditing ? "user_profileImage_edit" : "user_profileImage"} />
-    );
-}
+function ProfileImg({ isEditing, user, setImg }) {
+  function onUpload(e) {
+    const uploadedImg = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(uploadedImg);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImg(reader.result || null);
+        resolve();
+      };
+    });
+  }
 
-function ProfileEditButton({ isEditing, handleEdit }) {
-  return <button onClick={handleEdit}>{isEditing ? "완료" : "프로필 편집"}</button>;
-}
-
-function ProfileMessage({ isEditing, nickname, setNickname, message, setMessage }) {
-  if (isEditing)
+  if (isEditing) {
     return (
       <form>
+        <label htmlFor="profile-img-input">
+          <img
+            className="profile-img"
+            src={user.profileImage}
+            alt="User profile preview"
+          />
+        </label>
         <input
-          type="text"
-          minLength="1"
-          maxLength="8"
-          value={nickname}
-          onChange={(e) => {setNickname(e.target.value);}}
-        />
-        <input
-          type="text"
-          maxLength="30"
-          value={message}
-          onChange={(e) => {setMessage(e.target.value);}}
+          id="profile-img-input"
+          type="file"
+          accept="image/*"
+          src={user.profileImage}
+          onChange={(e) => {
+            return onUpload(e);
+          }}
         />
       </form>
     );
-return (
-	<>
-	<p>{nickname}</p>
-	<p>{message}</p>
-	</>
-);
+  }
+  return (
+    <img className="profile-img" src={user.profileImage} alt="User profile" />
+  );
+}
+
+function ProfileText({ isEditing, setUser, user }) {
+  return (
+    <div>
+      {isEditing ? (
+        <form>
+          <input
+            value={user.nickname}
+            onChange={(e) => {
+              setUser({ ...user, nickname: e.target.value });
+            }}
+          />
+          <input
+            value={user.profileMessage}
+            onChange={(e) => {
+              setUser({ ...user, profileMessage: e.target.value });
+            }}
+          />
+        </form>
+      ) : (
+        <>
+          <p>{user.nickname}</p>
+          <p>{user.profileMessage}</p>
+        </>
+      )}
+    </div>
+  );
+}
+
+function ProfileBtns({ isEditing, setIsEditing, setUser, savedUser }) {
+  return (
+    <div>
+      <button
+        type="button"
+        className={`btn-edit ${isEditing ? "btn-replace" : ""}`}
+        onClick={() => {
+          setIsEditing(!isEditing);
+        }}
+      >
+        프로필 편집
+      </button>
+      <button
+        type="submit"
+        className={`btn-edit ${isEditing ? "" : "btn-replace"}`}
+        onClick={() => {
+          setIsEditing(!isEditing);
+          // POST
+        }}
+      >
+        완료
+      </button>
+      <button
+        type="button"
+        className={`btn-cancel ${isEditing ? "" : "hidden"}`}
+        onClick={() => {
+          setIsEditing(!isEditing);
+          setUser(savedUser);
+        }}
+      >
+        취소
+      </button>
+    </div>
+  );
 }
