@@ -36,6 +36,7 @@ export default function Profile() {
 }
 
 function ProfileImg({ isEditing, user, setImg }) {
+  const [isUploaded, setIsUploaded] = useState(false);
   function onUpload(e) {
     const uploadedImg = e.target.files[0];
     const reader = new FileReader();
@@ -44,6 +45,7 @@ function ProfileImg({ isEditing, user, setImg }) {
     return new Promise((resolve) => {
       reader.onload = () => {
         setImg(reader.result || null);
+        setIsUploaded(true);
         resolve();
       };
     });
@@ -54,7 +56,19 @@ function ProfileImg({ isEditing, user, setImg }) {
       <form>
         <label htmlFor="profile-img-input">
           <img
-            className="ProfileImg__img"
+            className={`ProfileImg__form__img--overlay ${
+              isUploaded ? "ProfileImg__form__img--uploaded" : ""
+            }`}
+            src="https://i.ibb.co/L17G9ms/camera-overlay.png"
+            alt="profile edit"
+          />
+          <div
+            className={`ProfileImg__form__div ${
+              isUploaded ? "ProfileImg__form__img--uploaded" : ""
+            }`}
+          />
+          <img
+            className="ProfileImg__img ProfileImg__form__img"
             src={user.profileImage}
             alt="User profile preview"
           />

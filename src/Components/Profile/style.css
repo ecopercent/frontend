@@ -36,6 +36,26 @@ body {
 	height: 100px;
 }
 
+.ProfileImg__form__div {
+	display: inline-block;
+	position: absolute;
+	height: 100.5px;
+	width: 100.5px;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.ProfileImg__form__img--overlay {
+	position: absolute;
+	height: 40px;
+	width: 40px;
+	padding: 30px 30px;
+}
+
+.ProfileImg__form__img--uploaded {
+	display: none;
+}
+
 .ProfileImg__img {
 	height: 100px;
 	width: 100px;
