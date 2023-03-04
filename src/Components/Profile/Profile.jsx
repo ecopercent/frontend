@@ -120,7 +120,7 @@ function ProfileBtns({ isEditing, setIsEditing, setUser, savedUser }) {
     <div className="ProfileBtns-container">
       <button
         type="button"
-        className={`ProfileBtns__btn ${
+        className={`ProfileBtns__btn font-caption1-regular ${
           isEditing ? "ProfileBtns__btn--replaced" : ""
         }`}
         onClick={() => {
@@ -131,7 +131,7 @@ function ProfileBtns({ isEditing, setIsEditing, setUser, savedUser }) {
       </button>
       <button
         type="submit"
-        className={`ProfileBtns__btn--featured ${
+        className={`ProfileBtns__btn ProfileBtns__btn--featured font-caption1-bold ${
           isEditing ? "" : "ProfileBtns__btn--replaced"
         }`}
         onClick={() => {
@@ -143,7 +143,7 @@ function ProfileBtns({ isEditing, setIsEditing, setUser, savedUser }) {
       </button>
       <button
         type="button"
-        className={`ProfileBtns__btn ${
+        className={`ProfileBtns__btn font-caption1-regular ${
           isEditing ? "" : "ProfileBtns__btn--hidden"
         }`}
         onClick={() => {

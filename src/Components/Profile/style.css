@@ -1,3 +1,13 @@
+/*					Colors	 				*/
+
+:root {
+	--light-green: #E1EEDD;
+	--light-gray: #DEDEDE;
+  }
+  
+
+/*					Classes	 				*/
+
 .Profile {
 	display: flex;
 	flex-direction: column;
@@ -79,13 +89,24 @@
 	height: 24px;
 }
 
-/* .ProfileBtns__btn {
-
+.ProfileBtns__btn {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	
+	width: 86px;
+	height: 24px;
+	
+	background: var(--light-gray);
+	border-radius: 8px;
+	border: 0px;
 }
 
 .ProfileBtns__btn--featured {
-
-} */
+	background: var(--light-green);
+}
 
 .ProfileBtns__btn--replaced {
 	display: none;
@@ -98,7 +119,7 @@
 
 /*					Fonts	 				*/
 
-.font-bold-body {
+.font-body-bold {
 	font-family: 'SF Pro Text';
 	font-style: normal;
 	font-weight: 600;
@@ -109,7 +130,7 @@
 	letter-spacing: -0.408px;
 }
 
-.font-regular-body {
+.font-body-regular {
 	font-family: 'SF Pro Text';
 	font-style: normal;
 	font-weight: 400;
@@ -129,4 +150,22 @@
 	/* or 156% */
 
 	letter-spacing: -0.32px;
+}
+
+.font-caption1-regular {
+	font-family: 'SF Pro Text';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 16px;
+	/* identical to box height, or 133% */
+}
+
+.font-caption1-bold {
+	font-family: 'SF Pro Text';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 16px;
+	/* identical to box height, or 133% */
 }
