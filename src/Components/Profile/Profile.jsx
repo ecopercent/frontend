@@ -55,17 +55,17 @@ function ProfileImg({ isEditing, user, setImg }) {
     return (
       <form>
         <label htmlFor="profile-img-input">
+          <div
+            className={`ProfileImg__form__div ${
+              isUploaded ? "ProfileImg__form__img--uploaded" : ""
+            }`}
+          />
           <img
             className={`ProfileImg__form__img--overlay ${
               isUploaded ? "ProfileImg__form__img--uploaded" : ""
             }`}
             src="https://i.ibb.co/L17G9ms/camera-overlay.png"
             alt="profile edit"
-          />
-          <div
-            className={`ProfileImg__form__div ${
-              isUploaded ? "ProfileImg__form__img--uploaded" : ""
-            }`}
           />
           <img
             className="ProfileImg__img ProfileImg__form__img"
