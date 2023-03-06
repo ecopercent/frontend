@@ -11,5 +11,5 @@ export const FooterWrap = styled.div`
 `;
 
 export const PageWrap = styled.div`
-  min-height: 100%;
+  max-height: 92%;
 `;

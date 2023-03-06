@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from "react";
 import TabBar from "../../Components/TabBar/TabBar";
-import ItemPage from "../../pages/ItemPage/ItemPage";
-import MainPage from "../../pages/MainPage/MainPage";
-import SettingPage from "../../pages/SettingPage/SettingPage";
+import ItemPage from "../../Pages/ItemPage/ItemPage";
+import MainPage from "../../Pages/MainPage/MainPage";
+import SettingPage from "../../Pages/SettingPage/SettingPage";
 import Error from "../Error/Error";
 import { PageWrap, FooterWrap } from "./style";
 
