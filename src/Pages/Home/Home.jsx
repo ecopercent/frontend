@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "../../Components/Profile/Profile";
 
-const MainPage = () => {
+const Main = () => {
   return (
     <div>
       <h1>메인페이지</h1>
@@ -18,4 +18,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default Main;
