@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TabItemBackGround } from "./style";
 
 const TabItem = ({
@@ -7,13 +8,13 @@ const TabItem = ({
   IconComponent,
   setCurrTabNumber,
   currTabNumber,
+  page,
 }) => {
   const navigate = useNavigate();
   const tabClickHandler = useCallback(() => {
     setCurrTabNumber(itemNumber);
-    navigate("/home");
+    navigate(`/main/${page}`);
   }, []);
-
   return (
     <TabItemBackGround
       onClick={tabClickHandler}
@@ -21,9 +22,7 @@ const TabItem = ({
         backgroundColor: `${currTabNumber === itemNumber ? "green" : ""}`,
       }}
     >
-      <Link to="/home/main">
-        <IconComponent />
-      </Link>
+      <IconComponent />
     </TabItemBackGround>
   );
 };

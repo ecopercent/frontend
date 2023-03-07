@@ -1,48 +1,54 @@
+import { useParams } from "react-router-dom";
 import React, { useState } from "react";
-import { Route } from "react-router-dom";
-import loadable from "@loadable/component";
+import { AiFillSetting } from "react-icons/ai";
+import { BiHomeAlt } from "react-icons/bi";
+import { BsFillBoxFill } from "react-icons/bs";
 import TabBar from "../../Components/TabBar/TabBar";
-import ItemPage from "../../Pages/ItemPage/ItemPage";
-// import MainPage from "../../Pages/MainPage/MainPage";
-import SettingPage from "../../Pages/SettingPage/SettingPage";
-// import Error from "../Error/Error";
+import Error from "../Error/Error";
+import Setting from "../../Pages/Setting/Setting";
+import Home from "../../Pages/Home/Home";
+import Item from "../../Pages/Item/Item";
 import { FooterWrap, PageWrap } from "./style";
 
-const HomePage = loadable(() => {
-  return import("../../Pages/HomePage/HomePage");
-});
+const routeInfo = [
+  {
+    page: "setting",
+    jsx: Setting,
+    icon: AiFillSetting,
+  },
+  {
+    page: "home",
+    jsx: Home,
+    icon: BiHomeAlt,
+  },
+  {
+    page: "item",
+    jsx: Item,
+    icon: BsFillBoxFill,
+  },
+];
+
+const generateFindIndexCondition = (page) => {
+  return (arrElement) => {
+    return arrElement.page === page;
+  };
+};
+
 const Main = () => {
-  const [currTabNumber, setCurrTabNumber] = useState(1);
-  // const ConvertNumberToPage = useCallback(() => {
-  //   switch (Number(currTabNumber)) {
-  //     case 0:
-  //       return <SettingPage />;
-  //     case 1:
-  //       return <MainPage />;
-  //     case 2:
-  //       return <ItemPage />;
-  //     default:
-  //       return <Error />;
-  //   }
-  // }, [currTabNumber]);
+  const params = useParams();
+  const pageNum = routeInfo.findIndex(generateFindIndexCondition(params.page));
+  const [currTabNumber, setCurrTabNumber] = useState(pageNum);
+
+  if (params === undefined || currTabNumber === -1) return <Error />;
 
   return (
     <div>
-      {/* <Routes> */}
-      <Route path="/home/setting" element={<SettingPage />} />
-      <Route path="/home/main" element={<HomePage />} />
-      <Route path="/home/item" element={<ItemPage />} />
-      {/* </Routes> */}
-      <PageWrap>
-        {/* {ConvertNumberToPage()} */}
-        {/* <BrowserRouter> */}
-
-        {/* </BrowserRouter> */}
-      </PageWrap>
+      <PageWrap>{routeInfo[currTabNumber].jsx()}</PageWrap>
       <FooterWrap>
         <TabBar
           setCurrTabNumber={setCurrTabNumber}
           currTabNumber={currTabNumber}
+          routeInfo={routeInfo}
         />
       </FooterWrap>
     </div>
