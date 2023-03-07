@@ -2,6 +2,9 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import loadable from "@loadable/component";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 const Login = loadable(() => {
   return import("../Login/Login");
