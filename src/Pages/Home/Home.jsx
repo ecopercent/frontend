@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Profile from "../../Components/Profile/Profile";
-import TileItem from "../../Components/TitleImg/TitleImg";
+// import TileItem from "../../Components/TitleImg/TitleImg";
 
 const Home = () => {
   const [showType, setShowType] = useState(0);
@@ -26,8 +26,6 @@ const Home = () => {
         텀블
       </button>
       <h1>메인페이지</h1>
-      <TileItem catagory={0} />
-      <TileItem catagory={1} />
       {/* {converShowType(showType)} */}
     </div>
   );
