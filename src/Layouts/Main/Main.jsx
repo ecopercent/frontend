@@ -10,12 +10,6 @@ import Home from "../../Pages/Home/Home";
 import Item from "../../Pages/Item/Item";
 import { FooterWrap, PageWrap } from "./style";
 
-const generateFindIndexCondition = (page) => {
-  return (arrElement) => {
-    return arrElement.page === page;
-  };
-};
-
 const Main = () => {
   const routeInfo = [
     {
@@ -36,7 +30,9 @@ const Main = () => {
   ];
 
   const params = useParams();
-  const pageNum = routeInfo.findIndex(generateFindIndexCondition(params.page));
+  const pageNum = routeInfo.findIndex((info) => {
+    return info.page === params.page;
+  });
   const [currTabNumber, setCurrTabNumber] = useState(pageNum);
 
   if (params === undefined || currTabNumber === -1 || pageNum === -1)
