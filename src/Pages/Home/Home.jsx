@@ -3,12 +3,7 @@ import Profile from "../../Components/Profile/Profile";
 
 const Home = () => {
   const [showType, setShowType] = useState(0);
-  console.log(showType);
-  console.log(showType);
-  console.log(showType);
-  console.log(showType);
   const clickHandler = (e) => {
-    console.log(showType);
     setShowType(e.target.value);
   };
 
