@@ -6,8 +6,8 @@ import loadable from "@loadable/component";
 const Login = loadable(() => {
   return import("../Login/Login");
 });
-const Home = loadable(() => {
-  return import("../Home/Home");
+const Main = loadable(() => {
+  return import("../Main/Main");
 });
 const Error = loadable(() => {
   return import("../Error/Error");
@@ -18,7 +18,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home/*" element={<Home />} />
+        <Route path="/main/:page" element={<Main />} />
         <Route path="/*" element={<Error />} />
       </Routes>
     </BrowserRouter>
