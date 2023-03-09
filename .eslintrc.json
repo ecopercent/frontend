@@ -31,14 +31,14 @@
 			"error",
 			"always"
 		],
-		// tmp rules. plan to use Typescript
-		"react/prop-types": 1,
-		"react/button-has-type": 1,
 		"jsx-a11y/label-has-associated-control": [
 			2,
 			{
 			  "labelAttributes": ["htmlFor"]
 			}
-		  ]
+		],
+		// tmp rules. plan to use Typescript
+		"react/prop-types": 1,
+		"react/button-has-type": 1
 	}
 }
