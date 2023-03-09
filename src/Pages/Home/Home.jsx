@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Profile from "../../Components/Profile/Profile";
-// import TileItem from "../../Components/TitleImg/TitleImg";
 
 const Home = () => {
   const [showType, setShowType] = useState(0);
