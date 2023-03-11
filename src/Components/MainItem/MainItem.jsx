@@ -1,43 +1,71 @@
-import { findAllByDisplayValue } from "@testing-library/react";
 import React, { useState } from "react";
 
 export default function MainItemTab() {
-  const [tumblerTab, setTumblerTab] = useState(false);
-  const [ecobagTab, setEcobagTab] = useState(findAllByDisplayValue);
+  const [itemTab, setItemTab] = useState({
+    tumbler: false,
+    ecobag: false,
+  });
 
   return (
     <div>
+      <TabButtons setItemTab={setItemTab} />
+      {itemTab.tumbler && <span>텀블러</span>}
+      {itemTab.ecobag && <span>에코백</span>}
+      {itemTab.tumbler || itemTab.ecobag || <span>아이템을 등록하세요.</span>}
+      <MainItem tumbler={itemTab.tumbler} ecobag={itemTab.ecobag} />
+    </div>
+  );
+}
+
+function TabButtons({ setItemTab }) {
+  const [tryConvert, setTryConvert] = useState(false);
+
+  return (
+    <div>
+		{tryConvert && 
       <div>
         <button
+          type="button"
           onClick={() => {
-            setTumblerTab(true);
-            setEcobagTab(true);
+            setItemTab({
+              tumbler: true,
+              ecobag: true,
+            });
           }}
         >
           전체
         </button>
         <button
+          type="button"
           onClick={() => {
-            setTumblerTab(true);
-            setEcobagTab(false);
+            setItemTab({
+              tumbler: true,
+              ecobag: false,
+            });
           }}
         >
           텀블러
         </button>
         <button
+          type="button"
           onClick={() => {
-            setTumblerTab(false);
-            setEcobagTab(true);
+            setItemTab({
+              tumbler: false,
+              ecobag: true,
+            });
           }}
         >
           에코백
         </button>
-        <button>메인변경</button>
-      </div>
-	  {tumblerTab && <span>텀블러</span>}
-	  {ecobagTab && <span>에코백</span>}
-	  {tumblerTab || ecobagTab || <span>아이템을 등록하세요.</span>}
-      <MainItem tumbler={tumblerTab} ecobag={ecobagTab} />
+      </div>}
+      <button
+        type="button"
+        onClick={() => {
+          return setTryConvert(!tryConvert);
+        }}
+      >
+        메인변경
+      </button>
     </div>
   );
 }
