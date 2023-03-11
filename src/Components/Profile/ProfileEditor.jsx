@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./style.css";
-import { useQuery } from "@tanstack/react-query";
-import getUser from "../../Api/getUser";
+import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
+import { getUser, patchUser } from "../../Api/user";
 
-export default function ProfileEditor({ userId, handleClick }) {
+export default function ProfileEditor({ userId, setIsEditing }) {
+  const queryClient = useQueryClient();
   const profileQuery = useQuery({
     queryKey: ["profile", userId],
     queryFn: () => {
@@ -17,23 +18,40 @@ export default function ProfileEditor({ userId, handleClick }) {
     profileImage: profileQuery.data.profileImage,
   });
 
+  const profileEditMutation = useMutation({
+    mutationFn: patchUser,
+    onSuccess: (data) => {
+      queryClient.setQueryData(["profile", userId], data);
+      queryClient.invalidateQueries(["profile", userId]);
+    },
+  });
+
+  function handleSubmit() {
+    profileEditMutation.mutate({
+      id: userId,
+      nick: localUser.nickname,
+      msg: localUser.profileMessage,
+      img: localUser.profileImage,
+    });
+  }
+
   if (profileQuery.isError) console.log(JSON.stringify(profileQuery.error));
 
   return (
     <div className="ProfileImg-ProfileText-container">
-      <ProfileImg
-        img={localUser.profileImage}
-        setImg={(src) => {
-          setLocalUser({ ...localUser, ProfileImage: src });
+      <ProfileImg user={localUser} setUser={setLocalUser} />
+      <ProfileText user={localUser} setUser={setLocalUser} />
+      <ProfileBtns
+        setIsEditing={setIsEditing}
+        handleSubmit={() => {
+          return handleSubmit();
         }}
       />
-      <ProfileText user={localUser} setUser={setLocalUser} />
-      <ProfileBtns handleClick={handleClick} />
     </div>
   );
 }
 
-function ProfileImg({ img, setImg }) {
+function ProfileImg({ user, setUser }) {
   const [isUploaded, setIsUploaded] = useState(false);
 
   function onUpload(e) {
@@ -41,13 +59,10 @@ function ProfileImg({ img, setImg }) {
     const reader = new FileReader();
 
     reader.readAsDataURL(uploadedImg);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setImg(reader.result || null);
-        setIsUploaded(true);
-        resolve();
-      };
-    });
+    reader.onloadend = () => {
+      setUser({ ...user, profileImage: reader.result });
+      setIsUploaded(true);
+    };
   }
 
   return (
@@ -67,7 +82,7 @@ function ProfileImg({ img, setImg }) {
         />
         <img
           className="ProfileImg__img ProfileImg__form__img"
-          src={img}
+          src={user.profileImage}
           alt="User profile preview"
         />
       </label>
@@ -76,7 +91,6 @@ function ProfileImg({ img, setImg }) {
         id="profile-img-input"
         type="file"
         accept="image/*"
-        src={img}
         onChange={(e) => {
           return onUpload(e);
         }}
@@ -110,21 +124,23 @@ function ProfileText({ user, setUser }) {
   );
 }
 
-function ProfileBtns({ handleClick }) {
+function ProfileBtns({ setIsEditing, handleSubmit }) {
   return (
     <div className="ProfileBtns-container">
       <button
         type="submit"
         className="ProfileBtns__btn ProfileBtns__btn--featured font-caption1-bold"
-        onClick={handleClick}
-        // POST 추가
+        onClick={() => {
+          setIsEditing();
+          handleSubmit();
+        }}
       >
         완료
       </button>
       <button
         type="button"
         className="ProfileBtns__btn font-caption1-regular"
-        onClick={handleClick}
+        onClick={setIsEditing}
       >
         취소
       </button>

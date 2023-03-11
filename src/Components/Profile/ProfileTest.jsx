@@ -12,7 +12,7 @@ export default function ProfileTest() {
       {isEditing ? (
         <ProfileEditor
           userId={userId}
-          handleClick={() => {
+          setIsEditing={() => {
             return setIsEditing(!isEditing);
           }}
         />
