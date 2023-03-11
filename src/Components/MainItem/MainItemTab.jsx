@@ -27,10 +27,9 @@ export default function MainItemTab({ userId }) {
 	enabled:!!userQuery.data?.titleEcobagId
   });
 
-  const [itemTab, setItemTab] = useState({
-    tumbler: true,
-    ecobag: true,
-  });
+  let localSavedSet = localStorage.getItem("mainTabSetting");
+  localSavedSet = localSavedSet ? JSON.parse(localSavedSet) : {tumbler:true, ecobag:true};
+  const [itemTab, setItemTab] = useState(localSavedSet);
 
   return (
     <div>
@@ -58,6 +57,7 @@ function TabButtons({ hasTumbler, hasEcobag, setItemTab }) {
                 tumbler: true,
                 ecobag: true,
               });
+			  localStorage.setItem("mainTabSetting", JSON.stringify({tumbler:true, ecobag:true}));
             }}
           >
             전체
@@ -70,6 +70,7 @@ function TabButtons({ hasTumbler, hasEcobag, setItemTab }) {
                 tumbler: true,
                 ecobag: false,
               });
+			  localStorage.setItem("mainTabSetting", JSON.stringify({tumbler:true, ecobag:false}));
             }}
           >
             텀블러
@@ -82,6 +83,7 @@ function TabButtons({ hasTumbler, hasEcobag, setItemTab }) {
                 tumbler: false,
                 ecobag: true,
               });
+			  localStorage.setItem("mainTabSetting", JSON.stringify({tumbler:false, ecobag:true}));
             }}
           >
             에코백
