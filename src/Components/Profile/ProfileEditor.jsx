@@ -62,7 +62,7 @@ function ProfileImg({ img, setImg }) {
           className={`ProfileImg__form__img--overlay ${
             isUploaded ? "ProfileImg__form__img--uploaded" : ""
           }`}
-          src="https://i.ibb.co/L17G9ms/camera-overlay.png"
+          src="/img/userProfileImgOverlay.png"
           alt="profile edit"
         />
         <img
