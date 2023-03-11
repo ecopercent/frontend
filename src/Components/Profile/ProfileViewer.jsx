@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import "./style.css";
-import getUser from "../../Api/getUser";
+import { getUser } from "../../Api/user";
 
 export default function ProfileViewer({ userId, setIsEditing }) {
   return (
