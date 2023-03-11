@@ -5,17 +5,13 @@ import ProfileEditor from "./ProfileEditor";
 
 export default function ProfileTest() {
   const [isEditing, setIsEditing] = useState(false);
-  //   const [localUser, setLocalUser] = useState({
-  //     nickname: "",
-  //     profileMessage: "",
-  //     profileImage: "",
-  //   });
   const userId = 1;
 
   return (
     <div className="Profile">
       {isEditing ? (
         <ProfileEditor
+          userId={userId}
           handleClick={() => {
             return setIsEditing(!isEditing);
           }}
