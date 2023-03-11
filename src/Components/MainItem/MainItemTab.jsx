@@ -11,8 +11,6 @@ export default function MainItemTab({ userId }) {
     },
   });
   
-  console.log(userQuery.data);
-
   const mainTumblerQuery = useQuery({
 	queryKey: ["mainTumbler", userId],
 	queryFn: () => {
@@ -29,8 +27,6 @@ export default function MainItemTab({ userId }) {
 	enabled:!!userQuery.data?.titleEcobagId
   });
 
-  console.log(mainTumblerQuery.data, mainEcobagQuery.data);
-
   const [itemTab, setItemTab] = useState({
     tumbler: true,
     ecobag: true,
@@ -38,15 +34,16 @@ export default function MainItemTab({ userId }) {
 
   return (
     <div>
-      <TabButtons setItemTab={setItemTab} />
+      {(mainTumblerQuery?.data || mainEcobagQuery?.data) && <TabButtons hasTumbler={!!mainTumblerQuery?.data} hasEcobag={!!mainEcobagQuery?.data} setItemTab={setItemTab} />}
       {/* 테스트용 뷰 */}
-      {itemTab.tumbler && <span>텀블러</span>}
-      {itemTab.ecobag && <span>에코백</span>}
+      {itemTab.tumbler && mainTumblerQuery?.data && <div>{mainTumblerQuery.data.nickname}</div>}
+      {itemTab.ecobag && mainEcobagQuery?.data && <div>{mainEcobagQuery.data.nickname}</div>}
+	  {mainTumblerQuery?.data === undefined && mainEcobagQuery?.data === undefined && <div>아이템을 등록하세요.</div>}
     </div>
   );
 }
 
-function TabButtons({ setItemTab }) {
+function TabButtons({ hasTumbler, hasEcobag, setItemTab }) {
   const [tryConvert, setTryConvert] = useState(false);
 
   return (
@@ -55,6 +52,7 @@ function TabButtons({ setItemTab }) {
         <div>
           <button
             type="button"
+			disabled={!hasTumbler || !hasEcobag}
             onClick={() => {
               setItemTab({
                 tumbler: true,
@@ -66,6 +64,7 @@ function TabButtons({ setItemTab }) {
           </button>
           <button
             type="button"
+			disabled={!hasTumbler}
             onClick={() => {
               setItemTab({
                 tumbler: true,
@@ -77,6 +76,7 @@ function TabButtons({ setItemTab }) {
           </button>
           <button
             type="button"
+			disabled={!hasEcobag}
             onClick={() => {
               setItemTab({
                 tumbler: false,
