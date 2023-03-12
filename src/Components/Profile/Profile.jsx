@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./style.css";
 import { Navigate } from "react-router-dom";
-import ProfileViewer from "./ProfileViewer";
-import ProfileEditor from "./ProfileEditor";
+import ProfileViewer from "./ProfileViewer/ProfileViewer";
+import ProfileEditor from "./ProfileEditor/ProfileEditor";
+import ProfileContainer from "./style";
 
 export default function Profile({ userId }) {
   if (userId === (undefined || null)) return <Navigate to="/" />;
@@ -10,7 +10,7 @@ export default function Profile({ userId }) {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <div className="Profile">
+    <ProfileContainer>
       {isEditing ? (
         <ProfileEditor
           userId={userId}
@@ -26,6 +26,6 @@ export default function Profile({ userId }) {
           }}
         />
       )}
-    </div>
+    </ProfileContainer>
   );
 }
