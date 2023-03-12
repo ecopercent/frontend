@@ -14,20 +14,20 @@ export default function ProfileViewer({ userId, setIsEditing }) {
 }
 
 function ProfileImg({ userId }) {
-  const profileQuery = useQuery({
-    queryKey: ["profile", userId],
+  const userQuery = useQuery({
+    queryKey: ["user", userId],
     queryFn: () => {
       return getUser(userId);
     },
   });
 
-  const user = profileQuery.data;
+  const user = userQuery.data;
 
   return (
     <img
       className="ProfileImg__img"
       src={
-        profileQuery.isLoading || profileQuery.isError
+        userQuery.isLoading || userQuery.isError
           ? "/img/userLoadingImage.png"
           : user.profileImage
       }
@@ -37,32 +37,30 @@ function ProfileImg({ userId }) {
 }
 
 function ProfileText({ userId }) {
-  const profileQuery = useQuery({
-    queryKey: ["profile", userId],
+  const userQuery = useQuery({
+    queryKey: ["user", userId],
     queryFn: () => {
       return getUser(userId);
     },
   });
 
-  const user = profileQuery.data;
+  const user = userQuery.data;
 
   return (
     <div className="ProfileText-container">
       <p className="ProfileText__text-nickname font-body-bold">
-        {profileQuery.isLoading || profileQuery.isError ? "" : user.nickname}
+        {userQuery.isLoading || userQuery.isError ? "" : user.nickname}
       </p>
       <p className="ProfileText__text-msg font-body-regular">
-        {profileQuery.isLoading || profileQuery.isError
-          ? ""
-          : user.profileMessage}
+        {userQuery.isLoading || userQuery.isError ? "" : user.profileMessage}
       </p>
     </div>
   );
 }
 
 function ProfileBtns({ userId, handleClick }) {
-  const profileQuery = useQuery({
-    queryKey: ["profile", userId],
+  const userQuery = useQuery({
+    queryKey: ["user", userId],
     queryFn: () => {
       return getUser(userId);
     },
@@ -74,7 +72,7 @@ function ProfileBtns({ userId, handleClick }) {
         type="button"
         className="ProfileBtns__btn font-caption1-regular"
         onClick={handleClick}
-        disabled={profileQuery.isLoading || profileQuery.isError}
+        disabled={userQuery.isLoading || userQuery.isError}
       >
         프로필 편집
       </button>

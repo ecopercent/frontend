@@ -5,24 +5,24 @@ import { getUser, patchUser } from "../../Api/user";
 
 export default function ProfileEditor({ userId, setIsEditing }) {
   const queryClient = useQueryClient();
-  const profileQuery = useQuery({
-    queryKey: ["profile", userId],
+  const userQuery = useQuery({
+    queryKey: ["user", userId],
     queryFn: () => {
       return getUser(userId);
     },
   });
 
   const [localUser, setLocalUser] = useState({
-    nickname: profileQuery.data.nickname,
-    profileMessage: profileQuery.data.profileMessage,
-    profileImage: profileQuery.data.profileImage,
+    nickname: userQuery.data.nickname,
+    profileMessage: userQuery.data.profileMessage,
+    profileImage: userQuery.data.profileImage,
   });
 
   const profileEditMutation = useMutation({
     mutationFn: patchUser,
     onSuccess: (data) => {
-      queryClient.setQueryData(["profile", userId], data);
-      queryClient.invalidateQueries(["profile", userId]);
+      queryClient.setQueryData(["user", userId], data);
+      queryClient.invalidateQueries(["user", userId]);
     },
   });
 
@@ -35,7 +35,7 @@ export default function ProfileEditor({ userId, setIsEditing }) {
     });
   }
 
-  if (profileQuery.isError) console.log(JSON.stringify(profileQuery.error));
+  if (userQuery.isError) console.log(JSON.stringify(userQuery.error));
 
   return (
     <div className="ProfileImg-ProfileText-container">
