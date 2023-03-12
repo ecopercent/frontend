@@ -2,14 +2,6 @@ import styled from "@emotion/styled";
 
 const lightGray = "#dedede";
 
-// const caption1Regular = styled.div`
-//   font-style: normal;
-//   font-weight: 400;
-//   font-size: 12px;
-//   line-height: 16px;
-//   /* identical to box height, or 133% */
-// `;
-
 export const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;

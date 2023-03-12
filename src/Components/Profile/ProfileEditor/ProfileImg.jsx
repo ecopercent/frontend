@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../style.css";
 import imageCompression from "browser-image-compression";
+import * as S from "./style";
 
 export default function ProfileImg({ user, setUser }) {
   const [isUploaded, setIsUploaded] = useState(false);
@@ -46,20 +46,13 @@ export default function ProfileImg({ user, setUser }) {
   return (
     <form>
       <label htmlFor="profile-img-input">
-        <div
-          className={`ProfileImg__form__div ${
-            isUploaded ? "ProfileImg__form__img--uploaded" : ""
-          }`}
-        />
-        <img
-          className={`ProfileImg__form__img--overlay ${
-            isUploaded ? "ProfileImg__form__img--uploaded" : ""
-          }`}
+        <S.ProfileImgOpacity isUploaded={isUploaded} />
+        <S.ProfileImgOverlay
+          isUploaded={isUploaded}
           src="/img/userProfileImgOverlay.png"
           alt="profile edit"
         />
-        <img
-          className="ProfileImg__img ProfileImg__form__img"
+        <S.ProfileImgPreview
           src={
             user.profileImage
               ? user.profileImage
@@ -68,8 +61,7 @@ export default function ProfileImg({ user, setUser }) {
           alt="User profile preview"
         />
       </label>
-      <input
-        className="ProfileImg__form__input"
+      <S.ProfileImgInput
         id="profile-img-input"
         type="file"
         accept="image/*"

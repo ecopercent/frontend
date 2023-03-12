@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../style.css";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { getUser, patchUser } from "../../../Api/user";
 import ProfileImg from "./ProfileImg";
@@ -42,15 +41,17 @@ export default function ProfileEditor({ userId, setIsEditing }) {
   }
 
   return (
-    <S.ProfileComponentsWrapper>
-      <ProfileImg user={localUser} setUser={setLocalUser} />
-      <ProfileText user={localUser} setUser={setLocalUser} />
+    <S.ProfileContainer>
+      <S.ProfileImgTextWrapper>
+        <ProfileImg user={localUser} setUser={setLocalUser} />
+        <ProfileText user={localUser} setUser={setLocalUser} />
+      </S.ProfileImgTextWrapper>
       <ProfileBtns
         setIsEditing={setIsEditing}
         handleSubmit={() => {
           return handleSubmit();
         }}
       />
-    </S.ProfileComponentsWrapper>
+    </S.ProfileContainer>
   );
 }

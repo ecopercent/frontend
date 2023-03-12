@@ -1,11 +1,10 @@
 import React from "react";
-import "../style.css";
+import * as S from "./style";
 
 export default function ProfileText({ user, setUser }) {
   return (
-    <form className="ProfileText-container ProfileText-container--editing">
-      <textarea
-        className="ProfileText__textarea font-input"
+    <S.ProfileTextForm>
+      <S.ProfileTextarea
         value={user.nickname}
         onChange={(e) => {
           setUser({ ...user, nickname: e.target.value });
@@ -13,8 +12,7 @@ export default function ProfileText({ user, setUser }) {
         rows="1"
         maxLength="8"
       />
-      <textarea
-        className="ProfileText__textarea font-input"
+      <S.ProfileTextarea
         value={user.profileMessage}
         onChange={(e) => {
           setUser({ ...user, profileMessage: e.target.value });
@@ -22,6 +20,6 @@ export default function ProfileText({ user, setUser }) {
         rows="3"
         maxLength="50"
       />
-    </form>
+    </S.ProfileTextForm>
   );
 }
