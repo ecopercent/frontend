@@ -1,28 +1,29 @@
 import React, { useState } from "react";
 import "./style.css";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
+import imageCompression from "browser-image-compression";
 import { getUser, patchUser } from "../../Api/user";
 
 export default function ProfileEditor({ userId, setIsEditing }) {
   const queryClient = useQueryClient();
-  const profileQuery = useQuery({
-    queryKey: ["profile", userId],
+  const userQuery = useQuery({
+    queryKey: ["user", userId],
     queryFn: () => {
       return getUser(userId);
     },
   });
 
   const [localUser, setLocalUser] = useState({
-    nickname: profileQuery.data.nickname,
-    profileMessage: profileQuery.data.profileMessage,
-    profileImage: profileQuery.data.profileImage,
+    nickname: userQuery.data.nickname,
+    profileMessage: userQuery.data.profileMessage,
+    profileImage: userQuery.data.profileImage,
   });
 
   const profileEditMutation = useMutation({
     mutationFn: patchUser,
     onSuccess: (data) => {
-      queryClient.setQueryData(["profile", userId], data);
-      queryClient.invalidateQueries(["profile", userId]);
+      queryClient.setQueryData(["user", userId], data);
+      queryClient.invalidateQueries(["user", userId]);
     },
   });
 
@@ -35,7 +36,7 @@ export default function ProfileEditor({ userId, setIsEditing }) {
     });
   }
 
-  if (profileQuery.isError) console.log(JSON.stringify(profileQuery.error));
+  if (userQuery.isError) console.log(JSON.stringify(userQuery.error));
 
   return (
     <div className="ProfileImg-ProfileText-container">
@@ -54,12 +55,39 @@ export default function ProfileEditor({ userId, setIsEditing }) {
 function ProfileImg({ user, setUser }) {
   const [isUploaded, setIsUploaded] = useState(false);
 
-  function onUpload(e) {
+  async function imgCompress(img) {
+    const options = {
+      maxSizeMB: 0.2,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+
+    try {
+      const compressdImg = await imageCompression(img, options);
+      console.log("이미지 압축 완료");
+      console.log(compressdImg);
+      return compressdImg;
+    } catch (error) {
+      console.log("이미지 압축 실패");
+      console.log(error);
+      return img;
+    }
+  }
+
+  async function onUpload(e) {
     const uploadedImg = e.target.files[0];
     const reader = new FileReader();
 
-    reader.readAsDataURL(uploadedImg);
+    console.log("업로드된 이미지");
+    console.log(uploadedImg);
+
+    console.log("이미지 압축 시작");
+    const compressedImg = await imgCompress(uploadedImg);
+
+    reader.readAsDataURL(compressedImg);
     reader.onloadend = () => {
+      console.log("url로 변환");
+      console.log(reader.result);
       setUser({ ...user, profileImage: reader.result });
       setIsUploaded(true);
     };
