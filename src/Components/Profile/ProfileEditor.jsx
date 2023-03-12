@@ -13,6 +13,8 @@ export default function ProfileEditor({ userId, setIsEditing }) {
     },
   });
 
+  if (userQuery.isError) console.log(JSON.stringify(userQuery.error));
+
   const [localUser, setLocalUser] = useState({
     nickname: userQuery.data.nickname,
     profileMessage: userQuery.data.profileMessage,
@@ -35,8 +37,6 @@ export default function ProfileEditor({ userId, setIsEditing }) {
       img: localUser.profileImage,
     });
   }
-
-  if (userQuery.isError) console.log(JSON.stringify(userQuery.error));
 
   return (
     <div className="ProfileImg-ProfileText-container">
@@ -110,7 +110,11 @@ function ProfileImg({ user, setUser }) {
         />
         <img
           className="ProfileImg__img ProfileImg__form__img"
-          src={user.profileImage}
+          src={
+            user.profileImage
+              ? user.profileImage
+              : "/img/userProfileImgOverlay.png"
+          }
           alt="User profile preview"
         />
       </label>

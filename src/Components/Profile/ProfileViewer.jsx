@@ -27,7 +27,7 @@ function ProfileImg({ userId }) {
     <img
       className="ProfileImg__img"
       src={
-        userQuery.isLoading || userQuery.isError
+        userQuery.isLoading || userQuery.isError || user.profileImage === null
           ? "/img/userLoadingImage.png"
           : user.profileImage
       }
