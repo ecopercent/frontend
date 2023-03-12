@@ -15,12 +15,12 @@ export default function ProfileText({ userId }) {
 
   return (
     <S.ProfileTextContainer>
-      <p className="ProfileText__text-nickname font-body-bold">
+      <S.ProfileTextNickname>
         {userQuery.isLoading || userQuery.isError ? "" : user.nickname}
-      </p>
-      <p className="ProfileText__text-msg font-body-regular">
+      </S.ProfileTextNickname>
+      <S.ProfileTextMessage>
         {userQuery.isLoading || userQuery.isError ? "" : user.profileMessage}
-      </p>
+      </S.ProfileTextMessage>
     </S.ProfileTextContainer>
   );
 }

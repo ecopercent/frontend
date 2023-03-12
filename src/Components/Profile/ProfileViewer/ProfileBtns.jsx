@@ -12,15 +12,15 @@ export default function ProfileBtns({ userId, handleClick }) {
   });
 
   return (
-    <div className="ProfileBtns-container">
-      <button
+    <S.ProfileButtonLayout>
+      <S.ProfileEditButton
         type="button"
         className="ProfileBtns__btn font-caption1-regular"
         onClick={handleClick}
         disabled={userQuery.isLoading || userQuery.isError}
       >
         프로필 편집
-      </button>
-    </div>
+      </S.ProfileEditButton>
+    </S.ProfileButtonLayout>
   );
 }

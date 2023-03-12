@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "../style.css";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { getUser, patchUser } from "../../../Api/user";
-import { ProfileComponentsWrapper } from "../style";
 import ProfileImg from "./ProfileImg";
 import ProfileText from "./ProfileText";
 import ProfileBtns from "./ProfileBtns";
+import * as S from "./style";
 
 export default function ProfileEditor({ userId, setIsEditing }) {
   const queryClient = useQueryClient();
@@ -42,7 +42,7 @@ export default function ProfileEditor({ userId, setIsEditing }) {
   }
 
   return (
-    <ProfileComponentsWrapper>
+    <S.ProfileComponentsWrapper>
       <ProfileImg user={localUser} setUser={setLocalUser} />
       <ProfileText user={localUser} setUser={setLocalUser} />
       <ProfileBtns
@@ -51,6 +51,6 @@ export default function ProfileEditor({ userId, setIsEditing }) {
           return handleSubmit();
         }}
       />
-    </ProfileComponentsWrapper>
+    </S.ProfileComponentsWrapper>
   );
 }
