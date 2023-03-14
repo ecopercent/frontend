@@ -33,23 +33,6 @@ export default function MainItemTab({ userId }) {
     : { tumbler: true, ecobag: true };
   const [itemTab, setItemTab] = useState(localSavedSet);
 
-  if (
-    (mainTumblerQuery.data === undefined && itemTab.tumbler) ||
-    (mainEcobagQuery.data === undefined && itemTab.ecobag)
-  ) {
-    setItemTab({
-      ecobag: mainEcobagQuery.data !== undefined,
-      tumbler: mainTumblerQuery.data !== undefined,
-    });
-    localStorage.setItem(
-      "mainTabSetting",
-      JSON.stringify({
-        ecobag: mainEcobagQuery.data !== undefined,
-        tumbler: mainTumblerQuery.data !== undefined,
-      })
-    );
-  }
-
   return (
     <div>
       {(mainTumblerQuery?.data || mainEcobagQuery?.data) && (
