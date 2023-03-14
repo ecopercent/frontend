@@ -12,8 +12,6 @@ export function patchUser({ id, nick, msg, img }) {
       nickname: nick,
       profileImage: img,
       profileMessage: msg,
-      email: "tmp@email.com",
-      // email은 api 설계 오류로 인한 임시 데이터
     })
     .then((res) => {
       return res.data;
