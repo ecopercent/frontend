@@ -19,22 +19,19 @@ function toPieChartItemPath(x, y, radiusIn, radiusOut, startAngle, endAngle) {
   return d;
 }
 
-const ClippedCircleStrock = ({ divideNum, imagePath }) => {
+const ItmeImageStrock = ({ divideNum, imagePath }) => {
   const [useCount, setUseCount] = useState(divideNum);
   const pathRefList = useRef({});
-
   const increaseCount = useCallback(() => {
-    console.log(useCount);
-    console.log(pathRefList.current[useCount]);
     if (useCount > 0) {
       const targetRef = pathRefList.current[useCount];
       targetRef.style.display = "none";
       // targetRef.blur();
+      setUseCount((currUseCount) => {
+        return currUseCount > 1 ? currUseCount - 1 : 0;
+      });
+      // patch api 날리기
     }
-    setUseCount((currUseCount) => {
-      return currUseCount > 1 ? currUseCount - 1 : 0;
-    });
-    // patch api 날리기
   }, [useCount]);
 
   return (
@@ -88,4 +85,4 @@ const ClippedCircleStrock = ({ divideNum, imagePath }) => {
   );
 };
 
-export default ClippedCircleStrock;
+export default ItmeImageStrock;

@@ -25,10 +25,7 @@ const Home = () => {
         텀블
       </button>
       <h1>메인페이지</h1>
-      <ItemShowControlloer
-        showType={Number(showType)}
-        imagePath="/logo192.png"
-      />
+      <ItemShowControlloer showType={showType} imagePath="/logo192.png" />
     </div>
   );
 };
