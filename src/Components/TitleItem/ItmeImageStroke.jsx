@@ -19,7 +19,7 @@ function toPieChartItemPath(x, y, radiusIn, radiusOut, startAngle, endAngle) {
   return d;
 }
 
-const ItmeImageStrock = ({ divideNum, imagePath }) => {
+const ItmeImageStroke = ({ divideNum, imagePath }) => {
   const [useCount, setUseCount] = useState(divideNum);
   const pathRefList = useRef({});
   const increaseCount = useCallback(() => {
@@ -85,4 +85,4 @@ const ItmeImageStrock = ({ divideNum, imagePath }) => {
   );
 };
 
-export default ItmeImageStrock;
+export default ItmeImageStroke;
