@@ -21,5 +21,4 @@ export const ImageClipper = styled.img`
   object-fit: cover; /* 이미지 비율 유지 */
   border-radius: 50%;
   border: 1px solid;
-  // border-image: url(${"/hyopark.jpg"}) 1000 round;
 `;
