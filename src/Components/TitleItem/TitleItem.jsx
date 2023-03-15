@@ -1,12 +1,12 @@
 import React from "react";
-import ItmeImageStrock from "./ItmeImageStrock";
+import ItmeImageStroke from "./ItmeImageStroke";
 
 const TitleItem = ({ catagory, imagePath }) => {
   // 에코백
   if (catagory === 0) {
     return (
       <div>
-        <ItmeImageStrock divideNum={3} imagePath={imagePath} />
+        <ItmeImageStroke divideNum={3} imagePath={imagePath} />
         <hr />
         <h1>0%</h1>
         <h2>현재 0회</h2>
@@ -17,7 +17,7 @@ const TitleItem = ({ catagory, imagePath }) => {
   // 텀블러
   return (
     <div>
-      <ItmeImageStrock divideNum={1} imagePath={imagePath} />
+      <ItmeImageStroke divideNum={1} imagePath={imagePath} />
       <hr />
       <h1>0%</h1>
       <h2>현재 0회</h2>
