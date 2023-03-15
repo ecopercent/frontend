@@ -1,20 +1,24 @@
 import React, { useCallback, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Profile from "../../Components/Profile/Profile";
+import MainItemTab from "../../Components/MainItem/MainItemTab";
 import ItemShowControlloer from "../../Components/TitleItem/ItemShowControlloer";
 
 const Home = () => {
-  // 유저id로 유저 정보 요청 -> 대표 아이템 아이디 두개 얻을 수 있음 -> 아이디만 넘겨서 안에서 뿌릴까?
+  const { state } = useLocation();
   const [showType, setShowType] = useState(0);
   const clickHandler = useCallback(
     (e) => {
+      console.log(e);
       setShowType(e.target.value);
     },
     [showType]
   );
-
   return (
     <div>
-      <Profile />
+      <h1>메인페이지</h1>
+      <Profile userId={state} />
+      <MainItemTab userId={state} />
       <button value={0} onClick={clickHandler}>
         둘다
       </button>
@@ -24,8 +28,10 @@ const Home = () => {
       <button value={2} onClick={clickHandler}>
         텀블
       </button>
-      <h1>메인페이지</h1>
-      <ItemShowControlloer showType={showType} imagePath="/logo192.png" />
+      <ItemShowControlloer
+        showType={Number(showType)}
+        imagePath="/logo192.png"
+      />
     </div>
   );
 };
