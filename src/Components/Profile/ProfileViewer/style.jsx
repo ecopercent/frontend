@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-
-const lightGray = "#dedede";
+import * as color from "../../../style/color";
 
 export const ProfileContainer = styled.div`
   display: flex;
@@ -89,7 +88,7 @@ export const ProfileEditButton = styled.button`
   width: 86px;
   height: 24px;
 
-  background: ${lightGray};
+  background: ${color.lightGray};
   border-radius: 8px;
   border: 0px;
 `;
