@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback, useState } from "react";
 import { ImageClipper } from "./style";
 
 function toPieChartItemPath(x, y, radiusIn, radiusOut, startAngle, endAngle) {
@@ -19,16 +19,63 @@ function toPieChartItemPath(x, y, radiusIn, radiusOut, startAngle, endAngle) {
   return d;
 }
 
-const ItmeImageStroke = ({ divideNum, imagePath }) => {
-  const [useCount, setUseCount] = useState(divideNum);
-  const pathRefList = useRef({});
+const makeDateStr = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = `0${date.getMonth() + 1}`.slice(-2);
+  const day = `0${date.getDate()}`.slice(-2);
+  const dateStr = `${year}-${month}-${day}`;
+  console.log("dateStr", dateStr);
+  return dateStr;
+};
+
+const checkItemUseCount = (id, divideNum) => {
+  const itemCountObj = JSON.parse(localStorage.getItem(`item/${id}`));
+  if (itemCountObj && makeDateStr() === itemCountObj.dateStr) {
+    console.log("return ", itemCountObj.count);
+    return itemCountObj.count;
+  }
+  return divideNum;
+};
+
+const threeStrockInfo = [
+  {
+    key: 1,
+    d: toPieChartItemPath(100, 100, 75, 80, 511, 629),
+  },
+  {
+    key: 2,
+    d: toPieChartItemPath(100, 100, 75, 80, 391, 509),
+  },
+  {
+    key: 3,
+    d: toPieChartItemPath(100, 100, 75, 80, 271, 389),
+  },
+];
+
+const oneStrockInfo = [
+  {
+    key: 1,
+    d: toPieChartItemPath(100, 100, 75, 80, 271, 629),
+  },
+];
+
+const ItmeImageStroke = ({ divideNum, imagePath, id }) => {
+  const currentCount = checkItemUseCount(id, divideNum);
+  const [useCount, setUseCount] = useState(currentCount);
   const increaseCount = useCallback(() => {
     if (useCount > 0) {
-      const targetRef = pathRefList.current[useCount];
-      targetRef.style.display = "none";
       // targetRef.blur();
       setUseCount((currUseCount) => {
-        return currUseCount > 1 ? currUseCount - 1 : 0;
+        const changeCout = currUseCount > 1 ? currUseCount - 1 : 0;
+        localStorage.setItem(
+          `item/${id}`,
+          JSON.stringify({
+            count: changeCout,
+            dateStr: makeDateStr(),
+          })
+        );
+        return changeCout;
       });
       // patch api 날리기
     }
@@ -46,38 +93,18 @@ const ItmeImageStroke = ({ divideNum, imagePath }) => {
           <foreignObject x="50" y="50" width="100%" height="100%">
             <ImageClipper src={imagePath} alt="아이템 이미지" />
           </foreignObject>
-          {divideNum === 3 ? (
-            <>
-              <path
-                key={3}
-                ref={(ref) => {
-                  pathRefList.current[3] = ref;
-                }}
-                d={toPieChartItemPath(100, 100, 75, 80, 271, 389)}
-              />
-              <path
-                key={2}
-                ref={(ref) => {
-                  pathRefList.current[2] = ref;
-                }}
-                d={toPieChartItemPath(100, 100, 75, 80, 391, 509)}
-              />
-              <path
-                key={1}
-                ref={(ref) => {
-                  pathRefList.current[1] = ref;
-                }}
-                d={toPieChartItemPath(100, 100, 75, 80, 511, 629)}
-              />
-            </>
-          ) : (
-            <path
-              key={1}
-              ref={(ref) => {
-                pathRefList.current[1] = ref;
-              }}
-              d={toPieChartItemPath(100, 100, 75, 80, 271, 629)}
-            />
+          {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map(
+            (element) => {
+              if (element.key <= useCount)
+                return <path d={element.d} key={element.key} />;
+              return (
+                <path
+                  d={element.d}
+                  style={{ display: "none" }}
+                  key={element.key}
+                />
+              );
+            }
           )}
         </g>
       </svg>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "../../Api/user";
 import getItem from "../../Api/item";
+import TitleItem from "../TitleItem/TitleItem";
+import { TitleItemContainer } from "../TitleItem/style";
 
 export default function MainItemTab({ userId }) {
   const userQuery = useQuery({
@@ -42,13 +44,14 @@ export default function MainItemTab({ userId }) {
           setItemTab={setItemTab}
         />
       )}
-      {/* 테스트용 뷰 */}
-      {itemTab.tumbler && mainTumblerQuery?.data && (
-        <div>{mainTumblerQuery.data.nickname}</div>
-      )}
-      {itemTab.ecobag && mainEcobagQuery?.data && (
-        <div>{mainEcobagQuery.data.nickname}</div>
-      )}
+      <TitleItemContainer>
+        {itemTab.tumbler && mainTumblerQuery?.data && (
+          <TitleItem itemInfo={mainTumblerQuery.data} />
+        )}
+        {itemTab.ecobag && mainEcobagQuery?.data && (
+          <TitleItem itemInfo={mainEcobagQuery.data} />
+        )}
+      </TitleItemContainer>
       {mainTumblerQuery?.data === undefined &&
         mainEcobagQuery?.data === undefined && <div>아이템을 등록하세요.</div>}
     </div>

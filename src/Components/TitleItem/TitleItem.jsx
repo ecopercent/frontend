@@ -1,27 +1,19 @@
 import React from "react";
 import ItmeImageStroke from "./ItmeImageStroke";
 
-const TitleItem = ({ catagory, imagePath }) => {
-  // 에코백
-  if (catagory === 0) {
-    return (
-      <div>
-        <ItmeImageStroke divideNum={3} imagePath={imagePath} />
-        <hr />
-        <h1>0%</h1>
-        <h2>현재 0회</h2>
-        <h2>목표 0회</h2>
-      </div>
-    );
-  }
-  // 텀블러
+const TitleItem = ({ itemInfo }) => {
   return (
     <div>
-      <ItmeImageStroke divideNum={1} imagePath={imagePath} />
+      <ItmeImageStroke
+        divideNum={itemInfo.category === "tumbler" ? 3 : 1}
+        imagePath={itemInfo.image}
+        id={itemInfo.id}
+      />
+      <h3>{itemInfo.nickname}</h3>
       <hr />
-      <h1>0%</h1>
-      <h2>현재 0회</h2>
-      <h2>목표 0회</h2>
+      <h1>{itemInfo.usageCount}%</h1>
+      <h2>현재 {itemInfo.usageCount}회</h2>
+      <h2>목표 {itemInfo.type}회</h2>
     </div>
   );
 };
