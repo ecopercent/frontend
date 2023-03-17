@@ -1,7 +1,5 @@
 import styled from "@emotion/styled";
-
-const lightGreen = "#e1eedd";
-const lightGray = "#dedede";
+import * as color from "../../../style/color";
 
 export const ProfileContainer = styled.div`
   display: flex;
@@ -104,7 +102,7 @@ export const ProfileBtn = styled.div`
   height: 24px;
 
   background: ${(props) => {
-    return props.featured ? lightGreen : lightGray;
+    return props.featured ? color.lightGreen : color.lightGray;
   }};
   border-radius: 8px;
   border: 0px;
