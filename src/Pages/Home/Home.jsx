@@ -7,7 +7,6 @@ const Home = () => {
   const { state } = useLocation();
   return (
     <div>
-      <h1>메인페이지</h1>
       <Profile userId={state} />
       <MainItemTab userId={state} />
     </div>

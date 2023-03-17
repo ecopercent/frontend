@@ -4,7 +4,7 @@ import * as color from "../../style/color";
 export const TabContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: 418px;
+  width: 100%;
   margin: 0 auto;
   padding: 10px;
 `;

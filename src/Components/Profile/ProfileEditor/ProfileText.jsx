@@ -18,7 +18,7 @@ export default function ProfileText({ user, setUser }) {
           setUser({ ...user, profileMessage: e.target.value });
         }}
         rows="3"
-        maxLength="50"
+        maxLength="70"
       />
     </S.ProfileTextForm>
   );

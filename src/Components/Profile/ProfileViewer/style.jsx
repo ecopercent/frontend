@@ -9,7 +9,7 @@ export const ProfileContainer = styled.div`
   padding: 15px 24px;
   gap: 16px;
 
-  width: 390px;
+  width: 100%;
   height: 180px;
   margin: 0 auto;
   border-bottom: 0.5px solid;
@@ -18,10 +18,10 @@ export const ProfileContainer = styled.div`
 export const ProfileImgTextWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: flex-start;
+  gap: 20px;
 
-  width: 342px;
+  width: 100%;
   height: 100px;
 `;
 
@@ -39,7 +39,8 @@ export const ProfileTextContainer = styled.div`
   padding: 8px 0px 0px;
   gap: 12px;
 
-  width: 220px;
+  word-break: break-all;
+  width: 100%
   height: 100px;
 `;
 
@@ -74,7 +75,6 @@ export const ProfileButtonLayout = styled.div`
   align-items: flex-start;
   padding: 0px 8px;
 
-  width: 342px;
   height: 24px;
 `;
 

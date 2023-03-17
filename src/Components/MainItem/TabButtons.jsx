@@ -64,6 +64,8 @@ export default function TabButtons({
         </S.MainSetBtnsWrapper>
       )}
       <S.ConvertBtn
+        id="convert"
+        type="button"
         onClick={() => {
           setTryConvert(!tryConvert);
         }}

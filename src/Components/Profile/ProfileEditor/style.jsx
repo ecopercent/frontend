@@ -9,7 +9,7 @@ export const ProfileContainer = styled.div`
   padding: 15px 24px;
   gap: 16px;
 
-  width: 390px;
+  width: 100%;
   height: 180px;
   margin: 0 auto;
   border-bottom: 0.5px solid;
@@ -18,10 +18,10 @@ export const ProfileContainer = styled.div`
 export const ProfileImgTextWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: flex-start;
+  gap: 20px;
 
-  width: 342px;
+  width: 100%;
   height: 100px;
 `;
 
@@ -61,15 +61,15 @@ export const ProfileTextForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 5px 0px 0px;
+  padding: 5px 10px 0px 0px;
   gap: 8px;
 
-  width: 220px;
+  width: 100%;
   height: 100px;
 `;
 
 export const ProfileTextarea = styled.textarea`
-  width: 220px;
+  width: 100%;
   resize: none;
 
   font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
@@ -87,7 +87,7 @@ export const ProfileBtnContainer = styled.div`
   align-items: flex-start;
   padding: 0px 8px;
 
-  width: 342px;
+  width: 100%;
   height: 24px;
 `;
 
