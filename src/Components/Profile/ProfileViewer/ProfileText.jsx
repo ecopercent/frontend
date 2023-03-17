@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getUser } from "../../../Api/user";
 import * as S from "./style";
 
-export default function ProfileText({ userId }) {
+export default function ProfileText({ userId, isMobile }) {
   const userQuery = useQuery({
     queryKey: ["user", userId],
     queryFn: () => {
@@ -14,7 +14,7 @@ export default function ProfileText({ userId }) {
   const user = userQuery.data;
 
   return (
-    <S.ProfileTextContainer>
+    <S.ProfileTextContainer isMobile={isMobile}>
       <S.ProfileTextNickname>
         {userQuery.isLoading || userQuery.isError ? "" : user.nickname}
       </S.ProfileTextNickname>

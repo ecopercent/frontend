@@ -1,12 +1,15 @@
 import styled from "@emotion/styled";
 import * as color from "../../../style/color";
+import * as font from "../../../style/font";
 
 export const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 15px 24px;
+  padding: ${(props) => {
+    return props.isMobile ? "15px 10px;" : "15px 24px;";
+  }};
   gap: 16px;
 
   width: 100%;
@@ -19,7 +22,9 @@ export const ProfileImgTextWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 20px;
+  gap: ${(props) => {
+    return props.isMobile ? "10px;" : "20px;";
+  }};
 
   width: 100%;
   height: 100px;
@@ -36,8 +41,12 @@ export const ProfileTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 8px 0px 0px;
-  gap: 12px;
+  padding: ${(props) => {
+    return props.isMobile ? "0px;" : "8px 0px 0px;";
+  }}
+  gap: ${(props) => {
+    return props.isMobile ? "8px;" : "12px;";
+  }}
 
   word-break: break-all;
   width: 100%
@@ -47,25 +56,14 @@ export const ProfileTextContainer = styled.div`
 export const ProfileTextNickname = styled.p`
   margin: 0;
 
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 16px;
-  /* identical to box height, or 129% */
-
-  letter-spacing: -0.408px;
+  ${font.boldBody};
 `;
 
 export const ProfileTextMessage = styled.p`
   margin: 0;
 
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
+  ${font.normalBody};
   line-height: 20px;
-  /* or 147% */
-
-  letter-spacing: -0.408px;
 `;
 
 export const ProfileButtonLayout = styled.div`
@@ -78,7 +76,7 @@ export const ProfileButtonLayout = styled.div`
   height: 24px;
 `;
 
-export const ProfileEditButton = styled.button`
+export const ProfileEditButton = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -91,4 +89,6 @@ export const ProfileEditButton = styled.button`
   background: ${color.lightGray};
   border-radius: 8px;
   border: 0px;
+
+  ${font.normalBtn}
 `;

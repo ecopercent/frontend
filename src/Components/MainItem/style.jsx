@@ -22,7 +22,7 @@ export const AllBtnsContainer = styled.div`
   gap: 10px;
 `;
 
-export const ConvertBtn = styled.button`
+export const ConvertBtn = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
