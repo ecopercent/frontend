@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import ProfileViewer from "./ProfileViewer/ProfileViewer";
 import ProfileEditor from "./ProfileEditor/ProfileEditor";
-// import "./style.css";
 
 export default function Profile({ userId }) {
   if (userId === (undefined || null)) return <Navigate to="/" />;
