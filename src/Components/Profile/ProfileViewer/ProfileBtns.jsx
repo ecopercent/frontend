@@ -15,7 +15,6 @@ export default function ProfileBtns({ userId, handleClick }) {
     <S.ProfileButtonLayout>
       <S.ProfileEditButton
         type="button"
-        className="ProfileBtns__btn font-caption1-regular"
         onClick={handleClick}
         disabled={userQuery.isLoading || userQuery.isError}
       >

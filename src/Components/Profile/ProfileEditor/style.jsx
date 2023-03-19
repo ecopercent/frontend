@@ -1,15 +1,18 @@
 import styled from "@emotion/styled";
 import * as color from "../../../style/color";
+import * as font from "../../../style/font";
 
 export const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 15px 24px;
+  padding: ${(props) => {
+    return props.isMobile ? "15px 10px;" : "15px 24px;";
+  }};
   gap: 16px;
 
-  width: 390px;
+  width: 100%;
   height: 180px;
   margin: 0 auto;
   border-bottom: 0.5px solid;
@@ -18,10 +21,12 @@ export const ProfileContainer = styled.div`
 export const ProfileImgTextWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: flex-start;
+  gap: ${(props) => {
+    return props.isMobile ? "10px;" : "20px;";
+  }};
 
-  width: 342px;
+  width: 100%;
   height: 100px;
 `;
 
@@ -43,7 +48,7 @@ export const ProfileImgOverlay = styled.img`
   position: absolute;
   height: 40px;
   width: 40px;
-  padding: 30px 30px;
+  margin: 30px 30px;
 `;
 
 export const ProfileImgPreview = styled.img`
@@ -61,23 +66,23 @@ export const ProfileTextForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 5px 0px 0px;
-  gap: 8px;
+  padding: ${(props) => {
+    return props.isMobile ? "0px;" : "5px 10px 0px 0px;";
+  }}
+  gap: ${(props) => {
+    return props.isMobile ? "3px;" : "8px;";
+  }}
 
-  width: 220px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
 `;
 
 export const ProfileTextarea = styled.textarea`
-  width: 220px;
+  width: 100%;
   resize: none;
 
-  font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 17px;
-  /* or 156% */
+  ${font.normalTextarea}
+  line-height: 16px;
 `;
 
 export const ProfileBtnContainer = styled.div`
@@ -87,7 +92,7 @@ export const ProfileBtnContainer = styled.div`
   align-items: flex-start;
   padding: 0px 8px;
 
-  width: 342px;
+  width: 100%;
   height: 24px;
 `;
 
@@ -107,10 +112,7 @@ export const ProfileBtn = styled.div`
   border-radius: 8px;
   border: 0px;
 
-  font-style: normal;
-  font-weight: ${(props) => {
-    return props.featured ? 600 : 400;
+  ${(props) => {
+    return props.featured ? font.boldBtn : font.normalBtn;
   }};
-  font-size: 12px;
-  line-height: 16px;
 `;
