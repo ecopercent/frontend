@@ -1,14 +1,13 @@
-import React from "react";
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import AllInfo from "../../Components/Item/AllInfo";
 import EachInfo from "../../Components/Item/EachInfo";
+import ItemList from "../../Components/Item/ItemList";
 
 // tmp data
 const userId = 1;
 
 const Item = () => {
-  // const [infoItemId, setInfoItemId] = useState(0);
-  const infoItemId = 0;
+  const [infoItemId, setInfoItemId] = useState(0);
 
   return (
     <div>
@@ -16,8 +15,9 @@ const Item = () => {
       {infoItemId === 0 ? (
         <AllInfo userId={userId} />
       ) : (
-        <EachInfo userId={userId} />
+        <EachInfo userId={userId} infoItemId={infoItemId} />
       )}
+      <ItemList userId={userId} setInfoItemId={setInfoItemId} />
     </div>
   );
 };
