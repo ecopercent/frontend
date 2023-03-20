@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { useMediaQuery } from "react-responsive";
-import { getUser, patchUser } from "../../../Api/user";
+import { getUser, patchUser } from "../../../../Api/user";
 import ProfileImg from "./ProfileImg";
 import ProfileText from "./ProfileText";
 import ProfileBtns from "./ProfileBtns";
