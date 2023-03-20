@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Navigate } from "react-router-dom";
 import { getUser } from "../../../Api/user";
 import getItem from "../../../Api/item";
 import TabButtons from "./TabButtons";
 import TitleItem from "../TitleItem/TitleItem";
 import * as S from "./style";
 import { TitleItemContainer } from "../TitleItem/style";
+import { getLogin } from "../../../Layouts/Login/Login";
 
-export default function MainItemTab({ userId }) {
+export default function MainItemTab() {
+  const userId = getLogin();
+  if (!userId) return <Navigate to="/" />;
+
   const userQuery = useQuery({
     queryKey: ["user", userId],
     queryFn: () => {
