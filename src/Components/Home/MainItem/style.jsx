@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import * as color from "../../style/color";
+import * as color from "../../../style/color";
 
 export const TabContainer = styled.div`
   display: flex;

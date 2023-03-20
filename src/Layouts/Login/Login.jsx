@@ -1,6 +1,10 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+export function getLogin() {
+  return localStorage.getItem("userId");
+}
+
 const Login = () => {
   const navigate = useNavigate();
   const userId = useRef();
@@ -11,7 +15,8 @@ const Login = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          navigate("/main/home", { state: userId.current.value });
+          localStorage.setItem("userId", userId.current.value);
+          navigate("/main/home");
         }}
       >
         <input type="number" ref={userId} />
