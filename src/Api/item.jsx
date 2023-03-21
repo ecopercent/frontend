@@ -6,7 +6,7 @@ export function getItem(id) {
   });
 }
 
-export function getItemList({ userId, category }) {
+export function getItemList(userId, category) {
   return axios
     .get(`/items?userid=${userId}&category=${category}`)
     .then((res) => {
