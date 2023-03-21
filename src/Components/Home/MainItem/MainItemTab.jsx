@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Navigate } from "react-router-dom";
 import { getUser } from "../../../Api/user";
-import getItem from "../../../Api/item";
+import { getItem } from "../../../Api/item";
 import TabButtons from "./TabButtons";
 import TitleItem from "../TitleItem/TitleItem";
 import * as S from "./style";
