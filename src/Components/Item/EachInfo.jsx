@@ -1,16 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import { getUser } from "../../Api/user";
 import { getItem } from "../../Api/item";
 import TitleSetModal from "../Modal/TitleSetModal";
 
 export default function EachInfo({ userId, infoItemId }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const itemQuery = useQuery({
-    queryKey: [userId, infoItemId],
+    queryKey: ["item", infoItemId],
     queryFn: () => {
       return getItem(infoItemId);
     },
   });
+
+  const userQuery = useQuery({
+    queryKey: ["user", userId],
+    queryFn: () => {
+      return getUser(userId);
+    },
+  });
+
+  const isTitle =
+    infoItemId === userQuery.data?.titleTumblerId ||
+    infoItemId === userQuery.data?.titleEcobagId;
 
   return (
     <>
@@ -24,12 +36,13 @@ export default function EachInfo({ userId, infoItemId }) {
       <div>
         <p>{itemQuery.data?.nickname}</p>
         <button
+          disabled={isTitle}
           type="button"
           onClick={() => {
             setModalIsOpen(true);
           }}
         >
-          대표 설정
+          {isTitle ? "대표" : "대표 설정"}
         </button>
         <button
           type="button"
