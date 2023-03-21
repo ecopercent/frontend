@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import TitleSetModal from "../Modal/TitleSetModal";
 
 export default function EachInfo({ userId, infoItemId }) {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <>
+      {modalOpen && (
+        <TitleSetModal
+          onClose={() => {
+            setModalOpen(false);
+          }}
+        />
+      )}
       <div>
         <p>
           아이템닉네임 | 유저아이디:{userId} | 아이템아이디:{infoItemId}
         </p>
         <button
           onClick={() => {
-            return alert("대표 설정 모달 띄우기");
+            setModalOpen(true);
           }}
         >
           대표 설정
