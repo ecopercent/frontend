@@ -11,5 +11,10 @@ export const FooterWrap = styled.div`
 `;
 
 export const PageWrap = styled.div`
-  max-height: 92%;
+  top: 2%;
+  position: fixed;
+  height: 88%;
+  left: 1%;
+  width: 98%;
+  padding: 1%;
 `;
