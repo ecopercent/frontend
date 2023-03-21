@@ -28,6 +28,11 @@ export default function EachInfo({ userId, infoItemId }) {
     <>
       {modalIsOpen && (
         <TitleSetModal
+          queryData={{
+            userId,
+            itemId: infoItemId,
+            category: itemQuery.data?.category,
+          }}
           onClose={() => {
             setModalIsOpen(false);
           }}
