@@ -25,14 +25,12 @@ const makeDateStr = () => {
   const month = `0${date.getMonth() + 1}`.slice(-2);
   const day = `0${date.getDate()}`.slice(-2);
   const dateStr = `${year}-${month}-${day}`;
-  console.log("dateStr", dateStr);
   return dateStr;
 };
 
 const checkItemUseCount = (id, divideNum) => {
   const itemCountObj = JSON.parse(localStorage.getItem(`item/${id}`));
   if (itemCountObj && makeDateStr() === itemCountObj.dateStr) {
-    console.log("return ", itemCountObj.count);
     return itemCountObj.count;
   }
   return divideNum;

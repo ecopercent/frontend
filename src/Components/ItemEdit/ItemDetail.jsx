@@ -8,8 +8,13 @@ const ItemDetail = ({ item }) => {
   const [isError, setIsError] = useState(false);
   const [nickname, onNickname] = useInput("");
   const [brand, onBrand] = useInput("");
-  const [type, onType] = useInput("");
-  const [targetCount, onTargetCount] = useInput("");
+  const [type, setType] = useState("");
+  const [targetCount, setTargetCount] = useState(0);
+  const onType = useCallback((e) => {
+    const values = e.target.value.split(",");
+    setType(e.target.value);
+    setTargetCount(values[1]);
+  }, []);
   const [purchasePrice, onPurchasePrice] = useInput("");
   const [purchaseDate, onPurchaseData] = useInput(Date());
   const queryClient = useQueryClient();
@@ -17,7 +22,6 @@ const ItemDetail = ({ item }) => {
   const itemEditMutation = useMutation({
     mutationFn: patchItem,
     onSuccess: (data) => {
-      console.log("result: ", data);
       queryClient.setQueryData(["itemDetail", item.id], data);
       queryClient.invalidateQueries(["itemDetail", item.id]);
     },
@@ -38,7 +42,6 @@ const ItemDetail = ({ item }) => {
         return;
       }
       setIsError(false);
-      console.log("submiit", purchaseDate, item);
       itemEditMutation.mutate({
         itemId: item.id,
         itemImage: "test",
@@ -85,11 +88,13 @@ const ItemDetail = ({ item }) => {
             <div>
               <Span>타입</Span>
               <Select value={type} onChange={onType}>
-                <option value=""> 선택 </option>
-                <option value="스테인리스">스테인리스</option>
-                <option value="우라늄">우라늄</option>
-                <option value="나무">나무</option>
-                <option value="오스트랄로피테쿠스">오스트랄로피테쿠스</option>
+                <option value=" ,0">선택</option>
+                <option value="스테인리스,100">스테인리스</option>
+                <option value="우라늄,200">우라늄</option>
+                <option value="나무,300">나무</option>
+                <option value="오스트랄로피테쿠스,400">
+                  오스트랄로피테쿠스
+                </option>
               </Select>
             </div>
           </Label>
@@ -98,8 +103,9 @@ const ItemDetail = ({ item }) => {
               <Span>목표횟수</Span>
               <Input
                 value={targetCount}
-                onChange={onTargetCount}
+                // onChange={onTargetCount}
                 type="number"
+                readOnly
               />
             </div>
           </Label>
