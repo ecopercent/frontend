@@ -46,11 +46,7 @@ const Main = () => {
     <div>
       <PageWrap>{routeInfo[currTabNumber].jsx}</PageWrap>
       <FooterWrap>
-        <TabBar
-          setCurrTabNumber={setCurrTabNumber}
-          currTabNumber={currTabNumber}
-          routeInfo={routeInfo}
-        />
+        <TabBar currTabNumber={currTabNumber} routeInfo={routeInfo} />
       </FooterWrap>
     </div>
   );
