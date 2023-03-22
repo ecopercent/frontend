@@ -25,6 +25,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/main/:page" element={<Main />} />
               <Route path="/*" element={<Error />} />
             </Routes>
