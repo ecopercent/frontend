@@ -44,13 +44,14 @@ export default function EachInfo({ userId, infoItemId }) {
           <span>{itemQuery.data?.nickname}</span>
           <S.InfoBtnContainer>
             <S.TitleSetBtn
+              isTitle={isTitle}
               disabled={isTitle}
               type="button"
               onClick={() => {
                 setModalIsOpen(true);
               }}
             >
-              {isTitle ? "대표" : "대표 설정"}
+              {isTitle ? "대표아이템" : "대표 설정"}
             </S.TitleSetBtn>
             <S.ModifyBtn
               type="button"

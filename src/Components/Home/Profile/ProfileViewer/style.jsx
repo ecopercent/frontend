@@ -76,7 +76,7 @@ export const ProfileButtonLayout = styled.div`
   height: 24px;
 `;
 
-export const ProfileEditButton = styled.div`
+export const ProfileEditButton = styled.button`
   ${btn.profile}
   ${font.normalBtn}
 `;

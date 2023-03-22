@@ -15,6 +15,19 @@ export const boldBody = `
 	font-weight: 600;
 `;
 
+export const normalSmall = `
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+
+  line-height: 24px;
+`;
+
+export const boldSmall = `
+  ${normalSmall}
+  font-weight: 600;
+`;
+
 export const normalTextarea = `
 	font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
 	font-style: normal;
@@ -31,6 +44,8 @@ export const normalBtn = `
 	font-weight: 400;
 	font-size: 12px;
 	line-height: 16px;
+	
+	color: black;
 `;
 
 export const boldBtn = `

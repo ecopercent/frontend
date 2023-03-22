@@ -25,6 +25,8 @@ export const InfoHeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  ${font.boldBody}
 `;
 
 export const InfoContentsDiv = styled.div`
@@ -48,20 +50,34 @@ export const ContentPart = styled.div`
 
 export const InfoLabel = styled.span`
   text-align: left;
+  ${font.boldSmall}
+  line-height: 150%;
 `;
 
 export const InfoValue = styled.span`
   text-align: right;
+  ${font.normalSmall}
+  line-height: 150%;
 `;
 
-export const ModifyBtn = styled.div`
+export const ModifyBtn = styled.button`
   ${btn.normal}
   ${font.normalBtn}
 `;
 
-export const TitleSetBtn = styled.div`
+export const TitleSetBtn = styled.button`
   ${btn.green}
   ${font.normalBtn}
+
+  ${(props) => {
+    return (
+      props.isTitle &&
+      `letter-spacing: -1px;
+	  font-size: 12px;
+	  padding: 0px;
+	  color: gray;`
+    );
+  }}
 `;
 
 /*

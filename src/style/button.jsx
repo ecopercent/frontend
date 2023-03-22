@@ -15,6 +15,8 @@ export const normal = `
   border-radius: 8px;
   border: 0px;
 
+  cursor: pointer;
+
   ${font.normalBtn};
 `;
 

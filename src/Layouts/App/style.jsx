@@ -14,6 +14,8 @@ const style = css`
     -moz-box-sizing: border-box;
     // 웹킷 & 크롬
     -webkit-box-sizing: border-box;
+    // iOS 사파리 기본 스타일 제거
+    -webkit-appearance: none;
   }
 `;
 

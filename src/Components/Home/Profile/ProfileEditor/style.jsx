@@ -96,7 +96,7 @@ export const ProfileBtnContainer = styled.div`
   height: 24px;
 `;
 
-export const ProfileBtn = styled.div`
+export const ProfileBtn = styled.button`
   ${(props) => {
     return props.featured ? btn.profileGreen : btn.profile;
   }};
