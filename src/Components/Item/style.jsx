@@ -70,12 +70,12 @@ export const TitleSetBtn = styled.button`
   ${btn.green}
   ${font.normalBtn}
 
+  padding: 0px;
   ${(props) => {
     return (
       props.isTitle &&
       `letter-spacing: -1px;
 	  font-size: 12px;
-	  padding: 0px;
 	  color: gray;`
     );
   }}
