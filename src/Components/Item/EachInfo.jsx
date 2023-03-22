@@ -40,56 +40,58 @@ export default function EachInfo({ userId, infoItemId }) {
         />
       )}
       <S.InfoDiv>
-        <div>
-          <p>{itemQuery.data?.nickname}</p>
-          <S.TitleSetBtn
-            disabled={isTitle}
-            type="button"
-            onClick={() => {
-              setModalIsOpen(true);
-            }}
-          >
-            {isTitle ? "대표" : "대표 설정"}
-          </S.TitleSetBtn>
-          <S.ModifyBtn
-            type="button"
-            onClick={() => {
-              return alert("아이템 수정 페이지로 이동!");
-            }}
-          >
-            수정
-          </S.ModifyBtn>
-        </div>
-        <div>
-          <p>
+        <S.InfoHeaderDiv>
+          <span>{itemQuery.data?.nickname}</span>
+          <S.InfoBtnContainer>
+            <S.TitleSetBtn
+              disabled={isTitle}
+              type="button"
+              onClick={() => {
+                setModalIsOpen(true);
+              }}
+            >
+              {isTitle ? "대표" : "대표 설정"}
+            </S.TitleSetBtn>
+            <S.ModifyBtn
+              type="button"
+              onClick={() => {
+                return alert("아이템 수정 페이지로 이동!");
+              }}
+            >
+              수정
+            </S.ModifyBtn>
+          </S.InfoBtnContainer>
+        </S.InfoHeaderDiv>
+        <S.InfoContentsDiv>
+          <S.InfoLabel>
             브랜드
             <br />
             타입
             <br />
             목표횟수
-          </p>
-          <p>
+          </S.InfoLabel>
+          <S.InfoValue>
             {itemQuery.data?.brand || ""}
             <br />
             {itemQuery.data?.type || ""}
             <br />
             300회
-          </p>
-          <p>
+          </S.InfoValue>
+          <S.InfoLabel>
             구입가
             <br />
             구입일
             <br />
             사용횟수
-          </p>
-          <p>
+          </S.InfoLabel>
+          <S.InfoValue>
             {itemQuery.data?.price ? `${itemQuery.data?.price}원` : ""}
             <br />
             {itemQuery.data?.purchaseDate || ""}
             <br />
             {itemQuery.data?.usageCount}회
-          </p>
-        </div>
+          </S.InfoValue>
+        </S.InfoContentsDiv>
       </S.InfoDiv>
     </>
   );

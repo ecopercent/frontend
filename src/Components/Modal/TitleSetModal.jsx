@@ -25,7 +25,7 @@ export default function TitleSetModal({ queryData, onClose }) {
       <div>
         <div ref={modalRef} style={{ backgroundColor: "yellow" }}>
           <h1>대표아이템 설정</h1>
-          <p>대표 아이템을 변경하시겠습니까?</p>
+          <span>대표 아이템을 변경하시겠습니까?</span>
           <div>
             <S.CancelBtn
               type="button"

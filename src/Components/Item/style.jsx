@@ -18,18 +18,26 @@ export const InfoDiv = styled.div`
 
 export const InfoHeaderDiv = styled.div`
   width: 100%;
-  padding: 10px 10px;
+  height: 44px;
+  padding: 10px 20px;
   border-bottom: 0.5px solid;
 
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const InfoContentsDiv = styled.div`
   width: 100%;
-  padding: 10px 10px;
+  padding: 10px 20px;
 
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+`;
+
+export const InfoBtnContainer = styled.div`
+  display: flex;
+  gap: 7px;
 `;
 
 export const ContentPart = styled.div`
@@ -38,11 +46,11 @@ export const ContentPart = styled.div`
   justify-content: space-between;
 `;
 
-export const LeftText = styled.p`
+export const InfoLabel = styled.span`
   text-align: left;
 `;
 
-export const RightText = styled.p`
+export const InfoValue = styled.span`
   text-align: right;
 `;
 

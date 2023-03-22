@@ -38,26 +38,30 @@ export default function AllInfo({ userId }) {
       <S.InfoHeaderDiv>나의 아이템 {userId}</S.InfoHeaderDiv>
       <S.InfoContentsDiv>
         <S.ContentPart>
-          <S.LeftText>
+          <S.InfoLabel>
             텀블러
             <br />
             달성개수
-          </S.LeftText>
-          <S.RightText>
+            <br />
+            <br />
+          </S.InfoLabel>
+          <S.InfoValue>
             {tumblersQuery.data ? tumblersQuery.data.length : 0}개<br />
-            {achivedCnt.tumbler}개
-          </S.RightText>
+            {achivedCnt.tumbler}개<br />
+          </S.InfoValue>
         </S.ContentPart>
         <S.ContentPart>
-          <S.LeftText>
+          <S.InfoLabel>
             에코백
             <br />
             달성개수
-          </S.LeftText>
-          <S.RightText>
+            <br />
+            <br />
+          </S.InfoLabel>
+          <S.InfoValue>
             {ecobagsQuery.data ? ecobagsQuery.data.length : 0}개<br />
-            {achivedCnt.ecobag}개
-          </S.RightText>
+            {achivedCnt.ecobag}개<br />
+          </S.InfoValue>
         </S.ContentPart>
       </S.InfoContentsDiv>
     </S.InfoDiv>
