@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getItemList } from "../../Api/item";
+import * as S from "./style";
 
 export default function AllInfo({ userId }) {
   // db에 생기기 전까지 임시 목표 사용횟수
@@ -33,28 +34,32 @@ export default function AllInfo({ userId }) {
   }
 
   return (
-    <>
-      <div>나의 아이템 {userId}</div>
-      <div>
-        <p>
-          텀블러
-          <br />
-          달성개수
-        </p>
-        <p>
-          {tumblersQuery.data ? tumblersQuery.data.length : 0}개<br />
-          {achivedCnt.tumbler}개
-        </p>
-        <p>
-          에코백
-          <br />
-          달성개수
-        </p>
-        <p>
-          {ecobagsQuery.data ? ecobagsQuery.data.length : 0}개<br />
-          {achivedCnt.ecobag}개
-        </p>
-      </div>
-    </>
+    <S.InfoDiv>
+      <S.InfoHeaderDiv>나의 아이템 {userId}</S.InfoHeaderDiv>
+      <S.InfoContentsDiv>
+        <S.ContentPart>
+          <S.LeftText>
+            텀블러
+            <br />
+            달성개수
+          </S.LeftText>
+          <S.RightText>
+            {tumblersQuery.data ? tumblersQuery.data.length : 0}개<br />
+            {achivedCnt.tumbler}개
+          </S.RightText>
+        </S.ContentPart>
+        <S.ContentPart>
+          <S.LeftText>
+            에코백
+            <br />
+            달성개수
+          </S.LeftText>
+          <S.RightText>
+            {ecobagsQuery.data ? ecobagsQuery.data.length : 0}개<br />
+            {achivedCnt.ecobag}개
+          </S.RightText>
+        </S.ContentPart>
+      </S.InfoContentsDiv>
+    </S.InfoDiv>
   );
 }
