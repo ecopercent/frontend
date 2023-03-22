@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { patchTitleItem } from "../../Api/user";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import ModalContainer from "./ModalContainer";
+import * as S from "./style";
 
 export default function TitleSetModal({ queryData, onClose }) {
   const modalRef = useRef();
@@ -26,15 +27,15 @@ export default function TitleSetModal({ queryData, onClose }) {
           <h1>대표아이템 설정</h1>
           <p>대표 아이템을 변경하시겠습니까?</p>
           <div>
-            <button
+            <S.CancelBtn
               type="button"
               onClick={() => {
                 return onClose();
               }}
             >
               취소
-            </button>
-            <button
+            </S.CancelBtn>
+            <S.SubmitBtn
               type="button"
               onClick={() => {
                 titleMutation.mutate();
@@ -42,7 +43,7 @@ export default function TitleSetModal({ queryData, onClose }) {
               }}
             >
               확인
-            </button>
+            </S.SubmitBtn>
           </div>
         </div>
       </div>

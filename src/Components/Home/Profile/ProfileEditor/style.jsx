@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import * as color from "../../../../style/color";
 import * as font from "../../../../style/font";
+import * as btn from "../../../../style/button";
 
 export const ProfileContainer = styled.div`
   display: flex;
@@ -97,22 +97,11 @@ export const ProfileBtnContainer = styled.div`
 `;
 
 export const ProfileBtn = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  width: 86px;
-  height: 24px;
-
-  background: ${(props) => {
-    return props.featured ? color.lightGreen : color.lightGray;
+  ${(props) => {
+    return props.featured ? btn.profileGreen : btn.profile;
   }};
-  border-radius: 8px;
-  border: 0px;
 
   ${(props) => {
-    return props.featured ? font.boldBtn : font.normalBtn;
+    return props.featured && font.boldBtn;
   }};
 `;

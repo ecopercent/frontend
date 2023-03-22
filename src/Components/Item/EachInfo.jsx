@@ -42,7 +42,7 @@ export default function EachInfo({ userId, infoItemId }) {
       <S.InfoDiv>
         <div>
           <p>{itemQuery.data?.nickname}</p>
-          <button
+          <S.TitleSetBtn
             disabled={isTitle}
             type="button"
             onClick={() => {
@@ -50,15 +50,15 @@ export default function EachInfo({ userId, infoItemId }) {
             }}
           >
             {isTitle ? "대표" : "대표 설정"}
-          </button>
-          <button
+          </S.TitleSetBtn>
+          <S.ModifyBtn
             type="button"
             onClick={() => {
               return alert("아이템 수정 페이지로 이동!");
             }}
           >
             수정
-          </button>
+          </S.ModifyBtn>
         </div>
         <div>
           <p>

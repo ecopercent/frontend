@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import * as color from "../../../../style/color";
 import * as font from "../../../../style/font";
+import * as btn from "../../../../style/button";
 
 export const ProfileContainer = styled.div`
   display: flex;
@@ -77,18 +77,6 @@ export const ProfileButtonLayout = styled.div`
 `;
 
 export const ProfileEditButton = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  width: 86px;
-  height: 24px;
-
-  background: ${color.lightGray};
-  border-radius: 8px;
-  border: 0px;
-
+  ${btn.profile}
   ${font.normalBtn}
 `;

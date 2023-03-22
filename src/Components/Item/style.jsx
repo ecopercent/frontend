@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import * as btn from "../../style/button";
+import * as font from "../../style/font";
 
 /*
  *          Info
@@ -42,6 +44,16 @@ export const LeftText = styled.p`
 
 export const RightText = styled.p`
   text-align: right;
+`;
+
+export const ModifyBtn = styled.div`
+  ${btn.normal}
+  ${font.normalBtn}
+`;
+
+export const TitleSetBtn = styled.div`
+  ${btn.green}
+  ${font.normalBtn}
 `;
 
 /*
