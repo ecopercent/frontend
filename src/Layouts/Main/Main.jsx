@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiFillSetting } from "react-icons/ai";
 import { BiHomeAlt } from "react-icons/bi";
 import { BsFillBoxFill } from "react-icons/bs";
@@ -34,6 +34,10 @@ const Main = () => {
     return info.page === params.page;
   });
   const [currTabNumber, setCurrTabNumber] = useState(pageNum);
+
+  useEffect(() => {
+    setCurrTabNumber(pageNum);
+  }, [pageNum]);
 
   if (params === undefined || currTabNumber === -1 || pageNum === -1)
     return <Error />;
