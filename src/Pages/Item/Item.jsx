@@ -8,7 +8,7 @@ import ItemList from "../../Components/Item/ItemList";
 
 const Item = () => {
   const userId = getLogin();
-  if (!userId) return <Navigate to="/" />;
+  if (!userId) return <Navigate to="/login" />;
   const [infoItemId, setInfoItemId] = useState(0);
 
   return (

@@ -6,7 +6,7 @@ import { getLogin } from "../../../Layouts/Login/Login";
 
 export default function Profile() {
   const userId = getLogin();
-  if (!userId) return <Navigate to="/" />;
+  if (!userId) return <Navigate to="/login" />;
 
   const [isEditing, setIsEditing] = useState(false);
 
