@@ -1,8 +1,15 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
+import { BsPlusCircle } from "react-icons/bs";
 import { getItemList } from "../../Api/item";
+import * as S from "./style";
 
-export default function ItemList({ userId, itemListOf, setInfoItemId }) {
+export default function ItemList({
+  userId,
+  itemListOf,
+  infoItemId,
+  setInfoItemId,
+}) {
   const itemListQuery = useQuery({
     queryKey: [`${itemListOf}s`, userId],
     queryFn: () => {
@@ -11,13 +18,12 @@ export default function ItemList({ userId, itemListOf, setInfoItemId }) {
   });
 
   return (
-    <ul>
-      <h1>{itemListOf} 리스트</h1>
+    <S.ItemsContainerUl>
       {itemListQuery.data?.map((item) => {
         return (
-          <li
+          <S.ItemLi
             key={item.id}
-            role="presentation"
+            featured={infoItemId === item.id}
             onClick={() => {
               return setInfoItemId(item.id);
             }}
@@ -26,11 +32,11 @@ export default function ItemList({ userId, itemListOf, setInfoItemId }) {
             }}
           >
             <img src={item.image} alt={item.nickname} />
-          </li>
+          </S.ItemLi>
         );
       })}
-      <li
-        role="presentation"
+      <S.ItemLi
+        isAddBtn
         onClick={() => {
           return alert("추가페이지로 이동!");
         }}
@@ -38,8 +44,8 @@ export default function ItemList({ userId, itemListOf, setInfoItemId }) {
           alert("추가페이지로 이동!");
         }}
       >
-        <img alt="아이템 추가" />
-      </li>
-    </ul>
+        <BsPlusCircle size={40} />
+      </S.ItemLi>
+    </S.ItemsContainerUl>
   );
 }

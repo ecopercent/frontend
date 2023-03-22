@@ -1,24 +1,27 @@
 import React from "react";
+import * as S from "./style";
 
-export default function ItemListTabBtns({ setItemListOf }) {
+export default function ItemListTabBtns({ itemListOf, setItemListOf }) {
   return (
-    <div>
-      <button
+    <>
+      <S.ListTabBtn
         type="button"
+        featured={itemListOf === "tumbler"}
         onClick={() => {
           return setItemListOf("tumbler");
         }}
       >
         텀블러
-      </button>
-      <button
+      </S.ListTabBtn>
+      <S.ListTabBtn
         type="button"
+        featured={itemListOf === "ecobag"}
         onClick={() => {
           return setItemListOf("ecobag");
         }}
       >
         에코백
-      </button>
-    </div>
+      </S.ListTabBtn>
+    </>
   );
 }

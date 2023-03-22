@@ -22,11 +22,13 @@ export const AllBtnsContainer = styled.div`
   gap: 10px;
 `;
 
-export const ConvertBtn = styled.div`
+export const ConvertBtn = styled.button`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-content: center;
+  padding: 0px;
+  color: black;
 
   width: 40px;
   height: 40px;
@@ -35,11 +37,13 @@ export const ConvertBtn = styled.div`
   background-color: ${color.lightGreen};
 `;
 
-export const MainSetBtn = styled.div`
+export const MainSetBtn = styled.button`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-content: center;
+  padding: 0px;
+  color: black;
 
   width: 40px;
   height: 40px;
