@@ -21,7 +21,7 @@ function App() {
       <GlobalStyles />
       <Pc>
         <div id="pc" style={{ width: "500px", margin: "0 auto" }}>
-          <h3>pc</h3>
+          <h3 style={{ position: "absolute", left: 20 }}>pc</h3>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Login />} />
@@ -32,7 +32,7 @@ function App() {
         </div>
       </Pc>
       <Mobile>
-        <h3>모바일</h3>
+        <h3 style={{ position: "absolute", left: 20 }}>모바일</h3>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />

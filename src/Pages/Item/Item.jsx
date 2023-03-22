@@ -12,7 +12,6 @@ const Item = () => {
 
   return (
     <div>
-      <h1>아이템페이지</h1>
       {infoItemId === 0 ? (
         <AllInfo userId={userId} />
       ) : (
