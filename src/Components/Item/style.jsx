@@ -138,8 +138,8 @@ export const ItemLi = styled.li`
 
   ${(props) => {
     return (
-      (props.isAddBtn && `border: 1px solid;`) ||
-      (props.featured && `border: 2px ${color.basicGreen} solid;`)
+      (props.isAddBtn && `outline: 1px solid;`) ||
+      (props.featured && `outline: 2px ${color.basicGreen} solid;`)
     );
   }}
   border-radius: 100px;
