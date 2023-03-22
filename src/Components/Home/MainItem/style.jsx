@@ -23,7 +23,9 @@ export const AllBtnsContainer = styled.div`
 `;
 
 export const ConvertBtn = styled.button`
-  display: flex;
+  display: ${(props) => {
+    return props.disabled ? `none` : `flex`;
+  }};
   justify-content: center;
   flex-wrap: wrap;
   align-content: center;
@@ -35,6 +37,8 @@ export const ConvertBtn = styled.button`
   border: 0px solid;
   border-radius: 50%;
   background-color: ${color.lightGreen};
+
+  cursor: pointer;
 `;
 
 export const MainSetBtn = styled.button`
@@ -47,17 +51,23 @@ export const MainSetBtn = styled.button`
 
   width: 40px;
   height: 40px;
+  border: 0px solid;
   border-radius: 50%;
   background-color: ${color.lightGray};
+
+  cursor: pointer;
 `;
 
-export const BothItemBtn = styled.div`
+export const BothItemBtn = styled.button`
   display: flex;
   align-items: center;
   position: relative;
 
   width: 40px;
   height: 40px;
+  border: 0px solid;
   border-radius: 50%;
   background-color: ${color.lightGray};
+
+  cursor: pointer;
 `;
