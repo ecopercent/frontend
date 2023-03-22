@@ -12,9 +12,7 @@ export const FooterWrap = styled.div`
 
 export const PageWrap = styled.div`
   top: 2%;
-  position: fixed;
   height: 88%;
-  left: 1%;
   width: 98%;
   padding: 1%;
 `;

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import ItemEdit from "../../Components/ItemEdit/ItemEdit";
+// import ItemEdit from "../../Components/ItemEdit/ItemEdit";
 import { getLogin } from "../../Layouts/Login/Login";
 import AllInfo from "../../Components/Item/AllInfo";
 import EachInfo from "../../Components/Item/EachInfo";
-// import ItemList from "../../Components/Item/ItemList";
 import ItemListBox from "../../Components/Item/ItemListBox";
 
 const Item = () => {
@@ -15,7 +14,7 @@ const Item = () => {
   return (
     <div>
       {/* <ItemEdit item={{ oper: "add", id: 2 }} /> */}
-      <ItemEdit item={{ oper: "edit", id: 1 }} />
+      {/* <ItemEdit item={{ oper: "edit", id: 1 }} /> */}
       {infoItemId === 0 ? (
         <AllInfo userId={userId} />
       ) : (
