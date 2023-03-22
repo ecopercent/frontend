@@ -9,7 +9,10 @@ export default function ItemListBox({ userId, setInfoItemId }) {
   return (
     <S.ItemListContainer>
       <S.ItemCategoryTabDiv>
-        <ItemListTabBtns setItemListOf={setItemListOf} />
+        <ItemListTabBtns
+          itemListOf={itemListOf}
+          setItemListOf={setItemListOf}
+        />
       </S.ItemCategoryTabDiv>
       <S.ItemListDiv>
         <ItemList

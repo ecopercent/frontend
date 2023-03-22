@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import * as btn from "../../style/button";
 import * as font from "../../style/font";
+import * as color from "../../style/color";
 
 /*
  *          Info
@@ -81,6 +82,35 @@ export const TitleSetBtn = styled.button`
 `;
 
 /*
+ *          List View Category Set Buttons
+ */
+
+export const ItemCategoryTabDiv = styled.div`
+  width: 100%;
+  height: 44px;
+  border-bottom: 0.5px solid;
+`;
+
+export const ListTabBtn = styled.button`
+  width: 50%;
+  padding: 0;
+  height: 100%;
+
+  border: 0px;
+  background: none;
+
+  ${font.boldBody}
+
+  ${(props) => {
+    return (
+      props.featured &&
+      `border-bottom: 3px ${color.basicGreen} solid;
+	   color: ${color.basicGreen}`
+    );
+  }}
+`;
+
+/*
  *          Item List
  */
 
@@ -89,12 +119,6 @@ export const ItemListContainer = styled.div`
   margin: 10px 10px;
   border: 1px solid;
   border-radius: 10px;
-`;
-
-export const ItemCategoryTabDiv = styled.div`
-  width: 100%;
-  padding: 10px 10px;
-  border-bottom: 0.5px solid;
 `;
 
 export const ItemListDiv = styled.div`
