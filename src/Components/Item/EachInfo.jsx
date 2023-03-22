@@ -91,7 +91,9 @@ export default function EachInfo({ userId, infoItemId }) {
             <S.InfoValue>
               {itemQuery.data?.price ? `${itemQuery.data?.price}원` : ""}
               <br />
-              {itemQuery.data?.purchaseDate.slice(0, 10) || ""}
+              {itemQuery.data?.purchaseDate
+                ? itemQuery.data?.purchaseDate.slice(0, 10)
+                : ""}
               <br />
               {itemQuery.data?.usageCount}회
             </S.InfoValue>

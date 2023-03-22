@@ -22,11 +22,13 @@ export default function TitleSetModal({ queryData, onClose }) {
 
   return (
     <ModalContainer>
-      <div>
-        <div ref={modalRef} style={{ backgroundColor: "yellow" }}>
-          <h1>대표아이템 설정</h1>
-          <span>대표 아이템을 변경하시겠습니까?</span>
-          <div>
+      <S.backgroundOverlay>
+        <S.ModalLayout ref={modalRef}>
+          <S.TextContainer>
+            <S.ModalTitle>대표아이템 설정</S.ModalTitle>
+            <S.ModalContent>대표 아이템을 변경하시겠습니까?</S.ModalContent>
+          </S.TextContainer>
+          <S.BtnContainer>
             <S.CancelBtn
               type="button"
               onClick={() => {
@@ -44,9 +46,9 @@ export default function TitleSetModal({ queryData, onClose }) {
             >
               확인
             </S.SubmitBtn>
-          </div>
-        </div>
-      </div>
+          </S.BtnContainer>
+        </S.ModalLayout>
+      </S.backgroundOverlay>
     </ModalContainer>
   );
 }

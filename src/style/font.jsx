@@ -28,6 +28,19 @@ export const boldSmall = `
   font-weight: 600;
 `;
 
+export const normalTitle3 = `
+		font-style: normal;
+		font-weight: 400;
+		font-size: 20px;
+		line-height: 24px;
+		letter-spacing: 0.38px;
+`;
+
+export const boldTitle3 = `
+${normalTitle3}
+font-weight: 600;
+`;
+
 export const normalTextarea = `
 	font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
 	font-style: normal;
