@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import AllInfo from "../../Components/Item/AllInfo";
 import EachInfo from "../../Components/Item/EachInfo";
-import ItemList from "../../Components/Item/ItemList";
+import ItemListBox from "../../Components/Item/ItemListBox";
 import { getLogin } from "../../Layouts/Login/Login";
 
 const Item = () => {
@@ -18,7 +18,7 @@ const Item = () => {
       ) : (
         <EachInfo userId={userId} infoItemId={infoItemId} />
       )}
-      <ItemList userId={userId} setInfoItemId={setInfoItemId} />
+      <ItemListBox userId={userId} setInfoItemId={setInfoItemId} />
     </div>
   );
 };

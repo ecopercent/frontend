@@ -1,10 +1,23 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useRef } from "react";
+import { patchTitleItem } from "../../Api/user";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import ModalContainer from "./ModalContainer";
 
-export default function TitleSetModal({ onClose }) {
+export default function TitleSetModal({ queryData, onClose }) {
   const modalRef = useRef();
   useOutsideClick(modalRef, onClose);
+
+  const queryClient = useQueryClient();
+  const titleMutation = useMutation({
+    mutationFn: () => {
+      return patchTitleItem(queryData);
+    },
+    onSuccess: (data) => {
+      queryClient.setQueryData(["user", queryData.userId], data);
+      queryClient.invalidateQueries(["user", queryData.userId]);
+    },
+  });
 
   return (
     <ModalContainer>
@@ -24,7 +37,8 @@ export default function TitleSetModal({ onClose }) {
             <button
               type="button"
               onClick={() => {
-                return onClose();
+                titleMutation.mutate();
+                onClose();
               }}
             >
               확인
