@@ -31,7 +31,7 @@ export default function ItemList({
               return setInfoItemId(item.id);
             }}
           >
-            <img src={item.image} alt={item.nickname} />
+            <S.ItemImg src={item.image} alt={item.nickname} />
           </S.ItemLi>
         );
       })}

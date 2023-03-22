@@ -148,3 +148,9 @@ export const ItemLi = styled.li`
   align-items: center;
   justify-content: center;
 `;
+
+export const ItemImg = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+`;
