@@ -15,4 +15,5 @@ export const PageWrap = styled.div`
   height: 88%;
   width: 98%;
   padding: 1%;
+  margin: 0px 0px 8vh;
 `;
