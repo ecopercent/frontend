@@ -63,7 +63,7 @@ export const SubmitBtn = styled.button`
 export const CancelBtn = styled.button`
   ${btn.normal}
   ${font.normalBtn}
-=======
+`;
 
 export const CreateModal = styled.div`
   position: fixed;
