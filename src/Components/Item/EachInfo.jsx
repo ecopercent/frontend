@@ -64,34 +64,38 @@ export default function EachInfo({ userId, infoItemId }) {
           </S.InfoBtnContainer>
         </S.InfoHeaderDiv>
         <S.InfoContentsDiv>
-          <S.InfoLabel>
-            브랜드
-            <br />
-            타입
-            <br />
-            목표횟수
-          </S.InfoLabel>
-          <S.InfoValue>
-            {itemQuery.data?.brand || ""}
-            <br />
-            {itemQuery.data?.type || ""}
-            <br />
-            300회
-          </S.InfoValue>
-          <S.InfoLabel>
-            구입가
-            <br />
-            구입일
-            <br />
-            사용횟수
-          </S.InfoLabel>
-          <S.InfoValue>
-            {itemQuery.data?.price ? `${itemQuery.data?.price}원` : ""}
-            <br />
-            {itemQuery.data?.purchaseDate || ""}
-            <br />
-            {itemQuery.data?.usageCount}회
-          </S.InfoValue>
+          <S.ContentPart>
+            <S.InfoLabel>
+              브랜드
+              <br />
+              타입
+              <br />
+              목표횟수
+            </S.InfoLabel>
+            <S.InfoValue>
+              {itemQuery.data?.brand || ""}
+              <br />
+              {itemQuery.data?.type || ""}
+              <br />
+              300회
+            </S.InfoValue>
+          </S.ContentPart>
+          <S.ContentPart>
+            <S.InfoLabel>
+              구입가
+              <br />
+              구입일
+              <br />
+              사용횟수
+            </S.InfoLabel>
+            <S.InfoValue>
+              {itemQuery.data?.price ? `${itemQuery.data?.price}원` : ""}
+              <br />
+              {itemQuery.data?.purchaseDate || ""}
+              <br />
+              {itemQuery.data?.usageCount}회
+            </S.InfoValue>
+          </S.ContentPart>
         </S.InfoContentsDiv>
       </S.InfoDiv>
     </>
