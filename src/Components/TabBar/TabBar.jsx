@@ -2,7 +2,7 @@ import React from "react";
 import { TabBarContainer } from "./style";
 import TabItem from "./TabItem";
 
-const TabBar = ({ setCurrTabNumber, currTabNumber, routeInfo }) => {
+const TabBar = ({ currTabNumber, routeInfo }) => {
   return (
     <TabBarContainer>
       {routeInfo.map((element, index) => {
@@ -12,7 +12,6 @@ const TabBar = ({ setCurrTabNumber, currTabNumber, routeInfo }) => {
             itemNumber={index}
             IconComponent={element.icon}
             page={element.page}
-            setCurrTabNumber={setCurrTabNumber}
             currTabNumber={currTabNumber}
           />
         );
