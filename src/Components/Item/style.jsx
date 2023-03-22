@@ -7,7 +7,7 @@ import * as color from "../../style/color";
  *          Info
  */
 
-export const InfoDiv = styled.div`
+export const InfoLayout = styled.div`
   width: 100% - margin;
   margin: 10px 10px;
   border: 1px solid;
@@ -100,6 +100,7 @@ export const ListTabBtn = styled.button`
   background: none;
 
   ${font.boldBody}
+  color: black;
 
   ${(props) => {
     return (
@@ -114,17 +115,33 @@ export const ListTabBtn = styled.button`
  *          Item List
  */
 
-export const ItemListContainer = styled.div`
+export const ItemListLayout = styled.div`
   width: 100% - margin;
   margin: 10px 10px;
   border: 1px solid;
   border-radius: 10px;
 `;
 
-export const ItemListDiv = styled.div`
-  width: 100%px;
+export const ItemsContainerUl = styled.ul`
+  padding: 0;
 
   display: flex;
-  display-direction: column;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+`;
+
+export const ItemLi = styled.li`
+  list-style: none;
+  width: 160px;
+  height: 200px;
+
+  ${(props) => {
+    return props.isAddBtn && `border: 1px solid;`;
+  }}
+  border-radius: 100px;
+
+  display: flex;
+  align-items: center;
   justify-content: center;
 `;

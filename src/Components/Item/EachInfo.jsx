@@ -39,7 +39,7 @@ export default function EachInfo({ userId, infoItemId }) {
           }}
         />
       )}
-      <S.InfoDiv>
+      <S.InfoLayout>
         <S.InfoHeaderDiv>
           <span>{itemQuery.data?.nickname}</span>
           <S.InfoBtnContainer>
@@ -97,7 +97,7 @@ export default function EachInfo({ userId, infoItemId }) {
             </S.InfoValue>
           </S.ContentPart>
         </S.InfoContentsDiv>
-      </S.InfoDiv>
+      </S.InfoLayout>
     </>
   );
 }
