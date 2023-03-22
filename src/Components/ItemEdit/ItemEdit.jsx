@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import getItem from "../../Api/item";
+import { getItem } from "../../Api/item";
 import DeleteItemModal from "./DeleteItemModal";
 import ItmeImage from "./ItmeImage";
 import ItemDetail from "./ItemDetail";
@@ -9,7 +9,7 @@ import { ItemEditBorder } from "./style";
 
 const ItemEdit = ({ item }) => {
   const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
-  
+
   const onCloseModal = useCallback(() => {
     setShowdeleteItemModal(false);
   }, []);
@@ -19,7 +19,7 @@ const ItemEdit = ({ item }) => {
       return getItem(item.id);
     },
   });
-  
+
   const itemDetail = itemDetailQuery.data;
   console.log("cuuritemDetail:", itemDetail);
 
