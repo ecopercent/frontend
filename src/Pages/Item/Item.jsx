@@ -4,7 +4,8 @@ import ItemEdit from "../../Components/ItemEdit/ItemEdit";
 import { getLogin } from "../../Layouts/Login/Login";
 import AllInfo from "../../Components/Item/AllInfo";
 import EachInfo from "../../Components/Item/EachInfo";
-import ItemList from "../../Components/Item/ItemList";
+// import ItemList from "../../Components/Item/ItemList";
+import ItemListBox from "../../Components/Item/ItemListBox";
 
 const Item = () => {
   const userId = getLogin();
@@ -21,7 +22,7 @@ const Item = () => {
       ) : (
         <EachInfo userId={userId} infoItemId={infoItemId} />
       )}
-      <ItemList userId={userId} setInfoItemId={setInfoItemId} />
+      <ItemListBox userId={userId} setInfoItemId={setInfoItemId} />
     </div>
   );
 };

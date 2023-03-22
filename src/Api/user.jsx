@@ -17,3 +17,13 @@ export function patchUser({ id, nick, msg, img }) {
       return res.data;
     });
 }
+
+export function patchTitleItem({ userId, itemId, category }) {
+  return axios
+    .patch(`/users/${userId}/title-${category}`, {
+      titleTumblerId: itemId,
+    })
+    .then((res) => {
+      return res.data;
+    });
+}
