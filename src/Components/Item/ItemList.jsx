@@ -4,7 +4,12 @@ import { BsPlusCircle } from "react-icons/bs";
 import { getItemList } from "../../Api/item";
 import * as S from "./style";
 
-export default function ItemList({ userId, itemListOf, setInfoItemId }) {
+export default function ItemList({
+  userId,
+  itemListOf,
+  infoItemId,
+  setInfoItemId,
+}) {
   const itemListQuery = useQuery({
     queryKey: [`${itemListOf}s`, userId],
     queryFn: () => {
@@ -18,6 +23,7 @@ export default function ItemList({ userId, itemListOf, setInfoItemId }) {
         return (
           <S.ItemLi
             key={item.id}
+            featured={infoItemId === item.id}
             onClick={() => {
               return setInfoItemId(item.id);
             }}

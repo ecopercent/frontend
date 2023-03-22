@@ -18,7 +18,11 @@ const Item = () => {
       ) : (
         <EachInfo userId={userId} infoItemId={infoItemId} />
       )}
-      <ItemListBox userId={userId} setInfoItemId={setInfoItemId} />
+      <ItemListBox
+        userId={userId}
+        infoItemId={infoItemId}
+        setInfoItemId={setInfoItemId}
+      />
     </div>
   );
 };
