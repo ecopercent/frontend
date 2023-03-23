@@ -4,10 +4,12 @@ import MainItemTab from "../../Components/Home/MainItem/MainItemTab";
 
 const Home = () => {
   return (
-    <div>
+    // <div>
+    <>
       <Profile />
       <MainItemTab />
-    </div>
+    </>
+    // </div>
   );
 };
 

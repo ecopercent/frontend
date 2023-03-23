@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { ItemEditHeadWrapper, DeletreBtn } from "./style";
 
 const ItemEditHead = ({ itemDetail, item, setShowdeleteItemModal }) => {
   const onclickDeleteItemModal = useCallback((e) => {
@@ -9,22 +10,13 @@ const ItemEditHead = ({ itemDetail, item, setShowdeleteItemModal }) => {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        height: "5vh",
-        margin: "1%",
-      }}
-    >
-      <h3>
-        {itemDetail?.category === "tumbler" ? "텀블러" : "에코백"}{" "}
-        {item.oper === "edit" ? "수정" : "추가"}
-      </h3>
+    <ItemEditHeadWrapper>
+      {itemDetail?.category === "tumbler" ? "텀블러 " : "에코백 "}
+      {item.oper === "edit" ? "수정" : "추가"}
       {item.oper === "edit" && (
-        <button onClick={onclickDeleteItemModal}>삭제</button>
+        <DeletreBtn onClick={onclickDeleteItemModal}>삭제</DeletreBtn>
       )}
-    </div>
+    </ItemEditHeadWrapper>
   );
 };
 

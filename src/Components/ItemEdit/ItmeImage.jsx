@@ -1,10 +1,10 @@
 import React from "react";
 import { HiOutlineCamera } from "react-icons/hi";
-import { ImageClipper, FlexCenterWrapper } from "./style";
+import { ImageClipper, ItemDetalImagerWrapper } from "./style";
 
 const ItmeImage = ({ imagePath, oper }) => {
   return (
-    <FlexCenterWrapper>
+    <ItemDetalImagerWrapper>
       <ImageClipper
         src={oper === "edit" ? imagePath : "/img/userLoadingImage.png"}
         alt="아이템 이미지"
@@ -23,7 +23,7 @@ const ItmeImage = ({ imagePath, oper }) => {
           console.log("이미지 피커 나와랏");
         }}
       />
-    </FlexCenterWrapper>
+    </ItemDetalImagerWrapper>
   );
 };
 

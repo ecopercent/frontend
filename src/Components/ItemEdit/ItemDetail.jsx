@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { EditDetailWrapper, Label, Error, Input, Span, Select } from "./style";
+import * as S from "./style";
 import useInput from "../../hooks/useInput";
 import { patchItem } from "../../Api/item";
 
@@ -57,94 +57,63 @@ const ItemDetail = ({ item }) => {
 
   // TODO: 스타일 다시 할때 라벨이랑 div 빼고 해보자
   return (
-    <form onSubmit={onEditItem}>
-      <div>
-        <EditDetailWrapper>
-          <Label>
-            <div>
-              <Span>닉네임</Span>
-              <Input
-                value={nickname}
-                onChange={onNickname}
-                type="text"
-                maxLength={8}
-                minLength={2}
-              />
-            </div>
-          </Label>
-          <Label>
-            <div>
-              <Span>브랜드</Span>
-              <Input
-                value={brand}
-                onChange={onBrand}
-                type="text"
-                minLength={1}
-                maxLength={12}
-              />
-            </div>
-          </Label>
-          <Label>
-            <div>
-              <Span>타입</Span>
-              <Select value={type} onChange={onType}>
-                <option value=" ,0">선택</option>
-                <option value="스테인리스,100">스테인리스</option>
-                <option value="우라늄,200">우라늄</option>
-                <option value="나무,300">나무</option>
-                <option value="오스트랄로피테쿠스,400">
-                  오스트랄로피테쿠스
-                </option>
-              </Select>
-            </div>
-          </Label>
-          <Label>
-            <div>
-              <Span>목표횟수</Span>
-              <Input
-                value={targetCount}
-                // onChange={onTargetCount}
-                type="number"
-                readOnly
-              />
-            </div>
-          </Label>
-          <Label>
-            <div>
-              <Span>구입가</Span>
-              <Input
-                value={purchasePrice}
-                onChange={onPurchasePrice}
-                type="number"
-              />
-            </div>
-          </Label>
-          <Label>
-            <div>
-              <Span>구입일</Span>
-              <Input
-                value={purchaseDate}
-                onChange={onPurchaseData}
-                type="date"
-              />
-            </div>
-          </Label>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              margin: "3%",
-              width: "35%",
-            }}
-          >
-            <button type="reset">취소</button>
-            <button type="submit">저장</button>
-          </div>
-        </EditDetailWrapper>
-        {isError && <Error>닉네임, 브랜드, 타입은 필수입니다.</Error>}
-      </div>
-    </form>
+    <S.EditDetailWrapper>
+      <S.Form onSubmit={onEditItem}>
+        <S.FormInnerWrapper>
+          <S.Span>닉네임</S.Span>
+          <S.Input
+            value={nickname}
+            onChange={onNickname}
+            type="text"
+            maxLength={8}
+            minLength={2}
+          />
+          <S.Span>브랜드</S.Span>
+          <S.Input
+            value={brand}
+            onChange={onBrand}
+            type="text"
+            minLength={1}
+            maxLength={12}
+          />
+          <S.Span>타입</S.Span>
+          <S.Select value={type} onChange={onType}>
+            <option value=" ,0"> </option>
+            <option value="스테인리스,100">스테인리스</option>
+            <option value="우라늄,200">우라늄</option>
+            <option value="나무,300">나무</option>
+            <option value="오스트랄로피테쿠스,400">오스트랄로피테쿠스</option>
+          </S.Select>
+          <S.Span>목표횟수</S.Span>
+          <S.Input
+            value={targetCount}
+            // onChange={onTargetCount}
+            type="number"
+            readOnly
+          />
+          <S.Span>구입가</S.Span>
+          <S.Input
+            value={purchasePrice}
+            onChange={onPurchasePrice}
+            type="number"
+          />
+          <S.Span>구입일</S.Span>
+          <S.Input value={purchaseDate} onChange={onPurchaseData} type="date" />
+        </S.FormInnerWrapper>
+        <div
+          style={{
+            height: "4%",
+            marginTop: "1%",
+          }}
+        >
+          {isError && <S.Error>닉네임, 브랜드, 타입은 필수입니다.</S.Error>}
+        </div>
+        <S.ButtonWrapper>
+          <S.CancelBtn type="reset">취소</S.CancelBtn>
+          <S.SubmitBtn type="submit">저장</S.SubmitBtn>
+        </S.ButtonWrapper>
+      </S.Form>
+    </S.EditDetailWrapper>
   );
 };
 

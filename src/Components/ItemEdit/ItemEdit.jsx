@@ -32,7 +32,9 @@ const ItemEdit = ({ item }) => {
       />
       <hr />
       <ItmeImage imagePath={itemDetail?.image} oper={item.oper} />
+      <hr />
       <ItemDetail item={item} />
+      <hr />
       <DeleteItemModal
         show={showdeleteItemModal}
         onCloseModal={onCloseModal}
