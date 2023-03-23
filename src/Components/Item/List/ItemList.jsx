@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { BsPlusCircle } from "react-icons/bs";
 import { getItemList } from "../../../Api/item";
@@ -36,8 +36,14 @@ export default function ItemList({
     });
   }
 
+  const ulRef = useRef();
+
+  useEffect(() => {
+    ulRef.current.firstChild.scrollIntoView();
+  }, [itemListOf]);
+
   return (
-    <S.ItemsUl>
+    <S.ItemsUl ref={ulRef}>
       {itemListQuery.data?.map((item) => {
         return (
           <S.ItemLi
