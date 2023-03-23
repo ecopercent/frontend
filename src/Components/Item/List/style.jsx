@@ -12,7 +12,10 @@ export const ItemCategoryTabContainer = styled.div`
   border-bottom: 0.5px solid;
 `;
 
-export const ItemListContainer = styled.div``;
+export const ItemListContainer = styled.div`
+  // display: flex;
+  overflow-y: auto;
+`;
 
 /*
  *          Item List Tab Bar
@@ -49,23 +52,27 @@ export const ItemsUl = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-
-  // position: absolute;
-  // overflow-y: auto;
 `;
 
 export const ItemLi = styled.li`
   list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 100px;
+  ${(props) => {
+    return props.featured
+      ? `border: 2px ${color.basicGreen} solid;`
+      : `border: 2px rgba(0,0,0,0) solid;`;
+  }}
+`;
+
+export const ItemAddDiv = styled.li`
   width: 160px;
   height: 200px;
-
-  ${(props) => {
-    return (
-      (props.isAddBtn && `outline: 1px solid;`) ||
-      (props.featured && `outline: 2px ${color.basicGreen} solid;`)
-    );
-  }}
   border-radius: 100px;
+  border: 1px solid;
 
   display: flex;
   align-items: center;
@@ -73,7 +80,7 @@ export const ItemLi = styled.li`
 `;
 
 export const ItemImg = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 160px;
+  height: 200px;
   border-radius: 100px;
 `;

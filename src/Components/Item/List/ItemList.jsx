@@ -35,8 +35,7 @@ export default function ItemList({
           </S.ItemLi>
         );
       })}
-      <S.ItemLi
-        isAddBtn
+      <S.ItemAddDiv
         onClick={() => {
           return alert("추가페이지로 이동!");
         }}
@@ -45,7 +44,7 @@ export default function ItemList({
         }}
       >
         <BsPlusCircle size={40} />
-      </S.ItemLi>
+      </S.ItemAddDiv>
     </S.ItemsUl>
   );
 }
