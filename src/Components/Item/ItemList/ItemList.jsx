@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { BsPlusCircle } from "react-icons/bs";
-import { getItemList } from "../../Api/item";
+import { getItemList } from "../../../Api/item";
 import * as S from "./style";
 
 export default function ItemList({
@@ -18,7 +18,7 @@ export default function ItemList({
   });
 
   return (
-    <S.ItemsContainerUl>
+    <S.ItemsUl>
       {itemListQuery.data?.map((item) => {
         return (
           <S.ItemLi
@@ -46,6 +46,6 @@ export default function ItemList({
       >
         <BsPlusCircle size={40} />
       </S.ItemLi>
-    </S.ItemsContainerUl>
+    </S.ItemsUl>
   );
 }

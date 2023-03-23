@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getItemList } from "../../Api/item";
+import { getItemList } from "../../../Api/item";
 import * as S from "./style";
 
 export default function AllInfo({ userId }) {

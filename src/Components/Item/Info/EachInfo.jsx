@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { getUser } from "../../Api/user";
-import { getItem } from "../../Api/item";
-import TitleSetModal from "../Modal/TitleSetModal";
+import { getUser } from "../../../Api/user";
+import { getItem } from "../../../Api/item";
+import TitleSetModal from "../../Modal/TitleSetModal";
 import * as S from "./style";
 
 export default function EachInfo({ userId, infoItemId }) {

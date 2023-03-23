@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ItemListTabBtns from "./ItemListTabBtns";
-import ItemList from "./ItemList";
+import ItemListTabBtns from "./ItemList/ItemListTabBtns";
+import ItemList from "./ItemList/ItemList";
 import * as S from "./style";
 
 export default function ItemListBox({ userId, infoItemId, setInfoItemId }) {
@@ -8,18 +8,20 @@ export default function ItemListBox({ userId, infoItemId, setInfoItemId }) {
 
   return (
     <S.ItemListLayout>
-      <S.ItemCategoryTabDiv>
+      <S.ItemCategoryTabContainer>
         <ItemListTabBtns
           itemListOf={itemListOf}
           setItemListOf={setItemListOf}
         />
-      </S.ItemCategoryTabDiv>
-      <ItemList
-        userId={userId}
-        itemListOf={itemListOf}
-        infoItemId={infoItemId}
-        setInfoItemId={setInfoItemId}
-      />
+      </S.ItemCategoryTabContainer>
+      <S.ItemListContainer>
+        <ItemList
+          userId={userId}
+          itemListOf={itemListOf}
+          infoItemId={infoItemId}
+          setInfoItemId={setInfoItemId}
+        />
+      </S.ItemListContainer>
     </S.ItemListLayout>
   );
 }
