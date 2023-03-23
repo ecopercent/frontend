@@ -13,7 +13,7 @@ const Item = () => {
   const [infoItemId, setInfoItemId] = useState(0);
 
   return (
-    <div>
+    <>
       {/* <ItemEdit item={{ oper: "add", id: 2 }} /> */}
       {/* <ItemEdit item={{ oper: "edit", id: 1 }} /> */}
       <S.InfoLayout>
@@ -30,7 +30,7 @@ const Item = () => {
           setInfoItemId={setInfoItemId}
         />
       </S.ListLayout>
-    </div>
+    </>
   );
 };
 

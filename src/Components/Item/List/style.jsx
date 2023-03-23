@@ -8,12 +8,14 @@ import * as color from "../../../style/color";
 
 export const ItemCategoryTabContainer = styled.div`
   width: 100%;
-  height: 44px;
+  height: 100%;
   border-bottom: 0.5px solid;
 `;
 
 export const ItemListContainer = styled.div`
-  // display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow-y: auto;
 `;
 
@@ -23,8 +25,8 @@ export const ItemListContainer = styled.div`
 
 export const ListTabBtn = styled.button`
   width: 50%;
+  height: 44px;
   padding: 0;
-  height: 100%;
 
   border: 0px;
   background: none;

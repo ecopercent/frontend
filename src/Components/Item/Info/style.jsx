@@ -3,13 +3,8 @@ import * as btn from "../../../style/button";
 import * as font from "../../../style/font";
 
 export const InfoContainer = styled.div`
-  width: 100% - margin;
-  margin: 10px 10px;
   border: 1px solid;
   border-radius: 10px;
-
-  display: flex;
-  flex-direction: column;
 `;
 
 export const InfoHeaderDiv = styled.div`
@@ -33,27 +28,13 @@ export const InfoContentsDiv = styled.div`
   justify-content: space-between;
 `;
 
+/*
+ *          Info Header - Title
+ */
+
 export const InfoBtnContainer = styled.div`
   display: flex;
   gap: 7px;
-`;
-
-export const ContentPart = styled.div`
-  width: 40%;
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const InfoLabel = styled.span`
-  text-align: left;
-  ${font.boldSmall}
-  line-height: 150%;
-`;
-
-export const InfoValue = styled.span`
-  text-align: right;
-  ${font.normalSmall}
-  line-height: 150%;
 `;
 
 export const ModifyBtn = styled.button`
@@ -74,4 +55,26 @@ export const TitleSetBtn = styled.button`
 	  color: gray;`
     );
   }}
+`;
+
+/*
+ *          Info Contents
+ */
+
+export const ContentPart = styled.div`
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const InfoLabel = styled.span`
+  text-align: left;
+  ${font.boldSmall}
+  line-height: 150%;
+`;
+
+export const InfoValue = styled.span`
+  text-align: right;
+  ${font.normalSmall}
+  line-height: 150%;
 `;

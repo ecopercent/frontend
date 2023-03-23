@@ -5,6 +5,11 @@ const style = css`
   body {
     font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
     margin: 0;
+    height: 100%;
+  }
+
+  #root {
+    height: 100%;
   }
 
   * {
