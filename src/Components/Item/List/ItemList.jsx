@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { BsPlusCircle } from "react-icons/bs";
 import { getItemList } from "../../../Api/item";
@@ -17,15 +17,43 @@ export default function ItemList({
     },
   });
 
+  const itemsRef = useRef();
+
+  function getMap() {
+    if (!itemsRef.current) {
+      itemsRef.current = new Map();
+    }
+    return itemsRef.current;
+  }
+
+  function scrollToId(id) {
+    const map = getMap();
+    const node = map.get(id);
+    node.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "nearest",
+    });
+  }
+
   return (
     <S.ItemsUl>
       {itemListQuery.data?.map((item) => {
         return (
           <S.ItemLi
             key={item.id}
+            ref={(node) => {
+              const map = getMap();
+              if (node) {
+                map.set(item.id, node);
+              } else {
+                map.delete(item.id);
+              }
+            }}
             featured={infoItemId === item.id}
             onClick={() => {
-              return setInfoItemId(item.id);
+              scrollToId(item.id);
+              setInfoItemId(item.id);
             }}
             onKeyDown={() => {
               return setInfoItemId(item.id);
