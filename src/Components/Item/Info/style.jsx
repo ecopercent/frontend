@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import * as btn from "../../../style/button";
 import * as font from "../../../style/font";
 
-export const InfoLayout = styled.div`
+export const InfoContainer = styled.div`
   width: 100% - margin;
   margin: 10px 10px;
   border: 1px solid;

@@ -4,7 +4,8 @@ import { Navigate } from "react-router-dom";
 import { getLogin } from "../../Layouts/Login/Login";
 import AllInfo from "../../Components/Item/Info/AllInfo";
 import EachInfo from "../../Components/Item/Info/EachInfo";
-import ItemListBox from "../../Components/Item/ItemListBox";
+import ItemListBox from "../../Components/Item/List/ItemListBox";
+import * as S from "./style";
 
 const Item = () => {
   const userId = getLogin();
@@ -15,16 +16,20 @@ const Item = () => {
     <div>
       {/* <ItemEdit item={{ oper: "add", id: 2 }} /> */}
       {/* <ItemEdit item={{ oper: "edit", id: 1 }} /> */}
-      {infoItemId === 0 ? (
-        <AllInfo userId={userId} />
-      ) : (
-        <EachInfo userId={userId} infoItemId={infoItemId} />
-      )}
-      <ItemListBox
-        userId={userId}
-        infoItemId={infoItemId}
-        setInfoItemId={setInfoItemId}
-      />
+      <S.InfoLayout>
+        {infoItemId === 0 ? (
+          <AllInfo userId={userId} />
+        ) : (
+          <EachInfo userId={userId} infoItemId={infoItemId} />
+        )}
+      </S.InfoLayout>
+      <S.ListLayout>
+        <ItemListBox
+          userId={userId}
+          infoItemId={infoItemId}
+          setInfoItemId={setInfoItemId}
+        />
+      </S.ListLayout>
     </div>
   );
 };

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import ItemListTabBtns from "./ItemList/ItemListTabBtns";
-import ItemList from "./ItemList/ItemList";
+import ItemListTabBtns from "./ItemListTabBtns";
+import ItemList from "./ItemList";
 import * as S from "./style";
 
 export default function ItemListBox({ userId, infoItemId, setInfoItemId }) {
   const [itemListOf, setItemListOf] = useState("tumbler");
 
   return (
-    <S.ItemListLayout>
+    <>
       <S.ItemCategoryTabContainer>
         <ItemListTabBtns
           itemListOf={itemListOf}
@@ -22,6 +22,6 @@ export default function ItemListBox({ userId, infoItemId, setInfoItemId }) {
           setInfoItemId={setInfoItemId}
         />
       </S.ItemListContainer>
-    </S.ItemListLayout>
+    </>
   );
 }

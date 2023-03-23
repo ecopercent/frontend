@@ -34,7 +34,7 @@ export default function AllInfo({ userId }) {
   }
 
   return (
-    <S.InfoLayout>
+    <S.InfoContainer>
       <S.InfoHeaderDiv>나의 아이템</S.InfoHeaderDiv>
       <S.InfoContentsDiv>
         <S.ContentPart>
@@ -64,6 +64,6 @@ export default function AllInfo({ userId }) {
           </S.InfoValue>
         </S.ContentPart>
       </S.InfoContentsDiv>
-    </S.InfoLayout>
+    </S.InfoContainer>
   );
 }
