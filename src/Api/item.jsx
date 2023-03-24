@@ -6,7 +6,6 @@ export function getItem(id) {
   });
 }
 
-
 export function patchItem({
   itemId,
   itemImage,
@@ -38,7 +37,6 @@ export function getItemList(userId, category) {
       return res.data;
     });
 }
-
 
 export function deleteItem(id) {
   return axios.delete(`/items/${id}`).then((res) => {

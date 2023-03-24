@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import ItemEdit from "../../Components/ItemEdit/ItemEdit";
+// import ItemEdit from "../../Components/ItemEdit/ItemEdit";
 import { getLogin } from "../../Layouts/Login/Login";
-import AllInfo from "../../Components/Item/AllInfo";
-import EachInfo from "../../Components/Item/EachInfo";
-// import ItemList from "../../Components/Item/ItemList";
-import ItemListBox from "../../Components/Item/ItemListBox";
+import AllInfo from "../../Components/Item/Info/AllInfo";
+import EachInfo from "../../Components/Item/Info/EachInfo";
+import ItemListBox from "../../Components/Item/List/ItemListBox";
+import * as S from "./style";
 
 const Item = () => {
   const userId = getLogin();
@@ -13,20 +13,24 @@ const Item = () => {
   const [infoItemId, setInfoItemId] = useState(0);
 
   return (
-    <div>
+    <>
       {/* <ItemEdit item={{ oper: "add", id: 2 }} /> */}
-      <ItemEdit item={{ oper: "edit", id: 1 }} />
-      {infoItemId === 0 ? (
-        <AllInfo userId={userId} />
-      ) : (
-        <EachInfo userId={userId} infoItemId={infoItemId} />
-      )}
-      <ItemListBox
-        userId={userId}
-        infoItemId={infoItemId}
-        setInfoItemId={setInfoItemId}
-      />
-    </div>
+      {/* <ItemEdit item={{ oper: "edit", id: 1 }} /> */}
+      <S.InfoLayout>
+        {infoItemId === 0 ? (
+          <AllInfo userId={userId} />
+        ) : (
+          <EachInfo userId={userId} infoItemId={infoItemId} />
+        )}
+      </S.InfoLayout>
+      <S.ListLayout>
+        <ItemListBox
+          userId={userId}
+          infoItemId={infoItemId}
+          setInfoItemId={setInfoItemId}
+        />
+      </S.ListLayout>
+    </>
   );
 };
 

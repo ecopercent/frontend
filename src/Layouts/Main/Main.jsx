@@ -8,7 +8,8 @@ import Error from "../Error/Error";
 import Setting from "../../Pages/Setting/Setting";
 import Home from "../../Pages/Home/Home";
 import Item from "../../Pages/Item/Item";
-import { FooterWrap, PageWrap } from "./style";
+import * as S from "./style";
+import { Pc, Mobile } from "../MediaQuery";
 
 const Main = () => {
   const routeInfo = [
@@ -43,12 +44,26 @@ const Main = () => {
     return <Error />;
 
   return (
-    <div>
-      <PageWrap>{routeInfo[currTabNumber].jsx}</PageWrap>
-      <FooterWrap>
-        <TabBar currTabNumber={currTabNumber} routeInfo={routeInfo} />
-      </FooterWrap>
-    </div>
+    <S.PageLayout>
+      <Pc>
+        <S.PcLayout>
+          <h3 style={{ position: "absolute", left: 20 }}>pc</h3>
+          <S.PcPageWrap>{routeInfo[currTabNumber].jsx} </S.PcPageWrap>
+          <S.FooterWrap>
+            <TabBar currTabNumber={currTabNumber} routeInfo={routeInfo} />
+          </S.FooterWrap>
+        </S.PcLayout>
+      </Pc>
+      <Mobile>
+        <S.MobileLayout>
+          <h3 style={{ position: "absolute", left: 20 }}>모바일</h3>
+          {routeInfo[currTabNumber].jsx}
+          <S.FooterWrap>
+            <TabBar currTabNumber={currTabNumber} routeInfo={routeInfo} />
+          </S.FooterWrap>
+        </S.MobileLayout>
+      </Mobile>
+    </S.PageLayout>
   );
 };
 
