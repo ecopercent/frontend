@@ -31,8 +31,7 @@ export function patchItem({
 
 export function getItemList(userId, category) {
   return axios
-    .get(`/items?userid=${userId}&category=${category}`)
-
+    .get(`/items?userId=${userId}&category=${category}`)
     .then((res) => {
       return res.data;
     });
@@ -42,4 +41,14 @@ export function deleteItem(id) {
   return axios.delete(`/items/${id}`).then((res) => {
     return res.data;
   });
+}
+
+export function patchTitleItem({ userId, itemId, category }) {
+  return axios
+    .patch(`/items/${itemId}/title-${category}`, {
+      userId,
+    })
+    .then((res) => {
+      return res.data;
+    });
 }
