@@ -62,32 +62,34 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
               <br />
               타입
               <br />
-              목표횟수
+              {infoItem[0].price ? "구입가" : ""}
+              <br />
             </S.InfoLabel>
             <S.InfoValue>
               {infoItem[0].brand || ""}
               <br />
               {infoItem[0].type || ""}
               <br />
-              300회
+              {infoItem[0].price ? `${infoItem[0].price}원` : ""}
             </S.InfoValue>
           </S.ContentPart>
           <S.ContentPart>
             <S.InfoLabel>
-              구입가
-              <br />
-              구입일
-              <br />
               사용횟수
+              <br />
+              목표횟수
+              <br />
+              {infoItem[0].purchaseDate ? "구입일" : ""}
+              <br />
             </S.InfoLabel>
             <S.InfoValue>
-              {infoItem[0].price ? `${infoItem[0].price}원` : ""}
+              {infoItem[0].currentUsageCount}회
+              <br />
+              {infoItem[0].goalUsageCount}회
               <br />
               {infoItem[0].purchaseDate
                 ? infoItem[0].purchaseDate.slice(0, 10)
                 : ""}
-              <br />
-              {infoItem[0].currentUsageCount}회
             </S.InfoValue>
           </S.ContentPart>
         </S.InfoContentsDiv>
