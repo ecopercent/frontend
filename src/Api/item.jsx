@@ -43,6 +43,12 @@ export function deleteItem(id) {
   });
 }
 
+export function getTitleItem(userId, category) {
+  return axios.get(`/users/${userId}/title-${category}`).then((res) => {
+    return res.data;
+  });
+}
+
 export function patchTitleItem({ userId, itemId, category }) {
   return axios
     .patch(`/users/${userId}/items/${itemId}/title-${category}`)
