@@ -9,6 +9,7 @@ export default function ItemList({
   itemListOf,
   infoItemId,
   setInfoItemId,
+  setInfoItemCategory,
 }) {
   const itemListQuery = useQuery({
     queryKey: [`${itemListOf}s`, userId],
@@ -60,9 +61,12 @@ export default function ItemList({
             onClick={() => {
               scrollToId(item.id);
               setInfoItemId(item.id);
+              setInfoItemCategory(item.category);
             }}
             onKeyDown={() => {
-              return setInfoItemId(item.id);
+              scrollToId(item.id);
+              setInfoItemId(item.id);
+              setInfoItemCategory(item.category);
             }}
           >
             <S.ItemImg src={item.image} alt={item.nickname} />

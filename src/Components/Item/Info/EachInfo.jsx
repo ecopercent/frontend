@@ -1,38 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { getUser } from "../../../Api/user";
-import { getItem } from "../../../Api/item";
+import { getItemList } from "../../../Api/item";
 import TitleSetModal from "../../Modal/TitleSetModal";
 import * as S from "./style";
 
-export default function EachInfo({ userId, infoItemId }) {
+export default function EachInfo({ userId, itemId, itemCategory }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const itemQuery = useQuery({
-    queryKey: ["item", infoItemId],
+  const itemListQuery = useQuery({
+    queryKey: [`${itemCategory}s`, userId],
     queryFn: () => {
-      return getItem(infoItemId);
+      return getItemList(userId, itemCategory);
     },
   });
 
-  const userQuery = useQuery({
-    queryKey: ["user", userId],
-    queryFn: () => {
-      return getUser(userId);
-    },
+  const infoItem = itemListQuery.data?.filter((item) => {
+    return item.id === itemId;
   });
-
-  const isTitle =
-    infoItemId === userQuery.data?.titleTumblerId ||
-    infoItemId === userQuery.data?.titleEcobagId;
 
   return (
     <>
       {modalIsOpen && (
         <TitleSetModal
           queryData={{
-            userId,
-            itemId: infoItemId,
-            category: itemQuery.data?.category,
+            userId: Number(userId),
+            itemId: Number(itemId),
+            category: infoItem[0].category,
           }}
           onClose={() => {
             setModalIsOpen(false);
@@ -41,17 +33,17 @@ export default function EachInfo({ userId, infoItemId }) {
       )}
       <S.InfoContainer>
         <S.InfoHeaderDiv>
-          <span>{itemQuery.data?.nickname}</span>
+          <span>{infoItem[0].nickname}</span>
           <S.InfoBtnContainer>
             <S.TitleSetBtn
-              isTitle={isTitle}
-              disabled={isTitle}
+              isTitle={infoItem[0].isTitle}
+              disabled={infoItem[0].isTitle}
               type="button"
               onClick={() => {
                 setModalIsOpen(true);
               }}
             >
-              {isTitle ? "대표아이템" : "대표 설정"}
+              {infoItem[0].isTitle ? "대표아이템" : "대표 설정"}
             </S.TitleSetBtn>
             <S.ModifyBtn
               type="button"
@@ -73,9 +65,9 @@ export default function EachInfo({ userId, infoItemId }) {
               목표횟수
             </S.InfoLabel>
             <S.InfoValue>
-              {itemQuery.data?.brand || ""}
+              {infoItem[0].brand || ""}
               <br />
-              {itemQuery.data?.type || ""}
+              {infoItem[0].type || ""}
               <br />
               300회
             </S.InfoValue>
@@ -89,13 +81,13 @@ export default function EachInfo({ userId, infoItemId }) {
               사용횟수
             </S.InfoLabel>
             <S.InfoValue>
-              {itemQuery.data?.price ? `${itemQuery.data?.price}원` : ""}
+              {infoItem[0].price ? `${infoItem[0].price}원` : ""}
               <br />
-              {itemQuery.data?.purchaseDate
-                ? itemQuery.data?.purchaseDate.slice(0, 10)
+              {infoItem[0].purchaseDate
+                ? infoItem[0].purchaseDate.slice(0, 10)
                 : ""}
               <br />
-              {itemQuery.data?.usageCount}회
+              {infoItem[0].usageCount}회
             </S.InfoValue>
           </S.ContentPart>
         </S.InfoContentsDiv>

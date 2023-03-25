@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useRef } from "react";
-import { patchTitleItem } from "../../Api/user";
+import { patchTitleItem } from "../../Api/item";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import SmallModal from "./SmallModal";
 import * as S from "./style";
@@ -14,9 +14,17 @@ export default function TitleSetModal({ queryData, onClose }) {
     mutationFn: () => {
       return patchTitleItem(queryData);
     },
-    onSuccess: (data) => {
-      queryClient.setQueryData(["user", queryData.userId], data);
-      queryClient.invalidateQueries(["user", queryData.userId]);
+    // 현재 PATCH시 응답 데이터가 없음, 이슈 제안중
+    // onSuccess: (data) => {
+    // queryClient.setQueryData(
+    //   [`${queryData.category}s`, queryData.userId],
+    //   data
+    // );
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        `${queryData.category}s`,
+        queryData.userId,
+      ]);
     },
   });
 

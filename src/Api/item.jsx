@@ -45,9 +45,7 @@ export function deleteItem(id) {
 
 export function patchTitleItem({ userId, itemId, category }) {
   return axios
-    .patch(`/items/${itemId}/title-${category}`, {
-      userId,
-    })
+    .patch(`/users/${userId}/items/${itemId}/title-${category}`)
     .then((res) => {
       return res.data;
     });
