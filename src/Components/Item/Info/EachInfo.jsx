@@ -87,7 +87,7 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
                 ? infoItem[0].purchaseDate.slice(0, 10)
                 : ""}
               <br />
-              {infoItem[0].usageCount}회
+              {infoItem[0].currentUsageCount}회
             </S.InfoValue>
           </S.ContentPart>
         </S.InfoContentsDiv>
