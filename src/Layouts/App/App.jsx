@@ -3,7 +3,6 @@ import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import loadable from "@loadable/component";
 import GlobalStyles from "./style";
-import { Pc, Mobile } from "../MediaQuery";
 
 const Login = loadable(() => {
   return import("../Login/Login");
@@ -19,29 +18,14 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Pc>
-        <div id="pc" style={{ width: "500px", margin: "0 auto" }}>
-          <h3 style={{ position: "absolute", left: 20 }}>pc</h3>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/main/:page" element={<Main />} />
-              <Route path="/*" element={<Error />} />
-            </Routes>
-          </BrowserRouter>
-        </div>
-      </Pc>
-      <Mobile>
-        <h3 style={{ position: "absolute", left: 20 }}>모바일</h3>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/main/:page" element={<Main />} />
-            <Route path="/*" element={<Error />} />
-          </Routes>
-        </BrowserRouter>
-      </Mobile>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/main/:page" element={<Main />} />
+          <Route path="/*" element={<Error />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

@@ -48,8 +48,7 @@ export default function MainItemTab() {
         {(mainTumblerQuery?.data || mainEcobagQuery?.data) && (
           <TabButtons
             userId={userId}
-            hasTumbler={!!mainTumblerQuery?.data}
-            hasEcobag={!!mainEcobagQuery?.data}
+            hasBoth={!!mainTumblerQuery?.data && !!mainEcobagQuery?.data}
             setItemTab={setItemTab}
           />
         )}

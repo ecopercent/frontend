@@ -7,19 +7,21 @@ export default function ItemListBox({ userId, infoItemId, setInfoItemId }) {
   const [itemListOf, setItemListOf] = useState("tumbler");
 
   return (
-    <S.ItemListLayout>
-      <S.ItemCategoryTabDiv>
+    <>
+      <S.ItemCategoryTabContainer>
         <ItemListTabBtns
           itemListOf={itemListOf}
           setItemListOf={setItemListOf}
         />
-      </S.ItemCategoryTabDiv>
-      <ItemList
-        userId={userId}
-        itemListOf={itemListOf}
-        infoItemId={infoItemId}
-        setInfoItemId={setInfoItemId}
-      />
-    </S.ItemListLayout>
+      </S.ItemCategoryTabContainer>
+      <S.ItemListContainer>
+        <ItemList
+          userId={userId}
+          itemListOf={itemListOf}
+          infoItemId={infoItemId}
+          setInfoItemId={setInfoItemId}
+        />
+      </S.ItemListContainer>
+    </>
   );
 }

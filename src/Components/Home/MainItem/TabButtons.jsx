@@ -3,12 +3,7 @@ import { MdOutlineViewCarousel, MdOutlineShoppingBag } from "react-icons/md";
 import { TbCup } from "react-icons/tb";
 import * as S from "./style";
 
-export default function TabButtons({
-  userId,
-  hasTumbler,
-  hasEcobag,
-  setItemTab,
-}) {
+export default function TabButtons({ userId, hasBoth, setItemTab }) {
   const [tryConvert, setTryConvert] = useState(false);
 
   function handleClick(tumblerValue, ecobagValue) {
@@ -27,7 +22,6 @@ export default function TabButtons({
           <S.BothItemBtn
             id="both"
             type="button"
-            disabled={!hasTumbler || !hasEcobag}
             onClick={() => {
               handleClick(true, true);
             }}
@@ -44,7 +38,6 @@ export default function TabButtons({
           <S.MainSetBtn
             id="tumbler"
             type="button"
-            disabled={!hasTumbler}
             onClick={() => {
               handleClick(true, false);
             }}
@@ -54,7 +47,6 @@ export default function TabButtons({
           <S.MainSetBtn
             id="ecobag"
             type="button"
-            disabled={!hasEcobag}
             onClick={() => {
               handleClick(false, true);
             }}
@@ -66,6 +58,7 @@ export default function TabButtons({
       <S.ConvertBtn
         id="convert"
         type="button"
+        disabled={!hasBoth}
         onClick={() => {
           setTryConvert(!tryConvert);
         }}
