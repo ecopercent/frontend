@@ -15,7 +15,7 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
 
   const infoItem = itemListQuery.data?.filter((item) => {
     return item.id === itemId;
-  });
+  })[0];
 
   return (
     <>
@@ -24,7 +24,7 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
           queryData={{
             userId: Number(userId),
             itemId: Number(itemId),
-            category: infoItem[0].category,
+            category: infoItem.category,
           }}
           onClose={() => {
             setModalIsOpen(false);
@@ -33,17 +33,17 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
       )}
       <S.InfoContainer>
         <S.InfoHeaderDiv>
-          <span>{infoItem[0].nickname}</span>
+          <span>{infoItem.nickname}</span>
           <S.InfoBtnContainer>
             <S.TitleSetBtn
-              isTitle={infoItem[0].isTitle}
-              disabled={infoItem[0].isTitle}
+              isTitle={infoItem.isTitle}
+              disabled={infoItem.isTitle}
               type="button"
               onClick={() => {
                 setModalIsOpen(true);
               }}
             >
-              {infoItem[0].isTitle ? "대표아이템" : "대표 설정"}
+              {infoItem.isTitle ? "대표아이템" : "대표 설정"}
             </S.TitleSetBtn>
             <S.ModifyBtn
               type="button"
@@ -62,15 +62,15 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
               <br />
               타입
               <br />
-              {infoItem[0].price ? "구입가" : ""}
+              {infoItem.price ? "구입가" : ""}
               <br />
             </S.InfoLabel>
             <S.InfoValue>
-              {infoItem[0].brand || ""}
+              {infoItem.brand || ""}
               <br />
-              {infoItem[0].type || ""}
+              {infoItem.type || ""}
               <br />
-              {infoItem[0].price ? `${infoItem[0].price}원` : ""}
+              {infoItem.price ? `${infoItem.price}원` : ""}
             </S.InfoValue>
           </S.ContentPart>
           <S.ContentPart>
@@ -79,17 +79,15 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
               <br />
               목표횟수
               <br />
-              {infoItem[0].purchaseDate ? "구입일" : ""}
+              {infoItem.purchaseDate ? "구입일" : ""}
               <br />
             </S.InfoLabel>
             <S.InfoValue>
-              {infoItem[0].currentUsageCount}회
+              {infoItem.currentUsageCount}회
               <br />
-              {infoItem[0].goalUsageCount}회
+              {infoItem.goalUsageCount}회
               <br />
-              {infoItem[0].purchaseDate
-                ? infoItem[0].purchaseDate.slice(0, 10)
-                : ""}
+              {infoItem.purchaseDate ? infoItem.purchaseDate.slice(0, 10) : ""}
             </S.InfoValue>
           </S.ContentPart>
         </S.InfoContentsDiv>
