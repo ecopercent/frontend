@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { upUsageCount } from "../../../Api/item";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { patchUsageCountUp } from "../../../Api/item";
 import * as S from "./style";
 
 function toPieChartItemPath(x, y, radiusIn, radiusOut, startAngle, endAngle) {
@@ -60,18 +60,29 @@ const oneStrockInfo = [
   },
 ];
 
-const ItmeImageStroke = ({ divideNum, imagePath, itemId }) => {
-  const currentUsageCount = checkItemUsageCount(itemId, divideNum);
+const ItmeImageStroke = ({ itemInfo, userId }) => {
+  const divideNum = itemInfo.category === "tumbler" ? 3 : 1;
+  const currentUsageCount = checkItemUsageCount(itemInfo.id, divideNum);
   const [usageCount, setUsageCount] = useState(currentUsageCount);
+  const queryClient = useQueryClient();
   const upUsageCountMutation = useMutation({
     mutationFn: patchUsageCountUp,
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        `title${itemInfo.category.replace(/^[a-z]/, (char) => {
+          return char.toUpperCase();
+        })}`,
+        userId,
+      ]);
+      queryClient.invalidateQueries(["titleEcobag", userId]);
+    },
   });
   const increaseCount = useCallback(() => {
     if (usageCount > 0) {
       setUsageCount((currUsageCount) => {
         const changeCout = currUsageCount > 1 ? currUsageCount - 1 : 0;
         localStorage.setItem(
-          `item/${itemId}`,
+          `item/${itemInfo.id}`,
           JSON.stringify({
             count: changeCout,
             dateStr: makeDateStr(),
@@ -79,7 +90,7 @@ const ItmeImageStroke = ({ divideNum, imagePath, itemId }) => {
         );
         return changeCout;
       });
-      upUsageCountMutation.mutate(itemId);
+      upUsageCountMutation.mutate(itemInfo.id);
     }
   }, [usageCount]);
 
@@ -87,7 +98,7 @@ const ItmeImageStroke = ({ divideNum, imagePath, itemId }) => {
     <svg width="200" height="200" viewBox="0 0 200 200" onClick={increaseCount}>
       <g>
         <foreignObject x="50" y="50" width="100%" height="100%">
-          <S.ImageClipper src={imagePath} alt="아이템 이미지" />
+          <S.ImageClipper src={itemInfo.image} alt="아이템 이미지" />
         </foreignObject>
         {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map((element) => {
           if (element.key <= usageCount)
