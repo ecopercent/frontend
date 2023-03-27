@@ -11,7 +11,8 @@ import { getLogin } from "../../Layouts/Login/Login";
 const Item = () => {
   const userId = getLogin();
   if (!userId) return <Navigate to="/login" />;
-  // const [infoItemId, setInfoItemId] = useState(0);
+  const [infoItemId, setInfoItemId] = useState(0);
+  const [infoItemCategory, setInfoItemCategory] = useState("tumbler");
 
   return (
     <>
@@ -19,9 +20,13 @@ const Item = () => {
       <ItemEdit item={{ oper: "edit", id: 1 }} />
       {/* <S.InfoLayout>
         {infoItemId === 0 ? (
-          <AllInfo userId={userId} />
+          <AllInfo userId={Number(userId)} />
         ) : (
-          <EachInfo userId={userId} infoItemId={infoItemId} />
+          <EachInfo
+            userId={Number(userId)}
+            itemId={infoItemId}
+            itemCategory={infoItemCategory}
+          />
         )}
       </S.InfoLayout>
       <S.ListLayout>
@@ -29,6 +34,7 @@ const Item = () => {
           userId={userId}
           infoItemId={infoItemId}
           setInfoItemId={setInfoItemId}
+          setInfoItemCategory={setInfoItemCategory}
         />
       </S.ListLayout> */}
     </>

@@ -4,9 +4,6 @@ import { getItemList } from "../../../Api/item";
 import * as S from "./style";
 
 export default function AllInfo({ userId }) {
-  // db에 생기기 전까지 임시 목표 사용횟수
-  const goalCnt = 300;
-
   const tumblersQuery = useQuery({
     queryKey: ["tumblers", userId],
     queryFn: () => {
@@ -24,12 +21,12 @@ export default function AllInfo({ userId }) {
   const achivedCnt = { tumbler: 0, ecobag: 0 };
   if (tumblersQuery.isSuccess) {
     achivedCnt.tumbler = tumblersQuery.data.filter((tumbler) => {
-      return tumbler.usageCount >= goalCnt;
+      return tumbler.usageCount >= tumbler.goalUsageCount;
     }).length;
   }
   if (ecobagsQuery.isSuccess) {
     achivedCnt.ecobag = ecobagsQuery.data.filter((ecobag) => {
-      return ecobag.usageCount >= goalCnt;
+      return ecobag.usageCount >= ecobag.goalUsageCount;
     }).length;
   }
 
