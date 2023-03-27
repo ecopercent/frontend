@@ -14,7 +14,7 @@ const ItemEditHead = ({ itemDetail, item, setShowdeleteItemModal }) => {
       {itemDetail?.category === "tumbler" ? "텀블러 " : "에코백 "}
       {item.oper === "edit" ? "수정" : "추가"}
       {item.oper === "edit" && (
-        <DeletreBtn onClick={onclickDeleteItemModal}>삭제</DeletreBtn>
+        <DeleteBtn onClick={onclickDeleteItemModal}>삭제</DeleteBtn>
       )}
     </ItemEditHeadWrapper>
   );
