@@ -43,7 +43,7 @@ export function deleteItem(itemId) {
   });
 }
 
-export function upUsageCount(itemId) {
+export function patchUsageCountUp(itemId) {
   return axios.patch(`/items/${itemId}/up`).then((res) => {
     return res.data;
   });
