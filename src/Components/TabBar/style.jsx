@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const TabBarContainer = styled.div`
   display: flex;
-  height: 50px;
+  height: 100%;
 `;
 
 export const TabItemBackGround = styled.div`

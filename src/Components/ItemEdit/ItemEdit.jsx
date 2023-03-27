@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getItem } from "../../Api/item";
 import DeleteItemModal from "./DeleteItemModal";
@@ -14,32 +14,50 @@ const ItemEdit = ({ item }) => {
     setShowdeleteItemModal(false);
   }, []);
   const itemDetailQuery = useQuery({
-    queryKey: ["itemDetail", item.id],
+    queryKey: ["itemDetail", Number(item.id)],
     queryFn: () => {
       return getItem(item.id);
     },
   });
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const resizeListener = () => {
+      setInnerWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", resizeListener);
+  });
+
+  const [innerHeight, setInnerHeight] = useState(window.innerHeight);
+  useEffect(() => {
+    const resizeListener = () => {
+      setInnerHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", resizeListener);
+  });
 
   const itemDetail = itemDetailQuery.data;
-  console.log("cuuritemDetail:", itemDetail);
 
   return (
-    <ItemEditBorder>
-      <ItemEditHead
-        itemDetail={itemDetail}
-        item={item}
-        setShowdeleteItemModal={setShowdeleteItemModal}
-      />
-      <hr />
-      <ItmeImage imagePath={itemDetail?.image} oper={item.oper} />
-      <ItemDetail item={item} />
-      <DeleteItemModal
-        show={showdeleteItemModal}
-        onCloseModal={onCloseModal}
-        setShowdeleteItemModal={setShowdeleteItemModal}
-        item={item}
-      />
-    </ItemEditBorder>
+    <div>
+      <ItemEditBorder width={innerWidth} height={innerHeight}>
+        <ItemEditHead
+          itemDetail={itemDetail}
+          item={item}
+          setShowdeleteItemModal={setShowdeleteItemModal}
+        />
+        <hr />
+        <ItmeImage imagePath={itemDetail?.image} oper={item.oper} />
+        <hr />
+        <ItemDetail item={item} />
+        <DeleteItemModal
+          show={showdeleteItemModal}
+          onCloseModal={onCloseModal}
+          setShowdeleteItemModal={setShowdeleteItemModal}
+          item={item}
+        />
+      </ItemEditBorder>
+    </div>
+    // </div>
   );
 };
 

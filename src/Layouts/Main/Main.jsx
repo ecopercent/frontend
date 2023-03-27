@@ -57,7 +57,7 @@ const Main = () => {
       <Mobile>
         <S.MobileLayout>
           <h3 style={{ position: "absolute", left: 20 }}>모바일</h3>
-          {routeInfo[currTabNumber].jsx}
+          <S.MobilePageWrap>{routeInfo[currTabNumber].jsx}</S.MobilePageWrap>
           <S.FooterWrap>
             <TabBar currTabNumber={currTabNumber} routeInfo={routeInfo} />
           </S.FooterWrap>

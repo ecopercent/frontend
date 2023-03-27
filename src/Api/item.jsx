@@ -31,8 +31,7 @@ export function patchItem({
 
 export function getItemList(userId, category) {
   return axios
-    .get(`/items?userid=${userId}&category=${category}`)
-
+    .get(`/items?userId=${userId}&category=${category}`)
     .then((res) => {
       return res.data;
     });
@@ -49,4 +48,18 @@ export function upUsageCount(itemId) {
     console.log("hi", res.data);
     return res.data;
   });
+}
+
+export function getTitleItem(userId, category) {
+  return axios.get(`/users/${userId}/title-${category}`).then((res) => {
+    return res.data;
+  });
+}
+
+export function patchTitleItem({ userId, itemId, category }) {
+  return axios
+    .patch(`/users/${userId}/items/${itemId}/title-${category}`)
+    .then((res) => {
+      return res.data;
+    });
 }
