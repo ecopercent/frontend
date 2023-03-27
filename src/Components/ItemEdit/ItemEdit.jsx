@@ -35,13 +35,10 @@ const ItemEdit = ({ item }) => {
     window.addEventListener("resize", resizeListener);
   });
 
-  console.log("innerWidth", innerWidth, innerHeight);
-
   const itemDetail = itemDetailQuery.data;
-  console.log("cuuritemDetail:", itemDetail);
 
   return (
-  // 모바일도 wrap 감싸야하네~
+    // 모바일도 wrap 감싸야하네~
     <div style={{ paddingBottom: "8%" }}>
       <ItemEditBorder width={innerWidth} height={innerHeight}>
         <ItemEditHead
@@ -49,7 +46,6 @@ const ItemEdit = ({ item }) => {
           item={item}
           setShowdeleteItemModal={setShowdeleteItemModal}
         />
-        {innerWidth}, {innerHeight}
         <hr />
         <ItmeImage imagePath={itemDetail?.image} oper={item.oper} />
         <hr />

@@ -21,8 +21,8 @@ export const ItemEditBorder = styled.div`
 export const ItemEditHeadWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 3%;
-  margin: 1%;
+  margin: 3%;
+  align-items: center;
 `;
 
 export const ImageClipper = styled.img`
@@ -103,6 +103,7 @@ export const Span = styled.span`
 `;
 
 export const Error = styled.div`
+  font-size: 13px;
   color: #e01e5a;
   padding-bottom: 1%;
   padding-left: 10%;

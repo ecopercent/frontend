@@ -11,6 +11,7 @@ const Modal = ({ show, children, onCloseModal }) => {
     return null;
   }
   return (
+    // TODO 반응형 추가해야할듯?
     <CreateModal onClick={onCloseModal}>
       <div>
         <CloseModalButton onClick={stopPropagation}>&times;</CloseModalButton>
