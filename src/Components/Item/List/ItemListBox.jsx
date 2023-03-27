@@ -3,7 +3,12 @@ import ItemListTabBtns from "./ItemListTabBtns";
 import ItemList from "./ItemList";
 import * as S from "./style";
 
-export default function ItemListBox({ userId, infoItemId, setInfoItemId }) {
+export default function ItemListBox({
+  userId,
+  infoItemId,
+  setInfoItemId,
+  setInfoItemCategory,
+}) {
   const [itemListOf, setItemListOf] = useState("tumbler");
 
   return (
@@ -16,10 +21,11 @@ export default function ItemListBox({ userId, infoItemId, setInfoItemId }) {
       </S.ItemCategoryTabContainer>
       <S.ItemListContainer>
         <ItemList
-          userId={userId}
+          userId={Number(userId)}
           itemListOf={itemListOf}
           infoItemId={infoItemId}
           setInfoItemId={setInfoItemId}
+          setInfoItemCategory={setInfoItemCategory}
         />
       </S.ItemListContainer>
     </>
