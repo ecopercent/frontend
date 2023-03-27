@@ -12,9 +12,9 @@ const TitleItem = ({ itemInfo }) => {
       <div style={{ textAlign: "center", paddingBottom: "10%" }}>
         <h3>{itemInfo.nickname}</h3>
         <hr />
-        <h1>{(itemInfo.currentUsageCount / itemInfo.type) * 100}%</h1>
+        <h1>{(itemInfo.currentUsageCount / itemInfo.goalUsageCount) * 100}%</h1>
         <h2>현재 {itemInfo.currentUsageCount}회</h2>
-        <h2>목표 {itemInfo.type}회</h2>
+        <h2>목표 {itemInfo.goalUsageCount}회</h2>
       </div>
     </div>
   );
