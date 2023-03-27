@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { ItemEditHeadWrapper, DeletreBtn } from "./style";
+import { ItemEditHeadWrapper, DeleteBtn } from "./style";
 
 const ItemEditHead = ({ itemDetail, item, setShowdeleteItemModal }) => {
   const onclickDeleteItemModal = useCallback((e) => {
