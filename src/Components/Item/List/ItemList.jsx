@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { BsPlusCircle } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import { getItemList } from "../../../Api/item";
 import * as S from "./style";
 
@@ -43,6 +44,12 @@ export default function ItemList({
     ulRef.current.firstChild.scrollIntoView();
   }, [itemListOf]);
 
+  const navigate = useNavigate();
+  const addObj = {
+    id: infoItemId,
+    oper: "add",
+  };
+
   return (
     <S.ItemsUl ref={ulRef}>
       {itemListQuery.data?.map((item) => {
@@ -75,10 +82,10 @@ export default function ItemList({
       })}
       <S.ItemAddDiv
         onClick={() => {
-          return alert("추가페이지로 이동!");
+          navigate("/item/add", { state: addObj });
         }}
         onKeyDown={() => {
-          alert("추가페이지로 이동!");
+          navigate("/item/add", { state: addObj });
         }}
       >
         <BsPlusCircle size={40} />

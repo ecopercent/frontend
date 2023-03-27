@@ -28,6 +28,7 @@ function App() {
           <Route path="/main/:page" element={<Main />} />
           <Route path="/*" element={<Error />} />
           <Route path="/item/edit" element={<ItemEdit />} />
+          <Route path="/item/add" element={<ItemEdit />} />
         </Routes>
       </BrowserRouter>
     </>
