@@ -13,6 +13,9 @@ const Main = loadable(() => {
 const Error = loadable(() => {
   return import("../Error/Error");
 });
+const ItemEdit = loadable(() => {
+  return import("../../Components/ItemEdit/ItemEdit");
+});
 
 function App() {
   return (
@@ -24,6 +27,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/main/:page" element={<Main />} />
           <Route path="/*" element={<Error />} />
+          <Route path="/item/edit" element={<ItemEdit />} />
         </Routes>
       </BrowserRouter>
     </>
