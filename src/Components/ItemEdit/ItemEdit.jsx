@@ -9,16 +9,18 @@ import ItemEditHead from "./ItemEditHead";
 import { ItemEditBorder } from "./style";
 
 const ItemEdit = () => {
-  const { state } = useLocation();
+  const navigateProps = useLocation();
+  const item = navigateProps.state;
+  // TODO: item이 없는 경우 리다이렉트하기
   const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
 
   const onCloseModal = useCallback(() => {
     setShowdeleteItemModal(false);
   }, []);
   const itemDetailQuery = useQuery({
-    queryKey: ["itemDetail", Number(state.id)],
+    queryKey: ["itemDetail", Number(item.id)],
     queryFn: () => {
-      return getItem(state.id);
+      return getItem(item.id);
     },
   });
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
@@ -44,18 +46,18 @@ const ItemEdit = () => {
       <ItemEditBorder width={innerWidth} height={innerHeight}>
         <ItemEditHead
           itemDetail={itemDetail}
-          item={state}
+          item={item}
           setShowdeleteItemModal={setShowdeleteItemModal}
         />
         <hr />
-        <ItmeImage imagePath={itemDetail?.image} oper={state.oper} />
+        <ItmeImage imagePath={itemDetail?.image} oper={item.oper} />
         <hr />
-        <ItemDetail item={state} />
+        <ItemDetail item={item} />
         <DeleteItemModal
           show={showdeleteItemModal}
           onCloseModal={onCloseModal}
           setShowdeleteItemModal={setShowdeleteItemModal}
-          item={state}
+          item={item}
         />
       </ItemEditBorder>
     </div>
