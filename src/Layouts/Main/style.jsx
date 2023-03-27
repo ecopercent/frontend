@@ -9,7 +9,6 @@ export const PcLayout = styled.div`
   height: 100%;
 
   // min-height: calc(100vh);
-  max-height: calc(100vh);
 `;
 
 export const PcPageWrap = styled.div`
@@ -18,7 +17,11 @@ export const PcPageWrap = styled.div`
 
   width: 500px;
   margin: 0 auto;
-  max-height: calc(100vh - 50px);
+  padding-bottom: 8%;
+`;
+
+export const MobilePageWrap = styled.div`
+  padding-bottom: 8%;
 `;
 
 export const MobileLayout = styled.div`
@@ -34,14 +37,12 @@ export const MobileLayout = styled.div`
 `;
 
 export const FooterWrap = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 8%;
   background-color: #333;
   color: #fff;
-
-  width: 100%;
-  height: 50px;
-
   display: flex;
   flex-direction: column;
-  // position: absolute;
-  // bottom: 0;
 `;
