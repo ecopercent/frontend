@@ -24,7 +24,7 @@ const DeleteItemModal = ({
     e.preventDefault();
     itemDeleteMutation.mutate(item.id);
     setShowdeleteItemModal(false);
-    navigate("/main/item");
+    navigate(-1);
     // TODO: 아이템 리스트 refetch
   }, []);
 

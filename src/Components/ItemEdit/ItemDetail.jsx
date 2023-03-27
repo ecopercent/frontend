@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import * as S from "./style";
 import useInput from "../../hooks/useInput";
 import { patchItem } from "../../Api/item";
@@ -27,6 +28,8 @@ const ItemDetail = ({ item }) => {
     },
   });
 
+  const navigate = useNavigate();
+
   const onEditItem = useCallback(
     (e) => {
       e.preventDefault();
@@ -51,6 +54,7 @@ const ItemDetail = ({ item }) => {
         itemPrice: purchasePrice,
         itemPurchaseDate: purchaseDate,
       });
+      navigate(-1);
     },
     [nickname, brand, type, targetCount, purchasePrice, purchaseDate]
   );
@@ -104,7 +108,15 @@ const ItemDetail = ({ item }) => {
           {isError && <S.Error>닉네임, 브랜드, 타입은 필수입니다.</S.Error>}
         </div>
         <S.ButtonWrapper>
-          <S.CancelBtn type="reset">취소</S.CancelBtn>
+          <S.CancelBtn
+            type="reset"
+            onClick={() => {
+              navigate(-1);
+              // TODO: 카테고리 탭 유지한 페이지로 돌아가기
+            }}
+          >
+            취소
+          </S.CancelBtn>
           <S.SubmitBtn type="submit">저장</S.SubmitBtn>
         </S.ButtonWrapper>
       </S.Form>
