@@ -130,7 +130,7 @@ export const CancelBtn = styled.button`
   ${font.normalBtn}
 `;
 
-export const DeletreBtn = styled.button`
+export const DeleteBtn = styled.button`
   ${btn.normal}
   ${font.normalBtn}
   color: red;
