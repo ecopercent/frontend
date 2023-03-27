@@ -4,11 +4,10 @@ import TitleItemTab from "../../Components/Home/TitleItem/TitleItemTab/TitleItem
 
 const Home = () => {
   return (
-    // <div>
     <>
       <Profile />
       <TitleItemTab />
-    </div>
+    </>
   );
 };
 

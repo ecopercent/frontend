@@ -60,25 +60,18 @@ const oneStrockInfo = [
   },
 ];
 
-const ItmeImageStroke = ({ divideNum, imagePath, id }) => {
-  const currentUsageCount = checkItemUsageCount(id, divideNum);
+const ItmeImageStroke = ({ divideNum, imagePath, itemId }) => {
+  const currentUsageCount = checkItemUsageCount(itemId, divideNum);
   const [usageCount, setUsageCount] = useState(currentUsageCount);
-  // const queryClient = useQueryClient();
   const upUsageCountMutation = useMutation({
     mutationFn: upUsageCount,
-    onSuccess: (data) => {
-      console.log(data);
-      // queryClient.setQueryData(["itemDetail", item.id], data);
-      // queryClient.invalidateQueries(["itemDetail", item.id]);
-    },
   });
   const increaseCount = useCallback(() => {
     if (usageCount > 0) {
-      // targetRef.blur();
       setUsageCount((currUsageCount) => {
         const changeCout = currUsageCount > 1 ? currUsageCount - 1 : 0;
         localStorage.setItem(
-          `item/${id}`,
+          `item/${itemId}`,
           JSON.stringify({
             count: changeCout,
             dateStr: makeDateStr(),
@@ -86,8 +79,7 @@ const ItmeImageStroke = ({ divideNum, imagePath, id }) => {
         );
         return changeCout;
       });
-      upUsageCountMutation.mutate();
-      // patch api 날리기
+      upUsageCountMutation.mutate(itemId);
     }
   }, [usageCount]);
 

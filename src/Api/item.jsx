@@ -45,7 +45,6 @@ export function deleteItem(itemId) {
 
 export function upUsageCount(itemId) {
   return axios.patch(`/items/${itemId}/up`).then((res) => {
-    console.log("hi", res.data);
     return res.data;
   });
 }
