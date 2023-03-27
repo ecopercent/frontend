@@ -87,7 +87,6 @@ const ItemDetail = ({ item }) => {
           <S.Span>목표횟수</S.Span>
           <S.Input
             value={targetCount}
-            // onChange={onTargetCount}
             type="number"
             readOnly
           />
