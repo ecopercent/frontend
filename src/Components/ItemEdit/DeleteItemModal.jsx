@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import { deleteItem } from "../../Api/item";
 import * as S from "./style";
@@ -10,6 +11,7 @@ const DeleteItemModal = ({
   setShowdeleteItemModal,
   item,
 }) => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const itemDeleteMutation = useMutation({
     mutationFn: deleteItem,
@@ -22,6 +24,8 @@ const DeleteItemModal = ({
     e.preventDefault();
     itemDeleteMutation.mutate(item.id);
     setShowdeleteItemModal(false);
+    navigate("/main/item");
+    // TODO: 아이템 리스트 refetch
   }, []);
 
   return (
