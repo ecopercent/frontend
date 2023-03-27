@@ -64,7 +64,7 @@ const ItmeImageStroke = ({ divideNum, imagePath, itemId }) => {
   const currentUsageCount = checkItemUsageCount(itemId, divideNum);
   const [usageCount, setUsageCount] = useState(currentUsageCount);
   const upUsageCountMutation = useMutation({
-    mutationFn: upUsageCount,
+    mutationFn: patchUsageCountUp,
   });
   const increaseCount = useCallback(() => {
     if (usageCount > 0) {
