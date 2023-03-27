@@ -1,12 +1,10 @@
-// import React, { useState } from "react";
-import React from "react";
+import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import ItemEdit from "../../Components/ItemEdit/ItemEdit";
 import { getLogin } from "../../Layouts/Login/Login";
-// import AllInfo from "../../Components/Item/Info/AllInfo";
-// import EachInfo from "../../Components/Item/Info/EachInfo";
-// import ItemListBox from "../../Components/Item/List/ItemListBox";
-// import * as S from "./style";
+import AllInfo from "../../Components/Item/Info/AllInfo";
+import EachInfo from "../../Components/Item/Info/EachInfo";
+import ItemListBox from "../../Components/Item/List/ItemListBox";
+import * as S from "./style";
 
 const Item = () => {
   const userId = getLogin();
@@ -16,9 +14,7 @@ const Item = () => {
 
   return (
     <>
-      {/* <ItemEdit item={{ oper: "add", id: 2 }} /> */}
-      <ItemEdit item={{ oper: "edit", id: 1 }} />
-      {/* <S.InfoLayout>
+      <S.InfoLayout>
         {infoItemId === 0 ? (
           <AllInfo userId={Number(userId)} />
         ) : (
@@ -36,7 +32,7 @@ const Item = () => {
           setInfoItemId={setInfoItemId}
           setInfoItemCategory={setInfoItemCategory}
         />
-      </S.ListLayout> */}
+      </S.ListLayout>
     </>
   );
 };
