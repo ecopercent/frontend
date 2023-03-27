@@ -38,8 +38,6 @@ const ItemEdit = ({ item }) => {
   const itemDetail = itemDetailQuery.data;
 
   return (
-    // TODO모바일도 wrap 감싸야하네~
-    // <div style={{ paddingBottom: "8%" }}>
     <div>
       <ItemEditBorder width={innerWidth} height={innerHeight}>
         <ItemEditHead

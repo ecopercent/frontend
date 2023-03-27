@@ -20,6 +20,10 @@ export const PcPageWrap = styled.div`
   padding-bottom: 8%;
 `;
 
+export const MobilePageWrap = styled.div`
+  padding-bottom: 8%;
+`;
+
 export const MobileLayout = styled.div`
   display: flex;
   flex-direction: column;
