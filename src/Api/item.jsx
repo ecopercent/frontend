@@ -38,8 +38,15 @@ export function getItemList(userId, category) {
     });
 }
 
-export function deleteItem(id) {
-  return axios.delete(`/items/${id}`).then((res) => {
+export function deleteItem(itemId) {
+  return axios.delete(`/items/${itemId}`).then((res) => {
+    return res.data;
+  });
+}
+
+export function upUsageCount(itemId) {
+  return axios.patch(`/items/${itemId}/up`).then((res) => {
+    console.log("hi", res.data);
     return res.data;
   });
 }

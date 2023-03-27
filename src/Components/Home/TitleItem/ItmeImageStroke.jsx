@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from "react";
-import { ImageClipper } from "./style";
+import { useMutation } from "@tanstack/react-query";
+import { upUsageCount } from "../../../Api/item";
+import * as S from "./style";
 
 function toPieChartItemPath(x, y, radiusIn, radiusOut, startAngle, endAngle) {
   function toXY(cX, cY, r, degrees) {
@@ -28,7 +30,7 @@ const makeDateStr = () => {
   return dateStr;
 };
 
-const checkItemUseCount = (id, divideNum) => {
+const checkItemUsageCount = (id, divideNum) => {
   const itemCountObj = JSON.parse(localStorage.getItem(`item/${id}`));
   if (itemCountObj && makeDateStr() === itemCountObj.dateStr) {
     return itemCountObj.count;
@@ -59,13 +61,22 @@ const oneStrockInfo = [
 ];
 
 const ItmeImageStroke = ({ divideNum, imagePath, id }) => {
-  const currentCount = checkItemUseCount(id, divideNum);
-  const [useCount, setUseCount] = useState(currentCount);
+  const currentUsageCount = checkItemUsageCount(id, divideNum);
+  const [usageCount, setUsageCount] = useState(currentUsageCount);
+  // const queryClient = useQueryClient();
+  const upUsageCountMutation = useMutation({
+    mutationFn: upUsageCount,
+    onSuccess: (data) => {
+      console.log(data);
+      // queryClient.setQueryData(["itemDetail", item.id], data);
+      // queryClient.invalidateQueries(["itemDetail", item.id]);
+    },
+  });
   const increaseCount = useCallback(() => {
-    if (useCount > 0) {
+    if (usageCount > 0) {
       // targetRef.blur();
-      setUseCount((currUseCount) => {
-        const changeCout = currUseCount > 1 ? currUseCount - 1 : 0;
+      setUsageCount((currUsageCount) => {
+        const changeCout = currUsageCount > 1 ? currUsageCount - 1 : 0;
         localStorage.setItem(
           `item/${id}`,
           JSON.stringify({
@@ -75,38 +86,30 @@ const ItmeImageStroke = ({ divideNum, imagePath, id }) => {
         );
         return changeCout;
       });
+      upUsageCountMutation.mutate();
       // patch api 날리기
     }
-  }, [useCount]);
+  }, [usageCount]);
 
   return (
-    <div>
-      <svg
-        width="200"
-        height="200"
-        viewBox="0 0 200 200"
-        onClick={increaseCount}
-      >
-        <g>
-          <foreignObject x="50" y="50" width="100%" height="100%">
-            <ImageClipper src={imagePath} alt="아이템 이미지" />
-          </foreignObject>
-          {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map(
-            (element) => {
-              if (element.key <= useCount)
-                return <path d={element.d} key={element.key} />;
-              return (
-                <path
-                  d={element.d}
-                  style={{ display: "none" }}
-                  key={element.key}
-                />
-              );
-            }
-          )}
-        </g>
-      </svg>
-    </div>
+    <svg width="200" height="200" viewBox="0 0 200 200" onClick={increaseCount}>
+      <g>
+        <foreignObject x="50" y="50" width="100%" height="100%">
+          <S.ImageClipper src={imagePath} alt="아이템 이미지" />
+        </foreignObject>
+        {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map((element) => {
+          if (element.key <= usageCount)
+            return <S.StrokePath d={element.d} key={element.key} />;
+          return (
+            <S.StrokePath
+              d={element.d}
+              style={{ display: "none" }}
+              key={element.key}
+            />
+          );
+        })}
+      </g>
+    </svg>
   );
 };
 
