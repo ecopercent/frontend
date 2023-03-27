@@ -11,8 +11,8 @@ import { getLogin } from "../../Layouts/Login/Login";
 const Item = () => {
   const userId = getLogin();
   if (!userId) return <Navigate to="/login" />;
-  const [infoItemId, setInfoItemId] = useState(0);
-  const [infoItemCategory, setInfoItemCategory] = useState("tumbler");
+  // const [infoItemId, setInfoItemId] = useState(0);
+  // const [infoItemCategory, setInfoItemCategory] = useState("tumbler");
 
   return (
     <>

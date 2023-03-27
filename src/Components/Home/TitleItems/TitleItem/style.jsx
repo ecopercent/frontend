@@ -1,11 +1,5 @@
 import styled from "@emotion/styled";
-import * as font from "../../../style/font";
-
-export const TitleItemContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import * as font from "../../../../style/font";
 
 export const Spacer = styled.span`
   display: block;
