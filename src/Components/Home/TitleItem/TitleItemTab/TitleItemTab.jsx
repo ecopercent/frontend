@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { getTitleItem } from "../../../../Api/item";
 import TabButtons from "./TabButtons";
 import TitleItem from "../TitleItem";
+import NoTitleItem from "../NoTitleItem";
 import * as S from "./style";
 import { TitleItemContainer } from "../style";
 import { getLogin } from "../../../../Layouts/Login/Login";
@@ -51,8 +52,9 @@ export default function TitleItemTab() {
           <TitleItem itemInfo={titleEcobagQuery.data} />
         )}
       </TitleItemContainer>
-      {titleTumblerQuery?.data === undefined &&
-        titleEcobagQuery?.data === undefined && <div>아이템을 등록하세요.</div>}
+      {titleTumblerQuery?.data === null && titleEcobagQuery?.data === null && (
+        <NoTitleItem />
+      )}
     </>
   );
 }
