@@ -3,11 +3,19 @@ import * as btn from "../../style/button";
 import * as font from "../../style/font";
 
 export const ItemEditBorder = styled.div`
-  position: absolute;
-  width: 98%;
-  height: 100%;
   border: 1px solid black;
   border-radius: 10px;
+  margin: 1.5%;
+  height: ${(prop) => {
+    const innerHeight = prop.height * 0.9;
+    const hardHeight = 667;
+    return prop.height < hardHeight
+      ? `${hardHeight * 0.9}px; margin-bottom: ${hardHeight * 0.04}px;`
+      : `${innerHeight}px`;
+  }};
+  ${(prop) => {
+    return prop.width < 360 ? "width: 360px;" : "";
+  }}
 `;
 
 export const ItemEditHeadWrapper = styled.div`
@@ -61,7 +69,7 @@ export const FormInnerWrapper = styled.div`
 export const Input = styled.input`
   height: 10%;
   width: 80%;
-  font-size: 18px;
+  font-size: 12px;
   line-height: 1;
   padding-left: 5%;
   border-radius: 6px;
@@ -74,7 +82,7 @@ export const Input = styled.input`
 export const Select = styled.select`
   height: 10%;
   width: 80%;
-  font-size: 18px;
+  font-size: 12px;
   line-height: 1;
   padding-left: 5%;
   border-radius: 6px;
