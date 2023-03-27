@@ -31,7 +31,7 @@ const DeleteItemModal = ({
       <h5>정말 삭제하시겠습니까?</h5>
       <S.ButtonWrapper>
         <S.CancelBtn type="reset">취소</S.CancelBtn>
-        <S.DeletreBtn onClick={onDeleteItem}>삭제</S.DeletreBtn>
+        <S.DeleteBtn onClick={onDeleteItem}>삭제</S.DeleteBtn>
       </S.ButtonWrapper>
       <h5> </h5>
     </Modal>
