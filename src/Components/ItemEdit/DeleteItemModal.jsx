@@ -14,8 +14,8 @@ const DeleteItemModal = ({
   const itemDeleteMutation = useMutation({
     mutationFn: deleteItem,
     onSuccess: (data) => {
-      queryClient.setQueryData(["itemDetail", item.id], data);
-      queryClient.invalidateQueries(["itemDetail", item.id]);
+      queryClient.setQueryData(["item", Number(item.id)], data);
+      queryClient.invalidateQueries(["item", Number(item.id)]);
     },
   });
   const onDeleteItem = useCallback((e) => {

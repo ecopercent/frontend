@@ -22,8 +22,8 @@ const ItemDetail = ({ item }) => {
   const itemEditMutation = useMutation({
     mutationFn: patchItem,
     onSuccess: (data) => {
-      queryClient.setQueryData(["itemDetail", item.id], data);
-      queryClient.invalidateQueries(["itemDetail", item.id]);
+      queryClient.setQueryData(["item", Number(item.id)], data);
+      queryClient.invalidateQueries(["item", Number(item.id)]);
     },
   });
 
@@ -85,11 +85,7 @@ const ItemDetail = ({ item }) => {
             <option value="오스트랄로피테쿠스,400">오스트랄로피테쿠스</option>
           </S.Select>
           <S.Span>목표횟수</S.Span>
-          <S.Input
-            value={targetCount}
-            type="number"
-            readOnly
-          />
+          <S.Input value={targetCount} type="number" readOnly />
           <S.Span>구입가</S.Span>
           <S.Input
             value={purchasePrice}

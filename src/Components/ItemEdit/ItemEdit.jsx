@@ -14,7 +14,7 @@ const ItemEdit = ({ item }) => {
     setShowdeleteItemModal(false);
   }, []);
   const itemDetailQuery = useQuery({
-    queryKey: ["itemDetail", item.id],
+    queryKey: ["itemDetail", Number(item.id)],
     queryFn: () => {
       return getItem(item.id);
     },
@@ -38,8 +38,9 @@ const ItemEdit = ({ item }) => {
   const itemDetail = itemDetailQuery.data;
 
   return (
-    // 모바일도 wrap 감싸야하네~
-    <div style={{ paddingBottom: "8%" }}>
+    // TODO모바일도 wrap 감싸야하네~
+    // <div style={{ paddingBottom: "8%" }}>
+    <div>
       <ItemEditBorder width={innerWidth} height={innerHeight}>
         <ItemEditHead
           itemDetail={itemDetail}
@@ -58,6 +59,7 @@ const ItemEdit = ({ item }) => {
         />
       </ItemEditBorder>
     </div>
+    // </div>
   );
 };
 
