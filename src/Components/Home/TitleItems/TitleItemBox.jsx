@@ -13,14 +13,14 @@ export default function TitleItemBox() {
   if (!userId) return <Navigate to="/" />;
 
   const titleTumblerQuery = useQuery({
-    queryKey: ["titleTumbler", userId],
+    queryKey: ["title", "tumbler", Number(userId)],
     queryFn: () => {
       return getTitleItem(userId, "tumbler");
     },
   });
 
   const titleEcobagQuery = useQuery({
-    queryKey: ["titleEcobag", userId],
+    queryKey: ["title", "ecobag", Number(userId)],
     queryFn: () => {
       return getTitleItem(userId, "ecobag");
     },
