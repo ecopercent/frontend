@@ -1,9 +1,12 @@
 import React from "react";
+import { BsFillPatchExclamationFill } from "react-icons/bs";
 import * as S from "./style";
+import { basicGreen } from "../../../../style/color";
 
 export default function NoTitleItem() {
   return (
     <S.NoTitleNoticeContainer>
+      <BsFillPatchExclamationFill size={40} color={basicGreen} />
       <S.NoTitleNotice>
         등록된 대표 아이템이 없습니다.
         <br />
