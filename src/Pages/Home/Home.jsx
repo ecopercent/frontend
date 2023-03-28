@@ -4,7 +4,6 @@ import TitleItemBox from "../../Components/Home/TitleItems/TitleItemBox";
 
 const Home = () => {
   return (
-    // <div>
     <>
       <Profile />
       <TitleItemBox />

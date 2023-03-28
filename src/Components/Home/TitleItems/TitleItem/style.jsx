@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import * as font from "../../../../style/font";
+import * as color from "../../../../style/color";
 
 export const Spacer = styled.span`
   display: block;
@@ -16,6 +17,10 @@ export const ImageClipper = styled.img`
   object-fit: cover; /* 이미지 비율 유지 */
   border-radius: 50%;
   border: 1px solid;
+`;
+
+export const StrokePath = styled.path`
+  fill: ${color.basicGreen};
 `;
 
 export const NoTitleNoticeContainer = styled.div`

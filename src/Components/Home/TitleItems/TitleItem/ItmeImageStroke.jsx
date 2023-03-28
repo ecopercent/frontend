@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from "react";
-import { ImageClipper } from "./style";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { patchUsageCountUp } from "../../../../Api/item";
+import * as S from "./style";
 
 function toPieChartItemPath(x, y, radiusIn, radiusOut, startAngle, endAngle) {
   function toXY(cX, cY, r, degrees) {
@@ -28,7 +30,7 @@ const makeDateStr = () => {
   return dateStr;
 };
 
-const checkItemUseCount = (id, divideNum) => {
+const checkItemUsageCount = (id, divideNum) => {
   const itemCountObj = JSON.parse(localStorage.getItem(`item/${id}`));
   if (itemCountObj && makeDateStr() === itemCountObj.dateStr) {
     return itemCountObj.count;
@@ -58,16 +60,25 @@ const oneStrockInfo = [
   },
 ];
 
-const ItmeImageStroke = ({ divideNum, imagePath, id }) => {
-  const currentCount = checkItemUseCount(id, divideNum);
-  const [useCount, setUseCount] = useState(currentCount);
+const ItmeImageStroke = ({ itemInfo, userId }) => {
+  const divideNum = itemInfo.category === "tumbler" ? 3 : 1;
+  const currentUsageCount = checkItemUsageCount(itemInfo.id, divideNum);
+  const [usageCount, setUsageCount] = useState(currentUsageCount);
+  const queryClient = useQueryClient();
+  const upUsageCountMutation = useMutation({
+    mutationFn: patchUsageCountUp,
+    onSuccess: () => {
+      if (itemInfo.category === "tumbler")
+        queryClient.invalidateQueries(["titleTumbler", userId]);
+      else queryClient.invalidateQueries(["titleEcobag", userId]);
+    },
+  });
   const increaseCount = useCallback(() => {
-    if (useCount > 0) {
-      // targetRef.blur();
-      setUseCount((currUseCount) => {
-        const changeCout = currUseCount > 1 ? currUseCount - 1 : 0;
+    if (usageCount > 0) {
+      setUsageCount((currUsageCount) => {
+        const changeCout = currUsageCount > 1 ? currUsageCount - 1 : 0;
         localStorage.setItem(
-          `item/${id}`,
+          `item/${itemInfo.id}`,
           JSON.stringify({
             count: changeCout,
             dateStr: makeDateStr(),
@@ -75,38 +86,29 @@ const ItmeImageStroke = ({ divideNum, imagePath, id }) => {
         );
         return changeCout;
       });
-      // patch api 날리기
+      upUsageCountMutation.mutate(itemInfo.id);
     }
-  }, [useCount]);
+  }, [usageCount]);
 
   return (
-    <div>
-      <svg
-        width="200"
-        height="200"
-        viewBox="0 0 200 200"
-        onClick={increaseCount}
-      >
-        <g>
-          <foreignObject x="50" y="50" width="100%" height="100%">
-            <ImageClipper src={imagePath} alt="아이템 이미지" />
-          </foreignObject>
-          {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map(
-            (element) => {
-              if (element.key <= useCount)
-                return <path d={element.d} key={element.key} />;
-              return (
-                <path
-                  d={element.d}
-                  style={{ display: "none" }}
-                  key={element.key}
-                />
-              );
-            }
-          )}
-        </g>
-      </svg>
-    </div>
+    <svg width="200" height="200" viewBox="0 0 200 200" onClick={increaseCount}>
+      <g>
+        <foreignObject x="50" y="50" width="100%" height="100%">
+          <S.ImageClipper src={itemInfo.image} alt="아이템 이미지" />
+        </foreignObject>
+        {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map((element) => {
+          if (element.key <= usageCount)
+            return <S.StrokePath d={element.d} key={element.key} />;
+          return (
+            <S.StrokePath
+              d={element.d}
+              style={{ display: "none" }}
+              key={element.key}
+            />
+          );
+        })}
+      </g>
+    </svg>
   );
 };
 
