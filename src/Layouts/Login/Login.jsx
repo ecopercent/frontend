@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import * as S from "./style";
 
 export function getLogin() {
   return localStorage.getItem("userId");
@@ -10,8 +11,8 @@ const Login = () => {
   const userId = useRef();
 
   return (
-    <div>
-      <h1>Login test</h1>
+    <S.LoginLayout>
+      <S.TmpLogo>로고</S.TmpLogo>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -22,7 +23,8 @@ const Login = () => {
         <input type="number" ref={userId} />
         <button type="submit">로그인</button>
       </form>
-    </div>
+      <S.SloganSpan>에코퍼센트 슬로건 한줄.</S.SloganSpan>
+    </S.LoginLayout>
   );
 };
 export default Login;
