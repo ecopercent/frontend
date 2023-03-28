@@ -68,6 +68,12 @@ const ItmeImageStroke = ({ itemInfo, userId }) => {
   const upUsageCountMutation = useMutation({
     mutationFn: patchUsageCountUp,
     onSuccess: () => {
+      const newItemInfo = { ...itemInfo };
+      newItemInfo.currentUsageCount += 1;
+      queryClient.setQueryData(
+        ["title", `${itemInfo.category}`, Number(userId)],
+        newItemInfo
+      );
       queryClient.invalidateQueries([
         "title",
         `${itemInfo.category}`,
