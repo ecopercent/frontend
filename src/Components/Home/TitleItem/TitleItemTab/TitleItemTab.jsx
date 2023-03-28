@@ -45,10 +45,10 @@ export default function TitleItemTab() {
       </S.TabContainer>
       <TitleItemContainer>
         {itemTab.tumbler && titleTumblerQuery?.data && (
-          <TitleItem itemInfo={titleTumblerQuery.data} />
+          <TitleItem itemInfo={titleTumblerQuery.data} userId={userId} />
         )}
         {itemTab.ecobag && titleEcobagQuery?.data && (
-          <TitleItem itemInfo={titleEcobagQuery.data} />
+          <TitleItem itemInfo={titleEcobagQuery.data} userId={userId} />
         )}
       </TitleItemContainer>
       {titleTumblerQuery?.data === undefined &&
