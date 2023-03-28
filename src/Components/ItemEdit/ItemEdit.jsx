@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
 import { getItem } from "../../Api/item";
 import DeleteItemModal from "./DeleteItemModal";
 import ItmeImage from "./ItmeImage";
@@ -7,7 +8,10 @@ import ItemDetail from "./ItemDetail";
 import ItemEditHead from "./ItemEditHead";
 import { ItemEditBorder } from "./style";
 
-const ItemEdit = ({ item }) => {
+const ItemEdit = () => {
+  const navigateProps = useLocation();
+  const item = navigateProps.state;
+  // TODO: item이 없는 경우 리다이렉트하기
   const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
 
   const onCloseModal = useCallback(() => {
@@ -57,7 +61,6 @@ const ItemEdit = ({ item }) => {
         />
       </ItemEditBorder>
     </div>
-    // </div>
   );
 };
 

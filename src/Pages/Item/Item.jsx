@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import React from "react";
 import { Navigate } from "react-router-dom";
 import { getLogin } from "../../Layouts/Login/Login";
 import AllInfo from "../../Components/Item/Info/AllInfo";

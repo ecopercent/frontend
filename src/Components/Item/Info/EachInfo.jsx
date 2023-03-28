@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getItemList } from "../../../Api/item";
 import TitleSetModal from "../../Modal/TitleSetModal";
 import * as S from "./style";
@@ -16,6 +17,12 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
   const infoItem = itemListQuery.data?.filter((item) => {
     return item.id === itemId;
   })[0];
+
+  const navigate = useNavigate();
+  const editObj = {
+    id: itemId,
+    oper: "edit",
+  };
 
   return (
     <>
@@ -48,7 +55,7 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
             <S.ModifyBtn
               type="button"
               onClick={() => {
-                return alert("아이템 수정 페이지로 이동!");
+                navigate("/item/edit", { state: editObj });
               }}
             >
               수정
