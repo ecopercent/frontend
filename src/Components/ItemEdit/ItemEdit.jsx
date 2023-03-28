@@ -14,7 +14,7 @@ const ItemEdit = ({ item }) => {
     setShowdeleteItemModal(false);
   }, []);
   const itemDetailQuery = useQuery({
-    queryKey: ["itemDetail", Number(item.id)],
+    queryKey: ["item", Number(item.id)],
     queryFn: () => {
       return getItem(item.id);
     },
