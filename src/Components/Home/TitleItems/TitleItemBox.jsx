@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Navigate } from "react-router-dom";
-import { getTitleItem } from "../../../../Api/item";
-import TabButtons from "./TabButtons";
-import TitleItem from "../TitleItem";
+import { getTitleItem } from "../../../Api/item";
+import ConvertButtons from "./ConvertBtn/ConvertButtons";
+import TitleItem from "./TitleItem/TitleItem";
+import NoTitleItem from "./TitleItem/NoTitleItem";
 import * as S from "./style";
-import { TitleItemContainer } from "../style";
-import { getLogin } from "../../../../Layouts/Login/Login";
+import { getLogin } from "../../../Layouts/Login/Login";
 
-export default function TitleItemTab() {
+export default function TitleItemBox() {
   const userId = getLogin();
   if (!userId) return <Navigate to="/" />;
 
@@ -36,23 +36,24 @@ export default function TitleItemTab() {
     <>
       <S.TabContainer>
         {(titleTumblerQuery?.data || titleEcobagQuery?.data) && (
-          <TabButtons
+          <ConvertButtons
             userId={userId}
             hasBoth={!!titleTumblerQuery?.data && !!titleEcobagQuery?.data}
             setItemTab={setItemTab}
           />
         )}
       </S.TabContainer>
-      <TitleItemContainer>
+      <S.TitleItemContainer>
         {itemTab.tumbler && titleTumblerQuery?.data && (
           <TitleItem itemInfo={titleTumblerQuery.data} userId={userId} />
         )}
         {itemTab.ecobag && titleEcobagQuery?.data && (
           <TitleItem itemInfo={titleEcobagQuery.data} userId={userId} />
         )}
-      </TitleItemContainer>
-      {titleTumblerQuery?.data === undefined &&
-        titleEcobagQuery?.data === undefined && <div>아이템을 등록하세요.</div>}
+      </S.TitleItemContainer>
+      {titleTumblerQuery?.data === null && titleEcobagQuery?.data === null && (
+        <NoTitleItem />
+      )}
     </>
   );
 }

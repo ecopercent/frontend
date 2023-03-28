@@ -3,7 +3,7 @@ import { MdOutlineViewCarousel, MdOutlineShoppingBag } from "react-icons/md";
 import { TbCup } from "react-icons/tb";
 import * as S from "./style";
 
-export default function TabButtons({ userId, hasBoth, setItemTab }) {
+export default function ConvertButtons({ userId, hasBoth, setItemTab }) {
   const [tryConvert, setTryConvert] = useState(false);
 
   function handleClick(tumblerValue, ecobagValue) {

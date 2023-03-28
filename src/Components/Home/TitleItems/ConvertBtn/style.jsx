@@ -1,14 +1,6 @@
 import styled from "@emotion/styled";
 import * as color from "../../../../style/color";
 
-export const TabContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  margin: 0 auto;
-  padding: 10px;
-`;
-
 export const MainSetBtnsWrapper = styled.div`
   display: flex;
   flex-direction: row;
