@@ -25,6 +25,11 @@ export default function TitleSetModal({ queryData, onClose }) {
         `${queryData.category}s`,
         queryData.userId,
       ]);
+      queryClient.refetchQueries([
+        "title",
+        `${queryData.category}`,
+        queryData.userId,
+      ]);
     },
   });
 
