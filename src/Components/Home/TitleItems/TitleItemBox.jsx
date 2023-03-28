@@ -34,14 +34,15 @@ export default function TitleItemBox() {
 
   return (
     <>
+      {titleTumblerQuery?.data === null && titleEcobagQuery?.data === null && (
+        <NoTitleItem />
+      )}
       <S.TabContainer>
-        {(titleTumblerQuery?.data || titleEcobagQuery?.data) && (
-          <ConvertButtons
-            userId={userId}
-            hasBoth={!!titleTumblerQuery?.data && !!titleEcobagQuery?.data}
-            setItemTab={setItemTab}
-          />
-        )}
+        <ConvertButtons
+          userId={userId}
+          hasBoth={!!titleTumblerQuery?.data && !!titleEcobagQuery?.data}
+          setItemTab={setItemTab}
+        />
       </S.TabContainer>
       <S.TitleItemContainer>
         {itemTab.tumbler && titleTumblerQuery?.data && (
@@ -51,9 +52,6 @@ export default function TitleItemBox() {
           <TitleItem itemInfo={titleEcobagQuery.data} userId={userId} />
         )}
       </S.TitleItemContainer>
-      {titleTumblerQuery?.data === null && titleEcobagQuery?.data === null && (
-        <NoTitleItem />
-      )}
     </>
   );
 }
