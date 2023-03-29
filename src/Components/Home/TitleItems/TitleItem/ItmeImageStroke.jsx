@@ -68,9 +68,17 @@ const ItmeImageStroke = ({ itemInfo, userId }) => {
   const upUsageCountMutation = useMutation({
     mutationFn: patchUsageCountUp,
     onSuccess: () => {
-      if (itemInfo.category === "tumbler")
-        queryClient.invalidateQueries(["titleTumbler", userId]);
-      else queryClient.invalidateQueries(["titleEcobag", userId]);
+      const newItemInfo = { ...itemInfo };
+      newItemInfo.currentUsageCount += 1;
+      queryClient.setQueryData(
+        ["title", `${itemInfo.category}`, Number(userId)],
+        newItemInfo
+      );
+      queryClient.invalidateQueries([
+        "title",
+        `${itemInfo.category}`,
+        Number(userId),
+      ]);
     },
   });
   const increaseCount = useCallback(() => {
