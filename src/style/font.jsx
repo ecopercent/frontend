@@ -65,3 +65,19 @@ export const boldBtn = `
 	${normalBtn}
 	font-weight: 600;
 `;
+
+export const normalSubheadline = `
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.24px;
+`;
+
+export const boldHeadline = `
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 22px;
+  text-align: center;
+`;
