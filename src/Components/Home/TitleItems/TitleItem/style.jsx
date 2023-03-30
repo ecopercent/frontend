@@ -27,11 +27,15 @@ export const NoTitleNoticeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 
-  flex: 1 0 auto;
   width: 100%;
 
+  // 임시 패딩
+  padding: 100px 0;
+
   // TODO : 하단 남는 공간 꽉 채우게
+  // flex: 1 0 auto;
   // 공간 확인용 컬러
   // background-color: green;
 `;

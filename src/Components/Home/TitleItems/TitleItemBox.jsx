@@ -13,14 +13,14 @@ export default function TitleItemBox() {
   if (!userId) return <Navigate to="/" />;
 
   const titleTumblerQuery = useQuery({
-    queryKey: ["titleTumbler", userId],
+    queryKey: ["title", "tumbler", Number(userId)],
     queryFn: () => {
       return getTitleItem(userId, "tumbler");
     },
   });
 
   const titleEcobagQuery = useQuery({
-    queryKey: ["titleEcobag", userId],
+    queryKey: ["title", "ecobag", Number(userId)],
     queryFn: () => {
       return getTitleItem(userId, "ecobag");
     },
@@ -34,14 +34,15 @@ export default function TitleItemBox() {
 
   return (
     <>
+      {titleTumblerQuery?.data === null && titleEcobagQuery?.data === null && (
+        <NoTitleItem />
+      )}
       <S.TabContainer>
-        {(titleTumblerQuery?.data || titleEcobagQuery?.data) && (
-          <ConvertButtons
-            userId={userId}
-            hasBoth={!!titleTumblerQuery?.data && !!titleEcobagQuery?.data}
-            setItemTab={setItemTab}
-          />
-        )}
+        <ConvertButtons
+          userId={userId}
+          hasBoth={!!titleTumblerQuery?.data && !!titleEcobagQuery?.data}
+          setItemTab={setItemTab}
+        />
       </S.TabContainer>
       <S.TitleItemContainer>
         {itemTab.tumbler && titleTumblerQuery?.data && (
@@ -51,9 +52,6 @@ export default function TitleItemBox() {
           <TitleItem itemInfo={titleEcobagQuery.data} userId={userId} />
         )}
       </S.TitleItemContainer>
-      {titleTumblerQuery?.data === null && titleEcobagQuery?.data === null && (
-        <NoTitleItem />
-      )}
     </>
   );
 }
