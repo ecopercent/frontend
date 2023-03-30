@@ -30,6 +30,11 @@ const ItemEditDetail = ({ item, itemDetail }) => {
         `${item.category}s`,
         Number(localStorage.getItem("userId")),
       ]);
+      queryClient.refetchQueries([
+        "title",
+        item.category,
+        Number(localStorage.getItem("userId")),
+      ]);
     },
   });
 
