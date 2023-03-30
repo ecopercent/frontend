@@ -6,9 +6,12 @@ import useInput from "../../../hooks/useInput";
 import { patchItem } from "../../../Api/item";
 
 const ItemEditDetail = ({ item, itemDetail }) => {
+  const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
   const [nickname, onNickname] = useInput(itemDetail.nickname);
   const [brand, onBrand] = useInput(itemDetail.brand);
+  const [purchasePrice, onPurchasePrice] = useInput(itemDetail.price);
+  const [purchaseDate, onPurchaseData] = useInput(itemDetail.purchaseDate);
   const [type, setType] = useState(itemDetail.type);
   const [targetGoalUsageCount, setTargetGoalUsageCount] = useState(
     itemDetail.goalUsageCount
@@ -18,18 +21,17 @@ const ItemEditDetail = ({ item, itemDetail }) => {
     setType(e.target.value);
     setTargetGoalUsageCount(values[1]);
   }, []);
-  const [purchasePrice, onPurchasePrice] = useInput(itemDetail.price);
-  const [purchaseDate, onPurchaseData] = useInput(itemDetail.purchaseDate);
   const queryClient = useQueryClient();
   const itemEditMutation = useMutation({
     mutationFn: patchItem,
-    onSuccess: (data) => {
-      queryClient.setQueryData(["item", Number(item.id)], data);
-      queryClient.invalidateQueries(["item", Number(item.id)]);
+    onSuccess: () => {
+      queryClient.refetchQueries(["item", Number(item.id)]);
+      queryClient.refetchQueries([
+        `${item.category}s`,
+        Number(localStorage.getItem("userId")),
+      ]);
     },
   });
-
-  const navigate = useNavigate();
 
   const onEditItem = useCallback(
     (e) => {
@@ -47,10 +49,10 @@ const ItemEditDetail = ({ item, itemDetail }) => {
       }
       setIsError(false);
       itemEditMutation.mutate({
-        itemId: item.id,
-        itemImage: "test",
+        itemId: Number(item.id),
+        itemImage: "이미지피커에서가져올거얏",
         itemNickname: nickname,
-        itemType: type,
+        itemType: type.split(",")[0],
         itemBrand: brand,
         itemPrice: purchasePrice,
         itemPurchaseDate: purchaseDate,
@@ -88,11 +90,24 @@ const ItemEditDetail = ({ item, itemDetail }) => {
             onChange={onType}
             placeholder={itemDetail.type}
           >
-            <option value="none,">none(공백으로 바꿀예정)</option>
-            <option value="도자기컵,210">도자기컵</option>
-            <option value="스테인리스,220">스테인리스</option>
-            <option value="폴리프로필렌,50">플라스틱(폴리프로필렌)</option>
-            <option value="폴리카보네이트,110">플라스틱(폴리카보네이트)</option>
+            <option value=" ,"> </option>
+            {item.category === "tumbler" ? (
+              <>
+                <option value="도자기컵,210">도자기컵</option>
+                <option value="스테인리스,220">스테인리스</option>
+                <option value="폴리프로필렌,50">플라스틱(폴리프로필렌)</option>
+                <option value="폴리카보네이트,110">
+                  플라스틱(폴리카보네이트)
+                </option>
+              </>
+            ) : (
+              <>
+                <option value="천,10">천</option>
+                <option value="가죽,20">가죽</option>
+                <option value="레자,30">레자</option>
+                <option value="폴리우레탄,40">폴리우레탄</option>
+              </>
+            )}
           </S.Select>
           <S.Span>목표횟수</S.Span>
           <S.Input

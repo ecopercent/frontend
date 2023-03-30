@@ -21,12 +21,13 @@ const ItemAddDetail = ({ item }) => {
     setTargetGoalUsageCount(values[1]);
   }, []);
   const queryClient = useQueryClient();
-
   const itemAddMutation = useMutation({
     mutationFn: postItem,
-    onSuccess: (data) => {
-      queryClient.setQueryData(["item", Number(data.id)], data);
-      queryClient.invalidateQueries(["item", Number(data.id)]);
+    onSuccess: () => {
+      queryClient.refetchQueries([
+        `${item.category}s`,
+        Number(localStorage.getItem("userId")),
+      ]);
     },
   });
   const onAddItem = useCallback(
@@ -45,11 +46,11 @@ const ItemAddDetail = ({ item }) => {
       }
       setIsError(false);
       itemAddMutation.mutate({
-        itemUserId: localStorage.getItem("userId"),
+        itemUserId: Number(localStorage.getItem("userId")),
         itemImage: "이미지피커에서가져올거얏",
         itemNickname: nickname,
         itemCategory: item.category,
-        itemType: type,
+        itemType: type.split(",")[0],
         itemBrand: brand,
         itemPrice: purchasePrice,
         itemPurchaseDate: purchaseDate,
@@ -82,10 +83,23 @@ const ItemAddDetail = ({ item }) => {
           <S.Span>타입</S.Span>
           <S.Select value={type} onChange={onType}>
             <option value=" ,"> </option>
-            <option value="도자기컵,210">도자기컵</option>
-            <option value="스테인리스,220">스테인리스</option>
-            <option value="폴리프로필렌,50">플라스틱(폴리프로필렌)</option>
-            <option value="폴리카보네이트,110">플라스틱(폴리카보네이트)</option>
+            {item.category === "tumbler" ? (
+              <>
+                <option value="도자기컵,210">도자기컵</option>
+                <option value="스테인리스,220">스테인리스</option>
+                <option value="폴리프로필렌,50">플라스틱(폴리프로필렌)</option>
+                <option value="폴리카보네이트,110">
+                  플라스틱(폴리카보네이트)
+                </option>
+              </>
+            ) : (
+              <>
+                <option value="천,10">천</option>
+                <option value="가죽,20">가죽</option>
+                <option value="레자,30">레자</option>
+                <option value="폴리우레탄,40">폴리우레탄</option>
+              </>
+            )}
           </S.Select>
           <S.Span>목표횟수</S.Span>
           <S.Input value={targetGoalUsageCount} type="number" readOnly />

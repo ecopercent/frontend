@@ -1,13 +1,10 @@
 import React from "react";
 import * as S from "../style";
 
-const ItmeImage = ({ imagePath, oper }) => {
+const ItmeImage = ({ imagePath }) => {
   return (
     <S.ItemImageWrap>
-      <S.ImageClipper
-        src={oper === "edit" ? imagePath : "/img/userLoadingImage.png"}
-        alt="아이템 이미지"
-      />
+      <S.ImageClipper src={imagePath} alt="아이템 이미지" />
       <S.CameraIcon
         color="white"
         onClick={() => {

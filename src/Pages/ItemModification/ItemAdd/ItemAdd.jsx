@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ItmeAddImage from "./ItmeAddImage";
 import ItemAddDetail from "./ItemAddDetail";
 import ItemAddHead from "./ItemAddHead";
@@ -8,8 +8,8 @@ import { ItemEditBorder, ItemEditWrap } from "../style";
 const ItemAdd = () => {
   const navigateProps = useLocation();
   const item = navigateProps.state;
-  // TODO: item이 없는 경우 리다이렉트하기
-
+  const navigate = useNavigate();
+  if (!item) navigate(-1);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   useEffect(() => {
     const resizeListener = () => {
@@ -17,7 +17,6 @@ const ItemAdd = () => {
     };
     window.addEventListener("resize", resizeListener);
   });
-
   const [innerHeight, setInnerHeight] = useState(window.innerHeight);
   useEffect(() => {
     const resizeListener = () => {
@@ -25,13 +24,12 @@ const ItemAdd = () => {
     };
     window.addEventListener("resize", resizeListener);
   });
-
   return (
     <ItemEditWrap>
       <ItemEditBorder width={innerWidth} height={innerHeight}>
         <ItemAddHead item={item} />
         <hr />
-        <ItmeAddImage imagePath={" "} oper={item.oper} />
+        <ItmeAddImage />
         <hr />
         <ItemAddDetail item={item} />
       </ItemEditBorder>
