@@ -6,7 +6,7 @@ import DeleteItemModal from "./DeleteItemModal";
 import ItmeImage from "./ItmeImage";
 import ItemDetail from "./ItemDetail";
 import ItemEditHead from "./ItemEditHead";
-import { ItemEditBorder } from "./style";
+import { ItemEditBorder, ItemEditWrap } from "./style";
 
 const ItemEdit = () => {
   const navigateProps = useLocation();
@@ -42,7 +42,7 @@ const ItemEdit = () => {
   const itemDetail = itemDetailQuery.data;
 
   return (
-    <div>
+    <ItemEditWrap>
       <ItemEditBorder width={innerWidth} height={innerHeight}>
         <ItemEditHead
           itemDetail={itemDetail}
@@ -60,7 +60,7 @@ const ItemEdit = () => {
           item={item}
         />
       </ItemEditBorder>
-    </div>
+    </ItemEditWrap>
   );
 };
 

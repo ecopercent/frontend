@@ -2,6 +2,11 @@ import styled from "@emotion/styled";
 import * as btn from "../../style/button";
 import * as font from "../../style/font";
 
+export const ItemEditWrap = styled.div`
+  width: 500px;
+  margin: 0 auto;
+`;
+
 export const ItemEditBorder = styled.div`
   border: 1px solid black;
   border-radius: 10px;
@@ -69,7 +74,7 @@ export const FormInnerWrapper = styled.div`
 export const Input = styled.input`
   height: 10%;
   width: 80%;
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1;
   padding-left: 5%;
   border-radius: 6px;
@@ -82,7 +87,7 @@ export const Input = styled.input`
 export const Select = styled.select`
   height: 10%;
   width: 80%;
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1;
   padding-left: 5%;
   border-radius: 6px;
