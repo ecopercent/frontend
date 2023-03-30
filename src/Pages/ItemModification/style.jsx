@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { HiOutlineCamera } from "react-icons/hi";
 import * as btn from "../../style/button";
 import * as font from "../../style/font";
 
@@ -38,7 +39,7 @@ export const ImageClipper = styled.img`
   border: 1px solid;
 `;
 
-export const ItemDetalImagerWrapper = styled.div`
+export const ItemImageWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +49,7 @@ export const ItemDetalImagerWrapper = styled.div`
   height: 25%;
 `;
 
-export const EditDetailWrapper = styled.div`
+export const ItemeDetailWrapper = styled.div`
   display: flex;
   width: 100%;
   // flex-direction: column;
@@ -139,4 +140,14 @@ export const DeleteBtn = styled.button`
   ${btn.normal}
   ${font.normalBtn}
   color: red;
+`;
+
+export const CameraIcon = styled(HiOutlineCamera)`
+  position: absolute;
+  width: 120px;
+  height: 150px;
+  border-radius: 45%;
+  padding: 30px 30px;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
 `;

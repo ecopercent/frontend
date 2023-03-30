@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import Modal from "../Modal/Modal";
-import { deleteItem } from "../../Api/item";
-import * as S from "./style";
+import Modal from "../../../Components/Modal/Modal";
+import { deleteItem } from "../../../Api/item";
+import * as S from "../style";
 
 const DeleteItemModal = ({
   show,

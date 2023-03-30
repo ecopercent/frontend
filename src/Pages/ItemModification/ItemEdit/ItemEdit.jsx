@@ -1,17 +1,18 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
-import { getItem } from "../../Api/item";
+import { getItem } from "../../../Api/item";
 import DeleteItemModal from "./DeleteItemModal";
-import ItmeImage from "./ItmeImage";
-import ItemDetail from "./ItemDetail";
+import ItmeImage from "./ItmeEditImage";
+import ItemEditDetail from "./ItemEditDetail";
 import ItemEditHead from "./ItemEditHead";
-import { ItemEditBorder, ItemEditWrap } from "./style";
+import { ItemEditBorder, ItemEditWrap } from "../style";
 
 const ItemEdit = () => {
   const navigateProps = useLocation();
   const item = navigateProps.state;
   // TODO: item이 없는 경우 리다이렉트하기
+  if (!item) return <h1> 로딩중 </h1>;
   const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
 
   const onCloseModal = useCallback(() => {
@@ -40,7 +41,7 @@ const ItemEdit = () => {
   });
 
   const itemDetail = itemDetailQuery.data;
-
+  if (!itemDetail) return <h1>로딩</h1>;
   return (
     <ItemEditWrap>
       <ItemEditBorder width={innerWidth} height={innerHeight}>
@@ -52,7 +53,7 @@ const ItemEdit = () => {
         <hr />
         <ItmeImage imagePath={itemDetail?.image} oper={item.oper} />
         <hr />
-        <ItemDetail item={item} />
+        <ItemEditDetail item={item} itemDetail={itemDetail} />
         <DeleteItemModal
           show={showdeleteItemModal}
           onCloseModal={onCloseModal}

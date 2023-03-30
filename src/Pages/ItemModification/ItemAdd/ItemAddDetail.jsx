@@ -1,36 +1,35 @@
 import React, { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import * as S from "./style";
-import useInput from "../../hooks/useInput";
-import { patchItem } from "../../Api/item";
+import * as S from "../style";
+import useInput from "../../../hooks/useInput";
+import { postItem } from "../../../Api/item";
+import makeDateStr from "../../../Utils/date";
 
-const ItemDetail = ({ item }) => {
+const ItemAddDetail = ({ item }) => {
+  const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
   const [nickname, onNickname] = useInput("");
   const [brand, onBrand] = useInput("");
+  const [purchasePrice, onPurchasePrice] = useInput(0);
+  const [purchaseDate, onPurchaseData] = useInput(makeDateStr());
   const [type, setType] = useState("");
-  const [targetCount, setTargetCount] = useState(0);
+  const [targetGoalUsageCount, setTargetGoalUsageCount] = useState(0);
   const onType = useCallback((e) => {
     const values = e.target.value.split(",");
     setType(e.target.value);
-    setTargetCount(values[1]);
+    setTargetGoalUsageCount(values[1]);
   }, []);
-  const [purchasePrice, onPurchasePrice] = useInput("");
-  const [purchaseDate, onPurchaseData] = useInput(Date());
   const queryClient = useQueryClient();
 
-  const itemEditMutation = useMutation({
-    mutationFn: patchItem,
+  const itemAddMutation = useMutation({
+    mutationFn: postItem,
     onSuccess: (data) => {
-      queryClient.setQueryData(["item", Number(item.id)], data);
-      queryClient.invalidateQueries(["item", Number(item.id)]);
+      queryClient.setQueryData(["item", Number(data.id)], data);
+      queryClient.invalidateQueries(["item", Number(data.id)]);
     },
   });
-
-  const navigate = useNavigate();
-
-  const onEditItem = useCallback(
+  const onAddItem = useCallback(
     (e) => {
       e.preventDefault();
       if (
@@ -45,10 +44,11 @@ const ItemDetail = ({ item }) => {
         return;
       }
       setIsError(false);
-      itemEditMutation.mutate({
-        itemId: item.id,
-        itemImage: "test",
+      itemAddMutation.mutate({
+        itemUserId: localStorage.getItem("userId"),
+        itemImage: "이미지피커에서가져올거얏",
         itemNickname: nickname,
+        itemCategory: item.category,
         itemType: type,
         itemBrand: brand,
         itemPrice: purchasePrice,
@@ -56,13 +56,12 @@ const ItemDetail = ({ item }) => {
       });
       navigate(-1);
     },
-    [nickname, brand, type, targetCount, purchasePrice, purchaseDate]
+    [nickname, brand, type, targetGoalUsageCount, purchasePrice, purchaseDate]
   );
 
-  // TODO: 스타일 다시 할때 라벨이랑 div 빼고 해보자
   return (
-    <S.EditDetailWrapper>
-      <S.Form onSubmit={onEditItem}>
+    <S.ItemeDetailWrapper>
+      <S.Form onSubmit={onAddItem}>
         <S.FormInnerWrapper>
           <S.Span>닉네임</S.Span>
           <S.Input
@@ -82,14 +81,14 @@ const ItemDetail = ({ item }) => {
           />
           <S.Span>타입</S.Span>
           <S.Select value={type} onChange={onType}>
-            <option value=" ,0"> </option>
-            <option value="스테인리스,100">스테인리스</option>
-            <option value="우라늄,200">우라늄</option>
-            <option value="나무,300">나무</option>
-            <option value="오스트랄로피테쿠스,400">오스트랄로피테쿠스</option>
+            <option value=" ,"> </option>
+            <option value="도자기컵,210">도자기컵</option>
+            <option value="스테인리스,220">스테인리스</option>
+            <option value="폴리프로필렌,50">플라스틱(폴리프로필렌)</option>
+            <option value="폴리카보네이트,110">플라스틱(폴리카보네이트)</option>
           </S.Select>
           <S.Span>목표횟수</S.Span>
-          <S.Input value={targetCount} type="number" readOnly />
+          <S.Input value={targetGoalUsageCount} type="number" readOnly />
           <S.Span>구입가</S.Span>
           <S.Input
             value={purchasePrice}
@@ -120,8 +119,8 @@ const ItemDetail = ({ item }) => {
           <S.SubmitBtn type="submit">저장</S.SubmitBtn>
         </S.ButtonWrapper>
       </S.Form>
-    </S.EditDetailWrapper>
+    </S.ItemeDetailWrapper>
   );
 };
 
-export default ItemDetail;
+export default ItemAddDetail;
