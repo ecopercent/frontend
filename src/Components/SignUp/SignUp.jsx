@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PcPageWrap } from "../../Layouts/Main/style";
+import CancelCheckModal from "../Modal/CancelCheckModal";
 import SignUpUser from "./SignUpUser";
 import SignUpItems from "./SignUpItems";
 import * as S from "./style";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  // const [cancelConfirm, setCancelConfirm] = useState(false);
 
   const onSubmit = () => {
     // TODO: 입력 유효성 검사
@@ -15,13 +18,22 @@ export default function SignUp() {
   };
 
   const onCancel = () => {
-    // TODO: 취소 확인 모달 구현
-    alert("(모달) 입력중인 정보는 저장되지 않습니다. 돌아가시겠습니까?");
-    return navigate(-1);
+    setModalIsOpen(true);
   };
 
   return (
     <PcPageWrap style={{ paddingBottom: "0" }}>
+      {modalIsOpen && (
+        <CancelCheckModal
+          onClose={() => {
+            setModalIsOpen(false);
+          }}
+          onConfirm={() => {
+            setModalIsOpen(false);
+            navigate(-1);
+          }}
+        />
+      )}
       <S.SignUpLayoutCol>
         <S.InputList>
           <SignUpUser />

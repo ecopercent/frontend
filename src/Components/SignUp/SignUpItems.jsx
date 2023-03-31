@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import CancelCheckModal from "../Modal/CancelCheckModal";
 import * as S from "./style";
 
 export default function SignUpItems({ category }) {
   const [isAdded, setIsAdded] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const onAdd = () => {
     // TODO: 아이템 추가 페이지에서 [등록] 누르면 true로 세팅
@@ -16,13 +18,22 @@ export default function SignUpItems({ category }) {
   };
 
   const onCancel = () => {
-    // TODO: 삭제 확인 모달
-    alert("삭제 확인 모달!");
-    setIsAdded(false);
+    setModalIsOpen(true);
   };
 
   return (
     <S.InputItem col>
+      {modalIsOpen && (
+        <CancelCheckModal
+          onConfirm={() => {
+            setIsAdded(false);
+            setModalIsOpen(false);
+          }}
+          onClose={() => {
+            setModalIsOpen(false);
+          }}
+        />
+      )}
       <S.LabelBox>
         <S.Label>{category}</S.Label>
         {isAdded ? (
