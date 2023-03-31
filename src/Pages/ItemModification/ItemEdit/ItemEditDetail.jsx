@@ -17,9 +17,9 @@ const ItemEditDetail = ({ item, itemDetail }) => {
     itemDetail.goalUsageCount
   );
   const onType = useCallback((e) => {
-    const values = e.target.value.split(",");
     setType(e.target.value);
-    setTargetGoalUsageCount(values[1]);
+    if (!e.target.value || !e.target.value.trim()) setTargetGoalUsageCount(0);
+    else setTargetGoalUsageCount(100);
   }, []);
   const queryClient = useQueryClient();
   const itemEditMutation = useMutation({
@@ -90,30 +90,7 @@ const ItemEditDetail = ({ item, itemDetail }) => {
             placeholder={itemDetail.brand}
           />
           <S.Span>타입</S.Span>
-          <S.Select
-            value={type}
-            onChange={onType}
-            placeholder={itemDetail.type}
-          >
-            <option value=" ,"> </option>
-            {item.category === "tumbler" ? (
-              <>
-                <option value="도자기컵,210">도자기컵</option>
-                <option value="스테인리스,220">스테인리스</option>
-                <option value="폴리프로필렌,50">플라스틱(폴리프로필렌)</option>
-                <option value="폴리카보네이트,110">
-                  플라스틱(폴리카보네이트)
-                </option>
-              </>
-            ) : (
-              <>
-                <option value="천,10">천</option>
-                <option value="가죽,20">가죽</option>
-                <option value="레자,30">레자</option>
-                <option value="폴리우레탄,40">폴리우레탄</option>
-              </>
-            )}
-          </S.Select>
+          <S.Input value={type} onChange={onType} />
           <S.Span>목표횟수</S.Span>
           <S.Input
             value={targetGoalUsageCount}
