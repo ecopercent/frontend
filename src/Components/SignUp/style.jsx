@@ -31,6 +31,9 @@ export const InputList = styled.ul`
 
 export const InputItem = styled.li`
   display: flex;
+  ${(props) => {
+    return props.col ? "flex-direction: column;" : "";
+  }}
   gap: 10px;
   position: relative;
 
@@ -54,6 +57,10 @@ export const Input = styled.input`
   ${font.normalSmall}
 `;
 
+/*
+ *          Textarea style
+ */
+
 export const TextareaHr = styled.hr`
   display: block;
   position: absolute;
@@ -76,9 +83,28 @@ export const Textarea = styled.textarea`
   line-height: 25px;
 `;
 
+/*
+ *          Item Post
+ */
+
+export const LabelBox = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+export const NoticeText = styled.span`
+  ${font.normalXsmall};
+`;
+
+/*
+ *          Submit Btn
+ */
+
 export const Btn = styled.button`
   ${(props) => {
-    return props.featured ? button.green : button.normal;
+    if (props.featured) return button.green;
+    if (props.delete) return button.pink;
+    return button.normal;
   }}}
 `;
 

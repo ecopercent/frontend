@@ -23,6 +23,14 @@ export const normalSmall = `
   line-height: 24px;
 `;
 
+export const normalXsmall = `
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+
+  line-height: 24px;
+`;
+
 export const boldSmall = `
   ${normalSmall}
   font-weight: 600;

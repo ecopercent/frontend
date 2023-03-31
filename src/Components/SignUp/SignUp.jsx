@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PcPageWrap } from "../../Layouts/Main/style";
 import * as S from "./style";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [tumblerAdd, setTumblerAdd] = useState(false);
+  const [ecobagAdd, setEcobagAdd] = useState(false);
 
   return (
     <PcPageWrap style={{ paddingBottom: "0" }}>
@@ -47,12 +49,89 @@ export default function SignUp() {
             <S.Label htmlFor="msg">소개</S.Label>
             <S.Textarea id="msg" type="textarea" />
           </S.InputItem>
-          {/* TODO: 아이템 등록 */}
-          <S.InputItem>
-            <S.Label htmlFor="tumbler">텀블러</S.Label>
+          <S.InputItem col>
+            <S.LabelBox>
+              <S.Label htmlFor="tumbler">텀블러</S.Label>
+              {tumblerAdd ? (
+                <>
+                  <S.Btn
+                    onClick={() => {
+                      // TODO: 아이템 수정 페이지에서 [등록] 누르면 데이터 세팅
+                      alert("아이템 수정 페이지로 이동!");
+                    }}
+                  >
+                    수정
+                  </S.Btn>
+                  <S.Btn
+                    delete
+                    onClick={() => {
+                      // TODO: 삭제 확인 모달
+                      alert("삭제 확인 모달!");
+                      setTumblerAdd(false);
+                    }}
+                  >
+                    등록취소
+                  </S.Btn>
+                </>
+              ) : (
+                <S.Btn
+                  onClick={() => {
+                    // TODO: 아이템 추가 페이지에서 [등록] 누르면 true로 세팅
+                    alert("아이템 추가 페이지로 이동!");
+                    setTumblerAdd(true);
+                  }}
+                >
+                  등록
+                </S.Btn>
+              )}
+            </S.LabelBox>
+            {tumblerAdd ? (
+              <p>텀블러 정보</p>
+            ) : (
+              <S.NoticeText>아이템은 나중에 등록할 수 있습니다.</S.NoticeText>
+            )}
           </S.InputItem>
-          <S.InputItem>
-            <S.Label htmlFor="ecobag">에코백</S.Label>
+          <S.InputItem col>
+            <S.LabelBox>
+              <S.Label htmlFor="ecobag">에코백</S.Label>
+              {ecobagAdd ? (
+                <>
+                  <S.Btn
+                    onClick={() => {
+                      // TODO: 아이템 수정 페이지에서 [등록] 누르면 데이터 세팅
+                      alert("아이템 수정 페이지로 이동!");
+                    }}
+                  >
+                    수정
+                  </S.Btn>
+                  <S.Btn
+                    delete
+                    onClick={() => {
+                      // TODO: 삭제 확인 모달
+                      alert("삭제 확인 모달!");
+                      setEcobagAdd(false);
+                    }}
+                  >
+                    등록취소
+                  </S.Btn>
+                </>
+              ) : (
+                <S.Btn
+                  onClick={() => {
+                    // TODO: 아이템 추가 페이지에서 [등록] 누르면 true로 세팅
+                    alert("아이템 추가 페이지로 이동!");
+                    setEcobagAdd(true);
+                  }}
+                >
+                  등록
+                </S.Btn>
+              )}
+            </S.LabelBox>
+            {ecobagAdd ? (
+              <p>에코백 정보</p>
+            ) : (
+              <S.NoticeText>아이템은 나중에 등록할 수 있습니다.</S.NoticeText>
+            )}
           </S.InputItem>
         </S.InputList>
         <S.SubmitBtnsBox>

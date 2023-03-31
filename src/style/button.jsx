@@ -20,6 +20,13 @@ export const normal = `
   ${font.normalBtn};
 `;
 
+export const disabled = `
+  ${normal}
+  opacity: 0.5;
+  color: gray;
+  cursor: not-allowed;
+`;
+
 export const green = `
   ${normal}
   background: ${color.lightGreen};
