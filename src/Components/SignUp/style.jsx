@@ -103,7 +103,7 @@ export const NoticeText = styled.span`
 export const Btn = styled.button`
   ${(props) => {
     if (props.featured) return button.green;
-    if (props.delete) return button.pink;
+    if (props.warning) return button.pink;
     return button.normal;
   }}}
 `;
