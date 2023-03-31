@@ -12,13 +12,9 @@ const ItemAddDetail = ({ item }) => {
   const [brand, onBrand] = useInput("");
   const [purchasePrice, onPurchasePrice] = useInput(0);
   const [purchaseDate, onPurchaseData] = useInput("");
-  const [type, setType] = useState("");
-  const [targetGoalUsageCount, setTargetGoalUsageCount] = useState(0);
-  const onType = useCallback((e) => {
-    setType(e.target.value);
-    if (!e.target.value || !e.target.value.trim()) setTargetGoalUsageCount(0);
-    else setTargetGoalUsageCount(100);
-  }, []);
+  const [type, onType] = useInput("");
+  const targetGoalUsageCount = 100;
+
   const queryClient = useQueryClient();
   const itemAddMutation = useMutation({
     mutationFn: postItem,
@@ -32,14 +28,7 @@ const ItemAddDetail = ({ item }) => {
   const onAddItem = useCallback(
     (e) => {
       e.preventDefault();
-      if (
-        !nickname ||
-        !nickname.trim() ||
-        !brand ||
-        !brand.trim() ||
-        !type ||
-        !type.trim()
-      ) {
+      if (!nickname || !nickname.trim() || !brand || !brand.trim()) {
         setIsError(true);
         return;
       }
@@ -82,7 +71,12 @@ const ItemAddDetail = ({ item }) => {
           <S.Span>타입</S.Span>
           <S.Input value={type} onChange={onType} />
           <S.Span>목표횟수</S.Span>
-          <S.Input value={targetGoalUsageCount} type="number" readOnly />
+          <S.Input
+            style={{ backgroundColor: "lightgray" }}
+            value={targetGoalUsageCount}
+            type="number"
+            readOnly
+          />
           <S.Span>구입가</S.Span>
           <S.Input
             value={purchasePrice}
@@ -98,7 +92,7 @@ const ItemAddDetail = ({ item }) => {
             marginTop: "1%",
           }}
         >
-          {isError && <S.Error>닉네임, 브랜드, 타입은 필수입니다.</S.Error>}
+          {isError && <S.Error>닉네임, 브랜드는 필수입니다.</S.Error>}
         </div>
         <S.ButtonWrapper>
           <S.CancelBtn

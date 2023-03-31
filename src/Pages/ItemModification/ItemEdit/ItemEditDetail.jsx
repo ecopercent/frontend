@@ -12,15 +12,9 @@ const ItemEditDetail = ({ item, itemDetail }) => {
   const [brand, onBrand] = useInput(itemDetail.brand);
   const [purchasePrice, onPurchasePrice] = useInput(itemDetail.price);
   const [purchaseDate, onPurchaseData] = useInput(itemDetail.purchaseDate);
-  const [type, setType] = useState(itemDetail.type);
-  const [targetGoalUsageCount, setTargetGoalUsageCount] = useState(
-    itemDetail.goalUsageCount
-  );
-  const onType = useCallback((e) => {
-    setType(e.target.value);
-    if (!e.target.value || !e.target.value.trim()) setTargetGoalUsageCount(0);
-    else setTargetGoalUsageCount(100);
-  }, []);
+  const [type, onType] = useInput(itemDetail.type);
+  const targetGoalUsageCount = itemDetail.goalUsageCount;
+
   const queryClient = useQueryClient();
   const itemEditMutation = useMutation({
     mutationFn: patchItem,
@@ -41,14 +35,7 @@ const ItemEditDetail = ({ item, itemDetail }) => {
   const onEditItem = useCallback(
     (e) => {
       e.preventDefault();
-      if (
-        !nickname ||
-        !nickname.trim() ||
-        !brand ||
-        !brand.trim() ||
-        !type ||
-        !type.trim()
-      ) {
+      if (!nickname || !nickname.trim() || !brand || !brand.trim()) {
         setIsError(true);
         return;
       }
@@ -93,6 +80,7 @@ const ItemEditDetail = ({ item, itemDetail }) => {
           <S.Input value={type} onChange={onType} />
           <S.Span>목표횟수</S.Span>
           <S.Input
+            style={{ backgroundColor: "lightgray" }}
             value={targetGoalUsageCount}
             type="number"
             readOnly
@@ -119,7 +107,7 @@ const ItemEditDetail = ({ item, itemDetail }) => {
             marginTop: "1%",
           }}
         >
-          {isError && <S.Error>닉네임, 브랜드, 타입은 필수입니다.</S.Error>}
+          {isError && <S.Error>닉네임, 브랜드는 필수입니다.</S.Error>}
         </div>
         <S.ButtonWrapper>
           <S.CancelBtn
