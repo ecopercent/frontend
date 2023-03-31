@@ -49,7 +49,7 @@ export const ItemImageWrap = styled.div`
   height: 25%;
 `;
 
-export const ItemeDetailWrapper = styled.div`
+export const ItemDetailWrapper = styled.div`
   display: flex;
   width: 100%;
   // flex-direction: column;
