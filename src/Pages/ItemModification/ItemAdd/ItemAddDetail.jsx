@@ -38,7 +38,7 @@ const ItemAddDetail = ({ item }) => {
         itemImage: "이미지피커에서가져올거얏",
         itemNickname: nickname,
         itemCategory: item.category,
-        itemType: type.split(",")[0],
+        itemType: type,
         itemBrand: brand,
         itemPrice: purchasePrice,
         itemPurchaseDate: purchaseDate,
