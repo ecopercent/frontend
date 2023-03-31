@@ -44,7 +44,7 @@ const ItemEditDetail = ({ item, itemDetail }) => {
         itemId: Number(item.id),
         itemImage: "이미지피커에서가져올거얏",
         itemNickname: nickname,
-        itemType: type.split(",")[0],
+        itemType: type,
         itemBrand: brand,
         itemPrice: purchasePrice,
         itemPurchaseDate: purchaseDate,
