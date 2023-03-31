@@ -28,7 +28,7 @@ export const ModalLayout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
+  gap: 20px;
 `;
 
 export const TextContainer = styled.div`
@@ -45,6 +45,8 @@ export const ModalTitle = styled.h2`
 
 export const ModalContent = styled.span`
   ${font.normalBody}
+  line-height: 1.5;
+  text-align: center;
 `;
 
 export const BtnContainer = styled.div`
@@ -55,14 +57,12 @@ export const BtnContainer = styled.div`
   margin: 0px 40px;
 `;
 
-export const SubmitBtn = styled.button`
-  ${btn.green}
-  ${font.normalBtn}
-`;
-
-export const CancelBtn = styled.button`
-  ${btn.normal}
-  ${font.normalBtn}
+export const Btn = styled.button`
+  ${(props) => {
+    if (props.featured) return btn.green;
+    if (props.warning) return btn.pink;
+    return btn.normal;
+  }}
 `;
 
 export const CreateModal = styled.div`

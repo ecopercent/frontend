@@ -40,15 +40,11 @@ export default function TitleSetModal({ queryData, onClose }) {
         <S.ModalContent>대표 아이템을 변경하시겠습니까?</S.ModalContent>
       </S.TextContainer>
       <S.BtnContainer>
-        <S.CancelBtn
-          type="button"
-          onClick={() => {
-            return onClose();
-          }}
-        >
+        <S.Btn type="button" onClick={onClose}>
           취소
-        </S.CancelBtn>
-        <S.SubmitBtn
+        </S.Btn>
+        <S.Btn
+          featured
           type="button"
           onClick={() => {
             titleMutation.mutate();
@@ -56,7 +52,7 @@ export default function TitleSetModal({ queryData, onClose }) {
           }}
         >
           확인
-        </S.SubmitBtn>
+        </S.Btn>
       </S.BtnContainer>
     </SmallModal>
   );
