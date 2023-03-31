@@ -22,6 +22,7 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
   const editObj = {
     id: itemId,
     oper: "edit",
+    category: itemCategory,
   };
 
   return (

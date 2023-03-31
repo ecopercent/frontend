@@ -1,19 +1,20 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useLocation } from "react-router-dom";
-import { getItem } from "../../Api/item";
+import { useNavigate, useLocation } from "react-router-dom";
+import { getItem } from "../../../Api/item";
 import DeleteItemModal from "./DeleteItemModal";
-import ItmeImage from "./ItmeImage";
-import ItemDetail from "./ItemDetail";
+import ItmeImage from "./ItmeEditImage";
+import ItemEditDetail from "./ItemEditDetail";
 import ItemEditHead from "./ItemEditHead";
-import { ItemEditBorder } from "./style";
+import { ItemEditBorder, ItemEditWrap } from "../style";
 
 const ItemEdit = () => {
   const navigateProps = useLocation();
   const item = navigateProps.state;
-  // TODO: item이 없는 경우 리다이렉트하기
-  const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
+  const navigate = useNavigate();
+  if (!item) navigate(-1);
 
+  const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
   const onCloseModal = useCallback(() => {
     setShowdeleteItemModal(false);
   }, []);
@@ -30,7 +31,6 @@ const ItemEdit = () => {
     };
     window.addEventListener("resize", resizeListener);
   });
-
   const [innerHeight, setInnerHeight] = useState(window.innerHeight);
   useEffect(() => {
     const resizeListener = () => {
@@ -38,21 +38,19 @@ const ItemEdit = () => {
     };
     window.addEventListener("resize", resizeListener);
   });
-
   const itemDetail = itemDetailQuery.data;
-
+  if (!itemDetail) return <h1>로딩중화면으로대체될글</h1>;
   return (
-    <div>
+    <ItemEditWrap>
       <ItemEditBorder width={innerWidth} height={innerHeight}>
         <ItemEditHead
-          itemDetail={itemDetail}
           item={item}
           setShowdeleteItemModal={setShowdeleteItemModal}
         />
         <hr />
-        <ItmeImage imagePath={itemDetail?.image} oper={item.oper} />
+        <ItmeImage imagePath={itemDetail.image} />
         <hr />
-        <ItemDetail item={item} />
+        <ItemEditDetail item={item} itemDetail={itemDetail} />
         <DeleteItemModal
           show={showdeleteItemModal}
           onCloseModal={onCloseModal}
@@ -60,7 +58,7 @@ const ItemEdit = () => {
           item={item}
         />
       </ItemEditBorder>
-    </div>
+    </ItemEditWrap>
   );
 };
 

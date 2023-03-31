@@ -5,6 +5,31 @@ export function getItem(id) {
     return res.data;
   });
 }
+export function postItem({
+  itemUserId,
+  itemImage,
+  itemNickname,
+  itemCategory,
+  itemType,
+  itemBrand,
+  itemPrice,
+  itemPurchaseDate,
+}) {
+  return axios
+    .post(`/items`, {
+      userId: itemUserId,
+      image: itemImage,
+      nickname: itemNickname,
+      category: itemCategory,
+      type: itemType,
+      brand: itemBrand,
+      price: itemPrice,
+      purchaseDate: itemPurchaseDate,
+    })
+    .then((res) => {
+      return res.data;
+    });
+}
 
 export function patchItem({
   itemId,

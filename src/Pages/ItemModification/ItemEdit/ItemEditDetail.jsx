@@ -1,53 +1,48 @@
 import React, { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import * as S from "./style";
-import useInput from "../../hooks/useInput";
-import { patchItem } from "../../Api/item";
+import * as S from "../style";
+import useInput from "../../../hooks/useInput";
+import { patchItem } from "../../../Api/item";
 
-const ItemDetail = ({ item }) => {
+const ItemEditDetail = ({ item, itemDetail }) => {
+  const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
-  const [nickname, onNickname] = useInput("");
-  const [brand, onBrand] = useInput("");
-  const [type, setType] = useState("");
-  const [targetCount, setTargetCount] = useState(0);
-  const onType = useCallback((e) => {
-    const values = e.target.value.split(",");
-    setType(e.target.value);
-    setTargetCount(values[1]);
-  }, []);
-  const [purchasePrice, onPurchasePrice] = useInput("");
-  const [purchaseDate, onPurchaseData] = useInput(Date());
-  const queryClient = useQueryClient();
+  const [nickname, onNickname] = useInput(itemDetail.nickname);
+  const [brand, onBrand] = useInput(itemDetail.brand);
+  const [purchasePrice, onPurchasePrice] = useInput(itemDetail.price);
+  const [purchaseDate, onPurchaseData] = useInput(itemDetail.purchaseDate);
+  const [type, onType] = useInput(itemDetail.type);
+  const targetGoalUsageCount = itemDetail.goalUsageCount;
 
+  const queryClient = useQueryClient();
   const itemEditMutation = useMutation({
     mutationFn: patchItem,
-    onSuccess: (data) => {
-      queryClient.setQueryData(["item", Number(item.id)], data);
-      queryClient.invalidateQueries(["item", Number(item.id)]);
+    onSuccess: () => {
+      queryClient.refetchQueries(["item", Number(item.id)]);
+      queryClient.refetchQueries([
+        `${item.category}s`,
+        Number(localStorage.getItem("userId")),
+      ]);
+      queryClient.refetchQueries([
+        "title",
+        item.category,
+        Number(localStorage.getItem("userId")),
+      ]);
     },
   });
-
-  const navigate = useNavigate();
 
   const onEditItem = useCallback(
     (e) => {
       e.preventDefault();
-      if (
-        !nickname ||
-        !nickname.trim() ||
-        !brand ||
-        !brand.trim() ||
-        !type ||
-        !type.trim()
-      ) {
+      if (!nickname || !nickname.trim() || !brand || !brand.trim()) {
         setIsError(true);
         return;
       }
       setIsError(false);
       itemEditMutation.mutate({
-        itemId: item.id,
-        itemImage: "test",
+        itemId: Number(item.id),
+        itemImage: "이미지피커에서가져올거얏",
         itemNickname: nickname,
         itemType: type,
         itemBrand: brand,
@@ -56,12 +51,11 @@ const ItemDetail = ({ item }) => {
       });
       navigate(-1);
     },
-    [nickname, brand, type, targetCount, purchasePrice, purchaseDate]
+    [nickname, brand, type, targetGoalUsageCount, purchasePrice, purchaseDate]
   );
 
-  // TODO: 스타일 다시 할때 라벨이랑 div 빼고 해보자
   return (
-    <S.EditDetailWrapper>
+    <S.ItemDetailWrapper>
       <S.Form onSubmit={onEditItem}>
         <S.FormInnerWrapper>
           <S.Span>닉네임</S.Span>
@@ -71,6 +65,7 @@ const ItemDetail = ({ item }) => {
             type="text"
             maxLength={8}
             minLength={2}
+            placeholder={itemDetail.nickname}
           />
           <S.Span>브랜드</S.Span>
           <S.Input
@@ -79,25 +74,32 @@ const ItemDetail = ({ item }) => {
             type="text"
             minLength={1}
             maxLength={12}
+            placeholder={itemDetail.brand}
           />
           <S.Span>타입</S.Span>
-          <S.Select value={type} onChange={onType}>
-            <option value=" ,0"> </option>
-            <option value="스테인리스,100">스테인리스</option>
-            <option value="우라늄,200">우라늄</option>
-            <option value="나무,300">나무</option>
-            <option value="오스트랄로피테쿠스,400">오스트랄로피테쿠스</option>
-          </S.Select>
+          <S.Input value={type} onChange={onType} />
           <S.Span>목표횟수</S.Span>
-          <S.Input value={targetCount} type="number" readOnly />
+          <S.Input
+            style={{ backgroundColor: "lightgray" }}
+            value={targetGoalUsageCount}
+            type="number"
+            readOnly
+            placeholder={itemDetail.goalUsageCount}
+          />
           <S.Span>구입가</S.Span>
           <S.Input
             value={purchasePrice}
             onChange={onPurchasePrice}
             type="number"
+            placeholder={itemDetail.price}
           />
           <S.Span>구입일</S.Span>
-          <S.Input value={purchaseDate} onChange={onPurchaseData} type="date" />
+          <S.Input
+            value={purchaseDate}
+            onChange={onPurchaseData}
+            type="date"
+            placeholder={itemDetail.purchaseDate}
+          />
         </S.FormInnerWrapper>
         <div
           style={{
@@ -105,7 +107,7 @@ const ItemDetail = ({ item }) => {
             marginTop: "1%",
           }}
         >
-          {isError && <S.Error>닉네임, 브랜드, 타입은 필수입니다.</S.Error>}
+          {isError && <S.Error>닉네임, 브랜드는 필수입니다.</S.Error>}
         </div>
         <S.ButtonWrapper>
           <S.CancelBtn
@@ -120,8 +122,8 @@ const ItemDetail = ({ item }) => {
           <S.SubmitBtn type="submit">저장</S.SubmitBtn>
         </S.ButtonWrapper>
       </S.Form>
-    </S.EditDetailWrapper>
+    </S.ItemDetailWrapper>
   );
 };
 
-export default ItemDetail;
+export default ItemEditDetail;

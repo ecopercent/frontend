@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import Modal from "../Modal/Modal";
-import { deleteItem } from "../../Api/item";
-import * as S from "./style";
+import Modal from "../../../Components/Modal/Modal";
+import { deleteItem } from "../../../Api/item";
+import * as S from "../style";
 
 const DeleteItemModal = ({
   show,
@@ -15,9 +15,17 @@ const DeleteItemModal = ({
   const queryClient = useQueryClient();
   const itemDeleteMutation = useMutation({
     mutationFn: deleteItem,
-    onSuccess: (data) => {
-      queryClient.setQueryData(["item", Number(item.id)], data);
-      queryClient.invalidateQueries(["item", Number(item.id)]);
+    onSuccess: () => {
+      queryClient.refetchQueries(["item", Number(item.id)]);
+      queryClient.refetchQueries([
+        `${item.category}s`,
+        Number(localStorage.getItem("userId")),
+      ]);
+      queryClient.refetchQueries([
+        "title",
+        item.category,
+        Number(localStorage.getItem("userId")),
+      ]);
     },
   });
   const onDeleteItem = useCallback((e) => {
@@ -25,7 +33,6 @@ const DeleteItemModal = ({
     itemDeleteMutation.mutate(item.id);
     setShowdeleteItemModal(false);
     navigate(-1);
-    // TODO: 아이템 리스트 refetch
   }, []);
 
   return (

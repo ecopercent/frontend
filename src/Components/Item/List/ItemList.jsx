@@ -48,6 +48,7 @@ export default function ItemList({
   const addObj = {
     id: infoItemId,
     oper: "add",
+    category: itemListOf,
   };
 
   return (

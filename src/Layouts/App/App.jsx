@@ -14,7 +14,10 @@ const Error = loadable(() => {
   return import("../Error/Error");
 });
 const ItemEdit = loadable(() => {
-  return import("../../Components/ItemEdit/ItemEdit");
+  return import("../../Pages/ItemModification/ItemEdit/ItemEdit");
+});
+const ItemAdd = loadable(() => {
+  return import("../../Pages/ItemModification/ItemAdd/ItemAdd");
 });
 const SignUp = loadable(() => {
   return import("../../Components/SignUp/SignUp");
@@ -32,7 +35,7 @@ function App() {
           <Route path="/main/:page" element={<Main />} />
           <Route path="/*" element={<Error />} />
           <Route path="/item/edit" element={<ItemEdit />} />
-          <Route path="/item/add" element={<ItemEdit />} />
+          <Route path="/item/add" element={<ItemAdd />} />
         </Routes>
       </BrowserRouter>
     </>
