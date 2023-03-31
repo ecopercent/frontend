@@ -66,7 +66,7 @@ const ItemAddDetail = ({ item }) => {
   );
 
   return (
-    <S.ItemeDetailWrapper>
+    <S.ItemDetailWrapper>
       <S.Form onSubmit={onAddItem}>
         <S.FormInnerWrapper>
           <S.Span>닉네임</S.Span>
