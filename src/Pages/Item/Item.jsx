@@ -31,7 +31,6 @@ const Item = () => {
           infoItemId={infoItemId}
           setInfoItemId={setInfoItemId}
           setInfoItemCategory={setInfoItemCategory}
-          itemCategory={infoItemCategory}
         />
       </S.ListLayout>
     </>
