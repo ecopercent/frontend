@@ -38,10 +38,10 @@ export default function SignUpItems({ category }) {
         <S.Label>{category}</S.Label>
         {isAdded ? (
           <>
-            <S.Btn onClick={onEdit}>수정</S.Btn>
             <S.Btn warning onClick={onCancel}>
               등록취소
             </S.Btn>
+            <S.Btn onClick={onEdit}>수정</S.Btn>
           </>
         ) : (
           <S.Btn onClick={onAdd}>등록</S.Btn>

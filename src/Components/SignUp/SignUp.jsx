@@ -41,10 +41,10 @@ export default function SignUp() {
           <SignUpItems category="에코백" />
         </S.InputList>
         <S.SubmitBtnsBox>
+          <S.Btn onClick={onCancel}>취소</S.Btn>
           <S.Btn featured onClick={onSubmit}>
             등록
           </S.Btn>
-          <S.Btn onClick={onCancel}>취소</S.Btn>
         </S.SubmitBtnsBox>
       </S.SignUpLayoutCol>
     </PcPageWrap>
