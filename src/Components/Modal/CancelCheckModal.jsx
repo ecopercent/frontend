@@ -18,21 +18,10 @@ export default function CancelCheckModal({ onClose, onConfirm }) {
         </S.ModalContent>
       </S.TextContainer>
       <S.BtnContainer>
-        <S.Btn
-          type="button"
-          onClick={() => {
-            return onClose();
-          }}
-        >
+        <S.Btn type="button" onClick={onClose}>
           취소
         </S.Btn>
-        <S.Btn
-          warning
-          type="button"
-          onClick={() => {
-            onConfirm();
-          }}
-        >
+        <S.Btn warning type="button" onClick={onConfirm}>
           확인
         </S.Btn>
       </S.BtnContainer>
