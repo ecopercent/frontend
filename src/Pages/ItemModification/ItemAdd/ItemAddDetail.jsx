@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import * as S from "../style";
 import useInput from "../../../hooks/useInput";
 import { postItem } from "../../../Api/item";
-import makeDateStr from "../../../Utils/date";
 
 const ItemAddDetail = ({ item }) => {
   const navigate = useNavigate();
@@ -12,7 +11,7 @@ const ItemAddDetail = ({ item }) => {
   const [nickname, onNickname] = useInput("");
   const [brand, onBrand] = useInput("");
   const [purchasePrice, onPurchasePrice] = useInput(0);
-  const [purchaseDate, onPurchaseData] = useInput(makeDateStr());
+  const [purchaseDate, onPurchaseData] = useInput("");
   const [type, setType] = useState("");
   const [targetGoalUsageCount, setTargetGoalUsageCount] = useState(0);
   const onType = useCallback((e) => {

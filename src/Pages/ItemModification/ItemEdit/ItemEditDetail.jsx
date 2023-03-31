@@ -68,7 +68,7 @@ const ItemEditDetail = ({ item, itemDetail }) => {
   );
 
   return (
-    <S.ItemeDetailWrapper>
+    <S.ItemDetailWrapper>
       <S.Form onSubmit={onEditItem}>
         <S.FormInnerWrapper>
           <S.Span>닉네임</S.Span>
@@ -157,7 +157,7 @@ const ItemEditDetail = ({ item, itemDetail }) => {
           <S.SubmitBtn type="submit">저장</S.SubmitBtn>
         </S.ButtonWrapper>
       </S.Form>
-    </S.ItemeDetailWrapper>
+    </S.ItemDetailWrapper>
   );
 };
 

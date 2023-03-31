@@ -137,9 +137,8 @@ export const CancelBtn = styled.button`
 `;
 
 export const DeleteBtn = styled.button`
-  ${btn.normal}
+  ${btn.pink}
   ${font.normalBtn}
-  color: red;
 `;
 
 export const CameraIcon = styled(HiOutlineCamera)`
