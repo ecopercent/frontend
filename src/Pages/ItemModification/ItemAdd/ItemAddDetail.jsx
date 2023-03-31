@@ -138,7 +138,7 @@ const ItemAddDetail = ({ item }) => {
           <S.SubmitBtn type="submit">저장</S.SubmitBtn>
         </S.ButtonWrapper>
       </S.Form>
-    </S.ItemeDetailWrapper>
+    </S.ItemDetailWrapper>
   );
 };
 
