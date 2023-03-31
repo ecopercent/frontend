@@ -16,6 +16,9 @@ const Error = loadable(() => {
 const ItemEdit = loadable(() => {
   return import("../../Components/ItemEdit/ItemEdit");
 });
+const SignUp = loadable(() => {
+  return import("../../Components/SignUp/SignUp");
+});
 
 function App() {
   return (
@@ -25,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/main/:page" element={<Main />} />
           <Route path="/*" element={<Error />} />
           <Route path="/item/edit" element={<ItemEdit />} />

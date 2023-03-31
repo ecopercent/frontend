@@ -26,6 +26,15 @@ const Login = () => {
         >
           <input type="number" ref={userId} />
           <button type="submit">로그인</button>
+          {/* 임시 버튼. OAuth 이후 연결할 페이지 */}
+          <button
+            type="button"
+            onClick={() => {
+              return navigate("/signup");
+            }}
+          >
+            회원가입
+          </button>
         </form>
         <S.Line />
       </S.LoginBox>
