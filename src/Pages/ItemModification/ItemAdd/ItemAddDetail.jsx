@@ -28,11 +28,6 @@ const ItemAddDetail = ({ item }) => {
         `${item.category}s`,
         Number(localStorage.getItem("userId")),
       ]);
-      queryClient.refetchQueries([
-        "title",
-        item.category,
-        Number(localStorage.getItem("userId")),
-      ]);
     },
   });
   const onAddItem = useCallback(
