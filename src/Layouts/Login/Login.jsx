@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import SocialLogin from "../../Components/Login/SocialLogin";
 import * as S from "./style";
 
 export function getLogin() {
@@ -17,6 +18,7 @@ const Login = () => {
         <S.Line />
         <S.ContinueWith>Continue With</S.ContinueWith>
         {/* 소셜 로그인 버튼들 들어갈 곳 */}
+        <SocialLogin />
         <form
           onSubmit={(e) => {
             e.preventDefault();
