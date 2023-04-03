@@ -8,20 +8,25 @@ export function isScriptLoaded(src) {
 }
 
 export function scriptLoad({ name, src, crossOrigin }) {
-  if (isScriptLoaded(src)) {
-    return true;
-  }
+  return new Promise((resolve, reject) => {
+    if (isScriptLoaded(src)) {
+      resolve();
+    } else {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = src;
+      if (process.env[`REACT_APP_${name}_INTEGRITY_VALUE`])
+        script.integrity = process.env[`REACT_APP_${name}_INTEGRITY_VALUE`];
+      if (crossOrigin) script.crossOrigin = crossOrigin;
 
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = src;
-  if (process.env[`REACT_APP_${name}_INTEGRITY_VALUE`])
-    script.integrity = process.env[`REACT_APP_${name}_INTEGRITY_VALUE`];
-  if (crossOrigin) script.crossOrigin = crossOrigin;
-  document.head.appendChild(script);
+      document.head.appendChild(script);
 
-  script.onload = () => {
-    return true;
-  };
-  return false;
+      script.onload = () => {
+        resolve();
+      };
+      script.onerror = (error) => {
+        reject(error);
+      };
+    }
+  });
 }
