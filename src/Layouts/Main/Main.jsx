@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { AiFillSetting } from "react-icons/ai";
 import { BiHomeAlt } from "react-icons/bi";
@@ -12,6 +12,7 @@ import * as S from "./style";
 import { Pc, Mobile } from "../MediaQuery";
 
 const Main = () => {
+  if (!localStorage.getItem("userId")) return <Navigate to="/" />;
   const routeInfo = [
     {
       page: "setting",
