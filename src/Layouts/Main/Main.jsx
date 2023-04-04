@@ -10,6 +10,7 @@ import Home from "../../Pages/Home/Home";
 import Item from "../../Pages/Item/Item";
 import * as S from "./style";
 import { Pc, Mobile } from "../MediaQuery";
+import { lightGreen } from "../../style/color";
 
 const Main = () => {
   if (!localStorage.getItem("userId")) return <Navigate to="/" />;
