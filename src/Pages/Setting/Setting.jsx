@@ -87,7 +87,7 @@ const Setting = () => {
     <S.SettingWrap>
       <h1
         style={{
-          backgroundColor: "lightgreen",
+          backgroundColor: `${lightGreen}`,
           // border: "1px solid black",
           borderRadius: "10px",
         }}
