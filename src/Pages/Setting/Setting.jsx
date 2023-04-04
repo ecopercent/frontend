@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./style";
+import { lightGreen } from "../../style/color";
 
 const Setting = () => {
-  
   const navigate = useNavigate();
   const accountArray = [
     {
