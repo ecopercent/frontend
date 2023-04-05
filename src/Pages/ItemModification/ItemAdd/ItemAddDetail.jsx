@@ -8,7 +8,7 @@ const ItemAddDetail = ({ submitCallback }) => {
   const [isError, setIsError] = useState(false);
   const [nickname, onNickname] = useInput("");
   const [brand, onBrand] = useInput("");
-  const [purchasePrice, onPurchasePrice] = useInput(0);
+  const [price, onPrice] = useInput(0);
   const [purchaseDate, onPurchaseData] = useInput("");
   const [type, onType] = useInput("");
   const targetGoalUsageCount = 100;
@@ -20,7 +20,7 @@ const ItemAddDetail = ({ submitCallback }) => {
       return;
     }
     setIsError(false);
-    submitCallback({ nickname, brand, purchasePrice, purchaseDate, type });
+    submitCallback({ nickname, brand, price, purchaseDate, type });
   };
 
   return (
@@ -53,11 +53,7 @@ const ItemAddDetail = ({ submitCallback }) => {
             readOnly
           />
           <S.Span>구입가</S.Span>
-          <S.Input
-            value={purchasePrice}
-            onChange={onPurchasePrice}
-            type="number"
-          />
+          <S.Input value={price} onChange={onPrice} type="number" />
           <S.Span>구입일</S.Span>
           <S.Input value={purchaseDate} onChange={onPurchaseData} type="date" />
         </S.FormInnerWrapper>

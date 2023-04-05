@@ -3,12 +3,12 @@ export default function signUpItemReducer(itemState, action) {
     case "ecobagSubmit":
       return {
         ...itemState,
-        ecobag: { ...action.input, category: action.category },
+        ecobag: action.input,
       };
     case "tumblerSubmit":
       return {
         ...itemState,
-        tumbler: { ...action.input, category: action.category },
+        tumbler: action.input,
       };
     case "ecobagDelete":
       return {

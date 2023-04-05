@@ -55,7 +55,7 @@ const ItemAdd = () => {
         itemCategory: item.category,
         itemType: input.type,
         itemBrand: input.brand,
-        itemPrice: input.purchasePrice,
+        itemPrice: input.price,
         itemPurchaseDate: input.purchaseDate,
       });
 
@@ -70,7 +70,6 @@ const ItemAdd = () => {
       dispatch({
         type: `${item.category}Submit`,
         input,
-        category: item.category,
       });
       navigate(-1);
     },

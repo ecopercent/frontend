@@ -8,18 +8,17 @@ export default function SignUpItems({ category }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
   const { state, dispatch } = useContext(SignUpItemContext);
+  const navigateState = {
+    type: "unauth",
+    category,
+  };
 
   const onAdd = () => {
-    const addObj = {
-      type: "unauth",
-      category,
-    };
-    navigate("/item/add", { state: addObj });
+    navigate("/item/add", { state: navigateState });
   };
 
   const onEdit = () => {
-    // TODO: 아이템 수정 페이지에서 [등록] 누르면 데이터 세팅
-    alert("아이템 수정 페이지로 이동!");
+    navigate("/item/edit", { state: navigateState });
   };
 
   const onCancel = () => {
@@ -60,8 +59,8 @@ export default function SignUpItems({ category }) {
           <span>닉네임: {state[category].nickname}</span>
           <span>브랜드: {state[category].brand}</span>
           {state[category].type && <span>타입: {state[category].type}</span>}
-          {state[category].purchasePrice && (
-            <span>가격: {state[category].purchasePrice}</span>
+          {state[category].price !== 0 && (
+            <span>가격: {state[category].price}</span>
           )}
           {state[category].purchaseDate && (
             <span>구매일: {state[category].purchaseDate}</span>
