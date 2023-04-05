@@ -5,7 +5,7 @@ import { TabItemBackGround } from "./style";
 const TabItem = ({ itemNumber, IconComponent, currTabNumber, page }) => {
   const navigate = useNavigate();
   const tabClickHandler = useCallback(() => {
-    navigate(`/main/${page}`);
+    navigate(`/${page}`);
   }, []);
   return (
     <TabItemBackGround

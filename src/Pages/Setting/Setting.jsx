@@ -81,8 +81,6 @@ const Setting = () => {
     helpArray.length +
     infoArray.length;
 
-  console.log(elementCount);
-
   return (
     <S.SettingWrap>
       <h1

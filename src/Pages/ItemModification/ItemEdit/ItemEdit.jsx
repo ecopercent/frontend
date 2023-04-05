@@ -12,8 +12,10 @@ const ItemEdit = () => {
   const navigateProps = useLocation();
   const item = navigateProps.state;
   const navigate = useNavigate();
-  if (!item) navigate(-1);
-
+  useEffect(() => {
+    if (!item) navigate("/item");
+  }, [item]);
+  if (!item) return <>로딩</>;
   const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
   const onCloseModal = useCallback(() => {
     setShowdeleteItemModal(false);

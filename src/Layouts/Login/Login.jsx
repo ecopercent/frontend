@@ -21,7 +21,7 @@ const Login = () => {
           onSubmit={(e) => {
             e.preventDefault();
             localStorage.setItem("userId", userId.current.value);
-            navigate("/main/home");
+            navigate("/home");
           }}
         >
           <input type="number" ref={userId} />
