@@ -12,7 +12,6 @@ export default function ProfileImg({ userId }) {
   });
 
   const user = userQuery.data;
-
   return (
     <S.ProfileImg
       src={
