@@ -1,11 +1,9 @@
-import React, { useCallback, useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../style";
 import useInput from "../../../hooks/useInput";
-import { postItem } from "../../../Api/item";
 
-const ItemAddDetail = ({ item }) => {
+const ItemAddDetail = ({ submitCallback }) => {
   const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
   const [nickname, onNickname] = useInput("");
@@ -15,42 +13,19 @@ const ItemAddDetail = ({ item }) => {
   const [type, onType] = useInput("");
   const targetGoalUsageCount = 100;
 
-  const queryClient = useQueryClient();
-  const itemAddMutation = useMutation({
-    mutationFn: postItem,
-    onSuccess: () => {
-      queryClient.refetchQueries([
-        `${item.category}s`,
-        Number(localStorage.getItem("userId")),
-      ]);
-    },
-  });
-  const onAddItem = useCallback(
-    (e) => {
-      e.preventDefault();
-      if (!nickname || !nickname.trim() || !brand || !brand.trim()) {
-        setIsError(true);
-        return;
-      }
-      setIsError(false);
-      itemAddMutation.mutate({
-        itemUserId: Number(localStorage.getItem("userId")),
-        itemImage: "이미지피커에서가져올거얏",
-        itemNickname: nickname,
-        itemCategory: item.category,
-        itemType: type,
-        itemBrand: brand,
-        itemPrice: purchasePrice,
-        itemPurchaseDate: purchaseDate,
-      });
-      navigate(-1);
-    },
-    [nickname, brand, type, targetGoalUsageCount, purchasePrice, purchaseDate]
-  );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!nickname || !nickname.trim() || !brand || !brand.trim()) {
+      setIsError(true);
+      return;
+    }
+    setIsError(false);
+    submitCallback({ nickname, brand, purchasePrice, purchaseDate, type });
+  };
 
   return (
     <S.ItemDetailWrapper>
-      <S.Form onSubmit={onAddItem}>
+      <S.Form onSubmit={handleSubmit}>
         <S.FormInnerWrapper>
           <S.Span>닉네임</S.Span>
           <S.Input

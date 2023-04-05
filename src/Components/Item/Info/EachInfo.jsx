@@ -21,7 +21,6 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
   const navigate = useNavigate();
   const editObj = {
     id: itemId,
-    oper: "edit",
     category: itemCategory,
   };
 

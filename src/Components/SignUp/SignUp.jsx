@@ -37,8 +37,8 @@ export default function SignUp() {
       <S.SignUpLayoutCol>
         <S.InputList>
           <SignUpUser />
-          <SignUpItems category="텀블러" />
-          <SignUpItems category="에코백" />
+          <SignUpItems category="tumbler" />
+          <SignUpItems category="ecobag" />
         </S.InputList>
         <S.SubmitBtnsBox>
           <S.Btn onClick={onCancel}>취소</S.Btn>

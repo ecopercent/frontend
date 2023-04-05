@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CancelCheckModal from "../Modal/CancelCheckModal";
+import SignUpItemContext from "../../hooks/SignUpItemContext";
 import * as S from "./style";
 
 export default function SignUpItems({ category }) {
-  const [isAdded, setIsAdded] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const { state, dispatch } = useContext(SignUpItemContext);
 
   const onAdd = () => {
-    // TODO: 아이템 추가 페이지에서 [등록] 누르면 true로 세팅
-    alert("아이템 추가 페이지로 이동!");
-    setIsAdded(true);
+    const addObj = {
+      type: "unauth",
+      category,
+    };
+    navigate("/item/add", { state: addObj });
   };
 
   const onEdit = () => {
@@ -26,7 +31,9 @@ export default function SignUpItems({ category }) {
       {modalIsOpen && (
         <CancelCheckModal
           onConfirm={() => {
-            setIsAdded(false);
+            dispatch({
+              type: `${category}Delete`,
+            });
             setModalIsOpen(false);
           }}
           onClose={() => {
@@ -35,8 +42,8 @@ export default function SignUpItems({ category }) {
         />
       )}
       <S.LabelBox>
-        <S.Label>{category}</S.Label>
-        {isAdded ? (
+        <S.Label>{category === "tumbler" ? "텀블러" : "에코백"}</S.Label>
+        {state[category] ? (
           <>
             <S.Btn warning onClick={onCancel}>
               등록취소
@@ -47,7 +54,7 @@ export default function SignUpItems({ category }) {
           <S.Btn onClick={onAdd}>등록</S.Btn>
         )}
       </S.LabelBox>
-      {isAdded ? (
+      {state[category] ? (
         // TODO: 등록된 아이템 정보 표시
         <p>{category} 정보</p>
       ) : (
