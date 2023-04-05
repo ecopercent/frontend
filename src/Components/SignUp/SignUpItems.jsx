@@ -55,8 +55,18 @@ export default function SignUpItems({ category }) {
         )}
       </S.LabelBox>
       {state[category] ? (
-        // TODO: 등록된 아이템 정보 표시
-        <p>{category} 정보</p>
+        <>
+          <div>이미지</div>
+          <span>닉네임: {state[category].nickname}</span>
+          <span>브랜드: {state[category].brand}</span>
+          {state[category].type && <span>타입: {state[category].type}</span>}
+          {state[category].purchasePrice && (
+            <span>가격: {state[category].purchasePrice}</span>
+          )}
+          {state[category].purchaseDate && (
+            <span>구매일: {state[category].purchaseDate}</span>
+          )}
+        </>
       ) : (
         <S.NoticeText>아이템은 나중에 등록할 수 있습니다.</S.NoticeText>
       )}
