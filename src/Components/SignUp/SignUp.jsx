@@ -17,6 +17,8 @@ export default function SignUp() {
     return alert("입력 유효성 검사 > 가입 완료 페이지로..");
   };
 
+  // TODO: 페이지 이탈 확인
+
   const handleClick = () => {
     setModalIsOpen(true);
   };
