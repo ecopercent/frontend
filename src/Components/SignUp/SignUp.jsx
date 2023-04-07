@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
+import { useMutation } from "@tanstack/react-query";
 import { PcPageWrap } from "../../Layouts/Main/style";
 import CancelCheckModal from "../Modal/CancelCheckModal";
 import SignUpUser from "./SignUpUser";
 import SignUpItems from "./SignUpItems";
+import { postUser } from "../../Api/user";
 import * as S from "./style";
 // import SignUpItemContext from "../../hooks/SignUpItemContext";
 
@@ -12,7 +14,7 @@ const initialUser = {
   nickname: "",
   // profileImage: "",
   profileMessage: "",
-  // email: "",
+  email: "",
 };
 
 export default function SignUp() {
@@ -22,13 +24,23 @@ export default function SignUp() {
   const [nicknameIsValid, setNicknameIsValid] = useState(false);
   const [warningText, setWarningText] = useState(null);
 
+  // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
     if (cookie.load("signup")) setUserInput(cookie.load("signup"));
+    if (cookie.load("email")) setUserInput(cookie.load("email"));
   }, []);
 
   const saveUserInput = () => {
     cookie.save("signup", userInput, { path: "/signup", maxAge: 60 * 30 });
   };
+
+  const signUpMutation = useMutation({
+    mutationFn: postUser,
+    onSuccess: () => {
+      cookie.remove("signup");
+      // TODO: 응답의 토큰 처리
+    },
+  });
 
   // 아이템 받아오는 용
   // const { state } = useContext(SignUpItemContext);
@@ -43,13 +55,10 @@ export default function SignUp() {
     // TODO: api 업데이트 되면 아이템 폼에 넣기
     // if (state.tumbler)
     // if (state.ecobag)
-    console.log(signUpForm);
-    cookie.remove("signup");
-    // TODO: 가입 완료 페이지 구현 + 리다이렉트
-    return alert("가입 가능!");
+    signUpMutation.mutate(signUpForm);
+    // TODO: 가입 완료 페이지 or 모달 구현
+    return navigate("/");
   };
-
-  // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
 
   const handleClick = () => {
     setModalIsOpen(true);

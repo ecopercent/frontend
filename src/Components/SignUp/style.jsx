@@ -111,7 +111,7 @@ export const Textarea = styled.textarea`
   outline: none;
   border-bottom: 1.5px solid;
   resize: none;
-  ${font.normalTextarea}
+  ${font.normalSmall}
   line-height: 25px;
 `;
 
