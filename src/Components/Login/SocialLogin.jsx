@@ -1,10 +1,11 @@
 import React from "react";
 import kakaoLogin from "./kakaoLogin";
+import * as S from "./style";
 
 export default function SocialLogin() {
   return (
-    <button type="button" onClick={kakaoLogin}>
-      카카오
-    </button>
+    <S.LoginButton onClick={kakaoLogin}>
+      <S.LogoImg src="/img/kakaoLogo.png" alt="kakao login" />
+    </S.LoginButton>
   );
 }
