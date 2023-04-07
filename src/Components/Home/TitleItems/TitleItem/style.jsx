@@ -12,8 +12,8 @@ export const Spacer = styled.span`
 
 export const ImageClipper = styled.img`
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   object-fit: cover; /* 이미지 비율 유지 */
   border-radius: 50%;
   border: 1px solid;
