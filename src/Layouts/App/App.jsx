@@ -24,6 +24,9 @@ const ItemAdd = loadable(() => {
 const SignUp = loadable(() => {
   return import("../../Components/SignUp/SignUp");
 });
+const Welcome = loadable(() => {
+  return import("../../Components/SignUp/Welcome");
+});
 
 function App() {
   const [state, dispatch] = useReducer(signUpItemReducer, {
@@ -42,6 +45,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/welcome" element={<Welcome />} />
             <Route path="/:page" element={<Main />} />
             <Route path="/*" element={<Error />} />
             <Route path="/item/edit" element={<ItemEdit />} />

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { BsPatchCheckFill } from "react-icons/bs";
+import { BsPatchCheckFill, BsCheckLg } from "react-icons/bs";
 import * as button from "../../style/button";
 import * as font from "../../style/font";
 import { basicGreen } from "../../style/color";
@@ -51,8 +51,6 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-  // width: 150px;
-  // flex: 1;
   border: none;
   outline: none;
   border-bottom: 1.5px solid;
@@ -83,8 +81,8 @@ export const NoticeText = styled.span`
   }}
 `;
 
-export const ValidCheckIcon = styled(BsPatchCheckFill)`
-  margin-left: -3px;
+export const ValidCheckIcon = styled(BsCheckLg)`
+  margin-left: -5px;
   margin-top: 3px;
   color: ${basicGreen};
 `;
@@ -201,4 +199,36 @@ export const SubmitBtnsBox = styled.div`
   bottom: 20px;
 
   margin: 30px 0 0;
+`;
+
+export const WelcomeIcon = styled(BsPatchCheckFill)`
+  width: 50px;
+  height: 50px;
+  color: ${basicGreen};
+  margin: 20px;
+`;
+
+export const WelcomLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto 0;
+`;
+
+export const Headline = styled.h2`
+  ${font.boldBody}
+  font-size: 30px;
+`;
+
+export const WelcomeText = styled.span`
+  ${font.boldHeadline};
+  font-weight: 400;
+  margin: 40px;
+`;
+
+export const GoHomeBtn = styled.button`
+  ${button.profileGreen};
+  ${font.normalSubheadline}
+  height: 40px;
+  width: 100px;
 `;

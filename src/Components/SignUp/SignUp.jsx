@@ -57,7 +57,7 @@ export default function SignUp() {
     // if (state.ecobag)
     signUpMutation.mutate(signUpForm);
     // TODO: 가입 완료 페이지 or 모달 구현
-    return navigate("/");
+    return navigate("/welcome", { state: true });
   };
 
   const handleClick = () => {
