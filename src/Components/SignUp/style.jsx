@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
+import { BsPatchCheckFill } from "react-icons/bs";
 import * as button from "../../style/button";
 import * as font from "../../style/font";
+import { basicGreen } from "../../style/color";
 
 export const SignUpLayoutCol = styled.div`
   display: flex;
@@ -20,7 +22,7 @@ export const InputList = styled.ul`
   display: flex;
   width: 90%;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
 
   margin: 0;
   padding: 0;
@@ -57,6 +59,36 @@ export const Input = styled.input`
   ${font.normalSmall}
 `;
 
+export const WarningText = styled.span`
+  position: absolute;
+  top: 35px;
+  ${font.normalXsmall};
+  color: red;
+`;
+
+export const NoticeText = styled.span`
+  ${font.normalXsmall};
+  ${(props) => {
+    if (props.msg)
+      return `
+        width: 40px;
+        position: absolute;
+        top: 50px;
+        left: 220px;
+        padding-top: 3px;
+        color: gray;
+        text-align: right;
+    `;
+    return null;
+  }}
+`;
+
+export const ValidCheckIcon = styled(BsPatchCheckFill)`
+  margin-left: -3px;
+  margin-top: 3px;
+  color: ${basicGreen};
+`;
+
 /*
  *          Textarea style
  */
@@ -90,10 +122,6 @@ export const Textarea = styled.textarea`
 export const LabelBox = styled.div`
   display: flex;
   gap: 10px;
-`;
-
-export const NoticeText = styled.span`
-  ${font.normalXsmall};
 `;
 
 /*
@@ -159,6 +187,7 @@ export const Btn = styled.button`
   ${(props) => {
     if (props.featured) return button.green;
     if (props.warning) return button.pink;
+    if (props.disabled) return button.disabled;
     return button.normal;
   }}}
 `;

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import cookie from "react-cookies";
 import * as S from "./style";
 import SignUpItemContext from "../../hooks/SignUpItemContext";
 
@@ -21,6 +22,7 @@ const Login = () => {
       dispatch({
         type: "ecobagDelete",
       });
+    cookie.remove("signup", { path: "/signup" });
   });
 
   return (
