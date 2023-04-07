@@ -97,6 +97,61 @@ export const NoticeText = styled.span`
 `;
 
 /*
+ *          Item Preview
+ */
+
+export const ItemPreviewBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* padding: 10px 10px 0px; */
+  padding: 15px 20px;
+  margin-top: 5px;
+
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  ${font.normalSmall};
+`;
+
+export const BundleOfTwoBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const SetBox = styled.div`
+  display: flex;
+  gap: 5px;
+  align-items: center;
+`;
+
+// 임시로 div 태그 사용. 추후 img 태그 변경
+export const ItemImg = styled.div`
+  width: 50px;
+  height: 50px;
+  background-color: gray;
+  border-radius: 100%;
+
+  margin-right: 5px;
+`;
+
+export const LabelText = styled.span`
+  width: 40px;
+  padding: 5px 0 0;
+
+  ${font.boldSmall}
+  line-height: 12px;
+`;
+
+export const ContentText = styled.span`
+  width: 150px;
+  padding: 5px 0 0;
+
+  ${font.normalSmall}
+  line-height: 12px;
+`;
+
+/*
  *          Submit Btn
  */
 

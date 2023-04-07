@@ -1,23 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CancelCheckModal from "../Modal/CancelCheckModal";
+import SignUpItemContext from "../../hooks/SignUpItemContext";
+import SignUpItemPreview from "./SignUpItemPreview";
 import * as S from "./style";
 
 export default function SignUpItems({ category }) {
-  const [isAdded, setIsAdded] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const onAdd = () => {
-    // TODO: 아이템 추가 페이지에서 [등록] 누르면 true로 세팅
-    alert("아이템 추가 페이지로 이동!");
-    setIsAdded(true);
+  const navigate = useNavigate();
+  const { state, dispatch } = useContext(SignUpItemContext);
+  const navigateState = {
+    type: "unauth",
+    category,
   };
 
-  const onEdit = () => {
-    // TODO: 아이템 수정 페이지에서 [등록] 누르면 데이터 세팅
-    alert("아이템 수정 페이지로 이동!");
+  const handleAdd = () => {
+    navigate("/item/add", { state: navigateState });
   };
 
-  const onCancel = () => {
+  const handleEdit = () => {
+    navigate("/item/edit", { state: navigateState });
+  };
+
+  const handleCancel = () => {
     setModalIsOpen(true);
   };
 
@@ -26,7 +31,9 @@ export default function SignUpItems({ category }) {
       {modalIsOpen && (
         <CancelCheckModal
           onConfirm={() => {
-            setIsAdded(false);
+            dispatch({
+              type: `${category}Delete`,
+            });
             setModalIsOpen(false);
           }}
           onClose={() => {
@@ -35,21 +42,20 @@ export default function SignUpItems({ category }) {
         />
       )}
       <S.LabelBox>
-        <S.Label>{category}</S.Label>
-        {isAdded ? (
+        <S.Label>{category === "tumbler" ? "텀블러" : "에코백"}</S.Label>
+        {state[category] ? (
           <>
-            <S.Btn warning onClick={onCancel}>
+            <S.Btn warning onClick={handleCancel}>
               등록취소
             </S.Btn>
-            <S.Btn onClick={onEdit}>수정</S.Btn>
+            <S.Btn onClick={handleEdit}>수정</S.Btn>
           </>
         ) : (
-          <S.Btn onClick={onAdd}>등록</S.Btn>
+          <S.Btn onClick={handleAdd}>등록</S.Btn>
         )}
       </S.LabelBox>
-      {isAdded ? (
-        // TODO: 등록된 아이템 정보 표시
-        <p>{category} 정보</p>
+      {state[category] ? (
+        <SignUpItemPreview initialItem={state[category]} />
       ) : (
         <S.NoticeText>아이템은 나중에 등록할 수 있습니다.</S.NoticeText>
       )}

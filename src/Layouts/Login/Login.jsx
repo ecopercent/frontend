@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./style";
+import SignUpItemContext from "../../hooks/SignUpItemContext";
 
 export function getLogin() {
   return localStorage.getItem("userId");
@@ -9,6 +10,18 @@ export function getLogin() {
 const Login = () => {
   const navigate = useNavigate();
   const userId = useRef();
+  const { state, dispatch } = useContext(SignUpItemContext);
+
+  useEffect(() => {
+    if (state.tumbler)
+      dispatch({
+        type: "tumblerDelete",
+      });
+    if (state.ecobag)
+      dispatch({
+        type: "ecobagDelete",
+      });
+  });
 
   return (
     <S.LoginLayout>

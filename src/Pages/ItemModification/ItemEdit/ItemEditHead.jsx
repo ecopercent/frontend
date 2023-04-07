@@ -8,10 +8,13 @@ const ItemEditHead = ({ item, setShowdeleteItemModal }) => {
       return !prev;
     });
   }, []);
+
   return (
     <ItemEditHeadWrapper>
       {item.category === "tumbler" ? "텀블러 수정" : "에코백 수정"}
-      <DeleteBtn onClick={onclickDeleteItemModal}>삭제</DeleteBtn>
+      {item.type === "auth" && (
+        <DeleteBtn onClick={onclickDeleteItemModal}>삭제</DeleteBtn>
+      )}
     </ItemEditHeadWrapper>
   );
 };

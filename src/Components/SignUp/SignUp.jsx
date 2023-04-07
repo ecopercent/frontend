@@ -11,13 +11,15 @@ export default function SignUp() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   // const [cancelConfirm, setCancelConfirm] = useState(false);
 
-  const onSubmit = () => {
+  const handleSubmit = () => {
     // TODO: 입력 유효성 검사
     // TODO: 가입 완료 페이지 구현 + 리다이렉트
     return alert("입력 유효성 검사 > 가입 완료 페이지로..");
   };
 
-  const onCancel = () => {
+  // TODO: 페이지 이탈 확인
+
+  const handleClick = () => {
     setModalIsOpen(true);
   };
 
@@ -37,12 +39,12 @@ export default function SignUp() {
       <S.SignUpLayoutCol>
         <S.InputList>
           <SignUpUser />
-          <SignUpItems category="텀블러" />
-          <SignUpItems category="에코백" />
+          <SignUpItems category="tumbler" />
+          <SignUpItems category="ecobag" />
         </S.InputList>
         <S.SubmitBtnsBox>
-          <S.Btn onClick={onCancel}>취소</S.Btn>
-          <S.Btn featured onClick={onSubmit}>
+          <S.Btn onClick={handleClick}>취소</S.Btn>
+          <S.Btn featured onClick={handleSubmit}>
             등록
           </S.Btn>
         </S.SubmitBtnsBox>
