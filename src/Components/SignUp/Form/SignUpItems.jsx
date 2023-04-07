@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CancelCheckModal from "../Modal/CancelCheckModal";
-import SignUpItemContext from "../../hooks/SignUpItemContext";
+import CancelCheckModal from "../../Modal/CancelCheckModal";
+import SignUpItemContext from "../../../hooks/SignUpItemContext";
 import SignUpItemPreview from "./SignUpItemPreview";
 import * as S from "./style";
 
