@@ -27,11 +27,22 @@ export default function SignUp() {
   // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
     if (cookie.load("signup")) setUserInput(cookie.load("signup"));
-    if (cookie.load("email")) setUserInput(cookie.load("email"));
+    if (cookie.load("email"))
+      setUserInput({ ...userInput, email: cookie.load("email") });
+    if (cookie.load("validCheck"))
+      setNicknameIsValid(cookie.load("validCheck"));
+    if (cookie.load("warning")) setWarningText(cookie.load("warning"));
   }, []);
 
   const saveUserInput = () => {
     cookie.save("signup", userInput, { path: "/signup", maxAge: 60 * 30 });
+    if (nicknameIsValid)
+      cookie.save("validCheck", nicknameIsValid, {
+        path: "/signup",
+        maxAge: 60 * 30,
+      });
+    if (warningText)
+      cookie.save("warning", warningText, { path: "/signup", maxAge: 60 * 30 });
   };
 
   const signUpMutation = useMutation({

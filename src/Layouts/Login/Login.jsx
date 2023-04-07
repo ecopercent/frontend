@@ -23,6 +23,8 @@ const Login = () => {
         type: "ecobagDelete",
       });
     cookie.remove("signup", { path: "/signup" });
+    cookie.remove("validCheck", { path: "/signup" });
+    cookie.remove("warning", { path: "/signup" });
   });
 
   return (
