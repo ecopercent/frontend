@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-// import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { getTitleItem } from "../../../Api/item";
 import ConvertButtons from "./ConvertBtn/ConvertButtons";
 import TitleItem from "./TitleItem/TitleItem";
@@ -10,7 +10,7 @@ import { getLogin } from "../../../Layouts/Login/Login";
 
 export default function TitleItemBox() {
   const userId = getLogin();
-  // if (!userId) return <Navigate to="/" />;
+  if (!userId) return <Navigate to="/" />;
 
   const titleTumblerQuery = useQuery({
     queryKey: ["title", "tumbler", Number(userId)],

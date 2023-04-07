@@ -1,9 +1,11 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import cookie from "react-cookies";
 import SocialLogin from "../../Components/Login/SocialLogin";
 import * as S from "./style";
 
 export function getLogin() {
+  if (cookie.load("userid")) return cookie.load("userid");
   return localStorage.getItem("userId");
 }
 
