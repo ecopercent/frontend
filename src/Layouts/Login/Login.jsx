@@ -5,6 +5,8 @@ import * as S from "./style";
 import SignUpItemContext from "../../hooks/SignUpItemContext";
 
 export function getLogin() {
+  const userid = cookie.load("userid");
+  if (userid) return userid;
   return localStorage.getItem("userId");
 }
 
