@@ -35,14 +35,12 @@ export default function SignUp() {
   }, []);
 
   const saveUserInput = () => {
-    cookie.save("signup", userInput, { path: "/signup", maxAge: 60 * 30 });
+    cookie.save("signup", userInput, { maxAge: 60 * 30 });
     if (nicknameIsValid)
       cookie.save("validCheck", nicknameIsValid, {
-        path: "/signup",
         maxAge: 60 * 30,
       });
-    if (warningText)
-      cookie.save("warning", warningText, { path: "/signup", maxAge: 60 * 30 });
+    if (warningText) cookie.save("warning", warningText, { maxAge: 60 * 30 });
   };
 
   const signUpMutation = useMutation({
@@ -85,7 +83,7 @@ export default function SignUp() {
           onConfirm={() => {
             setModalIsOpen(false);
             cookie.remove("signup");
-            navigate(-1);
+            navigate("/");
           }}
         />
       )}

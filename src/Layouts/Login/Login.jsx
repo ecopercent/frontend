@@ -22,9 +22,9 @@ const Login = () => {
       dispatch({
         type: "ecobagDelete",
       });
-    cookie.remove("signup", { path: "/signup" });
-    cookie.remove("validCheck", { path: "/signup" });
-    cookie.remove("warning", { path: "/signup" });
+    cookie.remove("signup");
+    cookie.remove("validCheck");
+    cookie.remove("warning");
   });
 
   return (
