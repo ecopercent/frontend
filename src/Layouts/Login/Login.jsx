@@ -1,17 +1,34 @@
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
 import SocialLogin from "../../Components/Login/SocialLogin";
 import * as S from "./style";
+import SignUpItemContext from "../../hooks/SignUpItemContext";
 
 export function getLogin() {
-  if (cookie.load("userid")) return cookie.load("userid");
+  const userid = cookie.load("userid");
+  if (userid) return userid;
   return localStorage.getItem("userId");
 }
 
 const Login = () => {
   const navigate = useNavigate();
   const userId = useRef();
+  const { state, dispatch } = useContext(SignUpItemContext);
+
+  useEffect(() => {
+    if (state.tumbler)
+      dispatch({
+        type: "tumblerDelete",
+      });
+    if (state.ecobag)
+      dispatch({
+        type: "ecobagDelete",
+      });
+    cookie.remove("signup");
+    cookie.remove("validCheck");
+    cookie.remove("warning");
+  });
 
   return (
     <S.LoginLayout>
