@@ -16,18 +16,14 @@ export const boldBody = `
 `;
 
 export const normalSmall = `
-  font-style: normal;
-  font-weight: 400;
+  ${normalBody}
   font-size: 14px;
-
   line-height: 24px;
 `;
 
 export const normalXsmall = `
-  font-style: normal;
-  font-weight: 400;
+  ${normalBody}
   font-size: 12px;
-
   line-height: 24px;
 `;
 
@@ -37,11 +33,10 @@ export const boldSmall = `
 `;
 
 export const normalTitle3 = `
-		font-style: normal;
-		font-weight: 400;
-		font-size: 20px;
-		line-height: 24px;
-		letter-spacing: 0.38px;
+  ${normalBody}
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.38px;
 `;
 
 export const boldTitle3 = `
@@ -50,19 +45,14 @@ font-weight: 600;
 `;
 
 export const normalTextarea = `
-	font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
-	font-style: normal;
-	font-weight: 400;
+  ${normalBody}
 	font-size: 15px;
-
 	line-height: 15px;
 	letter-spacing: -0.408px;
 `;
 
 export const normalBtn = `
-	font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
-	font-style: normal;
-	font-weight: 400;
+  ${normalBody}
 	font-size: 12px;
 	line-height: 16px;
 	
@@ -75,16 +65,14 @@ export const boldBtn = `
 `;
 
 export const normalSubheadline = `
-  font-style: normal;
-  font-weight: 400;
+  ${normalBody}
   font-size: 15px;
   line-height: 20px;
   letter-spacing: -0.24px;
 `;
 
 export const boldHeadline = `
-  font-style: normal;
-  font-weight: 600;
+  ${boldBody}
   font-size: 17px;
   line-height: 22px;
   text-align: center;

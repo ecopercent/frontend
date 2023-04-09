@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import cookie from "react-cookies";
 import * as S from "./style";
 import SignUpItemContext from "../../hooks/SignUpItemContext";
 
 export function getLogin() {
+  const userid = cookie.load("userid");
+  if (userid) return userid;
   return localStorage.getItem("userId");
 }
 
@@ -21,6 +24,9 @@ const Login = () => {
       dispatch({
         type: "ecobagDelete",
       });
+    cookie.remove("signup");
+    cookie.remove("validCheck");
+    cookie.remove("warning");
   });
 
   return (

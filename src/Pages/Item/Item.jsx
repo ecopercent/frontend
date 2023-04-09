@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
 import { getLogin } from "../../Layouts/Login/Login";
 import AllInfo from "../../Components/Item/Info/AllInfo";
 import EachInfo from "../../Components/Item/Info/EachInfo";
@@ -8,7 +7,6 @@ import * as S from "./style";
 
 const Item = () => {
   const userId = getLogin();
-  if (!userId) return <Navigate to="/login" />;
   const [infoItemId, setInfoItemId] = useState(0);
   const [infoItemCategory, setInfoItemCategory] = useState("tumbler");
 

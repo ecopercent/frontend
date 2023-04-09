@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CancelCheckModal from "../Modal/CancelCheckModal";
-import SignUpItemContext from "../../hooks/SignUpItemContext";
+import CancelCheckModal from "../../Modal/CancelCheckModal";
+import SignUpItemContext from "../../../hooks/SignUpItemContext";
 import SignUpItemPreview from "./SignUpItemPreview";
 import * as S from "./style";
 
-export default function SignUpItems({ category }) {
+export default function SignUpItems({ category, saveUserInput }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
   const { state, dispatch } = useContext(SignUpItemContext);
@@ -15,10 +15,12 @@ export default function SignUpItems({ category }) {
   };
 
   const handleAdd = () => {
+    saveUserInput();
     navigate("/item/add", { state: navigateState });
   };
 
   const handleEdit = () => {
+    saveUserInput();
     navigate("/item/edit", { state: navigateState });
   };
 
