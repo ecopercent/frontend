@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
+import SocialLogin from "../../Components/Login/SocialLogin";
 import * as S from "./style";
 import SignUpItemContext from "../../hooks/SignUpItemContext";
 
@@ -36,6 +37,7 @@ const Login = () => {
         <S.Line />
         <S.ContinueWith>Continue With</S.ContinueWith>
         {/* 소셜 로그인 버튼들 들어갈 곳 */}
+        <SocialLogin />
         <form
           onSubmit={(e) => {
             e.preventDefault();
