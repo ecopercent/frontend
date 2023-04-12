@@ -33,6 +33,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/:page" element={<Main />} />
+          <Route path="/:page/:subPage" element={<Main />} />
+          <Route path="/:page/:subPage/:accountDeletePage" element={<Main />} />
           <Route path="/*" element={<Error />} />
           <Route path="/item/edit" element={<ItemEdit />} />
           <Route path="/item/add" element={<ItemAdd />} />
