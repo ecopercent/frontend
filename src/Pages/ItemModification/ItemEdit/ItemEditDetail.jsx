@@ -1,62 +1,31 @@
-import React, { useCallback, useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../style";
 import useInput from "../../../hooks/useInput";
-import { patchItem } from "../../../Api/item";
 
-const ItemEditDetail = ({ item, itemDetail }) => {
+const ItemEditDetail = ({ itemDetail, editCallback }) => {
   const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
   const [nickname, onNickname] = useInput(itemDetail.nickname);
   const [brand, onBrand] = useInput(itemDetail.brand);
-  const [purchasePrice, onPurchasePrice] = useInput(itemDetail.price);
+  const [price, onPrice] = useInput(itemDetail.price);
   const [purchaseDate, onPurchaseData] = useInput(itemDetail.purchaseDate);
   const [type, onType] = useInput(itemDetail.type);
   const targetGoalUsageCount = itemDetail.goalUsageCount;
 
-  const queryClient = useQueryClient();
-  const itemEditMutation = useMutation({
-    mutationFn: patchItem,
-    onSuccess: () => {
-      queryClient.refetchQueries(["item", Number(item.id)]);
-      queryClient.refetchQueries([
-        `${item.category}s`,
-        Number(localStorage.getItem("userId")),
-      ]);
-      queryClient.refetchQueries([
-        "title",
-        item.category,
-        Number(localStorage.getItem("userId")),
-      ]);
-    },
-  });
-
-  const onEditItem = useCallback(
-    (e) => {
-      e.preventDefault();
-      if (!nickname || !nickname.trim() || !brand || !brand.trim()) {
-        setIsError(true);
-        return;
-      }
-      setIsError(false);
-      itemEditMutation.mutate({
-        itemId: Number(item.id),
-        itemImage: "이미지피커에서가져올거얏",
-        itemNickname: nickname,
-        itemType: type,
-        itemBrand: brand,
-        itemPrice: purchasePrice,
-        itemPurchaseDate: purchaseDate,
-      });
-      navigate(-1);
-    },
-    [nickname, brand, type, targetGoalUsageCount, purchasePrice, purchaseDate]
-  );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!nickname || !nickname.trim() || !brand || !brand.trim()) {
+      setIsError(true);
+      return;
+    }
+    setIsError(false);
+    editCallback({ nickname, type, brand, price, purchaseDate });
+  };
 
   return (
     <S.ItemDetailWrapper>
-      <S.Form onSubmit={onEditItem}>
+      <S.Form onSubmit={handleSubmit}>
         <S.FormInnerWrapper>
           <S.Span>닉네임</S.Span>
           <S.Input
@@ -88,8 +57,8 @@ const ItemEditDetail = ({ item, itemDetail }) => {
           />
           <S.Span>구입가</S.Span>
           <S.Input
-            value={purchasePrice}
-            onChange={onPurchasePrice}
+            value={price}
+            onChange={onPrice}
             type="number"
             placeholder={itemDetail.price}
           />
