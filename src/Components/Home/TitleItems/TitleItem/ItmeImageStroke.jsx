@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { patchUsageCountUp } from "../../../../Api/item";
 import * as S from "./style";
+import { lightGray } from "../../../../style/color";
 
 function toPieChartItemPath(x, y, radiusIn, radiusOut, startAngle, endAngle) {
   function toXY(cX, cY, r, degrees) {
@@ -110,7 +111,7 @@ const ItmeImageStroke = ({ itemInfo, userId }) => {
           return (
             <S.StrokePath
               d={element.d}
-              style={{ display: "none" }}
+              style={{ fill: lightGray }}
               key={element.key}
             />
           );
