@@ -11,8 +11,6 @@ export default function SocialLogin() {
     if (location.pathname.split("/")[2] === "kakao") {
       const params = new URLSearchParams(location.search);
       if (params.has("code")) {
-        console.log("카카오 인가 코드 받았어!");
-        console.log(params.get("code"));
         getKakaoToken({ authCode: params.get("code"), navigate });
       }
     }

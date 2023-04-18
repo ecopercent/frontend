@@ -47,7 +47,7 @@ export default function SignUp() {
     mutationFn: postUser,
     onSuccess: () => {
       cookie.remove("signup");
-      // TODO: 응답의 토큰 처리
+      cookie.remove("email");
     },
   });
 
@@ -65,7 +65,6 @@ export default function SignUp() {
     // if (state.tumbler)
     // if (state.ecobag)
     signUpMutation.mutate(signUpForm);
-    // TODO: 가입 완료 페이지 or 모달 구현
     return navigate("/welcome", { state: true });
   };
 
