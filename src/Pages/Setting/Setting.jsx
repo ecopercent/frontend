@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { cookie } from "react-cookie";
 import * as S from "./style";
 import AccountInfo from "./AccountInfo";
 import Error from "../../Layouts/Error/Error";
@@ -92,7 +93,8 @@ const Setting = () => {
       <hr />
       <S.Logout
         onClick={() => {
-          localStorage.removeItem("userId");
+          cookie.remove("userid");
+          cookie.remove("refresh");
           navigate("/");
         }}
       >

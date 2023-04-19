@@ -5,10 +5,10 @@ import ConvertButtons from "./ConvertBtn/ConvertButtons";
 import TitleItem from "./TitleItem/TitleItem";
 import NoTitleItem from "./TitleItem/NoTitleItem";
 import * as S from "./style";
-import { getLogin } from "../../../Layouts/Login/Login";
+import { getUserId } from "../../../Layouts/Login/Login";
 
 export default function TitleItemBox() {
-  const userId = getLogin();
+  const userId = getUserId();
 
   const titleTumblerQuery = useQuery({
     queryKey: ["title", "tumbler", Number(userId)],

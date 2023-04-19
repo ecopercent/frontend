@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { getLogin } from "../../Layouts/Login/Login";
+import { getUserId } from "../../Layouts/Login/Login";
 import AllInfo from "../../Components/Item/Info/AllInfo";
 import EachInfo from "../../Components/Item/Info/EachInfo";
 import ItemListBox from "../../Components/Item/List/ItemListBox";
 import * as S from "./style";
 
 const Item = () => {
-  const userId = getLogin();
+  const userId = getUserId();
   const [infoItemId, setInfoItemId] = useState(0);
   const [infoItemCategory, setInfoItemCategory] = useState("tumbler");
 

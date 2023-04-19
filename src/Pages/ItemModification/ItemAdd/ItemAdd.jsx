@@ -7,6 +7,7 @@ import ItemAddHead from "./ItemAddHead";
 import { ItemEditBorder, ItemEditWrap } from "../style";
 import { postItem } from "../../../Api/item";
 import SignUpItemContext from "../../../hooks/SignUpItemContext";
+import { getUserId } from "../../../Layouts/Login/Login";
 
 const ItemAdd = () => {
   const item = useLocation().state;
@@ -39,17 +40,14 @@ const ItemAdd = () => {
   const itemAddMutation = useMutation({
     mutationFn: postItem,
     onSuccess: () => {
-      queryClient.refetchQueries([
-        `${item.category}s`,
-        Number(localStorage.getItem("userId")),
-      ]);
+      queryClient.refetchQueries([`${item.category}s`, Number(getUserId())]);
     },
   });
 
   const addItemOnAuth = useCallback(
     (input) => {
       itemAddMutation.mutate({
-        itemUserId: Number(localStorage.getItem("userId")),
+        itemUserId: Number(getUserId()),
         itemImage: "이미지피커에서가져올거얏",
         itemNickname: input.nickname,
         itemCategory: item.category,

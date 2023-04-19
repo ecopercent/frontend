@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import ProfileViewer from "./ProfileViewer/ProfileViewer";
 import ProfileEditor from "./ProfileEditor/ProfileEditor";
-import { getLogin } from "../../../Layouts/Login/Login";
+import { getUserId } from "../../../Layouts/Login/Login";
 
 export default function Profile() {
-  const userId = getLogin();
+  const userId = getUserId();
   const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing)
