@@ -26,28 +26,34 @@ export default function SignUp() {
 
   // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
-    if (cookie.load("signup")) setUserInput(cookie.load("signup"));
+    if (cookie.load("signup")) {
+      setUserInput(cookie.load("signup"));
+      cookie.remove("signup");
+    }
     if (cookie.load("email"))
-      setUserInput({ ...userInput, email: cookie.load("email") });
-    if (cookie.load("validCheck"))
+      setUserInput((oldInput) => {
+        return { ...oldInput, email: cookie.load("email") };
+      });
+    if (cookie.load("validCheck")) {
       setNicknameIsValid(cookie.load("validCheck"));
-    if (cookie.load("warning")) setWarningText(cookie.load("warning"));
+      cookie.remove("validCheck");
+    }
+    if (cookie.load("warning")) {
+      setWarningText(cookie.load("warning"));
+      cookie.remove("warning");
+    }
   }, []);
 
   const saveUserInput = () => {
-    cookie.save("signup", userInput, { maxAge: 60 * 30 });
-    if (nicknameIsValid)
-      cookie.save("validCheck", nicknameIsValid, {
-        maxAge: 60 * 30,
-      });
-    if (warningText) cookie.save("warning", warningText, { maxAge: 60 * 30 });
+    cookie.save("signup", userInput);
+    if (nicknameIsValid) cookie.save("validCheck", nicknameIsValid);
+    if (warningText) cookie.save("warning", warningText);
   };
 
   const signUpMutation = useMutation({
     mutationFn: postUser,
     onSuccess: () => {
-      cookie.remove("signup");
-      cookie.remove("email", { path: "/signup" });
+      cookie.remove("email", { path: "/" });
     },
   });
 
