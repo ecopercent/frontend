@@ -1,149 +1,103 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as S from "./style";
-import { lightGreen } from "../../style/color";
+import AccountInfo from "./AccountInfo";
+import Error from "../../Layouts/Error/Error";
 
 const Setting = () => {
+  const { subPage } = useParams();
   const navigate = useNavigate();
-  const accountArray = [
+
+  const appArr = [
     {
-      label: "계정 정보",
-      style: S.Normal,
+      label: "앱 소개",
+      style: S.HoverPlain,
       onClickHandler: () => {
-        console.log("계정정보 띄우기");
+        console.log("노션 페이지로 리디렉션");
       },
     },
     {
-      label: "로그아웃",
-      style: S.Logout,
+      label: "개발팀",
+      style: S.HoverPlain,
       onClickHandler: () => {
-        console.log("로그아웃해주기! 리다이랙트 시키기!");
-        localStorage.removeItem("userId");
-        navigate("/");
+        console.log("노션 페이지로 리디렉션");
+      },
+    },
+    {
+      label: "도움말",
+      style: S.HoverPlain,
+      onClickHandler: () => {
+        console.log("노션 페이지로 리디렉션");
       },
     },
   ];
 
   const notificationArr = [
     {
-      label: "???",
-      style: S.Normal,
+      label: "운영방침",
+      style: S.HoverPlain,
       onClickHandler: () => {
-        console.log("이게 아마 텀블러 에코백 어캐띄울지 설정하려다 만거지?");
-      },
-    },
-    {
-      label: "??????????",
-      style: S.Normal,
-      onClickHandler: () => {
-        console.log("이게 아마 텀블러 에코백 어캐띄울지 설정하려다 만거지?");
-      },
-    },
-  ];
-
-  const helpArray = [
-    {
-      label: "개발팀",
-      style: S.Normal,
-      onClickHandler: () => {
-        console.log("개발팀 정보 띄우기 깃헙 컨플루언스 지라 피그마 등등등");
-      },
-    },
-    {
-      label: "문의하기",
-      style: S.Normal,
-      onClickHandler: () => {
-        console.log("대호 이메일주소");
-      },
-    },
-  ];
-
-  const infoArray = [
-    {
-      label: "운영약관",
-      style: S.Normal,
-      onClickHandler: () => {
-        console.log("우리가 곧 법");
+        console.log("노션 페이지로 리디렉션");
       },
     },
     {
       label: "개인정보처리방침",
-      style: S.Normal,
+      style: S.HoverPlain,
       onClickHandler: () => {
-        console.log("열씨미 알아보고 알려드리겠습니다. 고객님");
+        console.log("노션 페이지로 리디렉션");
+      },
+    },
+    {
+      label: "문의처",
+      style: S.HoverPlain,
+      onClickHandler: () => {
+        console.log("노션 페이지로 리디렉션");
       },
     },
   ];
 
-  const elementCount =
-    accountArray.length +
-    notificationArr.length +
-    helpArray.length +
-    infoArray.length;
+  if (subPage) {
+    return subPage === "accountInfo" ? <AccountInfo /> : <Error />;
+  }
 
   return (
     <S.SettingWrap>
-      <h1
-        style={{
-          backgroundColor: `${lightGreen}`,
-          // border: "1px solid black",
-          borderRadius: "10px",
+      <S.SettingTitle>설정</S.SettingTitle>
+      <S.Category>계정</S.Category>
+      <S.HoverPlain
+        onClick={() => {
+          navigate("accountInfo");
         }}
       >
-        설정
-      </h1>
-      <S.Category>계정</S.Category>
-      {accountArray.map((element) => {
+        회원 정보
+      </S.HoverPlain>
+      <hr />
+      <S.Category>앱</S.Category>
+      {appArr.map((element) => {
         return (
-          <element.style
-            elementCount={elementCount}
-            key={element.label}
-            onClick={element.onClickHandler}
-          >
+          <element.style key={element.label} onClick={element.onClickHandler}>
             {element.label}
           </element.style>
         );
       })}
       <hr />
-      <S.Category>알림</S.Category>
-      알림은 어쩌구 입니다.
+      <S.Category>안내</S.Category>
       {notificationArr.map((element) => {
         return (
-          <element.style
-            elementCount={elementCount}
-            key={element.label}
-            onClick={element.onClickHandler}
-          >
+          <element.style key={element.label} onClick={element.onClickHandler}>
             {element.label}
           </element.style>
         );
       })}
       <hr />
-      <S.Category>도움말</S.Category>
-      {helpArray.map((element) => {
-        return (
-          <element.style
-            elementCount={elementCount}
-            key={element.label}
-            onClick={element.onClickHandler}
-          >
-            {element.label}
-          </element.style>
-        );
-      })}
-      <hr />
-      <S.Category>도움말</S.Category>
-      {infoArray.map((element) => {
-        return (
-          <element.style
-            elementCount={elementCount}
-            key={element.label}
-            onClick={element.onClickHandler}
-          >
-            {element.label}
-          </element.style>
-        );
-      })}
+      <S.Logout
+        onClick={() => {
+          localStorage.removeItem("userId");
+          navigate("/");
+        }}
+      >
+        로그아웃
+      </S.Logout>
     </S.SettingWrap>
   );
 };

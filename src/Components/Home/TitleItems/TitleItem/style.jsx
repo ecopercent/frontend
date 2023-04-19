@@ -16,7 +16,7 @@ export const ImageClipper = styled.img`
   height: 150px;
   object-fit: cover; /* 이미지 비율 유지 */
   border-radius: 50%;
-  border: 1px solid;
+  // border: 1px solid;
 `;
 
 export const StrokePath = styled.path`
