@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { cookie } from "react-cookie";
+import cookie from "react-cookies";
 import * as S from "./style";
 import AccountInfo from "./AccountInfo";
 import Error from "../../Layouts/Error/Error";
@@ -94,7 +94,6 @@ const Setting = () => {
       <S.Logout
         onClick={() => {
           cookie.remove("userid");
-          cookie.remove("refresh");
           navigate("/");
         }}
       >
