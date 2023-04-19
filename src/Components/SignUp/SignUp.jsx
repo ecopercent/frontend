@@ -47,7 +47,7 @@ export default function SignUp() {
     mutationFn: postUser,
     onSuccess: () => {
       cookie.remove("signup");
-      cookie.remove("email");
+      cookie.remove("email", { path: "/signup" });
     },
   });
 
@@ -82,6 +82,7 @@ export default function SignUp() {
           onConfirm={() => {
             setModalIsOpen(false);
             cookie.remove("signup");
+            cookie.remove("email");
             navigate("/");
           }}
         />
