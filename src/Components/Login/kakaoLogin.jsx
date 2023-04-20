@@ -24,7 +24,7 @@ export async function kakaoLogin() {
 
 async function postKakaoToken({ kakaoAccessToken, navigate }) {
   try {
-    const response = await axios.get("/login/oauth2/kakao", {
+    const response = await axios.post("/login/oauth2/kakao", {
       headers: {
         Authorization: `Bearer ${kakaoAccessToken}`,
       },
