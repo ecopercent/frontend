@@ -54,6 +54,7 @@ export default function SignUp() {
     mutationFn: postUser,
     onSuccess: () => {
       cookie.remove("email", { path: "/" });
+      cookie.remove("oauth_provider", { path: "/" });
     },
   });
 
@@ -61,15 +62,24 @@ export default function SignUp() {
   // const { state } = useContext(SignUpItemContext);
 
   const handleSubmit = () => {
-    const signUpForm = { ...userInput };
+    let signUpForm = {
+      ...userInput,
+      oAuthProvider: cookie.load("oauth_provider"),
+    };
     if (signUpForm.nickname.length === 0)
       return setWarningText("닉네임을 입력하세요.");
     if (!nicknameIsValid)
       return setWarningText("닉네임 중복확인을 완료해주세요.");
 
+    signUpForm = {
+      ...signUpForm,
+      oAuthProvider: cookie.load("oauth_provider"),
+    };
+
     // TODO: api 업데이트 되면 아이템 폼에 넣기
     // if (state.tumbler)
     // if (state.ecobag)
+
     signUpMutation.mutate(signUpForm);
     return navigate("/welcome", { state: true });
   };
@@ -89,6 +99,7 @@ export default function SignUp() {
             setModalIsOpen(false);
             cookie.remove("signup");
             cookie.remove("email");
+            cookie.remove("oauth_provider");
             navigate("/");
           }}
         />
