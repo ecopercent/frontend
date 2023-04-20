@@ -24,11 +24,15 @@ export async function kakaoLogin() {
 
 async function postKakaoToken({ kakaoAccessToken, navigate }) {
   try {
-    const response = await axios.post("/login/oauth2/kakao", {
-      headers: {
-        Authorization: `Bearer ${kakaoAccessToken}`,
-      },
-    });
+    const response = await axios.post(
+      "/login/oauth2/kakao",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${kakaoAccessToken}`,
+        },
+      }
+    );
     if (response.status === 200) {
       navigate("/home");
     }
