@@ -24,17 +24,22 @@ export async function kakaoLogin() {
 
 async function postKakaoToken({ kakaoAccessToken, navigate }) {
   try {
-    const response = await axios.get("/login/oauth2/kakao", {
-      headers: {
-        Authorization: `Bearer ${kakaoAccessToken}`,
-      },
-    });
+    const response = await axios.post(
+      "/login/oauth2/kakao",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${kakaoAccessToken}`,
+        },
+      }
+    );
     if (response.status === 200) {
       navigate("/home");
     }
   } catch (err) {
     if (err.response.status === 404) {
       cookie.save("email", err.response.data.email, { path: "/" });
+      cookie.save("oauth_provider", "kakao", { path: "/" });
       navigate("/signup");
     } else {
       // 서버 안될 때
