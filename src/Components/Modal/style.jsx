@@ -63,6 +63,10 @@ export const Btn = styled.button`
     if (props.warning) return btn.pink;
     return btn.normal;
   }}
+
+  :hover {
+    opacity: 0.7;
+  }
 `;
 
 export const CreateModal = styled.div`

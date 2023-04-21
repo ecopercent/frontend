@@ -101,7 +101,15 @@ export const Btn = styled.button`
     if (props.warning) return button.pink;
     if (props.disabled) return button.disabled;
     return button.normal;
-  }}}
+  }}
+
+  ${(props) => {
+    if (!props.disabled)
+      return `:hover {
+    opacity: 0.7;
+  }`;
+    return null;
+  }}
 `;
 
 /*

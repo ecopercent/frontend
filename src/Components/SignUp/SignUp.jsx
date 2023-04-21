@@ -26,28 +26,35 @@ export default function SignUp() {
 
   // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
-    if (cookie.load("signup")) setUserInput(cookie.load("signup"));
+    if (cookie.load("signup")) {
+      setUserInput(cookie.load("signup"));
+      cookie.remove("signup");
+    }
     if (cookie.load("email"))
-      setUserInput({ ...userInput, email: cookie.load("email") });
-    if (cookie.load("validCheck"))
+      setUserInput((oldInput) => {
+        return { ...oldInput, email: cookie.load("email") };
+      });
+    if (cookie.load("validCheck")) {
       setNicknameIsValid(cookie.load("validCheck"));
-    if (cookie.load("warning")) setWarningText(cookie.load("warning"));
+      cookie.remove("validCheck");
+    }
+    if (cookie.load("warning")) {
+      setWarningText(cookie.load("warning"));
+      cookie.remove("warning");
+    }
   }, []);
 
   const saveUserInput = () => {
-    cookie.save("signup", userInput, { maxAge: 60 * 30 });
-    if (nicknameIsValid)
-      cookie.save("validCheck", nicknameIsValid, {
-        maxAge: 60 * 30,
-      });
-    if (warningText) cookie.save("warning", warningText, { maxAge: 60 * 30 });
+    cookie.save("signup", userInput);
+    if (nicknameIsValid) cookie.save("validCheck", nicknameIsValid);
+    if (warningText) cookie.save("warning", warningText);
   };
 
   const signUpMutation = useMutation({
     mutationFn: postUser,
     onSuccess: () => {
-      cookie.remove("signup");
-      // TODO: 응답의 토큰 처리
+      cookie.remove("email", { path: "/" });
+      cookie.remove("oauth_provider", { path: "/" });
     },
   });
 
@@ -55,17 +62,25 @@ export default function SignUp() {
   // const { state } = useContext(SignUpItemContext);
 
   const handleSubmit = () => {
-    const signUpForm = { ...userInput };
+    let signUpForm = {
+      ...userInput,
+      oAuthProvider: cookie.load("oauth_provider"),
+    };
     if (signUpForm.nickname.length === 0)
       return setWarningText("닉네임을 입력하세요.");
     if (!nicknameIsValid)
       return setWarningText("닉네임 중복확인을 완료해주세요.");
 
+    signUpForm = {
+      ...signUpForm,
+      oAuthProvider: cookie.load("oauth_provider"),
+    };
+
     // TODO: api 업데이트 되면 아이템 폼에 넣기
     // if (state.tumbler)
     // if (state.ecobag)
+
     signUpMutation.mutate(signUpForm);
-    // TODO: 가입 완료 페이지 or 모달 구현
     return navigate("/welcome", { state: true });
   };
 
@@ -83,6 +98,8 @@ export default function SignUp() {
           onConfirm={() => {
             setModalIsOpen(false);
             cookie.remove("signup");
+            cookie.remove("email");
+            cookie.remove("oauth_provider");
             navigate("/");
           }}
         />

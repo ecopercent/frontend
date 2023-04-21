@@ -25,9 +25,6 @@ const Login = () => {
       dispatch({
         type: "ecobagDelete",
       });
-    cookie.remove("signup");
-    cookie.remove("validCheck");
-    cookie.remove("warning");
   });
 
   return (
