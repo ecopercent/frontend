@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../../Components/Modal/Modal";
 import { deleteItem } from "../../../Api/item";
+import { getUserId } from "../../../Layouts/Login/Login";
 import * as S from "../style";
 
 const DeleteItemModal = ({
@@ -17,15 +18,8 @@ const DeleteItemModal = ({
     mutationFn: deleteItem,
     onSuccess: () => {
       queryClient.refetchQueries(["item", Number(item.id)]);
-      queryClient.refetchQueries([
-        `${item.category}s`,
-        Number(localStorage.getItem("userId")),
-      ]);
-      queryClient.refetchQueries([
-        "title",
-        item.category,
-        Number(localStorage.getItem("userId")),
-      ]);
+      queryClient.refetchQueries([`${item.category}s`, Number(getUserId())]);
+      queryClient.refetchQueries(["title", item.category, Number(getUserId())]);
     },
   });
   const onDeleteItem = useCallback((e) => {
