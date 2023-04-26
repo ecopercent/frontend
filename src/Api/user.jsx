@@ -23,3 +23,13 @@ export function patchUser({ id, nick, msg, img }) {
       return res.data;
     });
 }
+export function nicknameCheck(nickname) {
+  return axios
+    .get(`/nicknames/${nickname}`)
+    .then(() => {
+      return 200;
+    })
+    .catch((err) => {
+      return err.response.status;
+    });
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import * as S from "./style";
+import { nicknameCheck } from "../../../Api/user";
 
 export default function SignUpUser({
   userInput,
@@ -9,12 +10,25 @@ export default function SignUpUser({
   warningText,
   setWarningText,
 }) {
-  const validateNickname = () => {
+  const validateNickname = async (e) => {
     // TODO: 닉네임 중복확인 api 요청 하고 결과에 따른 로직 추가
-    setNicknameIsValid(true);
-    setWarningText(null);
-    if (nicknameIsValid) setNicknameIsValid(false);
-    alert("중복 확인 API 호출");
+    e.preventDefault();
+    try {
+      const validateResult = await nicknameCheck(userInput.nickname);
+      if (validateResult === 200) {
+        // 이미 있는 닉네임일때 인풋값을 지울까 말까
+        // 경고창 대신 모달로 띄워줄까 말까
+        alert("이미 사용 중인 닉네임입니다.");
+        setWarningText("다른 닉네임을 사용해 주세요.");
+      } else if (validateResult === 404) {
+        // 성공했을때 성공한 닉네임을 사용할지 말지 모달로 선택하게 할까 말까
+        setNicknameIsValid(true);
+        setWarningText(null);
+        if (nicknameIsValid) setNicknameIsValid(false);
+      }
+    } catch (err) {
+      console.log("server error");
+    }
   };
 
   const lengthSliceInKorean = (e) => {
