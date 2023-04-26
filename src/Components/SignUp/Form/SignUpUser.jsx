@@ -25,6 +25,9 @@ export default function SignUpUser({
         setNicknameIsValid(true);
         setWarningText(null);
         if (nicknameIsValid) setNicknameIsValid(false);
+      } else {
+        // 닉네임 정책 제대로 정해야할듯합니다. ex) 빈공백, /조합, \ 조합  # 등
+        alert("닉네임을 확인해주세요.");
       }
     } catch (err) {
       console.log("server error");
