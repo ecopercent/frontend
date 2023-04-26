@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
+import useInput from "../../hooks/useInput";
 
 const AppleLoginButton = () => {
   const clientId = `${process.env.REACT_APP_APPLE_CLIENT_ID}`;
-  const redirectURI = `${process.env.REACT_APP_APPLE_REDIRECT_URI}`;
   const scope = "name email";
   const state = "some-state";
   const nonce = "some-nonce";
+  const [redirectURI, onRedirectTest] = useInput("");
 
+  console.log("redirectURI", redirectURI);
   useEffect(() => {
     // Apple SDK 스크립트 로드
     const script = document.createElement("script");
@@ -32,14 +34,22 @@ const AppleLoginButton = () => {
   }, [clientId, redirectURI, scope, state, nonce]);
 
   return (
-    <div
-      style={{ width: "55px" }}
-      id="appleid-signin"
-      data-color="black"
-      data-type="sign in"
-      data-mode="logo-only"
-      data-border-radius="50"
-    />
+    <>
+      <input
+        value={redirectURI}
+        onChange={onRedirectTest}
+        type="text"
+        placeholder="테스트용 주소 해보자"
+      />
+      <div
+        style={{ width: "55px" }}
+        id="appleid-signin"
+        data-color="black"
+        data-type="sign in"
+        data-mode="logo-only"
+        data-border-radius="50"
+      />
+    </>
   );
 };
 
