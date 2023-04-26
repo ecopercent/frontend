@@ -3,7 +3,7 @@ import useInput from "../../hooks/useInput";
 
 const AppleLoginButton = () => {
   const clientId = `${process.env.REACT_APP_APPLE_CLIENT_ID}`;
-  const scope = "name email";
+  const scope = "email";
   const state = "some-state";
   const nonce = "some-nonce";
   const [redirectURI, onRedirectTest] = useInput("");
