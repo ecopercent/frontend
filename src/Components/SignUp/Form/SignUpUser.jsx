@@ -18,7 +18,7 @@ export default function SignUpUser({
       if (validateResult === 200) {
         // 이미 있는 닉네임일때 인풋값을 지울까 말까
         // 경고창 대신 모달로 띄워줄까 말까
-        alert("이미 사용 중인 닉네임입니다.");
+        alert("이미 사용 중인 닉네임입니다.\n다른 닉네임을 사용해 주세요.");
         setWarningText("다른 닉네임을 사용해 주세요.");
       } else if (validateResult === 404) {
         // 성공했을때 성공한 닉네임을 사용할지 말지 모달로 선택하게 할까 말까
