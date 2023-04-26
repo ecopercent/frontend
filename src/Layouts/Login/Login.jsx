@@ -24,7 +24,7 @@ const Login = () => {
 
   return (
     <S.LoginLayout>
-      <S.TmpLogo>로고</S.TmpLogo>
+      <S.Logo src="/logo.png" alt="eco% 로고" />
       <S.LoginBox>
         <S.Line />
         <S.ContinueWith>Continue With</S.ContinueWith>
