@@ -1,7 +1,13 @@
 import axios from "axios";
 
-export function postUser(signUpForm) {
-  return axios.post("/users", signUpForm).then((res) => {
+export function postUserOfKakao(signUpForm) {
+  return axios.post("/users/kakao", signUpForm).then((res) => {
+    return res.data;
+  });
+}
+
+export function postUserOfApple(signUpForm) {
+  return axios.post("/users/apple", signUpForm).then((res) => {
     return res.data;
   });
 }

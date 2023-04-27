@@ -6,7 +6,7 @@ import { PcPageWrap } from "../../Layouts/Main/style";
 import CancelCheckModal from "../Modal/CancelCheckModal";
 import SignUpUser from "./Form/SignUpUser";
 import SignUpItems from "./Form/SignUpItems";
-import { postUser } from "../../Api/user";
+import { postUserOfKakao, postUserOfApple } from "../../Api/user";
 import * as S from "./style";
 // import SignUpItemContext from "../../hooks/SignUpItemContext";
 
@@ -51,7 +51,10 @@ export default function SignUp() {
   };
 
   const signUpMutation = useMutation({
-    mutationFn: postUser,
+    mutationFn:
+      cookie.load("oauth_provider") === "kakao"
+        ? postUserOfKakao
+        : postUserOfApple,
     onSuccess: () => {
       cookie.remove("email", { path: "/" });
       cookie.remove("oauth_provider", { path: "/" });
