@@ -7,13 +7,13 @@ import ProfileText from "./ProfileText";
 import ProfileBtns from "./ProfileBtns";
 import * as S from "./style";
 
-export default function ProfileEditor({ userId, setIsEditing }) {
+export default function ProfileEditor({ setIsEditing }) {
   const isMobile = useMediaQuery({
     query: "(max-width:470px)",
   });
   const queryClient = useQueryClient();
   const userQuery = useQuery({
-    queryKey: ["user", userId],
+    queryKey: ["user"],
     queryFn: () => {
       return getUser();
     },
@@ -30,14 +30,13 @@ export default function ProfileEditor({ userId, setIsEditing }) {
   const profileEditMutation = useMutation({
     mutationFn: patchUser,
     onSuccess: (data) => {
-      queryClient.setQueryData(["user", userId], data);
-      queryClient.invalidateQueries(["user", userId]);
+      queryClient.setQueryData(["user"], data);
+      queryClient.invalidateQueries(["user"]);
     },
   });
 
   function handleSubmit() {
     profileEditMutation.mutate({
-      id: userId,
       nick: localUser.nickname,
       msg: localUser.profileMessage,
       img: localUser.profileImage,

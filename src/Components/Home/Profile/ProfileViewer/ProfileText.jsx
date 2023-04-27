@@ -3,9 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getUser } from "../../../../Api/user";
 import * as S from "./style";
 
-export default function ProfileText({ userId, isMobile }) {
+export default function ProfileText({ isMobile }) {
   const userQuery = useQuery({
-    queryKey: ["user", userId],
+    queryKey: ["user"],
     queryFn: () => {
       return getUser();
     },

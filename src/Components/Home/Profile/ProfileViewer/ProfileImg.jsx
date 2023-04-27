@@ -3,9 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getUser } from "../../../../Api/user";
 import * as S from "./style";
 
-export default function ProfileImg({ userId }) {
+export default function ProfileImg() {
   const userQuery = useQuery({
-    queryKey: ["user", userId],
+    queryKey: ["user"],
     queryFn: () => {
       return getUser();
     },

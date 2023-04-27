@@ -18,9 +18,9 @@ export function getUser() {
   });
 }
 
-export function patchUser({ id, nick, msg, img }) {
+export function patchUser({ nick, msg, img }) {
   return axios
-    .patch(`/users/${id}`, {
+    .patch(`/users`, {
       nickname: nick,
       profileImage: img,
       profileMessage: msg,
