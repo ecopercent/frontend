@@ -3,7 +3,7 @@ import { MdOutlineViewCarousel, MdOutlineShoppingBag } from "react-icons/md";
 import { TbCup } from "react-icons/tb";
 import * as S from "./style";
 
-export default function ConvertButtons({ userId, hasBoth, setItemTab }) {
+export default function ConvertButtons({ hasBoth, setItemTab }) {
   const [tryConvert, setTryConvert] = useState(false);
 
   function handleClick(tumblerValue, ecobagValue) {
@@ -12,7 +12,8 @@ export default function ConvertButtons({ userId, hasBoth, setItemTab }) {
       ecobag: ecobagValue,
     };
     setItemTab(settingValue);
-    localStorage.setItem(`mainSet${userId}`, JSON.stringify(settingValue));
+    // TODO: 고유값 삽입 필요
+    localStorage.setItem(`mainSet`, JSON.stringify(settingValue));
   }
 
   return (
