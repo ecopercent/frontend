@@ -5,14 +5,14 @@ import * as S from "./style";
 
 export default function AllInfo() {
   const tumblersQuery = useQuery({
-    queryKey: ["tumblers"],
+    queryKey: ["tumbler", "list"],
     queryFn: () => {
       return getItemList("tumbler");
     },
   });
 
   const ecobagsQuery = useQuery({
-    queryKey: ["ecobags"],
+    queryKey: ["ecobag", "list"],
     queryFn: () => {
       return getItemList("ecobag");
     },

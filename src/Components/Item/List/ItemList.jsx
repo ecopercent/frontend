@@ -12,7 +12,7 @@ export default function ItemList({
   setInfoItemCategory,
 }) {
   const itemListQuery = useQuery({
-    queryKey: [`${itemListOf}s`],
+    queryKey: [`${itemListOf}`, "list"],
     queryFn: () => {
       getItemList(itemListOf);
     },

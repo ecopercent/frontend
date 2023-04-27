@@ -8,7 +8,7 @@ import * as S from "./style";
 export default function EachInfo({ itemId, itemCategory }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const itemListQuery = useQuery({
-    queryKey: [`${itemCategory}s`],
+    queryKey: [`${itemCategory}`, "list"],
     queryFn: () => {
       return getItemList(itemCategory);
     },
