@@ -4,6 +4,7 @@ import * as S from "./style";
 
 export default function ProfileImg({ user, setUser }) {
   const [isUploaded, setIsUploaded] = useState(false);
+  const [preview, setPreview] = useState(false);
 
   async function imgCompress(img) {
     const options = {
@@ -34,11 +35,15 @@ export default function ProfileImg({ user, setUser }) {
     console.log("이미지 압축 시작");
     const compressedImg = await imgCompress(uploadedImg);
 
+    setUser({ ...user, profileImage: compressedImg });
+    // setIsUploaded(true);
+
     reader.readAsDataURL(compressedImg);
     reader.onloadend = () => {
-      console.log("url로 변환");
+      console.log("미리보기를 위한 url로 변환");
       console.log(reader.result);
-      setUser({ ...user, profileImage: reader.result });
+      // setUser({ ...user, profileImage: reader.result });
+      setPreview(reader.result);
       setIsUploaded(true);
     };
   }
@@ -53,11 +58,7 @@ export default function ProfileImg({ user, setUser }) {
           alt="profile edit"
         />
         <S.ProfileImgPreview
-          src={
-            user.profileImage
-              ? user.profileImage
-              : "/img/userProfileImgOverlay.png"
-          }
+          src={isUploaded ? preview : "/img/userProfileImgOverlay.png"}
           alt="User profile preview"
         />
       </label>

@@ -36,11 +36,11 @@ export default function ProfileEditor({ setIsEditing }) {
   });
 
   function handleSubmit() {
-    profileEditMutation.mutate({
-      nick: localUser.nickname,
-      msg: localUser.profileMessage,
-      img: localUser.profileImage,
-    });
+    const formData = new FormData();
+    formData.append("nickname", localUser.nickname);
+    formData.append("profileImage", localUser.profileImage);
+    formData.append("profileMessage", localUser.profileMessage);
+    profileEditMutation.mutate(formData);
   }
 
   return (

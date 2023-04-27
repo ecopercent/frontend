@@ -18,14 +18,8 @@ export function getUser() {
   });
 }
 
-export function patchUser({ nick, msg, img }) {
-  return axios
-    .patch(`/users`, {
-      nickname: nick,
-      profileImage: img,
-      profileMessage: msg,
-    })
-    .then((res) => {
-      return res.data;
-    });
+export function patchUser(formData) {
+  return axios.patch(`/users`, formData).then((res) => {
+    return res.data;
+  });
 }
