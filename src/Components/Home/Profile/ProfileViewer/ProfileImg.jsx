@@ -7,7 +7,7 @@ export default function ProfileImg({ userId }) {
   const userQuery = useQuery({
     queryKey: ["user", userId],
     queryFn: () => {
-      return getUser(userId);
+      return getUser();
     },
   });
 

@@ -15,7 +15,7 @@ export default function ProfileEditor({ userId, setIsEditing }) {
   const userQuery = useQuery({
     queryKey: ["user", userId],
     queryFn: () => {
-      return getUser(userId);
+      return getUser();
     },
   });
 

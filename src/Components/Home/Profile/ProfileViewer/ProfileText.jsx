@@ -7,7 +7,7 @@ export default function ProfileText({ userId, isMobile }) {
   const userQuery = useQuery({
     queryKey: ["user", userId],
     queryFn: () => {
-      return getUser(userId);
+      return getUser();
     },
   });
 

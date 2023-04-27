@@ -12,8 +12,8 @@ export function postUserOfApple(signUpForm) {
   });
 }
 
-export function getUser(id) {
-  return axios.get(`/users/${id}`).then((res) => {
+export function getUser() {
+  return axios.get(`/users/me`).then((res) => {
     return res.data;
   });
 }
