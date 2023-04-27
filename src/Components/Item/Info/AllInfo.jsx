@@ -3,18 +3,18 @@ import { useQuery } from "@tanstack/react-query";
 import { getItemList } from "../../../Api/item";
 import * as S from "./style";
 
-export default function AllInfo({ userId }) {
+export default function AllInfo() {
   const tumblersQuery = useQuery({
-    queryKey: ["tumblers", userId],
+    queryKey: ["tumbler", "list"],
     queryFn: () => {
-      return getItemList(userId, "tumbler");
+      return getItemList("tumbler");
     },
   });
 
   const ecobagsQuery = useQuery({
-    queryKey: ["ecobags", userId],
+    queryKey: ["ecobag", "list"],
     queryFn: () => {
-      return getItemList(userId, "ecobag");
+      return getItemList("ecobag");
     },
   });
 

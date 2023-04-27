@@ -1,20 +1,26 @@
 import axios from "axios";
 
-export function postUser(signUpForm) {
-  return axios.post("/users", signUpForm).then((res) => {
+export function postUserOfKakao(signUpForm) {
+  return axios.post("/users/kakao", signUpForm).then((res) => {
     return res.data;
   });
 }
 
-export function getUser(id) {
-  return axios.get(`/users/${id}`).then((res) => {
+export function postUserOfApple(signUpForm) {
+  return axios.post("/users/apple", signUpForm).then((res) => {
     return res.data;
   });
 }
 
-export function patchUser({ id, nick, msg, img }) {
+export function getUser() {
+  return axios.get(`/users/me`).then((res) => {
+    return res.data;
+  });
+}
+
+export function patchUser({ nick, msg, img }) {
   return axios
-    .patch(`/users/${id}`, {
+    .patch(`/users`, {
       nickname: nick,
       profileImage: img,
       profileMessage: msg,

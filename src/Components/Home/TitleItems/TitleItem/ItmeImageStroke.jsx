@@ -61,7 +61,7 @@ const oneStrockInfo = [
   },
 ];
 
-const ItmeImageStroke = ({ itemInfo, userId }) => {
+const ItmeImageStroke = ({ itemInfo }) => {
   const divideNum = itemInfo.category === "tumbler" ? 3 : 1;
   const currentUsageCount = checkItemUsageCount(itemInfo.id, divideNum);
   const [usageCount, setUsageCount] = useState(currentUsageCount);
@@ -71,15 +71,8 @@ const ItmeImageStroke = ({ itemInfo, userId }) => {
     onSuccess: () => {
       const newItemInfo = { ...itemInfo };
       newItemInfo.currentUsageCount += 1;
-      queryClient.setQueryData(
-        ["title", `${itemInfo.category}`, Number(userId)],
-        newItemInfo
-      );
-      queryClient.invalidateQueries([
-        "title",
-        `${itemInfo.category}`,
-        Number(userId),
-      ]);
+      queryClient.setQueryData(["title", `${itemInfo.category}`], newItemInfo);
+      queryClient.invalidateQueries(["title", `${itemInfo.category}`]);
     },
   });
   const increaseCount = useCallback(() => {

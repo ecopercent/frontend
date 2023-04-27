@@ -1,10 +1,10 @@
 import React from "react";
 import ItmeImageStroke from "./ItmeImageStroke";
 
-const TitleItem = ({ itemInfo, userId }) => {
+const TitleItem = ({ itemInfo }) => {
   return (
     <div>
-      <ItmeImageStroke itemInfo={itemInfo} userId={userId} />
+      <ItmeImageStroke itemInfo={itemInfo} />
       <div style={{ textAlign: "center", paddingBottom: "10%" }}>
         <h3>{itemInfo.nickname}</h3>
         <hr />

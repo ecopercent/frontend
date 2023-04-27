@@ -5,26 +5,24 @@ import ConvertButtons from "./ConvertBtn/ConvertButtons";
 import TitleItem from "./TitleItem/TitleItem";
 import NoTitleItem from "./TitleItem/NoTitleItem";
 import * as S from "./style";
-import { getUserId } from "../../../Layouts/Login/Login";
 
 export default function TitleItemBox() {
-  const userId = getUserId();
-
   const titleTumblerQuery = useQuery({
-    queryKey: ["title", "tumbler", Number(userId)],
+    queryKey: ["title", "tumbler"],
     queryFn: () => {
-      return getTitleItem(userId, "tumbler");
+      return getTitleItem("tumbler");
     },
   });
 
   const titleEcobagQuery = useQuery({
-    queryKey: ["title", "ecobag", Number(userId)],
+    queryKey: ["title", "ecobag"],
     queryFn: () => {
-      return getTitleItem(userId, "ecobag");
+      return getTitleItem("ecobag");
     },
   });
 
-  let localSavedSet = localStorage.getItem(`titleSet${userId}`);
+  // TODO: 로컬스토리지에 고유키 함께 넣어야함(getUser의 값 갖다 쓰기?)
+  let localSavedSet = localStorage.getItem(`titleSet`);
   localSavedSet = localSavedSet
     ? JSON.parse(localSavedSet)
     : { tumbler: true, ecobag: true };
@@ -37,17 +35,16 @@ export default function TitleItemBox() {
       )}
       <S.TabContainer>
         <ConvertButtons
-          userId={userId}
           hasBoth={!!titleTumblerQuery?.data && !!titleEcobagQuery?.data}
           setItemTab={setItemTab}
         />
       </S.TabContainer>
       <S.TitleItemContainer>
         {itemTab.tumbler && titleTumblerQuery?.data && (
-          <TitleItem itemInfo={titleTumblerQuery.data} userId={userId} />
+          <TitleItem itemInfo={titleTumblerQuery.data} />
         )}
         {itemTab.ecobag && titleEcobagQuery?.data && (
-          <TitleItem itemInfo={titleEcobagQuery.data} userId={userId} />
+          <TitleItem itemInfo={titleEcobagQuery.data} />
         )}
       </S.TitleItemContainer>
     </>
