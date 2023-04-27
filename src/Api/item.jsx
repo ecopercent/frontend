@@ -70,16 +70,17 @@ export function patchUsageCountUp(itemId) {
   });
 }
 
-export function getTitleItem(userId, category) {
-  return axios.get(`/users/${userId}/title-${category}`).then((res) => {
+export async function getTitleItem(category) {
+  try {
+    const res = await axios.get(`/users/me/title-${category}`);
     return res.data;
-  });
+  } catch (e) {
+    return null;
+  }
 }
 
-export function patchTitleItem({ userId, itemId, category }) {
-  return axios
-    .patch(`/users/${userId}/items/${itemId}/title-${category}`)
-    .then((res) => {
-      return res.data;
-    });
+export function patchTitleItem({ itemId, category }) {
+  return axios.patch(`/items/${itemId}/title-${category}`).then((res) => {
+    return res.data;
+  });
 }

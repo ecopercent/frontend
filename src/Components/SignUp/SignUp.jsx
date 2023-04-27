@@ -17,6 +17,7 @@ const initialUser = {
   email: "",
 };
 
+// TODO: OAuth를 거친 사람만 가입 가능하게
 export default function SignUp() {
   const navigate = useNavigate();
   const [modalIsOpen, setModalIsOpen] = useState(false);
