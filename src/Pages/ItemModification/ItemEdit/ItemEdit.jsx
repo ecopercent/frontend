@@ -8,7 +8,6 @@ import ItemEditDetail from "./ItemEditDetail";
 import ItemEditHead from "./ItemEditHead";
 import { ItemEditBorder, ItemEditWrap } from "../style";
 import SignUpItemContext from "../../../hooks/SignUpItemContext";
-import { getUserId } from "../../../Layouts/Login/Login";
 
 const ItemEdit = () => {
   const item = useLocation().state;
@@ -52,8 +51,8 @@ const ItemEdit = () => {
     mutationFn: patchItem,
     onSuccess: () => {
       queryClient.refetchQueries(["item", Number(item.id)]);
-      queryClient.refetchQueries([`${item.category}s`, Number(getUserId())]);
-      queryClient.refetchQueries(["title", item.category, Number(getUserId())]);
+      queryClient.refetchQueries([`${item.category}`, "list"]);
+      queryClient.refetchQueries(["title", item.category]);
     },
   });
 

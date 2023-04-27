@@ -4,7 +4,6 @@ import ItemList from "./ItemList";
 import * as S from "./style";
 
 export default function ItemListBox({
-  userId,
   infoItemId,
   setInfoItemId,
   setInfoItemCategory,
@@ -21,7 +20,6 @@ export default function ItemListBox({
       </S.ItemCategoryTabContainer>
       <S.ItemListContainer>
         <ItemList
-          userId={Number(userId)}
           itemListOf={itemListOf}
           infoItemId={infoItemId}
           setInfoItemId={setInfoItemId}

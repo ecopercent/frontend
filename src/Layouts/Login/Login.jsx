@@ -1,12 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import cookie from "react-cookies";
 import SocialLogin from "../../Components/Login/SocialLogin";
 import * as S from "./style";
 import SignUpItemContext from "../../hooks/SignUpItemContext";
-
-export function getUserId() {
-  return cookie.load("userid");
-}
 
 const Login = () => {
   const { state, dispatch } = useContext(SignUpItemContext);

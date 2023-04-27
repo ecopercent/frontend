@@ -6,16 +6,15 @@ import { getItemList } from "../../../Api/item";
 import * as S from "./style";
 
 export default function ItemList({
-  userId,
   itemListOf,
   infoItemId,
   setInfoItemId,
   setInfoItemCategory,
 }) {
   const itemListQuery = useQuery({
-    queryKey: [`${itemListOf}s`, userId],
+    queryKey: [`${itemListOf}`, "list"],
     queryFn: () => {
-      getItemList(userId, itemListOf);
+      getItemList(itemListOf);
     },
   });
 

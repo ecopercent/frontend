@@ -14,22 +14,15 @@ export default function TitleSetModal({ queryData, onClose }) {
     mutationFn: () => {
       return patchTitleItem(queryData);
     },
-    // 현재 PATCH시 응답 데이터가 없음, 이슈 제안중
+    // TODO: 현재 PATCH시 응답 데이터가 없음, 이슈 제안중
     // onSuccess: (data) => {
     // queryClient.setQueryData(
-    //   [`${queryData.category}s`, queryData.userId],
+    //   [`${queryData.category}`, "list"],
     //   data
     // );
     onSuccess: () => {
-      queryClient.invalidateQueries([
-        `${queryData.category}s`,
-        queryData.userId,
-      ]);
-      queryClient.refetchQueries([
-        "title",
-        `${queryData.category}`,
-        queryData.userId,
-      ]);
+      queryClient.invalidateQueries([`${queryData.category}`, "list"]);
+      queryClient.refetchQueries(["title", `${queryData.category}`]);
     },
   });
 
