@@ -27,6 +27,7 @@ export default function ProfileImg({ user, setUser }) {
 
   async function onUpload(e) {
     const uploadedImg = e.target.files[0];
+    // setUser({ ...user, profileImage: uploadedImg });
     const reader = new FileReader();
 
     console.log("업로드된 이미지");
@@ -35,6 +36,7 @@ export default function ProfileImg({ user, setUser }) {
     console.log("이미지 압축 시작");
     const compressedImg = await imgCompress(uploadedImg);
 
+    window.URL.revokeObjectURL(user.profileImage);
     setUser({ ...user, profileImage: compressedImg });
     // setIsUploaded(true);
 
@@ -58,7 +60,7 @@ export default function ProfileImg({ user, setUser }) {
           alt="profile edit"
         />
         <S.ProfileImgPreview
-          src={isUploaded ? preview : "/img/userProfileImgOverlay.png"}
+          src={isUploaded ? preview : user.profileImage}
           alt="User profile preview"
         />
       </label>

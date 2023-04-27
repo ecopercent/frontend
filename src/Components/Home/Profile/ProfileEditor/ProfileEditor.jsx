@@ -36,6 +36,7 @@ export default function ProfileEditor({ setIsEditing }) {
   });
 
   function handleSubmit() {
+    // TODO: 수정 필요
     const formData = new FormData();
     formData.append("nickname", localUser.nickname);
     formData.append("profileImage", localUser.profileImage);
