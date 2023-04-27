@@ -6,7 +6,6 @@ export function getItem(id) {
   });
 }
 export function postItem({
-  itemUserId,
   itemImage,
   itemNickname,
   itemCategory,
@@ -17,7 +16,6 @@ export function postItem({
 }) {
   return axios
     .post(`/items`, {
-      userId: itemUserId,
       image: itemImage,
       nickname: itemNickname,
       category: itemCategory,
@@ -54,12 +52,10 @@ export function patchItem({
     });
 }
 
-export function getItemList(userId, category) {
-  return axios
-    .get(`/items?userId=${userId}&category=${category}`)
-    .then((res) => {
-      return res.data;
-    });
+export function getItemList(category) {
+  return axios.get(`/items?category=${category}`).then((res) => {
+    return res.data;
+  });
 }
 
 export function deleteItem(itemId) {

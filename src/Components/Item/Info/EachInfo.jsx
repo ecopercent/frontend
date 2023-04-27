@@ -5,12 +5,12 @@ import { getItemList } from "../../../Api/item";
 import TitleSetModal from "../../Modal/TitleSetModal";
 import * as S from "./style";
 
-export default function EachInfo({ userId, itemId, itemCategory }) {
+export default function EachInfo({ itemId, itemCategory }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const itemListQuery = useQuery({
-    queryKey: [`${itemCategory}s`, userId],
+    queryKey: [`${itemCategory}s`],
     queryFn: () => {
-      return getItemList(userId, itemCategory);
+      return getItemList(itemCategory);
     },
   });
 
@@ -30,7 +30,6 @@ export default function EachInfo({ userId, itemId, itemCategory }) {
       {modalIsOpen && (
         <TitleSetModal
           queryData={{
-            userId: Number(userId),
             itemId: Number(itemId),
             category: infoItem.category,
           }}
