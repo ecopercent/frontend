@@ -51,7 +51,7 @@ const ItemEdit = () => {
     mutationFn: patchItem,
     onSuccess: () => {
       queryClient.refetchQueries(["item", Number(item.id)]);
-      queryClient.refetchQueries([`${item.category}s`]);
+      queryClient.refetchQueries([`${item.category}`, "list"]);
       queryClient.refetchQueries(["title", item.category]);
     },
   });

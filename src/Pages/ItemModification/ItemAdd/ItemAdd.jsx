@@ -39,7 +39,7 @@ const ItemAdd = () => {
   const itemAddMutation = useMutation({
     mutationFn: postItem,
     onSuccess: () => {
-      queryClient.refetchQueries([`${item.category}s`]);
+      queryClient.refetchQueries([`${item.category}`, "list"]);
     },
   });
 

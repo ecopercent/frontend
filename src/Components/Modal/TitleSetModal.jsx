@@ -17,7 +17,7 @@ export default function TitleSetModal({ queryData, onClose }) {
     // TODO: 현재 PATCH시 응답 데이터가 없음, 이슈 제안중
     // onSuccess: (data) => {
     // queryClient.setQueryData(
-    //   [`${queryData.category}s`],
+    //   [`${queryData.category}`, "list"],
     //   data
     // );
     onSuccess: () => {
