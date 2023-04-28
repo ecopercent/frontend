@@ -3,6 +3,13 @@ import { b64toBlob } from "../Utils/convert";
 
 export function getItem(id) {
   return axios.get(`/items/${id}`).then((res) => {
+    if (res.data.image) {
+      const file = b64toBlob(res.data.image, "image/png");
+      return {
+        ...res.data,
+        image: URL.createObjectURL(file),
+      };
+    }
     return res.data;
   });
 }
@@ -65,6 +72,13 @@ export function patchUsageCountUp(itemId) {
 export async function getTitleItem(category) {
   try {
     const res = await axios.get(`/users/me/title-${category}`);
+    if (res.data.image) {
+      const file = b64toBlob(res.data.image, "image/png");
+      return {
+        ...res.data,
+        image: URL.createObjectURL(file),
+      };
+    }
     return res.data;
   } catch (e) {
     return null;
