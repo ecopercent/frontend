@@ -26,7 +26,7 @@ export default function ProfileImg({
         <S.ProfileImgOpacity isUploaded={preview} />
         <S.ProfileImgOverlay
           isUploaded={preview}
-          src="/img/userProfileImgOverlay.png"
+          src="/img/ImgOverlay.png"
           alt="profile edit"
         />
         <S.ProfileImgPreview
