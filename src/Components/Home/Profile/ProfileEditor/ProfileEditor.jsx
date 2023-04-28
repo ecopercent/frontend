@@ -32,9 +32,10 @@ export default function ProfileEditor({ setIsEditing }) {
   const profileEditMutation = useMutation({
     mutationFn: patchUser,
     onSuccess: (data) => {
-      // TODO: 깜박이는거 줄일 수 없을까..
       queryClient.setQueryData(["user"], data);
+      queryClient.refetchQueries(["user"]);
       URL.revokeObjectURL(imgUrl);
+      setIsEditing();
     },
   });
 
