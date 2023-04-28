@@ -1,5 +1,5 @@
 import axios from "axios";
-import b64toBlob from "../Utils/convert";
+import { b64toBlob } from "../Utils/convert";
 
 export function postUserOfKakao(signUpForm) {
   return axios.post("/users/kakao", signUpForm).then((res) => {
