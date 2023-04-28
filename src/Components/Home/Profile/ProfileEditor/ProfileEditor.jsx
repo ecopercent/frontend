@@ -42,11 +42,12 @@ export default function ProfileEditor({ setIsEditing }) {
   function handleSubmit() {
     const formData = new FormData();
     formData.append(
-      "data",
+      "userData",
       new Blob([JSON.stringify(userData)], { type: "application/json" })
     );
-    if (preview) formData.append("file", new File([userImgFile], "file"));
-    else formData.append("file", null);
+    if (preview)
+      formData.append("profileImage", new File([userImgFile], "profileImage"));
+    else formData.append("profileImage", null);
     profileEditMutation.mutate(formData);
     return profileEditMutation.mutateAsync;
   }
