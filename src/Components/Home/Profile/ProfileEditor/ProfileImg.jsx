@@ -1,6 +1,5 @@
 import React from "react";
-import { imgCompress } from "../../../../Utils/convert";
-import * as S from "./style";
+import useImgInput from "../../../../hooks/useImgInput";
 
 export default function ProfileImg({
   imgFile,
@@ -8,38 +7,14 @@ export default function ProfileImg({
   preview,
   setPreview,
 }) {
-  const onUpload = async (e) => {
-    const uploadedImg = e.target.files[0];
-    const reader = new FileReader();
-    const compressedImg = await imgCompress(uploadedImg);
-    setImgFile(compressedImg);
+  const Form = useImgInput({
+    imgFile,
+    setImgFile,
+    preview,
+    setPreview,
+    h: 100,
+    w: 100,
+  });
 
-    reader.readAsDataURL(compressedImg);
-    reader.onloadend = () => {
-      setPreview(reader.result);
-    };
-  };
-
-  return (
-    <form>
-      <label htmlFor="profile-imgFile-input">
-        <S.ProfileImgOpacity isUploaded={preview} />
-        <S.ProfileImgOverlay
-          isUploaded={preview}
-          src="/img/ImgOverlay.png"
-          alt="profile edit"
-        />
-        <S.ProfileImgPreview
-          src={preview || imgFile}
-          alt="User profile preview"
-        />
-      </label>
-      <S.ProfileImgInput
-        id="profile-imgFile-input"
-        type="file"
-        accept="image/*"
-        onChange={onUpload}
-      />
-    </form>
-  );
+  return <Form />;
 }
