@@ -14,6 +14,7 @@ export default function ProfileImg({
     setPreview,
     h: 100,
     w: 100,
+    radius: "50%",
   });
 
   return <Form />;

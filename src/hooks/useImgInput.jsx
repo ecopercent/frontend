@@ -11,7 +11,8 @@ const ImgOpacity = styled.div`
   background: rgba(0, 0, 0, 0.2);
   ${(props) => {
     return `height: ${props.height + 0.5}px;
-    width: ${props.width + 0.5}px;`;
+    width: ${props.width + 0.5}px;
+    border-radius: ${props.radius};`;
   }}
 `;
 
@@ -32,13 +33,21 @@ const Input = styled.input`
 const ImgPreview = styled.img`
   ${(props) => {
     return `height: ${props.height}px;
-    width: ${props.width}px;`;
+    width: ${props.width}px;
+    border-radius: ${props.radius};`;
   }}
-  border-radius: 50%;
   border: 0.5px solid;
 `;
 
-const useImgInput = ({ imgFile, setImgFile, preview, setPreview, h, w }) => {
+const useImgInput = ({
+  imgFile,
+  setImgFile,
+  preview,
+  setPreview,
+  h,
+  w,
+  radius,
+}) => {
   const onUpload = async (e) => {
     const uploadedImg = e.target.files[0];
     const reader = new FileReader();
@@ -50,9 +59,12 @@ const useImgInput = ({ imgFile, setImgFile, preview, setPreview, h, w }) => {
       setPreview(reader.result);
     };
   };
+  // TODO: 유저인지 아이템인지 받아서 w,h,radius,기본이미지 지정하기
 
   function Opacity() {
-    return <ImgOpacity isUploaded={preview} height={h} width={w} />;
+    return (
+      <ImgOpacity isUploaded={preview} height={h} width={w} radius={radius} />
+    );
   }
 
   function Overlay() {
@@ -81,10 +93,12 @@ const useImgInput = ({ imgFile, setImgFile, preview, setPreview, h, w }) => {
   function Preview() {
     return (
       <ImgPreview
-        src={preview || imgFile}
+        // TODO: 기본 이미지 필요
+        src={preview || imgFile || "/img/ImgOverlay.png"}
         alt="img upload preview"
         height={h}
         width={w}
+        radius={radius}
       />
     );
   }
