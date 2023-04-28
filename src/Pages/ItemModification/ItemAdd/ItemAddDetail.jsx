@@ -44,7 +44,7 @@ const ItemAddDetail = ({ submitCallback }) => {
             maxLength={12}
           />
           <S.Span>타입</S.Span>
-          <S.Input value={type} onChange={onType} />
+          <S.Input value={type} onChange={onType} maxLength={12} />
           <S.Span>목표횟수</S.Span>
           <S.Input
             style={{ backgroundColor: "lightgray" }}
@@ -53,7 +53,18 @@ const ItemAddDetail = ({ submitCallback }) => {
             readOnly
           />
           <S.Span>구입가</S.Span>
-          <S.Input value={price} onChange={onPrice} type="number" />
+          <S.Input
+            value={price}
+            onChange={(e) => {
+              e.preventDefault();
+              if (e.target.value.length > e.target.maxLength)
+                e.target.value = e.target.value.slice(0, e.target.maxLength);
+              e.target.value = Number(e.target.value);
+              onPrice(e);
+            }}
+            maxLength={12}
+            type="number"
+          />
           <S.Span>구입일</S.Span>
           <S.Input value={purchaseDate} onChange={onPurchaseData} type="date" />
         </S.FormInnerWrapper>
