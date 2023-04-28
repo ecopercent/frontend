@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import imageCompression from "browser-image-compression";
 import * as S from "./style";
 
-export default function ProfileImg({ user, setUser }) {
-  const [isUploaded, setIsUploaded] = useState(false);
-  const [preview, setPreview] = useState(false);
-
+export default function ProfileImg({
+  imgFile,
+  setImgFile,
+  preview,
+  setPreview,
+}) {
   async function imgCompress(img) {
     const options = {
       maxSizeMB: 0.2,
@@ -15,57 +17,42 @@ export default function ProfileImg({ user, setUser }) {
 
     try {
       const compressdImg = await imageCompression(img, options);
-      console.log("이미지 압축 완료");
-      console.log(compressdImg);
       return compressdImg;
     } catch (error) {
-      console.log("이미지 압축 실패");
-      console.log(error);
+      // TODO: 이미지 압축 실패 시 핸들링
+      console.log("이미지 압축 실패", error);
       return img;
     }
   }
 
   async function onUpload(e) {
     const uploadedImg = e.target.files[0];
-    // setUser({ ...user, profileImage: uploadedImg });
     const reader = new FileReader();
-
-    console.log("업로드된 이미지");
-    console.log(uploadedImg);
-
-    console.log("이미지 압축 시작");
     const compressedImg = await imgCompress(uploadedImg);
-
-    window.URL.revokeObjectURL(user.profileImage);
-    setUser({ ...user, profileImage: compressedImg });
-    // setIsUploaded(true);
+    setImgFile(compressedImg);
 
     reader.readAsDataURL(compressedImg);
     reader.onloadend = () => {
-      console.log("미리보기를 위한 url로 변환");
-      console.log(reader.result);
-      // setUser({ ...user, profileImage: reader.result });
       setPreview(reader.result);
-      setIsUploaded(true);
     };
   }
 
   return (
     <form>
-      <label htmlFor="profile-img-input">
-        <S.ProfileImgOpacity isUploaded={isUploaded} />
+      <label htmlFor="profile-imgFile-input">
+        <S.ProfileImgOpacity isUploaded={preview} />
         <S.ProfileImgOverlay
-          isUploaded={isUploaded}
+          isUploaded={preview}
           src="/img/userProfileImgOverlay.png"
           alt="profile edit"
         />
         <S.ProfileImgPreview
-          src={isUploaded ? preview : user.profileImage}
+          src={preview || imgFile}
           alt="User profile preview"
         />
       </label>
       <S.ProfileImgInput
-        id="profile-img-input"
+        id="profile-imgFile-input"
         type="file"
         accept="image/*"
         onChange={(e) => {
