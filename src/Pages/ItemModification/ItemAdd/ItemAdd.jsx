@@ -1,7 +1,13 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+  useRef,
+} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import ItmeAddImage from "./ItmeAddImage";
+import ItemImage from "./ItemAddImage";
 import ItemAddDetail from "./ItemAddDetail";
 import ItemAddHead from "./ItemAddHead";
 import { ItemEditBorder, ItemEditWrap } from "../style";
@@ -43,18 +49,31 @@ const ItemAdd = () => {
     },
   });
 
+  const [preview, setPreview] = useState(null);
+  const itemImgFile = useRef();
+  const setItemImgFile = (set) => {
+    itemImgFile.current = set;
+  };
+
   const addItemOnAuth = useCallback(
     (input) => {
-      itemAddMutation.mutate({
-        itemImage: "이미지피커에서가져올거얏",
-        itemNickname: input.nickname,
-        itemCategory: item.category,
-        itemType: input.type,
-        itemBrand: input.brand,
-        itemPrice: input.price,
-        itemPurchaseDate: input.purchaseDate,
-      });
-
+      const formData = new FormData();
+      const itemData = {
+        ...input,
+        category: item.category,
+      };
+      formData.append(
+        "itemData",
+        new Blob([JSON.stringify(itemData)], { type: "application/json" })
+      );
+      if (itemImgFile.current) {
+        formData.append(
+          "itemImage",
+          new File([itemImgFile.current], "itemImage")
+        );
+      } else formData.append("itemImage", null);
+      // TODO: 아이템 기본 이미지 넣기
+      itemAddMutation.mutate(formData);
       navigate(-1);
     },
     [item.type]
@@ -77,7 +96,11 @@ const ItemAdd = () => {
       <ItemEditBorder width={innerWidth} height={innerHeight}>
         <ItemAddHead item={item} />
         <hr />
-        <ItmeAddImage />
+        <ItemImage
+          setImgFile={setItemImgFile}
+          preview={preview}
+          setPreview={setPreview}
+        />
         <hr />
         <ItemAddDetail
           submitCallback={

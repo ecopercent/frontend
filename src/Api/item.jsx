@@ -1,32 +1,15 @@
 import axios from "axios";
+import { b64toBlob } from "../Utils/convert";
 
 export function getItem(id) {
   return axios.get(`/items/${id}`).then((res) => {
     return res.data;
   });
 }
-export function postItem({
-  itemImage,
-  itemNickname,
-  itemCategory,
-  itemType,
-  itemBrand,
-  itemPrice,
-  itemPurchaseDate,
-}) {
-  return axios
-    .post(`/items`, {
-      image: itemImage,
-      nickname: itemNickname,
-      category: itemCategory,
-      type: itemType,
-      brand: itemBrand,
-      price: itemPrice,
-      purchaseDate: itemPurchaseDate,
-    })
-    .then((res) => {
-      return res.data;
-    });
+export function postItem(formData) {
+  return axios.post(`/items`, formData).then((res) => {
+    return res.data;
+  });
 }
 
 export function patchItem({
@@ -54,7 +37,16 @@ export function patchItem({
 
 export function getItemList(category) {
   return axios.get(`/items?category=${category}`).then((res) => {
-    return res.data;
+    return res.data.map((item) => {
+      if (item.image) {
+        const file = b64toBlob(item.image, "image/png");
+        return {
+          ...item,
+          image: URL.createObjectURL(file),
+        };
+      }
+      return item;
+    });
   });
 }
 
