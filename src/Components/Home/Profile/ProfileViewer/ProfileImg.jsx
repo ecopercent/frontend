@@ -11,13 +11,12 @@ export default function ProfileImg() {
     },
   });
 
-  const user = userQuery.data;
   return (
     <S.ProfileImg
       src={
-        userQuery.isLoading || userQuery.isError || user.profileImage === null
+        userQuery.isLoading || userQuery.isError
           ? "/img/userLoadingImage.png"
-          : user.profileImage
+          : userQuery?.data.profileImage
       }
       alt="user profile"
     />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { useMediaQuery } from "react-responsive";
 import { getUser, patchUser } from "../../../../Api/user";
@@ -21,36 +21,47 @@ export default function ProfileEditor({ setIsEditing }) {
 
   if (userQuery.isError) console.log(JSON.stringify(userQuery.error));
 
-  const [localUser, setLocalUser] = useState({
+  const [userData, setUserData] = useState({
     nickname: userQuery.data.nickname,
     profileMessage: userQuery.data.profileMessage,
-    profileImage: userQuery.data.profileImage,
   });
+  const [userImgFile, setUserImgFile] = useState(userQuery.data.profileImage);
+  const [preview, setPreview] = useState(null);
+  const imgUrl = useRef(userQuery.data.profileImage);
 
   const profileEditMutation = useMutation({
     mutationFn: patchUser,
     onSuccess: (data) => {
+      // TODO: 깜박이는거 줄일 수 없을까..
       queryClient.setQueryData(["user"], data);
-      queryClient.invalidateQueries(["user"]);
+      URL.revokeObjectURL(imgUrl);
     },
   });
 
   function handleSubmit() {
-    // TODO: 수정 필요
     const formData = new FormData();
-    formData.append("nickname", localUser.nickname);
-    formData.append("profileImage", localUser.profileImage);
-    formData.append("profileMessage", localUser.profileMessage);
+    formData.append(
+      "data",
+      new Blob([JSON.stringify(userData)], { type: "application/json" })
+    );
+    if (preview) formData.append("file", new File([userImgFile], "file"));
+    else formData.append("file", null);
     profileEditMutation.mutate(formData);
+    return profileEditMutation.mutateAsync;
   }
 
   return (
     <S.ProfileContainer isMobile={isMobile}>
       <S.ProfileImgTextWrapper isMobile={isMobile}>
-        <ProfileImg user={localUser} setUser={setLocalUser} />
+        <ProfileImg
+          imgFile={userImgFile}
+          setImgFile={setUserImgFile}
+          preview={preview}
+          setPreview={setPreview}
+        />
         <ProfileText
-          user={localUser}
-          setUser={setLocalUser}
+          userData={userData}
+          setUserData={setUserData}
           isMobile={isMobile}
         />
       </S.ProfileImgTextWrapper>
