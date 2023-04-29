@@ -9,16 +9,16 @@ export default function ProfileText({ userData, setUserData, isMobile }) {
         onChange={(e) => {
           setUserData({ ...userData, nickname: e.target.value });
         }}
-        rows="1"
-        maxLength="8"
+        rows={1}
+        maxLength={8}
       />
       <S.ProfileTextarea
         value={userData.profileMessage}
         onChange={(e) => {
           setUserData({ ...userData, profileMessage: e.target.value });
         }}
-        rows={isMobile ? "4" : "3"}
-        maxLength="70"
+        rows={isMobile ? 4 : 3}
+        maxLength={35}
       />
     </S.ProfileTextForm>
   );
