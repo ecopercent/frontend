@@ -1,16 +1,17 @@
 import axios from "axios";
 import { b64toBlob } from "../Utils/convert";
 
-export function postUserOfKakao({ formData, access }) {
-  return axios
-    .post("/users/kakao", formData, {
+export async function postUserOfKakao({ formData, access }) {
+  try {
+    const res = await axios.post("/users/kakao", formData, {
       headers: {
         Authorization: `Bearer ${access}`,
       },
-    })
-    .then((res) => {
-      return res.data;
     });
+    return res.data;
+  } catch (err) {
+    throw err.response.status;
+  }
 }
 
 export function postUserOfApple(signUpForm) {

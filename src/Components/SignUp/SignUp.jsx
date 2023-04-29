@@ -25,6 +25,11 @@ export default function SignUp() {
   const [warningText, setWarningText] = useState(null);
   const nicknameRef = useRef();
 
+  function removeCookies() {
+    cookie.remove("signup", { path: "/" });
+    cookie.remove("oauth_provider", { path: "/" });
+  }
+
   // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
     // TODO: 액세스 없는 경우 로그인 페이지로 리다이렉트
@@ -56,7 +61,20 @@ export default function SignUp() {
         ? postUserOfKakao
         : postUserOfApple,
     onSuccess: () => {
-      cookie.remove("oauth_provider", { path: "/" });
+      return navigate("/welcome", { state: true });
+    },
+    onError: (code) => {
+      if (code === 403) {
+        cookie.remove("oauth_provider", { path: "/" });
+        alert("세션이 만료되었습니다.");
+        removeCookies();
+        return navigate("/");
+      }
+      if (code === 409) {
+        nicknameRef.current.focus();
+        return setWarningText("이미 사용중인 닉네임입니다.");
+      }
+      return code;
     },
   });
 
@@ -68,11 +86,6 @@ export default function SignUp() {
       nicknameRef.current.focus();
       return setWarningText("닉네임을 입력하세요.");
     }
-    // TODO: mutate 결과로 핸들링
-    // if (!nicknameIsValid) {
-    //   nicknameRef.current.focus();
-    //   return setWarningText("이미 사용중인 닉네임입니다.");
-    // }
 
     const formData = new FormData();
 
@@ -97,8 +110,7 @@ export default function SignUp() {
       formData.append("ecobagImage", null);
     }
 
-    signUpMutation.mutate({ formData, access });
-    return navigate("/welcome", { state: true });
+    return signUpMutation.mutate({ formData, access });
   };
 
   const handleClick = () => {
@@ -114,8 +126,7 @@ export default function SignUp() {
           }}
           onConfirm={() => {
             setModalIsOpen(false);
-            cookie.remove("signup");
-            cookie.remove("oauth_provider");
+            removeCookies();
             navigate("/");
           }}
         />
