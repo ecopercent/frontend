@@ -8,9 +8,7 @@ const ItemImage = ({ setImgFile, preview, setPreview }) => {
     setImgFile,
     preview,
     setPreview,
-    h: 200,
-    w: 160,
-    radius: "100px",
+    type: "item",
   });
 
   return (

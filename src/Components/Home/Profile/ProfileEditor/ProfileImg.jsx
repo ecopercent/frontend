@@ -12,9 +12,7 @@ export default function ProfileImg({
     setImgFile,
     preview,
     setPreview,
-    h: 100,
-    w: 100,
-    radius: "50%",
+    type: "user",
   });
 
   return <Form />;

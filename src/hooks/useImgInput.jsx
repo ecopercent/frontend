@@ -10,9 +10,13 @@ const ImgOpacity = styled.div`
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.2);
   ${(props) => {
-    return `height: ${props.height + 0.5}px;
-    width: ${props.width + 0.5}px;
-    border-radius: ${props.radius};`;
+    if (props.type === "user")
+      return `height: 100.5px;
+              width: 100.5px;
+              border-radius: 50%;`;
+    return `height: 200.5px;
+            width: 160.5px;
+            border-radius: 100px;`;
   }}
 `;
 
@@ -32,22 +36,18 @@ const Input = styled.input`
 
 const ImgPreview = styled.img`
   ${(props) => {
-    return `height: ${props.height}px;
-    width: ${props.width}px;
-    border-radius: ${props.radius};`;
+    if (props.type === "user")
+      return `height: 100.5px;
+              width: 100.5px;
+              border-radius: 50%;`;
+    return `height: 200.5px;
+            width: 160.5px;
+            border-radius: 100px;`;
   }}
   border: 0.5px solid;
 `;
 
-const useImgInput = ({
-  imgFile,
-  setImgFile,
-  preview,
-  setPreview,
-  h,
-  w,
-  radius,
-}) => {
+const useImgInput = ({ imgFile, setImgFile, preview, setPreview, type }) => {
   const onUpload = async (e) => {
     const uploadedImg = e.target.files[0];
     const reader = new FileReader();
@@ -59,12 +59,9 @@ const useImgInput = ({
       setPreview(reader.result);
     };
   };
-  // TODO: 유저인지 아이템인지 받아서 w,h,radius,기본이미지 지정하기
 
   function Opacity() {
-    return (
-      <ImgOpacity isUploaded={preview} height={h} width={w} radius={radius} />
-    );
+    return <ImgOpacity isUploaded={preview} type={type} />;
   }
 
   function Overlay() {
@@ -73,8 +70,6 @@ const useImgInput = ({
         isUploaded={preview}
         src="/img/ImgOverlay.png"
         alt="img edit"
-        height={h}
-        width={w}
       />
     );
   }
@@ -96,9 +91,7 @@ const useImgInput = ({
         // TODO: 기본 이미지 필요
         src={preview || imgFile || "/img/ImgOverlay.png"}
         alt="img upload preview"
-        height={h}
-        width={w}
-        radius={radius}
+        type={type}
       />
     );
   }
