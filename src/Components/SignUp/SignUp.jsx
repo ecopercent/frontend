@@ -92,12 +92,15 @@ export default function SignUp() {
 
     formData.append(
       "userData",
-      new Blob([
-        JSON.stringify({
-          ...userInput,
-          oAuthProvider: cookie.load("oauth_provider"),
-        }),
-      ])
+      new Blob(
+        [
+          JSON.stringify({
+            ...userInput,
+            oAuthProvider: cookie.load("oauth_provider"),
+          }),
+        ],
+        { type: "application/json" }
+      )
     );
     if (imgFile)
       formData.append("profileImage", new File([imgFile], "profileImage"));
@@ -105,11 +108,17 @@ export default function SignUp() {
 
     // TODO: 아이템 이미지 넣기
     if (state.tumbler) {
-      formData.append("tumblerData", new Blob([JSON.stringify(state.tumbler)]));
+      formData.append(
+        "tumblerData",
+        new Blob([JSON.stringify(state.tumbler)], { type: "application/json" })
+      );
       formData.append("tumblerImage", null);
     }
     if (state.ecobag) {
-      formData.append("ecobagData", new Blob([JSON.stringify(state.ecobag)]));
+      formData.append(
+        "ecobagData",
+        new Blob([JSON.stringify(state.ecobag)], { type: "application/json" })
+      );
       formData.append("ecobagImage", null);
     }
 
