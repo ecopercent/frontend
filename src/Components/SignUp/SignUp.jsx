@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
 import { useMutation } from "@tanstack/react-query";
@@ -7,8 +7,8 @@ import CancelCheckModal from "../Modal/CancelCheckModal";
 import SignUpUser from "./Form/SignUpUser";
 import SignUpItems from "./Form/SignUpItems";
 import { postUserOfKakao, postUserOfApple } from "../../Api/user";
-import * as S from "./style";
 // import SignUpItemContext from "../../hooks/SignUpItemContext";
+import * as S from "./style";
 
 const initialUser = {
   nickname: "",
@@ -24,6 +24,7 @@ export default function SignUp() {
   const [userInput, setUserInput] = useState(initialUser);
   const [nicknameIsValid, setNicknameIsValid] = useState(false);
   const [warningText, setWarningText] = useState(null);
+  const nicknameRef = useRef();
 
   // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
@@ -70,10 +71,15 @@ export default function SignUp() {
       ...userInput,
       oAuthProvider: cookie.load("oauth_provider"),
     };
-    if (signUpForm.nickname.length === 0)
+    if (signUpForm.nickname.length === 0) {
+      nicknameRef.current.focus();
       return setWarningText("닉네임을 입력하세요.");
-    if (!nicknameIsValid)
-      return setWarningText("닉네임 중복확인을 완료해주세요.");
+    }
+    // TODO: 닉네임 중복 안내
+    if (!nicknameIsValid) {
+      nicknameRef.current.focus();
+      return setWarningText("이미 사용중인 닉네임입니다.");
+    }
 
     signUpForm = {
       ...signUpForm,
@@ -117,6 +123,7 @@ export default function SignUp() {
             setNicknameIsValid={setNicknameIsValid}
             warningText={warningText}
             setWarningText={setWarningText}
+            ref={nicknameRef}
           />
           <SignUpItems category="tumbler" saveUserInput={saveUserInput} />
           <SignUpItems category="ecobag" saveUserInput={saveUserInput} />

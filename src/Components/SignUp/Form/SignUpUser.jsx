@@ -1,14 +1,17 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import * as S from "./style";
 
-export default function SignUpUser({
-  userInput,
-  setUserInput,
-  nicknameIsValid,
-  setNicknameIsValid,
-  warningText,
-  setWarningText,
-}) {
+function SignUpUser(
+  {
+    userInput,
+    setUserInput,
+    nicknameIsValid,
+    setNicknameIsValid,
+    warningText,
+    setWarningText,
+  },
+  ref
+) {
   const validateNickname = () => {
     // TODO: 닉네임 중복확인 api 요청 하고 결과에 따른 로직 추가
     setNicknameIsValid(true);
@@ -53,6 +56,7 @@ export default function SignUpUser({
           닉네임 <span style={{ color: "red" }}>*</span>
         </S.Label>
         <S.Input
+          ref={ref}
           minLength={2}
           maxLength={8}
           type="text"
@@ -86,3 +90,5 @@ export default function SignUpUser({
     </>
   );
 }
+
+export default forwardRef(SignUpUser);
