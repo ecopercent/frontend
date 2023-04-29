@@ -13,12 +13,13 @@ import * as S from "./style";
 const initialUser = {
   nickname: "",
   profileMessage: "",
-  email: "",
 };
 
-// TODO: OAuth를 거친 사람만 가입 가능하게
 export default function SignUp() {
   const navigate = useNavigate();
+  const access = navigate.state;
+  if (!access) navigate("/");
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [userInput, setUserInput] = useState(initialUser);
   const [nicknameIsValid, setNicknameIsValid] = useState(true);
@@ -31,10 +32,6 @@ export default function SignUp() {
       setUserInput(cookie.load("signup"));
       cookie.remove("signup");
     }
-    if (cookie.load("email"))
-      setUserInput((oldInput) => {
-        return { ...oldInput, email: cookie.load("email") };
-      });
     if (cookie.load("validCheck")) {
       setNicknameIsValid(cookie.load("validCheck"));
       cookie.remove("validCheck");
@@ -57,7 +54,6 @@ export default function SignUp() {
         ? postUserOfKakao
         : postUserOfApple,
     onSuccess: () => {
-      cookie.remove("email", { path: "/" });
       cookie.remove("oauth_provider", { path: "/" });
     },
   });
@@ -99,7 +95,7 @@ export default function SignUp() {
       formData.append("ecobagImage", null);
     }
 
-    signUpMutation.mutate(formData);
+    signUpMutation.mutate(formData, access);
     return navigate("/welcome", { state: true });
   };
 
@@ -117,7 +113,6 @@ export default function SignUp() {
           onConfirm={() => {
             setModalIsOpen(false);
             cookie.remove("signup");
-            cookie.remove("email");
             cookie.remove("oauth_provider");
             navigate("/");
           }}
