@@ -24,6 +24,7 @@ export default function SignUp() {
   const [nicknameIsValid, setNicknameIsValid] = useState(true);
   const [warningText, setWarningText] = useState(null);
   const nicknameRef = useRef();
+  const [imgFile, setImgFile] = useState();
 
   function removeCookies() {
     cookie.remove("signup", { path: "/" });
@@ -98,7 +99,9 @@ export default function SignUp() {
         }),
       ])
     );
-    formData.append("profileImage", null);
+    if (imgFile)
+      formData.append("profileImage", new File([imgFile], "profileImage"));
+    else formData.append("profileImage", null);
 
     // TODO: 아이템 이미지 넣기
     if (state.tumbler) {
@@ -140,6 +143,7 @@ export default function SignUp() {
             setNicknameIsValid={setNicknameIsValid}
             warningText={warningText}
             setWarningText={setWarningText}
+            setImgFile={setImgFile}
             ref={nicknameRef}
           />
           <SignUpItems category="tumbler" saveUserInput={saveUserInput} />

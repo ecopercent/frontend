@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import * as S from "./style";
+import useImgInput from "../../../hooks/useImgInput";
 
 function SignUpUser(
   {
@@ -9,9 +10,16 @@ function SignUpUser(
     setNicknameIsValid,
     warningText,
     setWarningText,
+    setImgFile,
   },
   ref
 ) {
+  const ImgInputForm = useImgInput({
+    prevImg: null,
+    setUploadedFile: setImgFile,
+    type: "signUpUser",
+  });
+
   const validateNickname = () => {
     // TODO: 닉네임 중복확인 api 요청 하고 결과에 따른 로직 추가
     setNicknameIsValid(true);
@@ -34,23 +42,7 @@ function SignUpUser(
 
   return (
     <>
-      <S.InputItem>
-        <div
-          style={{
-            width: "130px",
-            height: "130px",
-            backgroundColor: "gray",
-            borderRadius: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "0 auto",
-          }}
-        >
-          {/* TODO: 프로필 이미지 input은 이미지 서버 완료 후에 재작업 */}
-          이미지 Input
-        </div>
-      </S.InputItem>
+      <ImgInputForm />
       <S.InputItem>
         <S.Label>
           닉네임 <span style={{ color: "red" }}>*</span>

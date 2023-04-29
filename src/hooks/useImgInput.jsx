@@ -20,6 +20,10 @@ const ImgOpacity = styled.div`
       return `height: 100.5px;
               width: 100.5px;
               border-radius: 50%;`;
+    if (props.type === "signUpUser")
+      return `height: 150.5px;
+              width: 150.5px;
+              border-radius: 50%;`;
     return `height: 200.5px;
             width: 160.5px;
             border-radius: 100px;`;
@@ -46,10 +50,14 @@ const ImgPreview = styled.img`
   ${(props) => {
     if (props.type === "user")
       return `height: 100.5px;
-      width: 100.5px;
+              width: 100.5px;
+              border-radius: 50%;`;
+    if (props.type === "signUpUser")
+      return `height: 150.5px;
+              width: 150.5px;
               border-radius: 50%;`;
     return `height: 200.5px;
-    width: 160.5px;
+            width: 160.5px;
             border-radius: 100px;`;
   }}
   border: 0.5px solid;
