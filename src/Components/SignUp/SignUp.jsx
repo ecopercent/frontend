@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
 import { useMutation } from "@tanstack/react-query";
 import { PcPageWrap } from "../../Layouts/Main/style";
@@ -17,8 +17,7 @@ const initialUser = {
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const access = navigate.state;
-  if (!access) navigate("/");
+  const { access } = useLocation().state;
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [userInput, setUserInput] = useState(initialUser);
@@ -28,6 +27,9 @@ export default function SignUp() {
 
   // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
+    // TODO: 액세스 없는 경우 로그인 페이지로 리다이렉트
+    // if (!access) navigate("/");
+
     if (cookie.load("signup")) {
       setUserInput(cookie.load("signup"));
       cookie.remove("signup");
@@ -95,7 +97,7 @@ export default function SignUp() {
       formData.append("ecobagImage", null);
     }
 
-    signUpMutation.mutate(formData, access);
+    signUpMutation.mutate({ formData, access });
     return navigate("/welcome", { state: true });
   };
 

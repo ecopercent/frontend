@@ -1,7 +1,7 @@
 import axios from "axios";
 import { b64toBlob } from "../Utils/convert";
 
-export function postUserOfKakao(formData, access) {
+export function postUserOfKakao({ formData, access }) {
   return axios
     .post("/users/kakao", formData, {
       headers: {
