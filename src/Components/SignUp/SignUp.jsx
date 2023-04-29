@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
 import { useMutation } from "@tanstack/react-query";
@@ -7,12 +7,11 @@ import CancelCheckModal from "../Modal/CancelCheckModal";
 import SignUpUser from "./Form/SignUpUser";
 import SignUpItems from "./Form/SignUpItems";
 import { postUserOfKakao, postUserOfApple } from "../../Api/user";
-// import SignUpItemContext from "../../hooks/SignUpItemContext";
+import SignUpItemContext from "../../hooks/SignUpItemContext";
 import * as S from "./style";
 
 const initialUser = {
   nickname: "",
-  // profileImage: "",
   profileMessage: "",
   email: "",
 };
@@ -22,7 +21,7 @@ export default function SignUp() {
   const navigate = useNavigate();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [userInput, setUserInput] = useState(initialUser);
-  const [nicknameIsValid, setNicknameIsValid] = useState(false);
+  const [nicknameIsValid, setNicknameIsValid] = useState(true);
   const [warningText, setWarningText] = useState(null);
   const nicknameRef = useRef();
 
@@ -64,33 +63,43 @@ export default function SignUp() {
   });
 
   // 아이템 받아오는 용
-  // const { state } = useContext(SignUpItemContext);
+  const { state } = useContext(SignUpItemContext);
 
   const handleSubmit = () => {
-    let signUpForm = {
-      ...userInput,
-      oAuthProvider: cookie.load("oauth_provider"),
-    };
-    if (signUpForm.nickname.length === 0) {
+    if (userInput.nickname.length === 0) {
       nicknameRef.current.focus();
       return setWarningText("닉네임을 입력하세요.");
     }
-    // TODO: 닉네임 중복 안내
-    if (!nicknameIsValid) {
-      nicknameRef.current.focus();
-      return setWarningText("이미 사용중인 닉네임입니다.");
+    // TODO: mutate 결과로 핸들링
+    // if (!nicknameIsValid) {
+    //   nicknameRef.current.focus();
+    //   return setWarningText("이미 사용중인 닉네임입니다.");
+    // }
+
+    const formData = new FormData();
+
+    formData.append(
+      "userData",
+      new Blob([
+        JSON.stringify({
+          ...userInput,
+          oAuthProvider: cookie.load("oauth_provider"),
+        }),
+      ])
+    );
+    formData.append("profileImage", null);
+
+    // TODO: 아이템 이미지 넣기
+    if (state.tumbler) {
+      formData.append("tumblerData", new Blob([JSON.stringify(state.tumbler)]));
+      formData.append("tumblerImage", null);
+    }
+    if (state.ecobag) {
+      formData.append("ecobagData", new Blob([JSON.stringify(state.ecobag)]));
+      formData.append("ecobagImage", null);
     }
 
-    signUpForm = {
-      ...signUpForm,
-      oAuthProvider: cookie.load("oauth_provider"),
-    };
-
-    // TODO: api 업데이트 되면 아이템 폼에 넣기
-    // if (state.tumbler)
-    // if (state.ecobag)
-
-    signUpMutation.mutate(signUpForm);
+    signUpMutation.mutate(formData);
     return navigate("/welcome", { state: true });
   };
 
