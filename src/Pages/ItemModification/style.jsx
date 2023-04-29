@@ -43,7 +43,6 @@ export const ItemImageWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   padding-top: 2%;
   padding-bottom: 3%;
   height: 25%;

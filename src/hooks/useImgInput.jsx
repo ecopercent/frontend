@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { imgCompress } from "../Utils/convert";
+
+const ImgLayout = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const ImgOpacity = styled.div`
   display: ${(props) => {
@@ -18,6 +24,7 @@ const ImgOpacity = styled.div`
             width: 160.5px;
             border-radius: 100px;`;
   }}
+  cursor: pointer;
 `;
 
 const ImgOverlay = styled.img`
@@ -28,6 +35,7 @@ const ImgOverlay = styled.img`
   height: 40px;
   width: 40px;
   margin: 30px 30px;
+  cursor: pointer;
 `;
 
 const Input = styled.input`
@@ -38,21 +46,28 @@ const ImgPreview = styled.img`
   ${(props) => {
     if (props.type === "user")
       return `height: 100.5px;
-              width: 100.5px;
+      width: 100.5px;
               border-radius: 50%;`;
     return `height: 200.5px;
-            width: 160.5px;
+    width: 160.5px;
             border-radius: 100px;`;
   }}
   border: 0.5px solid;
+  cursor: pointer;
 `;
 
-const useImgInput = ({ imgFile, setImgFile, preview, setPreview, type }) => {
+const useImgInput = ({ prevImg, setUploadedFile, type }) => {
+  const [preview, setPreview] = useState(null);
+  let defaultImg;
+  if (type === "tumbler") defaultImg = "/img/tumblerDefault.png";
+  else if (type === "ecobag") defaultImg = "/img/ecobagDefault.png";
+  else defaultImg = "/img/userDefault.png";
+
   const onUpload = async (e) => {
     const uploadedImg = e.target.files[0];
     const reader = new FileReader();
     const compressedImg = await imgCompress(uploadedImg);
-    setImgFile(compressedImg);
+    setUploadedFile(compressedImg);
 
     reader.readAsDataURL(compressedImg);
     reader.onloadend = () => {
@@ -88,28 +103,27 @@ const useImgInput = ({ imgFile, setImgFile, preview, setPreview, type }) => {
   function Preview() {
     return (
       <ImgPreview
-        // TODO: 기본 이미지 필요
-        src={preview || imgFile || "/img/ImgOverlay.png"}
+        src={preview || prevImg || defaultImg}
         alt="img upload preview"
         type={type}
       />
     );
   }
 
-  function Form() {
+  function ImgInputForm() {
     return (
       <form>
-        <label htmlFor="imgFile-input">
+        <ImgLayout htmlFor="imgFile-input">
           <Opacity />
           <Overlay />
           <Preview />
-        </label>
+        </ImgLayout>
         <ImgInput />
       </form>
     );
   }
 
-  return Form;
+  return ImgInputForm;
 };
 
 export default useImgInput;
