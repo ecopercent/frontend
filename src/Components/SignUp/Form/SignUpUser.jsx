@@ -1,17 +1,9 @@
 import React, { forwardRef } from "react";
-import * as S from "./style";
 import useImgInput from "../../../hooks/useImgInput";
+import * as S from "./style";
 
 function SignUpUser(
-  {
-    userInput,
-    setUserInput,
-    nicknameIsValid,
-    setNicknameIsValid,
-    warningText,
-    setWarningText,
-    setImgFile,
-  },
+  { userInput, setUserInput, warningText, setWarningText, setImgFile },
   ref
 ) {
   const ImgInputForm = useImgInput({
@@ -19,14 +11,6 @@ function SignUpUser(
     setUploadedFile: setImgFile,
     type: "signUpUser",
   });
-
-  const validateNickname = () => {
-    // TODO: 닉네임 중복확인 api 요청 하고 결과에 따른 로직 추가
-    setNicknameIsValid(true);
-    setWarningText(null);
-    if (nicknameIsValid) setNicknameIsValid(false);
-    alert("중복 확인 API 호출");
-  };
 
   const lengthSliceInKorean = (e) => {
     if (e.target.value.length > e.target.maxLength)
@@ -36,7 +20,6 @@ function SignUpUser(
   const handleNicknameInput = (e) => {
     lengthSliceInKorean(e);
     setUserInput({ ...userInput, nickname: e.target.value });
-    if (nicknameIsValid) setNicknameIsValid(false);
     if (warningText) setWarningText(null);
   };
 
@@ -55,14 +38,6 @@ function SignUpUser(
           value={userInput.nickname}
           onChange={handleNicknameInput}
         />
-        <S.Btn
-          type="button"
-          onClick={validateNickname}
-          disabled={nicknameIsValid || userInput.nickname.length <= 1}
-        >
-          중복확인
-        </S.Btn>
-        {nicknameIsValid && <S.ValidCheckIcon />}
         {warningText && <S.WarningText>{warningText}</S.WarningText>}
       </S.InputItem>
       <S.InputItem>

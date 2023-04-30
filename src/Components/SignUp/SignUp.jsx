@@ -21,7 +21,6 @@ export default function SignUp() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [userInput, setUserInput] = useState(initialUser);
-  const [nicknameIsValid, setNicknameIsValid] = useState(true);
   const [warningText, setWarningText] = useState(null);
   const nicknameRef = useRef();
   const [imgFile, setImgFile] = useState(null);
@@ -40,10 +39,6 @@ export default function SignUp() {
       setUserInput(cookie.load("signup"));
       cookie.remove("signup");
     }
-    if (cookie.load("validCheck")) {
-      setNicknameIsValid(cookie.load("validCheck"));
-      cookie.remove("validCheck");
-    }
     if (cookie.load("warning")) {
       setWarningText(cookie.load("warning"));
       cookie.remove("warning");
@@ -52,7 +47,6 @@ export default function SignUp() {
 
   const saveUserInput = () => {
     cookie.save("signup", userInput);
-    if (nicknameIsValid) cookie.save("validCheck", nicknameIsValid);
     if (warningText) cookie.save("warning", warningText);
   };
 
@@ -161,8 +155,6 @@ export default function SignUp() {
           <SignUpUser
             userInput={userInput}
             setUserInput={setUserInput}
-            nicknameIsValid={nicknameIsValid}
-            setNicknameIsValid={setNicknameIsValid}
             warningText={warningText}
             setWarningText={setWarningText}
             setImgFile={setImgFile}
