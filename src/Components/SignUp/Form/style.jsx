@@ -145,6 +145,7 @@ export const ItemImg = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 100%;
+  object-fit: cover;
 
   margin-right: 5px;
 `;

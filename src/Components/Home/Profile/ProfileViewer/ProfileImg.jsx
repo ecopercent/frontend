@@ -14,8 +14,10 @@ export default function ProfileImg() {
   return (
     <S.ProfileImg
       src={
-        userQuery.isLoading || userQuery.isError
-          ? "/img/userDefault.png"
+        userQuery.isLoading ||
+        userQuery.isError ||
+        !userQuery?.data.profileImage
+          ? "/img/default_user.png"
           : userQuery?.data.profileImage
       }
       alt="user profile"

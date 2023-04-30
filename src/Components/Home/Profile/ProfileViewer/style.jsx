@@ -35,6 +35,7 @@ export const ProfileImg = styled.img`
   width: 100px;
   border-radius: 50%;
   border: 0.5px solid;
+  object-fit: cover;
 `;
 
 export const ProfileTextContainer = styled.div`

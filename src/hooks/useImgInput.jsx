@@ -62,14 +62,15 @@ const ImgPreview = styled.img`
   }}
   border: 0.5px solid;
   cursor: pointer;
+  object-fit: cover;
 `;
 
 const useImgInput = ({ prevImg, setUploadedFile, type }) => {
   const [preview, setPreview] = useState(null);
   let defaultImg;
-  if (type === "tumbler") defaultImg = "/img/tumblerDefault.png";
-  else if (type === "ecobag") defaultImg = "/img/ecobagDefault.png";
-  else defaultImg = "/img/userDefault.png";
+  if (type === "tumbler") defaultImg = "/img/default_tumbler.png";
+  else if (type === "ecobag") defaultImg = "/img/default_ecobag.png";
+  else defaultImg = "/img/default_user.png";
 
   const onUpload = async (e) => {
     const uploadedImg = e.target.files[0];
