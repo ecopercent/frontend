@@ -141,11 +141,9 @@ export const SetBox = styled.div`
   align-items: center;
 `;
 
-// 임시로 div 태그 사용. 추후 img 태그 변경
-export const ItemImg = styled.div`
+export const ItemImg = styled.img`
   width: 50px;
   height: 50px;
-  background-color: gray;
   border-radius: 100%;
 
   margin-right: 5px;

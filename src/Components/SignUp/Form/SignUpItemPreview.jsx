@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as S from "./style";
 
-export default function SignUpItemPreview({ initialItem }) {
+export default function SignUpItemPreview({ initialItem, initialImg }) {
+  const url = URL.createObjectURL(initialImg);
+
+  useEffect(() => {
+    return () => {
+      URL.revokeObjectURL(url);
+    };
+  }, [initialImg]);
+
   return (
     <S.ItemPreviewBox>
       <S.SetBox>
-        <S.ItemImg />
+        <S.ItemImg src={url} />
         <span>{initialItem.nickname}</span>
       </S.SetBox>
       <S.BundleOfTwoBox>
