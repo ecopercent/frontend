@@ -1,5 +1,5 @@
 import axios from "axios";
-import { b64toBlob } from "../Utils/convert";
+import { base64toBlob } from "../Utils/convert";
 
 export async function postUserOfKakao({ formData, access }) {
   try {
@@ -23,7 +23,7 @@ export function postUserOfApple(signUpForm) {
 export function getUser() {
   return axios.get(`/users/me`).then((res) => {
     if (res.data.profileImage) {
-      const file = b64toBlob(res.data.profileImage, "image/png");
+      const file = base64toBlob(res.data.profileImage, "image/png");
       res.data.profileImage = URL.createObjectURL(file);
     }
     return res.data;
@@ -33,7 +33,7 @@ export function getUser() {
 export function patchUser(formData) {
   return axios.patch(`/users`, formData).then((res) => {
     if (res.data.profileImage) {
-      const file = b64toBlob(res.data.profileImage, "image/png");
+      const file = base64toBlob(res.data.profileImage, "image/png");
       res.data.profileImage = URL.createObjectURL(file);
     }
     return res.data;

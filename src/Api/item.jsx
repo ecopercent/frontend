@@ -1,10 +1,10 @@
 import axios from "axios";
-import { b64toBlob } from "../Utils/convert";
+import { base64toBlob } from "../Utils/convert";
 
 export function getItem(id) {
   return axios.get(`/items/${id}`).then((res) => {
     if (res.data.image) {
-      const file = b64toBlob(res.data.image, "image/png");
+      const file = base64toBlob(res.data.image, "image/png");
       return {
         ...res.data,
         image: URL.createObjectURL(file),
@@ -46,7 +46,7 @@ export function getItemList(category) {
   return axios.get(`/items?category=${category}`).then((res) => {
     return res.data.map((item) => {
       if (item.image) {
-        const file = b64toBlob(item.image, "image/png");
+        const file = base64toBlob(item.image, "image/png");
         return {
           ...item,
           image: URL.createObjectURL(file),
@@ -73,7 +73,7 @@ export async function getTitleItem(category) {
   try {
     const res = await axios.get(`/users/me/title-${category}`);
     if (res.data.image) {
-      const file = b64toBlob(res.data.image, "image/png");
+      const file = base64toBlob(res.data.image, "image/png");
       return {
         ...res.data,
         image: URL.createObjectURL(file),
