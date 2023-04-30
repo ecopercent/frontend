@@ -26,7 +26,7 @@ export default function SignUp() {
   const [imgFile, setImgFile] = useState(null);
 
   function removeCookies() {
-    cookie.remove("signup", { path: "/signup" });
+    cookie.remove("signup", { path: "/" });
     URL.revokeObjectURL(cookie.load("signupImg"));
     cookie.remove("signupImg", { path: "/" });
     cookie.remove("oauth_provider", { path: "/" });
@@ -104,30 +104,14 @@ export default function SignUp() {
     if (state.tumbler) {
       formData.append(
         "tumblerData",
-        new Blob(
-          [
-            JSON.stringify({
-              ...state.tumbler,
-              category: "tumbler",
-            }),
-          ],
-          { type: "application/json" }
-        )
+        new Blob([JSON.stringify(state.tumbler)], { type: "application/json" })
       );
       formData.append("tumblerImage", state.tumblerImg);
     }
     if (state.ecobag) {
       formData.append(
         "ecobagData",
-        new Blob(
-          [
-            JSON.stringify({
-              ...state.ecobag,
-              category: "ecobag",
-            }),
-          ],
-          { type: "application/json" }
-        )
+        new Blob([JSON.stringify(state.ecobag)], { type: "application/json" })
       );
       formData.append("ecobagImage", state.tumblerImg);
     }

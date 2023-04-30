@@ -78,7 +78,7 @@ const ItemAdd = () => {
     (input) => {
       dispatch({
         type: `${item.category}Submit`,
-        input,
+        input: { ...input, category: item.category },
       });
       dispatch({
         type: `${item.category}Img`,

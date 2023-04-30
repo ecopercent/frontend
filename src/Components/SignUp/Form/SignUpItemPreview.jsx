@@ -1,8 +1,10 @@
+// import React from "react";
 import React, { useEffect } from "react";
 import * as S from "./style";
 
 export default function SignUpItemPreview({ initialItem, initialImg }) {
-  const url = URL.createObjectURL(initialImg);
+  let url;
+  if (initialImg) url = URL.createObjectURL(initialImg);
 
   useEffect(() => {
     return () => {
@@ -13,7 +15,7 @@ export default function SignUpItemPreview({ initialItem, initialImg }) {
   return (
     <S.ItemPreviewBox>
       <S.SetBox>
-        <S.ItemImg src={url} />
+        <S.ItemImg src={url || `/img/default_${initialItem.category}.png`} />
         <span>{initialItem.nickname}</span>
       </S.SetBox>
       <S.BundleOfTwoBox>
