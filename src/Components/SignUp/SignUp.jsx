@@ -24,7 +24,7 @@ export default function SignUp() {
   const [nicknameIsValid, setNicknameIsValid] = useState(true);
   const [warningText, setWarningText] = useState(null);
   const nicknameRef = useRef();
-  const [imgFile, setImgFile] = useState();
+  const [imgFile, setImgFile] = useState(null);
 
   function removeCookies() {
     cookie.remove("signup", { path: "/" });
@@ -102,24 +102,37 @@ export default function SignUp() {
         { type: "application/json" }
       )
     );
-    if (imgFile)
-      formData.append("profileImage", new File([imgFile], "profileImage"));
-    else formData.append("profileImage", null);
+    formData.append("profileImage", imgFile);
 
-    // TODO: 아이템 이미지 넣기
     if (state.tumbler) {
       formData.append(
         "tumblerData",
-        new Blob([JSON.stringify(state.tumbler)], { type: "application/json" })
+        new Blob(
+          [
+            JSON.stringify({
+              ...state.tumbler,
+              category: "tumbler",
+            }),
+          ],
+          { type: "application/json" }
+        )
       );
-      formData.append("tumblerImage", null);
+      formData.append("tumblerImage", state.tumblerImg);
     }
     if (state.ecobag) {
       formData.append(
         "ecobagData",
-        new Blob([JSON.stringify(state.ecobag)], { type: "application/json" })
+        new Blob(
+          [
+            JSON.stringify({
+              ...state.ecobag,
+              category: "ecobag",
+            }),
+          ],
+          { type: "application/json" }
+        )
       );
-      formData.append("ecobagImage", null);
+      formData.append("ecobagImage", state.tumblerImg);
     }
 
     return signUpMutation.mutate({ formData, access });

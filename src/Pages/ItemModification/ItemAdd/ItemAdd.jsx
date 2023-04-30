@@ -49,8 +49,7 @@ const ItemAdd = () => {
     },
   });
 
-  const [preview, setPreview] = useState(null);
-  const itemImgFile = useRef();
+  const itemImgFile = useRef(null);
   const setItemImgFile = (set) => {
     itemImgFile.current = set;
   };
@@ -66,12 +65,7 @@ const ItemAdd = () => {
         "itemData",
         new Blob([JSON.stringify(itemData)], { type: "application/json" })
       );
-      if (itemImgFile.current) {
-        formData.append(
-          "itemImage",
-          new File([itemImgFile.current], "itemImage")
-        );
-      } else formData.append("itemImage", null);
+      formData.append("itemImage", itemImgFile.current);
       // TODO: 아이템 기본 이미지 넣기
       itemAddMutation.mutate(formData);
       navigate(-1);
@@ -86,6 +80,10 @@ const ItemAdd = () => {
         type: `${item.category}Submit`,
         input,
       });
+      dispatch({
+        type: `${item.category}Img`,
+        input: itemImgFile.current,
+      });
       navigate(-1);
     },
     [dispatch]
@@ -96,11 +94,7 @@ const ItemAdd = () => {
       <ItemEditBorder width={innerWidth} height={innerHeight}>
         <ItemAddHead item={item} />
         <hr />
-        <ItemImage
-          setImgFile={setItemImgFile}
-          preview={preview}
-          setPreview={setPreview}
-        />
+        <ItemImage setImgFile={setItemImgFile} category={item.category} />
         <hr />
         <ItemAddDetail
           submitCallback={
