@@ -2,13 +2,11 @@ import React from "react";
 import * as S from "../style";
 import useImgInput from "../../../hooks/useImgInput";
 
-const ItemImage = ({ setImgFile, preview, setPreview }) => {
+const ItemImage = ({ setImgFile, category }) => {
   const Form = useImgInput({
-    imgFile: null,
-    setImgFile,
-    preview,
-    setPreview,
-    type: "item",
+    prevImgFile: null,
+    setUploadedFile: setImgFile,
+    type: category,
   });
 
   return (

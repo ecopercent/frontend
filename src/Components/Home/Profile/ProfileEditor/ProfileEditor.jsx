@@ -26,7 +26,6 @@ export default function ProfileEditor({ setIsEditing }) {
     profileMessage: userQuery.data.profileMessage,
   });
   const [userImgFile, setUserImgFile] = useState(userQuery.data.profileImage);
-  const [preview, setPreview] = useState(null);
   const imgUrl = useRef(userQuery.data.profileImage);
 
   const profileEditMutation = useMutation({
@@ -45,9 +44,10 @@ export default function ProfileEditor({ setIsEditing }) {
       "userData",
       new Blob([JSON.stringify(userData)], { type: "application/json" })
     );
-    if (preview)
-      formData.append("profileImage", new File([userImgFile], "profileImage"));
-    else formData.append("profileImage", null);
+    formData.append(
+      "profileImage",
+      typeof userImgFile === "object" ? userImgFile : null
+    );
     profileEditMutation.mutate(formData);
     return profileEditMutation.mutateAsync;
   }
@@ -55,12 +55,7 @@ export default function ProfileEditor({ setIsEditing }) {
   return (
     <S.ProfileContainer isMobile={isMobile}>
       <S.ProfileImgTextWrapper isMobile={isMobile}>
-        <ProfileImg
-          imgFile={userImgFile}
-          setImgFile={setUserImgFile}
-          preview={preview}
-          setPreview={setPreview}
-        />
+        <ProfileImg imgFile={userImgFile} setImgFile={setUserImgFile} />
         <ProfileText
           userData={userData}
           setUserData={setUserData}

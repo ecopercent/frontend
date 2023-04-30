@@ -1,17 +1,10 @@
 import React from "react";
 import useImgInput from "../../../../hooks/useImgInput";
 
-export default function ProfileImg({
-  imgFile,
-  setImgFile,
-  preview,
-  setPreview,
-}) {
+export default function ProfileImg({ imgFile, setImgFile }) {
   const Form = useImgInput({
-    imgFile,
-    setImgFile,
-    preview,
-    setPreview,
+    prevImg: imgFile,
+    setUploadedFile: setImgFile,
     type: "user",
   });
 
