@@ -6,8 +6,8 @@ import { PcPageWrap } from "../../Layouts/Main/style";
 import CancelCheckModal from "../Modal/CancelCheckModal";
 import SignUpUser from "./Form/SignUpUser";
 import SignUpItems from "./Form/SignUpItems";
-import { postUserOfKakao, postUserOfApple } from "../../Api/user";
 import SignUpItemContext from "../../hooks/SignUpItemContext";
+import { postUserOfKakao, postUserOfApple } from "../../Api/user";
 import * as S from "./style";
 
 const initialUser = {
@@ -17,7 +17,7 @@ const initialUser = {
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const { access } = useLocation().state;
+  const access = useLocation().state;
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [userInput, setUserInput] = useState(initialUser);
@@ -26,14 +26,13 @@ export default function SignUp() {
   const [imgFile, setImgFile] = useState(null);
 
   function removeCookies() {
-    cookie.remove("signup", { path: "/" });
+    cookie.remove("signup", { path: "/signup" });
     cookie.remove("oauth_provider", { path: "/" });
   }
 
   // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
-    // TODO: 액세스 없는 경우 로그인 페이지로 리다이렉트
-    // if (!access) navigate("/");
+    if (!access) navigate("/");
 
     if (cookie.load("signup")) {
       setUserInput(cookie.load("signup"));
@@ -43,6 +42,7 @@ export default function SignUp() {
       setWarningText(cookie.load("warning"));
       cookie.remove("warning");
     }
+    nicknameRef.current.focus();
   }, []);
 
   const saveUserInput = () => {
@@ -60,7 +60,7 @@ export default function SignUp() {
     },
     onError: (code) => {
       if (code === 403) {
-        cookie.remove("oauth_provider", { path: "/" });
+        // TODO: 모달로?
         alert("세션이 만료되었습니다.");
         removeCookies();
         return navigate("/");
@@ -73,9 +73,7 @@ export default function SignUp() {
     },
   });
 
-  // 아이템 받아오는 용
   const { state } = useContext(SignUpItemContext);
-
   const handleSubmit = () => {
     if (userInput.nickname.length === 0) {
       nicknameRef.current.focus();
@@ -83,7 +81,6 @@ export default function SignUp() {
     }
 
     const formData = new FormData();
-
     formData.append(
       "userData",
       new Blob(
@@ -97,7 +94,6 @@ export default function SignUp() {
       )
     );
     formData.append("profileImage", imgFile);
-
     if (state.tumbler) {
       formData.append(
         "tumblerData",
@@ -129,7 +125,7 @@ export default function SignUp() {
       formData.append("ecobagImage", state.tumblerImg);
     }
 
-    return signUpMutation.mutate({ formData, access });
+    return signUpMutation.mutate({ formData, access: access.access });
   };
 
   const handleClick = () => {
