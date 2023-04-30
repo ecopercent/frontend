@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import cookie from "react-cookies";
 import styled from "@emotion/styled";
 import { imgCompress } from "../Utils/convert";
 
@@ -65,14 +66,19 @@ const ImgPreview = styled.img`
   object-fit: cover;
 `;
 
-const useImgInput = ({ prevImg, setUploadedFile, type }) => {
-  const [preview, setPreview] = useState(null);
+const useImgInput = ({ prevImg, setUploadedFile, type, prevPreview }) => {
+  console.log("prevPreview", prevPreview);
+  const [preview, setPreview] = useState(prevPreview);
   let defaultImg;
   if (type === "tumbler") defaultImg = "/img/default_tumbler.png";
   else if (type === "ecobag") defaultImg = "/img/default_ecobag.png";
   else defaultImg = "/img/default_user.png";
 
   const onUpload = async (e) => {
+    if (prevPreview) {
+      URL.revokeObjectURL(cookie.load("signupImg"));
+      cookie.remove("signupImg", { path: "/" });
+    }
     const uploadedImg = e.target.files[0];
     const reader = new FileReader();
     const compressedImg = await imgCompress(uploadedImg);

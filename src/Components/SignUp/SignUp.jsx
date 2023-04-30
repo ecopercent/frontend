@@ -27,6 +27,8 @@ export default function SignUp() {
 
   function removeCookies() {
     cookie.remove("signup", { path: "/signup" });
+    URL.revokeObjectURL(cookie.load("signupImg"));
+    cookie.remove("signupImg", { path: "/" });
     cookie.remove("oauth_provider", { path: "/" });
   }
 
@@ -38,6 +40,9 @@ export default function SignUp() {
       setUserInput(cookie.load("signup"));
       cookie.remove("signup");
     }
+    if (cookie.load("signupImg")) {
+      setImgFile(cookie.load("signupImg"));
+    }
     if (cookie.load("warning")) {
       setWarningText(cookie.load("warning"));
       cookie.remove("warning");
@@ -47,6 +52,8 @@ export default function SignUp() {
 
   const saveUserInput = () => {
     cookie.save("signup", userInput);
+    if (imgFile && !cookie.load("signupImg"))
+      cookie.save("signupImg", URL.createObjectURL(imgFile), { path: "/" });
     if (warningText) cookie.save("warning", warningText);
   };
 

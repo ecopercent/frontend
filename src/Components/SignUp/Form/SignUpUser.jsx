@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import cookie from "react-cookies";
 import useImgInput from "../../../hooks/useImgInput";
 import * as S from "./style";
 
@@ -10,6 +11,7 @@ function SignUpUser(
     prevImg: null,
     setUploadedFile: setImgFile,
     type: "signUpUser",
+    prevPreview: cookie.load("signupImg"),
   });
 
   const lengthSliceInKorean = (e) => {
