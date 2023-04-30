@@ -1,6 +1,20 @@
 import imageCompression from "browser-image-compression";
 
-export function b64toBlob(b64Data, contentType) {
+export function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = () => {
+      const base64String = reader.result.split(",")[1];
+      resolve(base64String);
+    };
+    reader.onerror = (error) => {
+      return reject(error);
+    };
+  });
+}
+
+export function base64toBlob(b64Data, contentType) {
   const sliceSize = 512;
 
   const byteCharacters = atob(b64Data);
