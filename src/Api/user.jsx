@@ -14,10 +14,17 @@ export async function postUserOfKakao({ formData, access }) {
   }
 }
 
-export function postUserOfApple(signUpForm) {
-  return axios.post("/users/apple", signUpForm).then((res) => {
+export async function postUserOfApple({ formData, access }) {
+  try {
+    const res = await axios.post("/users/apple", formData, {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+    });
     return res.data;
-  });
+  } catch (err) {
+    throw err.response.status;
+  }
 }
 
 export function getUser() {
