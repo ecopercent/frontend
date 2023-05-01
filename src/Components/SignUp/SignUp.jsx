@@ -9,6 +9,8 @@ import SignUpItems from "./Form/SignUpItems";
 import SignUpItemContext from "../../hooks/SignUpItemContext";
 import { postUserOfKakao, postUserOfApple } from "../../Api/user";
 import * as S from "./style";
+// import { blobToBase64 } from "../../Utils/convert";
+// import { base64ToBlob, blobToBase64 } from "../../Utils/convert";
 
 const initialUser = {
   nickname: "",
@@ -40,8 +42,15 @@ export default function SignUp() {
       setUserInput(cookie.load("signup"));
       cookie.remove("signup");
     }
-    if (cookie.load("signupImg")) {
-      setImgFile(cookie.load("signupImg"));
+    if (localStorage.getItem("signupImg")) {
+      // TEST: dataURL 사용
+      // setImgFile(
+      //   base64ToBlob(
+      //     localStorage.getItem("signupImg"),
+      //     localStorage.getItem("signupImgMime")
+      //   )
+      // );
+      setImgFile(localStorage.getItem("signupImg"));
     }
     if (cookie.load("warning")) {
       setWarningText(cookie.load("warning"));
@@ -50,10 +59,21 @@ export default function SignUp() {
     nicknameRef.current.focus();
   }, []);
 
-  const saveUserInput = () => {
+  const saveUserInput = async () => {
     cookie.save("signup", userInput);
-    if (imgFile && !cookie.load("signupImg"))
-      cookie.save("signupImg", URL.createObjectURL(imgFile), { path: "/" });
+    if (imgFile) {
+      // TEST: dataURL 사용
+      // try {
+      //   const res = await blobToBase64(imgFile);
+      //   console.log("blob -> b64 결과", res);
+      //   localStorage.setItem("signupImg", res.base64);
+      //   localStorage.setItem("signupImgMime", res.mime);
+      // } catch (err) {
+      //   console.log("blob -> b64 결과", err);
+      // }
+      localStorage.setItem("signupImg", imgFile);
+      cookie.save("previewUrl", URL.createObjectURL(imgFile), { path: "/" });
+    }
     if (warningText) cookie.save("warning", warningText);
   };
 

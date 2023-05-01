@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import cookie from "react-cookies";
+// import cookie from "react-cookies";
 import styled from "@emotion/styled";
 import { imgCompress } from "../Utils/convert";
 
@@ -75,18 +75,20 @@ const useImgInput = ({ prevImg, setUploadedFile, type, prevPreview }) => {
   else defaultImg = "/img/default_user.png";
 
   const onUpload = async (e) => {
-    if (prevPreview) {
-      URL.revokeObjectURL(cookie.load("signupImg"));
-      cookie.remove("signupImg", { path: "/" });
-    }
+    // if (prevPreview) {
+    // URL.revokeObjectURL(cookie.load("signupImg"));
+    // cookie.remove("signupImg", { path: "/" });
+    // }
     const uploadedImg = e.target.files[0];
     const reader = new FileReader();
     const compressedImg = await imgCompress(uploadedImg);
-    setUploadedFile(compressedImg);
+    // setUploadedFile(compressedImg);
 
     reader.readAsDataURL(compressedImg);
     reader.onloadend = () => {
+      console.log("reader result", reader.result);
       setPreview(reader.result);
+      setUploadedFile(reader.result);
     };
   };
 
