@@ -5,8 +5,11 @@ export function blobToBase64(blob) {
     const reader = new FileReader();
     reader.readAsDataURL(blob);
     reader.onloadend = () => {
-      const base64String = reader.result.split(",")[1];
-      resolve(base64String);
+      // const split = reader.result.split(",");
+      // const mimeType = split[0].split(";")[0];
+      // const base64String = split[1];
+      // resolve({ mime: mimeType, base64: base64String });
+      resolve(reader.result);
     };
     reader.onerror = (error) => {
       return reject(error);
@@ -14,30 +17,22 @@ export function blobToBase64(blob) {
   });
 }
 
-export function base64toBlob(b64Data, contentType) {
-  const sliceSize = 512;
+export function base64ToBlob(base64String, type) {
+  const byteCharacters = atob(base64String);
+  const byteNumbers = new Array(byteCharacters.length);
 
-  const byteCharacters = atob(b64Data);
-  const byteArrays = [];
-
-  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-    const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-    const byteNumbers = new Array(slice.length);
-    for (let i = 0; i < slice.length; i += 1) {
-      byteNumbers[i] = slice.charCodeAt(i);
-    }
-
-    const byteArray = new Uint8Array(byteNumbers);
-    byteArrays.push(byteArray);
+  for (let i = 0; i < byteCharacters.length; i += 1) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
   }
-  return new File(byteArrays, "pot", { type: contentType });
+
+  const byteArray = new Uint8Array(byteNumbers);
+  return new Blob([byteArray], { type });
 }
 
 export async function imgCompress(img) {
   const options = {
     maxSizeMB: 0.2,
-    maxWidthOrHeight: 1920,
+    maxWidthOrHeight: 500,
     useWebWorker: true,
   };
 
