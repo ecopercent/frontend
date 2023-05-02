@@ -3,7 +3,7 @@ name: React deployment practice
 on:
   push:
     branches:
-     - master
+     - main
 
 jobs:
   continuous-deployment:
