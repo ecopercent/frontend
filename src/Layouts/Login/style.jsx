@@ -3,8 +3,8 @@ import * as font from "../../style/font";
 import * as color from "../../style/color";
 
 export const LoginLayout = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   margin: 0 auto;
 
   display: flex;
@@ -20,8 +20,8 @@ export const Logo = styled.img`
   align-items: center;
   justify-content: center;
 
-  margin-top: 10vh;
-  height: 10vh;
+  margin-top: 10%;
+  height: 10%;
 `;
 
 export const LoginBox = styled.div`
@@ -51,6 +51,6 @@ export const ContinueWith = styled.span`
 export const SloganSpan = styled.span`
   ${font.normalSubheadline};
 
-  height: 10vh;
-  margin-top: 10vh;
+  height: 3%;
+  margin-top: 17%;
 `;
