@@ -27,6 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build_dev": "REACT_APP_ENDPOINT=https://api.ecopercent.com react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format:check": "prettier --check ./src",
