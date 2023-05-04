@@ -1,5 +1,5 @@
 import axios from "axios";
-import { base64ToBlob } from "../Utils/convert";
+import { base64ToDataUrl } from "../Utils/convert";
 
 export async function postUserOfKakao({ formData, access }) {
   try {
@@ -29,20 +29,16 @@ export async function postUserOfApple({ formData, access }) {
 
 export function getUser() {
   return axios.get(`/users/me`).then((res) => {
-    if (res.data.profileImage) {
-      const file = base64ToBlob(res.data.profileImage, "image/png");
-      res.data.profileImage = URL.createObjectURL(file);
-    }
+    if (res.data.profileImage)
+      res.data.profileImage = base64ToDataUrl(res.data.profileImage);
     return res.data;
   });
 }
 
 export function patchUser(formData) {
   return axios.patch(`/users`, formData).then((res) => {
-    if (res.data.profileImage) {
-      const file = base64ToBlob(res.data.profileImage, "image/png");
-      res.data.profileImage = URL.createObjectURL(file);
-    }
+    if (res.data.profileImage)
+      res.data.profileImage = base64ToDataUrl(res.data.profileImage);
     return res.data;
   });
 }

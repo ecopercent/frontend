@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { useMediaQuery } from "react-responsive";
 import { getUser, patchUser } from "../../../../Api/user";
@@ -26,14 +26,12 @@ export default function ProfileEditor({ setIsEditing }) {
     profileMessage: userQuery.data.profileMessage,
   });
   const [userImgFile, setUserImgFile] = useState(userQuery.data.profileImage);
-  const imgUrl = useRef(userQuery.data.profileImage);
 
   const profileEditMutation = useMutation({
     mutationFn: patchUser,
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data);
       queryClient.refetchQueries(["user"]);
-      URL.revokeObjectURL(imgUrl);
       setIsEditing();
     },
   });
