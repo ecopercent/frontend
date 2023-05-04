@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import * as S from "./style";
 
 const AppleLoginButton = () => {
   const clientId = `${process.env.REACT_APP_APPLE_CLIENT_ID}`;
@@ -32,14 +33,7 @@ const AppleLoginButton = () => {
   }, [clientId, redirectURI, scope, state, nonce]);
 
   return (
-    <div
-      style={{ width: "55px" }}
-      id="appleid-signin"
-      data-color="black"
-      data-type="sign in"
-      data-mode="logo-only"
-      data-border-radius="50"
-    />
+    <S.LogoImg src="/img/appleLogo.png" alt="apple login" id="appleid-signin" />
   );
 };
 
