@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { kakaoLogin, getKakaoToken } from "./kakaoLogin";
+import AppleLoginButton from "./appleLogin";
 import * as S from "./style";
 
 export default function SocialLogin() {
@@ -17,8 +18,13 @@ export default function SocialLogin() {
   }, []);
 
   return (
-    <S.LoginButton onClick={kakaoLogin}>
-      <S.LogoImg src="/img/kakaoLogo.png" alt="kakao login" />
-    </S.LoginButton>
+    <>
+      <S.LoginButton onClick={kakaoLogin}>
+        <S.LogoImg src="/img/kakaoLogo.png" alt="kakao login" />
+      </S.LoginButton>
+      <S.LoginButton>
+        <AppleLoginButton />
+      </S.LoginButton>
+    </>
   );
 }
