@@ -6,7 +6,8 @@ import React, {
   useRef,
 } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+// import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ItemImage from "./ItemAddImage";
 import ItemAddDetail from "./ItemAddDetail";
 import ItemAddHead from "./ItemAddHead";
@@ -41,11 +42,11 @@ const ItemAdd = () => {
     window.addEventListener("resize", resizeListener);
   });
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const itemAddMutation = useMutation({
     mutationFn: postItem,
     onSuccess: () => {
-      queryClient.refetchQueries([`${item.category}`, "list"]);
+      // queryClient.refetchQueries([`${item.category}`, "list"]);
     },
   });
 

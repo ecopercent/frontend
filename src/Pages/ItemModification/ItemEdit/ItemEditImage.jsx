@@ -2,9 +2,9 @@ import React from "react";
 import useImgInput from "../../../hooks/useImgInput";
 import * as S from "../style";
 
-const ItemImage = ({ setImgFile, category }) => {
+const ItemImage = ({ imgFile, setImgFile, category }) => {
   const Form = useImgInput({
-    prevImgFile: null,
+    prevImg: imgFile,
     setUploadedFile: setImgFile,
     type: category,
   });

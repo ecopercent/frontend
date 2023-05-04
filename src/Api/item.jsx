@@ -13,27 +13,10 @@ export function postItem(formData) {
   });
 }
 
-export function patchItem({
-  itemId,
-  itemImage,
-  itemNickname,
-  itemType,
-  itemBrand,
-  itemPrice,
-  itemPurchaseDate,
-}) {
-  return axios
-    .patch(`/items/${itemId}`, {
-      image: itemImage,
-      nickname: itemNickname,
-      type: itemType,
-      brand: itemBrand,
-      price: itemPrice,
-      purchaseDate: itemPurchaseDate,
-    })
-    .then((res) => {
-      return res.data;
-    });
+export function patchItem({ formData, id }) {
+  return axios.patch(`/items/${id}`, formData).then((res) => {
+    return res.data;
+  });
 }
 
 export function getItemList(category) {
