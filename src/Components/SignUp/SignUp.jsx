@@ -9,8 +9,6 @@ import SignUpItems from "./Form/SignUpItems";
 import SignUpItemContext from "../../hooks/SignUpItemContext";
 import { postUserOfKakao, postUserOfApple } from "../../Api/user";
 import * as S from "./style";
-// import { blobToBase64 } from "../../Utils/convert";
-// import { base64ToBlob, blobToBase64 } from "../../Utils/convert";
 
 const initialUser = {
   nickname: "",
@@ -28,9 +26,11 @@ export default function SignUp() {
   const [imgFile, setImgFile] = useState(null);
 
   function removeCookies() {
-    cookie.remove("signup", { path: "/" });
-    URL.revokeObjectURL(cookie.load("signupImg"));
-    cookie.remove("signupImg", { path: "/" });
+    cookie.remove("signup");
+    cookie.remove("warning");
+    URL.revokeObjectURL(cookie.load("previewUrl"));
+    cookie.remove("previewUrl");
+    localStorage.removeItem("signupImg");
     cookie.remove("oauth_provider", { path: "/" });
   }
 
@@ -43,14 +43,15 @@ export default function SignUp() {
       cookie.remove("signup");
     }
     if (localStorage.getItem("signupImg")) {
-      // TEST: dataURL 사용
-      // setImgFile(
-      //   base64ToBlob(
-      //     localStorage.getItem("signupImg"),
-      //     localStorage.getItem("signupImgMime")
-      //   )
-      // );
-      setImgFile(localStorage.getItem("signupImg"));
+      // blob 객체로 재변환
+      fetch(localStorage.getItem("signupImg"))
+        .then((res) => {
+          return res.blob();
+        })
+        .then((blob) => {
+          return setImgFile(blob);
+        });
+      localStorage.removeItem("signupImg");
     }
     if (cookie.load("warning")) {
       setWarningText(cookie.load("warning"));
@@ -62,17 +63,13 @@ export default function SignUp() {
   const saveUserInput = async () => {
     cookie.save("signup", userInput);
     if (imgFile) {
-      // TEST: dataURL 사용
-      // try {
-      //   const res = await blobToBase64(imgFile);
-      //   console.log("blob -> b64 결과", res);
-      //   localStorage.setItem("signupImg", res.base64);
-      //   localStorage.setItem("signupImgMime", res.mime);
-      // } catch (err) {
-      //   console.log("blob -> b64 결과", err);
-      // }
-      localStorage.setItem("signupImg", imgFile);
-      cookie.save("previewUrl", URL.createObjectURL(imgFile), { path: "/" });
+      // blob 객체는 저장소에 넣을 수 없으므로 페이지 이동 시 dataURL로 변환하여 저장해둠
+      const reader = new FileReader();
+      reader.readAsDataURL(imgFile);
+      reader.onloadend = () => {
+        localStorage.setItem("signupImg", reader.result);
+      };
+      cookie.save("previewUrl", URL.createObjectURL(imgFile));
     }
     if (warningText) cookie.save("warning", warningText);
   };
@@ -133,7 +130,7 @@ export default function SignUp() {
         "ecobagData",
         new Blob([JSON.stringify(state.ecobag)], { type: "application/json" })
       );
-      formData.append("ecobagImage", state.tumblerImg);
+      formData.append("ecobagImage", state.ecobagImg);
     }
 
     return signUpMutation.mutate({ formData, access: access.access });

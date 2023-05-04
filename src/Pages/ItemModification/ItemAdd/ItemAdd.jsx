@@ -66,7 +66,6 @@ const ItemAdd = () => {
         new Blob([JSON.stringify(itemData)], { type: "application/json" })
       );
       formData.append("itemImage", itemImgFile.current);
-      // TODO: 아이템 기본 이미지 넣기
       itemAddMutation.mutate(formData);
       navigate(-1);
     },
