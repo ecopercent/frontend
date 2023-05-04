@@ -4,27 +4,27 @@ import * as color from "../../style/color";
 
 export const LoginLayout = styled.div`
   height: 100%;
+  width: 100%;
   margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  position: fixed;
 `;
 
 export const Logo = styled.img`
-  position: fixed;
-  top: 20vh;
-  left: 50%;
-  transform: translate(-50%, 0%);
-
   display: flex;
   align-items: center;
   justify-content: center;
 
-  height: 10vh;
+  margin-top: 10%;
+  height: 10%;
 `;
 
 export const LoginBox = styled.div`
-  position: fixed;
-  top: 50%;
-  transform: translate(0%, -50%);
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,8 +51,6 @@ export const ContinueWith = styled.span`
 export const SloganSpan = styled.span`
   ${font.normalSubheadline};
 
-  position: fixed;
-  bottom: 50px;
-  left: 50%;
-  transform: translate(-50%, 0%);
+  height: 3%;
+  margin-top: 17%;
 `;
