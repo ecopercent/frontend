@@ -91,6 +91,12 @@ const ItemEdit = () => {
       type: `${item.category}Submit`,
       input,
     });
+    if (itemImgFile.current) {
+      dispatch({
+        type: `${item.category}Img`,
+        input: itemImgFile.current,
+      });
+    }
     navigate(-1);
   });
 
@@ -110,6 +116,7 @@ const ItemEdit = () => {
           imgFile={itemDetail.image}
           setImgFile={setItemImgFile}
           category={item.category}
+          prevPreview={URL.createObjectURL(state[`${item.category}Img`])}
         />
         <hr />
         <ItemEditDetail
