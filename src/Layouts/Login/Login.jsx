@@ -23,7 +23,6 @@ const Login = () => {
       <S.LoginBox>
         <S.Line />
         <S.ContinueWith>Continue With</S.ContinueWith>
-        {/* 소셜 로그인 버튼들 들어갈 곳 */}
         <SocialLogin />
         <S.Line />
       </S.LoginBox>
