@@ -89,7 +89,7 @@ const ItemEdit = () => {
   const editItemOnUnauth = useCallback((input) => {
     dispatch({
       type: `${item.category}Submit`,
-      input,
+      input: { ...input, category: item.category },
     });
     if (itemImgFile.current) {
       dispatch({
@@ -116,7 +116,11 @@ const ItemEdit = () => {
           imgFile={itemDetail.image}
           setImgFile={setItemImgFile}
           category={item.category}
-          prevPreview={URL.createObjectURL(state[`${item.category}Img`])}
+          prevPreview={
+            (state[`${item.category}Img`] &&
+              URL.createObjectURL(state[`${item.category}Img`])) ||
+            null
+          }
         />
         <hr />
         <ItemEditDetail
