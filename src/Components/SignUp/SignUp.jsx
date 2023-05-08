@@ -1,53 +1,76 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
 import { useMutation } from "@tanstack/react-query";
 import { PcPageWrap } from "../../Layouts/Main/style";
 import CancelCheckModal from "../Modal/CancelCheckModal";
 import SignUpUser from "./Form/SignUpUser";
 import SignUpItems from "./Form/SignUpItems";
+import SignUpItemContext from "../../hooks/SignUpItemContext";
 import { postUserOfKakao, postUserOfApple } from "../../Api/user";
 import * as S from "./style";
-// import SignUpItemContext from "../../hooks/SignUpItemContext";
 
 const initialUser = {
   nickname: "",
-  // profileImage: "",
   profileMessage: "",
-  email: "",
 };
 
-// TODO: OAuth를 거친 사람만 가입 가능하게
 export default function SignUp() {
   const navigate = useNavigate();
+  const access = useLocation().state;
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [userInput, setUserInput] = useState(initialUser);
-  const [nicknameIsValid, setNicknameIsValid] = useState(false);
   const [warningText, setWarningText] = useState(null);
+  const nicknameRef = useRef();
+  const [imgFile, setImgFile] = useState(null);
+
+  function removeCookies() {
+    cookie.remove("signup");
+    cookie.remove("warning");
+    URL.revokeObjectURL(cookie.load("previewUrl"));
+    cookie.remove("previewUrl");
+    localStorage.removeItem("signupImg");
+    cookie.remove("oauth_provider", { path: "/" });
+  }
 
   // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
+    if (!access) navigate("/");
+
     if (cookie.load("signup")) {
       setUserInput(cookie.load("signup"));
       cookie.remove("signup");
     }
-    if (cookie.load("email"))
-      setUserInput((oldInput) => {
-        return { ...oldInput, email: cookie.load("email") };
-      });
-    if (cookie.load("validCheck")) {
-      setNicknameIsValid(cookie.load("validCheck"));
-      cookie.remove("validCheck");
+    if (localStorage.getItem("signupImg")) {
+      // blob 객체로 재변환
+      fetch(localStorage.getItem("signupImg"))
+        .then((res) => {
+          return res.blob();
+        })
+        .then((blob) => {
+          return setImgFile(blob);
+        });
+      localStorage.removeItem("signupImg");
     }
     if (cookie.load("warning")) {
       setWarningText(cookie.load("warning"));
       cookie.remove("warning");
     }
+    nicknameRef.current.focus();
   }, []);
 
-  const saveUserInput = () => {
+  const saveUserInput = async () => {
     cookie.save("signup", userInput);
-    if (nicknameIsValid) cookie.save("validCheck", nicknameIsValid);
+    if (imgFile) {
+      // blob 객체는 저장소에 넣을 수 없으므로 페이지 이동 시 dataURL로 변환하여 저장해둠
+      const reader = new FileReader();
+      reader.readAsDataURL(imgFile);
+      reader.onloadend = () => {
+        localStorage.setItem("signupImg", reader.result);
+      };
+      cookie.save("previewUrl", URL.createObjectURL(imgFile));
+    }
     if (warningText) cookie.save("warning", warningText);
   };
 
@@ -57,35 +80,60 @@ export default function SignUp() {
         ? postUserOfKakao
         : postUserOfApple,
     onSuccess: () => {
-      cookie.remove("email", { path: "/" });
-      cookie.remove("oauth_provider", { path: "/" });
+      return navigate("/welcome", { state: true });
+    },
+    onError: (code) => {
+      if (code === 403) {
+        // TODO: 모달로?
+        alert("세션이 만료되었습니다.");
+        removeCookies();
+        return navigate("/");
+      }
+      if (code === 409) {
+        nicknameRef.current.focus();
+        return setWarningText("이미 사용중인 닉네임입니다.");
+      }
+      return code;
     },
   });
 
-  // 아이템 받아오는 용
-  // const { state } = useContext(SignUpItemContext);
-
+  const { state } = useContext(SignUpItemContext);
   const handleSubmit = () => {
-    let signUpForm = {
-      ...userInput,
-      oAuthProvider: cookie.load("oauth_provider"),
-    };
-    if (signUpForm.nickname.length === 0)
+    if (userInput.nickname.length === 0) {
+      nicknameRef.current.focus();
       return setWarningText("닉네임을 입력하세요.");
-    if (!nicknameIsValid)
-      return setWarningText("닉네임 중복확인을 완료해주세요.");
+    }
 
-    signUpForm = {
-      ...signUpForm,
-      oAuthProvider: cookie.load("oauth_provider"),
-    };
+    const formData = new FormData();
+    formData.append(
+      "userData",
+      new Blob(
+        [
+          JSON.stringify({
+            ...userInput,
+            oAuthProvider: cookie.load("oauth_provider"),
+          }),
+        ],
+        { type: "application/json" }
+      )
+    );
+    formData.append("profileImage", imgFile);
+    if (state.tumbler) {
+      formData.append(
+        "tumblerData",
+        new Blob([JSON.stringify(state.tumbler)], { type: "application/json" })
+      );
+      formData.append("tumblerImage", state.tumblerImg);
+    }
+    if (state.ecobag) {
+      formData.append(
+        "ecobagData",
+        new Blob([JSON.stringify(state.ecobag)], { type: "application/json" })
+      );
+      formData.append("ecobagImage", state.ecobagImg);
+    }
 
-    // TODO: api 업데이트 되면 아이템 폼에 넣기
-    // if (state.tumbler)
-    // if (state.ecobag)
-
-    signUpMutation.mutate(signUpForm);
-    return navigate("/welcome", { state: true });
+    return signUpMutation.mutate({ formData, access: access.access });
   };
 
   const handleClick = () => {
@@ -101,9 +149,7 @@ export default function SignUp() {
           }}
           onConfirm={() => {
             setModalIsOpen(false);
-            cookie.remove("signup");
-            cookie.remove("email");
-            cookie.remove("oauth_provider");
+            removeCookies();
             navigate("/");
           }}
         />
@@ -113,10 +159,10 @@ export default function SignUp() {
           <SignUpUser
             userInput={userInput}
             setUserInput={setUserInput}
-            nicknameIsValid={nicknameIsValid}
-            setNicknameIsValid={setNicknameIsValid}
             warningText={warningText}
             setWarningText={setWarningText}
+            setImgFile={setImgFile}
+            ref={nicknameRef}
           />
           <SignUpItems category="tumbler" saveUserInput={saveUserInput} />
           <SignUpItems category="ecobag" saveUserInput={saveUserInput} />

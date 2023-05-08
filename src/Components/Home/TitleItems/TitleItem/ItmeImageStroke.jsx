@@ -96,7 +96,10 @@ const ItmeImageStroke = ({ itemInfo }) => {
     <svg width="200" height="200" viewBox="0 0 200 200" onClick={increaseCount}>
       <g>
         <foreignObject x="25" y="25" width="100%" height="100%">
-          <S.ImageClipper src={itemInfo.image} alt="아이템 이미지" />
+          <S.ImageClipper
+            src={itemInfo.image || `img/default_${itemInfo.category}.png`}
+            alt="아이템 이미지"
+          />
         </foreignObject>
         {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map((element) => {
           if (element.key <= usageCount)

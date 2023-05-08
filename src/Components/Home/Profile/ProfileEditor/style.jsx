@@ -30,38 +30,6 @@ export const ProfileImgTextWrapper = styled.div`
   height: 100px;
 `;
 
-export const ProfileImgOpacity = styled.div`
-  display: ${(props) => {
-    return props.isUploaded ? "none" : "inline-block";
-  }};
-  position: absolute;
-  height: 100.5px;
-  width: 100.5px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.2);
-`;
-
-export const ProfileImgOverlay = styled.img`
-  ${(props) => {
-    return props.isUploaded ? "display: none" : "";
-  }};
-  position: absolute;
-  height: 40px;
-  width: 40px;
-  margin: 30px 30px;
-`;
-
-export const ProfileImgPreview = styled.img`
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  border: 0.5px solid;
-`;
-
-export const ProfileImgInput = styled.input`
-  display: none;
-`;
-
 export const ProfileTextForm = styled.form`
   display: flex;
   flex-direction: column;

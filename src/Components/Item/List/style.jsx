@@ -85,4 +85,5 @@ export const ItemImg = styled.img`
   width: 160px;
   height: 200px;
   border-radius: 100px;
+  object-fit: cover;
 `;

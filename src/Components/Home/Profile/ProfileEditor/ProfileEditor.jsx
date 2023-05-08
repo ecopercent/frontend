@@ -21,35 +21,42 @@ export default function ProfileEditor({ setIsEditing }) {
 
   if (userQuery.isError) console.log(JSON.stringify(userQuery.error));
 
-  const [localUser, setLocalUser] = useState({
+  const [userData, setUserData] = useState({
     nickname: userQuery.data.nickname,
     profileMessage: userQuery.data.profileMessage,
-    profileImage: userQuery.data.profileImage,
   });
+  const [userImgFile, setUserImgFile] = useState(userQuery.data.profileImage);
 
   const profileEditMutation = useMutation({
     mutationFn: patchUser,
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data);
-      queryClient.invalidateQueries(["user"]);
+      queryClient.refetchQueries(["user"]);
+      setIsEditing();
     },
   });
 
   function handleSubmit() {
-    profileEditMutation.mutate({
-      nick: localUser.nickname,
-      msg: localUser.profileMessage,
-      img: localUser.profileImage,
-    });
+    const formData = new FormData();
+    formData.append(
+      "userData",
+      new Blob([JSON.stringify(userData)], { type: "application/json" })
+    );
+    formData.append(
+      "profileImage",
+      typeof userImgFile === "object" ? userImgFile : null
+    );
+    profileEditMutation.mutate(formData);
+    return profileEditMutation.mutateAsync;
   }
 
   return (
     <S.ProfileContainer isMobile={isMobile}>
       <S.ProfileImgTextWrapper isMobile={isMobile}>
-        <ProfileImg user={localUser} setUser={setLocalUser} />
+        <ProfileImg imgFile={userImgFile} setImgFile={setUserImgFile} />
         <ProfileText
-          user={localUser}
-          setUser={setLocalUser}
+          userData={userData}
+          setUserData={setUserData}
           isMobile={isMobile}
         />
       </S.ProfileImgTextWrapper>

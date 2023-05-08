@@ -38,9 +38,8 @@ async function postKakaoToken({ kakaoAccessToken, navigate }) {
     }
   } catch (err) {
     if (err.response.status === 404) {
-      cookie.save("email", err.response.data.email, { path: "/" });
       cookie.save("oauth_provider", "kakao", { path: "/" });
-      navigate("/signup");
+      navigate("/signup", { state: { access: err.response.data.access } });
     } else {
       // 서버 안될 때
       navigate("/");

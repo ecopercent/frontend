@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
-import { BsCheckLg } from "react-icons/bs";
 import * as font from "../../../style/font";
 import * as button from "../../../style/button";
-import { basicGreen } from "../../../style/color";
 
 export const InputItem = styled.li`
   display: flex;
@@ -52,12 +50,6 @@ export const NoticeText = styled.span`
     `;
     return null;
   }}
-`;
-
-export const ValidCheckIcon = styled(BsCheckLg)`
-  margin-left: -5px;
-  margin-top: 3px;
-  color: ${basicGreen};
 `;
 
 /*
@@ -141,12 +133,11 @@ export const SetBox = styled.div`
   align-items: center;
 `;
 
-// 임시로 div 태그 사용. 추후 img 태그 변경
-export const ItemImg = styled.div`
+export const ItemImg = styled.img`
   width: 50px;
   height: 50px;
-  background-color: gray;
   border-radius: 100%;
+  object-fit: cover;
 
   margin-right: 5px;
 `;

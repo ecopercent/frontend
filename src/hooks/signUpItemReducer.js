@@ -5,10 +5,20 @@ export default function signUpItemReducer(itemState, action) {
         ...itemState,
         ecobag: action.input,
       };
+    case "ecobagImg":
+      return {
+        ...itemState,
+        ecobagImg: action.input,
+      };
     case "tumblerSubmit":
       return {
         ...itemState,
         tumbler: action.input,
+      };
+    case "tumblerImg":
+      return {
+        ...itemState,
+        tumblerImg: action.input,
       };
     case "ecobagDelete":
       return {

@@ -75,7 +75,10 @@ export default function ItemList({
               setInfoItemCategory(item.category);
             }}
           >
-            <S.ItemImg src={item.image} alt={item.nickname} />
+            <S.ItemImg
+              src={item.image || `/img/default_${item.category}.png`}
+              alt={item.nickname}
+            />
           </S.ItemLi>
         );
       })}

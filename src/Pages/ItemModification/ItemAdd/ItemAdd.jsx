@@ -1,7 +1,14 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+  useRef,
+} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import ItmeAddImage from "./ItmeAddImage";
+import { useMutation } from "@tanstack/react-query";
+// import { useMutation, useQueryClient } from "@tanstack/react-query";
+import ItemImage from "./ItemAddImage";
 import ItemAddDetail from "./ItemAddDetail";
 import ItemAddHead from "./ItemAddHead";
 import { ItemEditBorder, ItemEditWrap } from "../style";
@@ -35,26 +42,32 @@ const ItemAdd = () => {
     window.addEventListener("resize", resizeListener);
   });
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const itemAddMutation = useMutation({
     mutationFn: postItem,
     onSuccess: () => {
-      queryClient.refetchQueries([`${item.category}`, "list"]);
+      // queryClient.refetchQueries([`${item.category}`, "list"]);
     },
   });
 
+  const itemImgFile = useRef(null);
+  const setItemImgFile = (set) => {
+    itemImgFile.current = set;
+  };
+
   const addItemOnAuth = useCallback(
     (input) => {
-      itemAddMutation.mutate({
-        itemImage: "이미지피커에서가져올거얏",
-        itemNickname: input.nickname,
-        itemCategory: item.category,
-        itemType: input.type,
-        itemBrand: input.brand,
-        itemPrice: input.price,
-        itemPurchaseDate: input.purchaseDate,
-      });
-
+      const formData = new FormData();
+      const itemData = {
+        ...input,
+        category: item.category,
+      };
+      formData.append(
+        "itemData",
+        new Blob([JSON.stringify(itemData)], { type: "application/json" })
+      );
+      formData.append("itemImage", itemImgFile.current);
+      itemAddMutation.mutate(formData);
       navigate(-1);
     },
     [item.type]
@@ -65,7 +78,11 @@ const ItemAdd = () => {
     (input) => {
       dispatch({
         type: `${item.category}Submit`,
-        input,
+        input: { ...input, category: item.category },
+      });
+      dispatch({
+        type: `${item.category}Img`,
+        input: itemImgFile.current,
       });
       navigate(-1);
     },
@@ -77,7 +94,7 @@ const ItemAdd = () => {
       <ItemEditBorder width={innerWidth} height={innerHeight}>
         <ItemAddHead item={item} />
         <hr />
-        <ItmeAddImage />
+        <ItemImage setImgFile={setItemImgFile} category={item.category} />
         <hr />
         <ItemAddDetail
           submitCallback={

@@ -1,9 +1,15 @@
-import React, { useCallback, useState, useEffect, useContext } from "react";
+import React, {
+  useCallback,
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+} from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getItem, patchItem } from "../../../Api/item";
 import DeleteItemModal from "./DeleteItemModal";
-import ItmeImage from "./ItmeEditImage";
+import ItemImage from "./ItemEditImage";
 import ItemEditDetail from "./ItemEditDetail";
 import ItemEditHead from "./ItemEditHead";
 import { ItemEditBorder, ItemEditWrap } from "../style";
@@ -56,17 +62,24 @@ const ItemEdit = () => {
     },
   });
 
+  const itemImgFile = useRef(null);
+  const setItemImgFile = (set) => {
+    itemImgFile.current = set;
+  };
+
   const editItemOnAuth = useCallback(
     (input) => {
-      itemEditMutation.mutate({
-        itemId: Number(item.id),
-        itemImage: "이미지피커에서가져올거얏",
-        itemNickname: input.nickname,
-        itemType: input.type,
-        itemBrand: input.brand,
-        itemPrice: input.price,
-        itemPurchaseDate: input.purchaseDate,
-      });
+      const formData = new FormData();
+      const itemData = {
+        ...input,
+        category: item.category,
+      };
+      formData.append(
+        "itemData",
+        new Blob([JSON.stringify(itemData)], { type: "application/json" })
+      );
+      formData.append("itemImage", itemImgFile.current);
+      itemEditMutation.mutate({ formData, id: item.id });
       navigate(-1);
     },
     [itemEditMutation]
@@ -76,8 +89,14 @@ const ItemEdit = () => {
   const editItemOnUnauth = useCallback((input) => {
     dispatch({
       type: `${item.category}Submit`,
-      input,
+      input: { ...input, category: item.category },
     });
+    if (itemImgFile.current) {
+      dispatch({
+        type: `${item.category}Img`,
+        input: itemImgFile.current,
+      });
+    }
     navigate(-1);
   });
 
@@ -93,7 +112,16 @@ const ItemEdit = () => {
           setShowdeleteItemModal={setShowdeleteItemModal}
         />
         <hr />
-        <ItmeImage imagePath={itemDetail.image} />
+        <ItemImage
+          imgFile={itemDetail.image}
+          setImgFile={setItemImgFile}
+          category={item.category}
+          prevPreview={
+            (state[`${item.category}Img`] &&
+              URL.createObjectURL(state[`${item.category}Img`])) ||
+            null
+          }
+        />
         <hr />
         <ItemEditDetail
           itemDetail={itemDetail}
