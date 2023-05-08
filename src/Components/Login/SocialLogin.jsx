@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { kakaoLogin, getKakaoToken } from "./kakaoLogin";
+import { getKakaoAuthCode, KakaoLoginButton } from "./kakaoLogin";
 import AppleLoginButton from "./appleLogin";
 import * as S from "./style";
 
@@ -9,22 +9,14 @@ export default function SocialLogin() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname.split("/")[2] === "kakao") {
-      const params = new URLSearchParams(location.search);
-      if (params.has("code")) {
-        getKakaoToken({ authCode: params.get("code"), navigate });
-      }
-    }
-  }, []);
+    if (location.pathname.split("/")[2] === "kakao")
+      getKakaoAuthCode({ searchParams: location.search, navigate });
+  }, [location]);
 
   return (
-    <>
-      <S.LoginButton onClick={kakaoLogin}>
-        <S.LogoImg src="/img/kakaoLogo.png" alt="kakao login" />
-      </S.LoginButton>
-      <S.LoginButton>
-        <AppleLoginButton />
-      </S.LoginButton>
-    </>
+    <S.ButtonBox>
+      <KakaoLoginButton />
+      <AppleLoginButton />
+    </S.ButtonBox>
   );
 }
