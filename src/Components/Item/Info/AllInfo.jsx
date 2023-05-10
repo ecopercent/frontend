@@ -26,9 +26,9 @@ export default function AllInfo({ category }) {
       total.goalUsageCnt += Number(item.goalUsageCount);
       return item.usageCount >= item.goalUsageCount;
     }).length;
-    total.usagePercent = total.usageCnt / total.goalUsageCnt;
+    total.usagePercent = Math.round(total.usageCnt / total.goalUsageCnt);
     total.totalCnt = itemsQuery.data.length;
-    total.achivedPercent = total.achivedCnt / total.totalCnt;
+    total.achivedPercent = Math.round(total.achivedCnt / total.totalCnt);
   }
 
   return (
