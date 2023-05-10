@@ -55,10 +55,11 @@ const ItemEdit = () => {
   const queryClient = useQueryClient();
   const itemEditMutation = useMutation({
     mutationFn: patchItem,
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.refetchQueries([`${item.category}`, "list"]);
       queryClient.refetchQueries(["item", Number(item.id)]);
-      queryClient.refetchQueries([`${item.category}`, "list"]);
       queryClient.refetchQueries(["title", item.category]);
+      return navigate(-1);
     },
   });
 
@@ -80,7 +81,6 @@ const ItemEdit = () => {
       );
       formData.append("itemImage", itemImgFile.current);
       itemEditMutation.mutate({ formData, id: item.id });
-      navigate(-1);
     },
     [itemEditMutation]
   );
