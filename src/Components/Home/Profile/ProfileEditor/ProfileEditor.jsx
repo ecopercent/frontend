@@ -47,7 +47,6 @@ export default function ProfileEditor({ setIsEditing }) {
       typeof userImgFile === "object" ? userImgFile : null
     );
     profileEditMutation.mutate(formData);
-    return profileEditMutation.mutateAsync;
   }
 
   return (
