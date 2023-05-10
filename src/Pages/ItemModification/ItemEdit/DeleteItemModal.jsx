@@ -15,17 +15,17 @@ const DeleteItemModal = ({
   const queryClient = useQueryClient();
   const itemDeleteMutation = useMutation({
     mutationFn: deleteItem,
-    onSuccess: () => {
-      queryClient.refetchQueries(["item", Number(item.id)]);
-      queryClient.refetchQueries([`${item.category}`, "list"]);
+    onSuccess: async () => {
+      await queryClient.refetchQueries([`${item.category}`, "list"]);
+      queryClient.removeQueries(["item", Number(item.id)]);
       queryClient.refetchQueries(["title", item.category]);
+      setShowdeleteItemModal(false);
+      navigate(-1);
     },
   });
   const onDeleteItem = useCallback((e) => {
     e.preventDefault();
     itemDeleteMutation.mutate(item.id);
-    setShowdeleteItemModal(false);
-    navigate(-1);
   }, []);
 
   return (
