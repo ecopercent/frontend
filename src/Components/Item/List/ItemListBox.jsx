@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ItemListTabBtns from "./ItemListTabBtns";
 import ItemList from "./ItemList";
 import * as S from "./style";
@@ -6,17 +6,18 @@ import * as S from "./style";
 export default function ItemListBox({
   infoItemId,
   setInfoItemId,
-  infoItemCategory,
-  setInfoItemCategory,
+  itemListOf,
+  setItemListOf,
 }) {
-  const [itemListOf, setItemListOf] = useState(infoItemCategory);
-
   return (
     <>
       <S.ItemCategoryTabContainer>
         <ItemListTabBtns
           itemListOf={itemListOf}
-          setItemListOf={setItemListOf}
+          setItemListOf={(category) => {
+            setInfoItemId(0);
+            setItemListOf(category);
+          }}
         />
       </S.ItemCategoryTabContainer>
       <S.ItemListContainer>
@@ -24,7 +25,6 @@ export default function ItemListBox({
           itemListOf={itemListOf}
           infoItemId={infoItemId}
           setInfoItemId={setInfoItemId}
-          setInfoItemCategory={setInfoItemCategory}
         />
       </S.ItemListContainer>
     </>

@@ -8,25 +8,23 @@ import * as S from "./style";
 const Item = () => {
   const { state } = useLocation();
   const [infoItemId, setInfoItemId] = useState(state?.item || 0);
-  const [infoItemCategory, setInfoItemCategory] = useState(
-    state?.category || "tumbler"
-  );
+  const [itemListOf, setItemListOf] = useState(state?.category || "tumbler");
 
   return (
     <>
       <S.InfoLayout>
         {infoItemId === 0 ? (
-          <AllInfo />
+          <AllInfo category={itemListOf} />
         ) : (
-          <EachInfo itemId={infoItemId} itemCategory={infoItemCategory} />
+          <EachInfo itemId={infoItemId} itemCategory={itemListOf} />
         )}
       </S.InfoLayout>
       <S.ListLayout>
         <ItemListBox
           infoItemId={infoItemId}
           setInfoItemId={setInfoItemId}
-          infoItemCategory={infoItemCategory}
-          setInfoItemCategory={setInfoItemCategory}
+          itemListOf={itemListOf}
+          setItemListOf={setItemListOf}
         />
       </S.ListLayout>
     </>
