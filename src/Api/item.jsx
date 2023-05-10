@@ -57,6 +57,7 @@ export async function getTitleItem(category) {
 
 export function patchTitleItem({ itemId, category }) {
   return axios.patch(`/items/${itemId}/title-${category}`).then((res) => {
+    if (res.data.image) res.data.image = base64ToDataUrl(res.data.image);
     return res.data;
   });
 }

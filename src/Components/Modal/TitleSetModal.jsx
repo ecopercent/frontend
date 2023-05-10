@@ -14,15 +14,11 @@ export default function TitleSetModal({ queryData, onClose }) {
     mutationFn: () => {
       return patchTitleItem(queryData);
     },
-    // TODO: 현재 PATCH시 응답 데이터가 없음, 이슈 제안중
-    // onSuccess: (data) => {
-    // queryClient.setQueryData(
-    //   [`${queryData.category}`, "list"],
-    //   data
-    // );
-    onSuccess: () => {
-      queryClient.invalidateQueries([`${queryData.category}`, "list"]);
+    onSuccess: (res) => {
+      queryClient.setQueryData(["title", `${queryData.category}`], res);
+      onClose();
       queryClient.refetchQueries(["title", `${queryData.category}`]);
+      queryClient.refetchQueries([`${queryData.category}`, "list"]);
     },
   });
 
@@ -41,7 +37,6 @@ export default function TitleSetModal({ queryData, onClose }) {
           type="button"
           onClick={() => {
             titleMutation.mutate();
-            onClose();
           }}
         >
           확인
