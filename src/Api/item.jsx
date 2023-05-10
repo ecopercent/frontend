@@ -40,7 +40,7 @@ export function deleteItem(itemId) {
 }
 
 export function patchUsageCountUp(itemId) {
-  return axios.patch(`/items/${itemId}/up`).then((res) => {
+  return axios.patch(`/items/${itemId}/usage-count`).then((res) => {
     return res.data;
   });
 }

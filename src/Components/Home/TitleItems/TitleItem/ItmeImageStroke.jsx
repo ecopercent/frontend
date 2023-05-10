@@ -71,8 +71,9 @@ const ItmeImageStroke = ({ itemInfo }) => {
     onSuccess: () => {
       const newItemInfo = { ...itemInfo };
       newItemInfo.currentUsageCount += 1;
-      queryClient.setQueryData(["title", `${itemInfo.category}`], newItemInfo);
-      queryClient.invalidateQueries(["title", `${itemInfo.category}`]);
+      queryClient.setQueryData(["title", itemInfo.category], newItemInfo);
+      queryClient.invalidateQueries(["title", itemInfo.category]);
+      queryClient.invalidateQueries([itemInfo.category, "list"]);
     },
   });
   const increaseCount = useCallback(() => {
