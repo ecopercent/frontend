@@ -20,7 +20,7 @@ const DeleteItemModal = ({
       queryClient.removeQueries(["item", Number(item.id)]);
       queryClient.refetchQueries(["title", item.category]);
       setShowdeleteItemModal(false);
-      navigate(-1);
+      navigate("/item", { state: { category: item.category } });
     },
   });
   const onDeleteItem = useCallback((e) => {

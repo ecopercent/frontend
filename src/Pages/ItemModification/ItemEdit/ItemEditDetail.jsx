@@ -88,8 +88,9 @@ const ItemEditDetail = ({ itemDetail, editCallback }) => {
           <S.CancelBtn
             type="reset"
             onClick={() => {
-              navigate(-1);
-              // TODO: 카테고리 탭 유지한 페이지로 돌아가기
+              navigate("/item", {
+                state: { item: itemDetail.id, category: itemDetail.category },
+              });
             }}
           >
             취소

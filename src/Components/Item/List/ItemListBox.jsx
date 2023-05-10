@@ -6,9 +6,10 @@ import * as S from "./style";
 export default function ItemListBox({
   infoItemId,
   setInfoItemId,
+  infoItemCategory,
   setInfoItemCategory,
 }) {
-  const [itemListOf, setItemListOf] = useState("tumbler");
+  const [itemListOf, setItemListOf] = useState(infoItemCategory);
 
   return (
     <>

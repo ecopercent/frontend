@@ -44,9 +44,9 @@ const ItemAdd = () => {
   const queryClient = useQueryClient();
   const itemAddMutation = useMutation({
     mutationFn: postItem,
-    onSuccess: async () => {
+    onSuccess: async (res) => {
       await queryClient.refetchQueries([`${item.category}`, "list"]);
-      navigate(-1);
+      navigate("/item", { state: { item: res.id, category: item.category } });
     },
   });
 
@@ -99,6 +99,7 @@ const ItemAdd = () => {
           submitCallback={
             item.type === "auth" ? addItemOnAuth : addItemOnUnauth
           }
+          category={item.category}
         />
       </ItemEditBorder>
     </ItemEditWrap>
