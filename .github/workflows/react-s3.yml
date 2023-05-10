@@ -16,7 +16,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-
+          
+      - name: Setting .env
+        run: |
+          echo "REACT_APP_KAKAO_INTEGRITY_VALUE=${{ secrets.REACT_APP_KAKAO_INTEGRITY_VALUE }}" >> .env
+          echo "REACT_APP_KAKAO_JS_KEY=${{ secrets.REACT_APP_KAKAO_JS_KEY }}" >> .env
+          echo "REACT_APP_KAKAO_REDIRECT_URI=${{ secrets.REACT_APP_KAKAO_REDIRECT_URI }}" >> .env
+          echo "REACT_REST_API_KEY=${{ secrets.REACT_REST_API_KEY }}" >> .env
+          echo "REACT_REDIRECT_URI=${{ secrets.REACT_REDIRECT_URI }}" >> .env
+          echo "REACT_APP_APPLE_CLIENT_ID=${{ secrets.REACT_APP_APPLE_CLIENT_ID }}" >> .env
+          echo "REACT_APP_APPLE_REDIRECT_URI=${{ secrets.REACT_APP_APPLE_REDIRECT_URI }}" >> .env
+          cat .env
+          
       - name: Build
         run: |
           npm ci
