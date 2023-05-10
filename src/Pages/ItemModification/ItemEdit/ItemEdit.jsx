@@ -59,7 +59,7 @@ const ItemEdit = () => {
       await queryClient.refetchQueries([`${item.category}`, "list"]);
       queryClient.refetchQueries(["item", Number(item.id)]);
       queryClient.refetchQueries(["title", item.category]);
-      return navigate(-1);
+      navigate(-1);
     },
   });
 
