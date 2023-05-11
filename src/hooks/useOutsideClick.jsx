@@ -10,5 +10,5 @@ export default function useOutsideClick(modalRef, onClose) {
     return () => {
       return window.removeEventListener("mousedown", handleClick);
     };
-  });
+  }, [modalRef]);
 }
