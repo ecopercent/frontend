@@ -3,61 +3,72 @@ import { useQuery } from "@tanstack/react-query";
 import { getItemList } from "../../../Api/item";
 import * as S from "./style";
 
-export default function AllInfo() {
-  const tumblersQuery = useQuery({
-    queryKey: ["tumbler", "list"],
+export default function AllInfo({ category }) {
+  const total = {
+    usageCnt: 0,
+    goalUsageCnt: 0,
+    usagePercent: 0,
+    totalCnt: 0,
+    achivedCnt: 0,
+    achivedPercent: 0,
+  };
+  const itemsQuery = useQuery({
+    queryKey: [category, "list"],
     queryFn: () => {
-      return getItemList("tumbler");
+      return getItemList(category);
     },
   });
 
-  const ecobagsQuery = useQuery({
-    queryKey: ["ecobag", "list"],
-    queryFn: () => {
-      return getItemList("ecobag");
-    },
-  });
-
-  const achivedCnt = { tumbler: 0, ecobag: 0 };
-  if (tumblersQuery.isSuccess) {
-    achivedCnt.tumbler = tumblersQuery.data.filter((tumbler) => {
-      return tumbler.usageCount >= tumbler.goalUsageCount;
+  if (itemsQuery.isLoading || itemsQuery.isError) return null;
+  if (itemsQuery.isSuccess) {
+    total.achivedCnt = itemsQuery.data.filter((item) => {
+      total.usageCnt += Number(item.currentUsageCount);
+      total.goalUsageCnt += Number(item.goalUsageCount);
+      return item.usageCount >= item.goalUsageCount;
     }).length;
-  }
-  if (ecobagsQuery.isSuccess) {
-    achivedCnt.ecobag = ecobagsQuery.data.filter((ecobag) => {
-      return ecobag.usageCount >= ecobag.goalUsageCount;
-    }).length;
+    total.usagePercent = Math.round(
+      (total.usageCnt / total.goalUsageCnt) * 100
+    );
+    total.totalCnt = itemsQuery.data.length;
+    total.achivedPercent = Math.round(
+      (total.achivedCnt / total.totalCnt) * 100
+    );
   }
 
   return (
     <S.InfoContainer>
-      <S.InfoHeaderDiv>나의 아이템</S.InfoHeaderDiv>
+      <S.InfoHeaderDiv>
+        나의 {category === "tumbler" ? "텀블러" : "에코백"}
+      </S.InfoHeaderDiv>
       <S.InfoContentsDiv>
         <S.ContentPart>
           <S.InfoLabel>
-            텀블러
+            보유 아이템수
             <br />
-            달성개수
+            달성 아이템수
             <br />
+            달성 개수 퍼센트
             <br />
           </S.InfoLabel>
           <S.InfoValue>
-            {tumblersQuery.data ? tumblersQuery.data.length : 0}개<br />
-            {achivedCnt.tumbler}개<br />
+            {itemsQuery.data?.length}개<br />
+            {total.achivedCnt}개<br />
+            {total.achivedPercent}%
           </S.InfoValue>
         </S.ContentPart>
         <S.ContentPart>
           <S.InfoLabel>
-            에코백
+            총 사용횟수
             <br />
-            달성개수
+            총 목표횟수
             <br />
+            사용 횟수 퍼센트
             <br />
           </S.InfoLabel>
           <S.InfoValue>
-            {ecobagsQuery.data ? ecobagsQuery.data.length : 0}개<br />
-            {achivedCnt.ecobag}개<br />
+            {total.usageCnt}회<br />
+            {total.goalUsageCnt}회<br />
+            {total.usagePercent}%<br />
           </S.InfoValue>
         </S.ContentPart>
       </S.InfoContentsDiv>

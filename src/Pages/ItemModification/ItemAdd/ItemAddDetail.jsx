@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as S from "../style";
 import useInput from "../../../hooks/useInput";
 
-const ItemAddDetail = ({ submitCallback }) => {
+const ItemAddDetail = ({ submitCallback, category }) => {
   const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
   const [nickname, onNickname] = useInput("");
@@ -80,8 +80,7 @@ const ItemAddDetail = ({ submitCallback }) => {
           <S.CancelBtn
             type="reset"
             onClick={() => {
-              navigate(-1);
-              // TODO: 카테고리 탭 유지한 페이지로 돌아가기
+              navigate("/item", { state: { category } });
             }}
           >
             취소
