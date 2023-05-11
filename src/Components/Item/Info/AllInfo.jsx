@@ -19,7 +19,6 @@ export default function AllInfo({ category }) {
     },
   });
 
-  if (itemsQuery.isLoading || itemsQuery.isError) return null;
   if (itemsQuery.isSuccess) {
     total.achivedCnt = itemsQuery.data.filter((item) => {
       total.usageCnt += Number(item.currentUsageCount);
