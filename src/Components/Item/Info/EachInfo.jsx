@@ -1,24 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getItemList } from "../../../Api/item";
+import { getItem } from "../../../Api/item";
 import TitleSetModal from "../../Modal/TitleSetModal";
 import * as S from "./style";
 
 export default function EachInfo({ itemId, itemCategory }) {
+  const navigate = useNavigate();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const itemListQuery = useQuery({
-    queryKey: [`${itemCategory}`, "list"],
+
+  const itemQuery = useQuery({
+    queryKey: ["item", Number(itemId)],
     queryFn: () => {
-      return getItemList(itemCategory);
+      return getItem(itemId);
     },
   });
 
-  const infoItem = itemListQuery.data?.filter((item) => {
-    return item.id === itemId;
-  })[0];
-
-  const navigate = useNavigate();
   const editObj = {
     id: itemId,
     type: "auth",
@@ -30,8 +27,8 @@ export default function EachInfo({ itemId, itemCategory }) {
       {modalIsOpen && (
         <TitleSetModal
           queryData={{
-            itemId: Number(itemId),
-            category: infoItem.category,
+            itemId,
+            category: itemCategory,
           }}
           onClose={() => {
             setModalIsOpen(false);
@@ -40,17 +37,17 @@ export default function EachInfo({ itemId, itemCategory }) {
       )}
       <S.InfoContainer>
         <S.InfoHeaderDiv>
-          <span>{infoItem.nickname}</span>
+          <span>{itemQuery.data?.nickname}</span>
           <S.InfoBtnContainer>
             <S.TitleSetBtn
-              isTitle={infoItem.isTitle}
-              disabled={infoItem.isTitle}
+              isTitle={itemQuery.data?.isTitle}
+              disabled={itemQuery.data?.isTitle}
               type="button"
               onClick={() => {
                 setModalIsOpen(true);
               }}
             >
-              {infoItem.isTitle ? "대표아이템" : "대표 설정"}
+              {itemQuery.data?.isTitle ? "대표아이템" : "대표 설정"}
             </S.TitleSetBtn>
             <S.ModifyBtn
               type="button"
@@ -69,15 +66,15 @@ export default function EachInfo({ itemId, itemCategory }) {
               <br />
               타입
               <br />
-              {infoItem.price ? "구입가" : ""}
+              {itemQuery.data?.price ? "구입가" : ""}
               <br />
             </S.InfoLabel>
             <S.InfoValue>
-              {infoItem.brand || ""}
+              {itemQuery.data?.brand || ""}
               <br />
-              {infoItem.type || ""}
+              {itemQuery.data?.type || ""}
               <br />
-              {infoItem.price ? `${infoItem.price}원` : ""}
+              {itemQuery.data?.price ? `${itemQuery.data?.price}원` : ""}
             </S.InfoValue>
           </S.ContentPart>
           <S.ContentPart>
@@ -86,15 +83,17 @@ export default function EachInfo({ itemId, itemCategory }) {
               <br />
               목표횟수
               <br />
-              {infoItem.purchaseDate ? "구입일" : ""}
+              {itemQuery.data?.purchaseDate ? "구입일" : ""}
               <br />
             </S.InfoLabel>
             <S.InfoValue>
-              {infoItem.currentUsageCount}회
+              {itemQuery.data?.currentUsageCount}회
               <br />
-              {infoItem.goalUsageCount}회
+              {itemQuery.data?.goalUsageCount}회
               <br />
-              {infoItem.purchaseDate ? infoItem.purchaseDate.slice(0, 10) : ""}
+              {itemQuery.data?.purchaseDate
+                ? itemQuery.data?.purchaseDate.slice(0, 10)
+                : ""}
             </S.InfoValue>
           </S.ContentPart>
         </S.InfoContentsDiv>
