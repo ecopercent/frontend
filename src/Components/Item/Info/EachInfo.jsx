@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { getItem } from "../../../Api/item";
 import TitleSetModal from "../../Modal/TitleSetModal";
@@ -64,7 +64,7 @@ export default function EachInfo({ itemId, itemCategory }) {
             <S.InfoLabel>
               브랜드
               <br />
-              타입
+              {itemQuery.data?.type !== "" ? "타입" : ""}
               <br />
               {itemQuery.data?.price ? "구입가" : ""}
               <br />
