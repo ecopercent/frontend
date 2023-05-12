@@ -1,5 +1,3 @@
-// import styled from "@emotion/styled";
-
 export const normalBody = `
   font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
   font-style: normal;
@@ -76,4 +74,12 @@ export const boldHeadline = `
   font-size: 17px;
   line-height: 22px;
   text-align: center;
+`;
+
+export const boldPercent = `
+  font-family: 'SF Pro Display';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 50px;
+  line-height: 60px;
 `;

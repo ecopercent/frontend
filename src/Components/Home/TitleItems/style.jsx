@@ -4,7 +4,8 @@ export const TitleItemBox = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
+  overflow-y: auto;
 `;
 
 export const TabContainer = styled.div`

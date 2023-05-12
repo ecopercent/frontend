@@ -1,22 +1,28 @@
 import React from "react";
 import ItmeImageStroke from "./ItmeImageStroke";
+import * as S from "./style";
 
 const TitleItem = ({ itemInfo }) => {
+  const percent = Math.round(
+    (itemInfo.currentUsageCount / itemInfo.goalUsageCount) * 100
+  );
+
   return (
     <div>
       <ItmeImageStroke itemInfo={itemInfo} />
-      <div style={{ textAlign: "center", paddingBottom: "10%" }}>
-        <h3>{itemInfo.nickname}</h3>
-        <hr />
-        <h1>
-          {Math.round(
-            (itemInfo.currentUsageCount / itemInfo.goalUsageCount) * 100
-          )}
-          %
-        </h1>
-        <h2>현재 {itemInfo.currentUsageCount}회</h2>
-        <h2>목표 {itemInfo.goalUsageCount}회</h2>
-      </div>
+      <S.TitleInfoBox>
+        <S.BoldText>{itemInfo.nickname}</S.BoldText>
+        <S.PercentBox>
+          <S.HugePercent percent={percent}>{percent}</S.HugePercent>
+          <S.BoldText>%</S.BoldText>
+        </S.PercentBox>
+        <S.NormalText>
+          현재 <S.BoldText>{itemInfo.currentUsageCount}</S.BoldText>회
+        </S.NormalText>
+        <S.NormalText>
+          목표 <S.BoldText>{itemInfo.goalUsageCount}</S.BoldText>회
+        </S.NormalText>
+      </S.TitleInfoBox>
     </div>
   );
 };
