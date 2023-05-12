@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
+import { basicGreen } from "../../style/color";
 
 export const TabBarContainer = styled.div`
   display: flex;
   height: 100%;
+  border-top: 0.5px solid;
 `;
 
 export const TabItemBackGround = styled.div`
@@ -12,4 +14,13 @@ export const TabItemBackGround = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  ${(props) => {
+    return props.featured ? `color: ${basicGreen};` : "";
+  }}
+
+  :hover {
+    background-color: ${basicGreen};
+    color: white;
+  }
 `;

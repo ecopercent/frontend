@@ -16,7 +16,7 @@ export const PcPageWrap = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
-  max-height: calc(100% - 56px);
+  max-height: calc(100% - 48px);
 
   width: 500px;
   margin: 0 auto;
@@ -35,7 +35,7 @@ export const MobilePageWrap = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
-  max-height: calc(100% - 56px);
+  max-height: calc(100% - 48px);
 `;
 
 export const FooterWrap = styled.div`
@@ -44,7 +44,5 @@ export const FooterWrap = styled.div`
   flex-shrink: 0;
 
   width: 100%;
-  height: 56px;
-  background-color: #333;
-  color: #fff;
+  height: 48px;
 `;
