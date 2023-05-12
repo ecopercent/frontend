@@ -18,6 +18,10 @@ export const normal = `
   cursor: pointer;
 
   ${font.normalBtn};
+
+  :hover {
+    opacity: 0.7;
+  }
 `;
 
 export const disabled = `
