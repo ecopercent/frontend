@@ -41,6 +41,7 @@ export const Logout = styled.div`
     color: white;
   }
   border-radius: 3px;
+  cursor: pointer;
 `;
 
 export const HoverPlain = styled.div`
@@ -50,6 +51,7 @@ export const HoverPlain = styled.div`
     color: white;
   }
   border-radius: 3px;
+  cursor: pointer;
 `;
 
 export const Plain = styled.div`
