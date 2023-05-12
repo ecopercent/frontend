@@ -52,7 +52,7 @@ export default function AllInfo({ category }) {
           <S.InfoValue>
             {itemsQuery.data?.length}개<br />
             {total.achivedCnt}개<br />
-            {total.achivedPercent}%
+            {Number.isNaN(total.achivedPercent) ? "0" : total.achivedPercent}%
           </S.InfoValue>
         </S.ContentPart>
         <S.ContentPart>
@@ -67,7 +67,8 @@ export default function AllInfo({ category }) {
           <S.InfoValue>
             {total.usageCnt}회<br />
             {total.goalUsageCnt}회<br />
-            {total.usagePercent}%<br />
+            {Number.isNaN(total.achivedPercent) ? "0" : total.achivedPercent}%
+            <br />
           </S.InfoValue>
         </S.ContentPart>
       </S.InfoContentsDiv>
