@@ -7,9 +7,7 @@ export const ProfileContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: ${(props) => {
-    return props.isMobile ? "15px 10px;" : "15px 24px;";
-  }};
+  padding: 15px 25px;
   gap: 16px;
 
   width: 100%;
@@ -22,9 +20,7 @@ export const ProfileImgTextWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: ${(props) => {
-    return props.isMobile ? "10px;" : "20px;";
-  }};
+  gap: 20px;
 
   width: 100%;
   height: 100px;
@@ -33,6 +29,8 @@ export const ProfileImgTextWrapper = styled.div`
 export const ProfileImg = styled.img`
   height: 100px;
   width: 100px;
+  flex-shrink: 0;
+
   border-radius: 50%;
   border: 0.5px solid;
   object-fit: cover;
@@ -42,15 +40,11 @@ export const ProfileTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: ${(props) => {
-    return props.isMobile ? "0px;" : "8px 0px 0px;";
-  }}
-  gap: ${(props) => {
-    return props.isMobile ? "8px;" : "12px;";
-  }}
+  padding: 8px 0 0;
+  gap: 12px;
 
   word-break: break-all;
-  width: 100%
+  width: 100%;
   height: 100px;
 `;
 
