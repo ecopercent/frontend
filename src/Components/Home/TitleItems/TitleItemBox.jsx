@@ -28,25 +28,27 @@ export default function TitleItemBox() {
     : { tumbler: true, ecobag: true };
   const [itemTab, setItemTab] = useState(localSavedSet);
 
+  const hasBoth = titleTumblerQuery?.data && titleEcobagQuery?.data;
+
   return (
-    <>
-      {titleTumblerQuery?.data === null && titleEcobagQuery?.data === null && (
+    <S.TitleItemBox>
+      {hasBoth ? (
+        <>
+          <S.TabContainer>
+            <ConvertButtons hasBoth={hasBoth} setItemTab={setItemTab} />
+          </S.TabContainer>
+          <S.TitleItemContainer>
+            {itemTab.tumbler && titleTumblerQuery?.data && (
+              <TitleItem itemInfo={titleTumblerQuery.data} />
+            )}
+            {itemTab.ecobag && titleEcobagQuery?.data && (
+              <TitleItem itemInfo={titleEcobagQuery.data} />
+            )}
+          </S.TitleItemContainer>
+        </>
+      ) : (
         <NoTitleItem />
       )}
-      <S.TabContainer>
-        <ConvertButtons
-          hasBoth={!!titleTumblerQuery?.data && !!titleEcobagQuery?.data}
-          setItemTab={setItemTab}
-        />
-      </S.TabContainer>
-      <S.TitleItemContainer>
-        {itemTab.tumbler && titleTumblerQuery?.data && (
-          <TitleItem itemInfo={titleTumblerQuery.data} />
-        )}
-        {itemTab.ecobag && titleEcobagQuery?.data && (
-          <TitleItem itemInfo={titleEcobagQuery.data} />
-        )}
-      </S.TitleItemContainer>
-    </>
+    </S.TitleItemBox>
   );
 }

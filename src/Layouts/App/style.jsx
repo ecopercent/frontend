@@ -9,7 +9,7 @@ const style = css`
   }
 
   #root {
-    height: 100%;
+    height: 100vh;
   }
 
   * {

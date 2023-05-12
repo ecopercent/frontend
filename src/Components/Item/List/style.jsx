@@ -8,7 +8,6 @@ import * as color from "../../../style/color";
 
 export const ItemCategoryTabContainer = styled.div`
   width: 100%;
-  height: 100%;
   border-bottom: 0.5px solid;
 `;
 
@@ -54,6 +53,8 @@ export const ItemsUl = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 20px;
+
+  /* overflow-y: auto; */
 `;
 
 export const ItemLi = styled.li`

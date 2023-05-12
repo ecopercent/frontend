@@ -8,41 +8,43 @@ export const PcLayout = styled.div`
   width: 100%;
   height: 100%;
 
-  // min-height: calc(100vh);
+  display: flex;
+  flex-direction: column;
 `;
 
 export const PcPageWrap = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1 0 auto;
+  max-height: calc(100% - 56px);
 
   width: 500px;
   margin: 0 auto;
-  padding-bottom: 8%;
-`;
-
-export const MobilePageWrap = styled.div`
-  padding-bottom: 8%;
 `;
 
 export const MobileLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  // min-height: 100vh - 50px;
-  // min-height: -webkit-fill-available;
-
-  height: 100vh;
+  height: 100%;
   height: -webkit-fill-available;
   height: fill-available;
+
+  display: flex;
+  flex-direction: column;
+`;
+
+export const MobilePageWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  max-height: calc(100% - 56px);
 `;
 
 export const FooterWrap = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 8%;
-  background-color: #333;
-  color: #fff;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
+
+  width: 100%;
+  height: 56px;
+  background-color: #333;
+  color: #fff;
 `;
