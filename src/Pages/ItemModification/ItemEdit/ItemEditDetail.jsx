@@ -24,9 +24,9 @@ const ItemEditDetail = ({ itemDetail, editCallback }) => {
   };
 
   return (
-    <S.ItemDetailWrapper>
-      <S.Form onSubmit={handleSubmit}>
-        <S.FormInnerWrapper>
+    <S.Form onSubmit={handleSubmit}>
+      <S.FormInnerWrapper>
+        <S.LabelInputSet>
           <S.Span>닉네임</S.Span>
           <S.Input
             value={nickname}
@@ -36,6 +36,8 @@ const ItemEditDetail = ({ itemDetail, editCallback }) => {
             minLength={2}
             placeholder={itemDetail.nickname}
           />
+        </S.LabelInputSet>
+        <S.LabelInputSet>
           <S.Span>브랜드</S.Span>
           <S.Input
             value={brand}
@@ -45,16 +47,21 @@ const ItemEditDetail = ({ itemDetail, editCallback }) => {
             maxLength={12}
             placeholder={itemDetail.brand}
           />
+        </S.LabelInputSet>
+        <S.LabelInputSet>
           <S.Span>타입</S.Span>
           <S.Input value={type} onChange={onType} maxLength={12} />
+        </S.LabelInputSet>
+        <S.LabelInputSet>
           <S.Span>목표횟수</S.Span>
           <S.Input
-            style={{ backgroundColor: "lightgray" }}
             value={targetGoalUsageCount}
             type="number"
             readOnly
             placeholder={itemDetail.goalUsageCount}
           />
+        </S.LabelInputSet>
+        <S.LabelInputSet>
           <S.Span>구입가</S.Span>
           <S.Input
             value={price}
@@ -68,6 +75,8 @@ const ItemEditDetail = ({ itemDetail, editCallback }) => {
             maxLength={12}
             type="number"
           />
+        </S.LabelInputSet>
+        <S.LabelInputSet>
           <S.Span>구입일</S.Span>
           <S.Input
             value={purchaseDate}
@@ -75,30 +84,23 @@ const ItemEditDetail = ({ itemDetail, editCallback }) => {
             type="date"
             placeholder={itemDetail.purchaseDate}
           />
-        </S.FormInnerWrapper>
-        <div
-          style={{
-            height: "4%",
-            marginTop: "1%",
+        </S.LabelInputSet>
+      </S.FormInnerWrapper>
+      {isError && <S.Error>닉네임, 브랜드는 필수입니다.</S.Error>}
+      <S.ButtonWrapper>
+        <S.CancelBtn
+          type="reset"
+          onClick={() => {
+            navigate("/item", {
+              state: { item: itemDetail.id, category: itemDetail.category },
+            });
           }}
         >
-          {isError && <S.Error>닉네임, 브랜드는 필수입니다.</S.Error>}
-        </div>
-        <S.ButtonWrapper>
-          <S.CancelBtn
-            type="reset"
-            onClick={() => {
-              navigate("/item", {
-                state: { item: itemDetail.id, category: itemDetail.category },
-              });
-            }}
-          >
-            취소
-          </S.CancelBtn>
-          <S.SubmitBtn type="submit">저장</S.SubmitBtn>
-        </S.ButtonWrapper>
-      </S.Form>
-    </S.ItemDetailWrapper>
+          취소
+        </S.CancelBtn>
+        <S.SubmitBtn type="submit">저장</S.SubmitBtn>
+      </S.ButtonWrapper>
+    </S.Form>
   );
 };
 

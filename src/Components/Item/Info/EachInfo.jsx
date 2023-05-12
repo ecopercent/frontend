@@ -31,7 +31,7 @@ export default function EachInfo({ itemId, itemCategory }) {
         <TitleSetModal
           queryData={{
             itemId: Number(itemId),
-            category: infoItem.category,
+            category: infoItem?.category,
           }}
           onClose={() => {
             setModalIsOpen(false);
@@ -40,17 +40,17 @@ export default function EachInfo({ itemId, itemCategory }) {
       )}
       <S.InfoContainer>
         <S.InfoHeaderDiv>
-          <span>{infoItem.nickname}</span>
+          <span>{infoItem?.nickname}</span>
           <S.InfoBtnContainer>
             <S.TitleSetBtn
-              isTitle={infoItem.isTitle}
-              disabled={infoItem.isTitle}
+              isTitle={infoItem?.isTitle}
+              disabled={infoItem?.isTitle}
               type="button"
               onClick={() => {
                 setModalIsOpen(true);
               }}
             >
-              {infoItem.isTitle ? "대표아이템" : "대표 설정"}
+              {infoItem?.isTitle ? "대표아이템" : "대표 설정"}
             </S.TitleSetBtn>
             <S.ModifyBtn
               type="button"
@@ -69,15 +69,15 @@ export default function EachInfo({ itemId, itemCategory }) {
               <br />
               타입
               <br />
-              {infoItem.price ? "구입가" : ""}
+              {infoItem?.price ? "구입가" : ""}
               <br />
             </S.InfoLabel>
             <S.InfoValue>
-              {infoItem.brand || ""}
+              {infoItem?.brand || ""}
               <br />
-              {infoItem.type || ""}
+              {infoItem?.type || ""}
               <br />
-              {infoItem.price ? `${infoItem.price}원` : ""}
+              {infoItem?.price ? `${infoItem?.price}원` : ""}
             </S.InfoValue>
           </S.ContentPart>
           <S.ContentPart>
@@ -86,15 +86,17 @@ export default function EachInfo({ itemId, itemCategory }) {
               <br />
               목표횟수
               <br />
-              {infoItem.purchaseDate ? "구입일" : ""}
+              {infoItem?.purchaseDate ? "구입일" : ""}
               <br />
             </S.InfoLabel>
             <S.InfoValue>
-              {infoItem.currentUsageCount}회
+              {infoItem?.currentUsageCount}회
               <br />
-              {infoItem.goalUsageCount}회
+              {infoItem?.goalUsageCount}회
               <br />
-              {infoItem.purchaseDate ? infoItem.purchaseDate.slice(0, 10) : ""}
+              {infoItem?.purchaseDate
+                ? infoItem?.purchaseDate.slice(0, 10)
+                : ""}
             </S.InfoValue>
           </S.ContentPart>
         </S.InfoContentsDiv>

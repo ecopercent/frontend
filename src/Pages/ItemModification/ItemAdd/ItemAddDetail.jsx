@@ -24,9 +24,9 @@ const ItemAddDetail = ({ submitCallback, category }) => {
   };
 
   return (
-    <S.ItemDetailWrapper>
-      <S.Form onSubmit={handleSubmit}>
-        <S.FormInnerWrapper>
+    <S.Form onSubmit={handleSubmit}>
+      <S.FormInnerWrapper>
+        <S.LabelInputSet>
           <S.Span>닉네임</S.Span>
           <S.Input
             value={nickname}
@@ -35,6 +35,8 @@ const ItemAddDetail = ({ submitCallback, category }) => {
             maxLength={8}
             minLength={2}
           />
+        </S.LabelInputSet>
+        <S.LabelInputSet>
           <S.Span>브랜드</S.Span>
           <S.Input
             value={brand}
@@ -43,15 +45,16 @@ const ItemAddDetail = ({ submitCallback, category }) => {
             minLength={1}
             maxLength={12}
           />
+        </S.LabelInputSet>
+        <S.LabelInputSet>
           <S.Span>타입</S.Span>
           <S.Input value={type} onChange={onType} maxLength={12} />
+        </S.LabelInputSet>
+        <S.LabelInputSet>
           <S.Span>목표횟수</S.Span>
-          <S.Input
-            style={{ backgroundColor: "lightgray" }}
-            value={targetGoalUsageCount}
-            type="number"
-            readOnly
-          />
+          <S.Input value={targetGoalUsageCount} type="number" readOnly />
+        </S.LabelInputSet>
+        <S.LabelInputSet>
           <S.Span>구입가</S.Span>
           <S.Input
             value={price}
@@ -65,30 +68,32 @@ const ItemAddDetail = ({ submitCallback, category }) => {
             maxLength={12}
             type="number"
           />
+        </S.LabelInputSet>
+        <S.LabelInputSet>
           <S.Span>구입일</S.Span>
           <S.Input value={purchaseDate} onChange={onPurchaseData} type="date" />
-        </S.FormInnerWrapper>
-        <div
-          style={{
-            height: "4%",
-            marginTop: "1%",
+        </S.LabelInputSet>
+      </S.FormInnerWrapper>
+      <div
+        style={{
+          height: "4%",
+          marginTop: "1%",
+        }}
+      >
+        {isError && <S.Error>닉네임, 브랜드는 필수입니다.</S.Error>}
+      </div>
+      <S.ButtonWrapper>
+        <S.CancelBtn
+          type="reset"
+          onClick={() => {
+            navigate("/item", { state: { category } });
           }}
         >
-          {isError && <S.Error>닉네임, 브랜드는 필수입니다.</S.Error>}
-        </div>
-        <S.ButtonWrapper>
-          <S.CancelBtn
-            type="reset"
-            onClick={() => {
-              navigate("/item", { state: { category } });
-            }}
-          >
-            취소
-          </S.CancelBtn>
-          <S.SubmitBtn type="submit">저장</S.SubmitBtn>
-        </S.ButtonWrapper>
-      </S.Form>
-    </S.ItemDetailWrapper>
+          취소
+        </S.CancelBtn>
+        <S.SubmitBtn type="submit">저장</S.SubmitBtn>
+      </S.ButtonWrapper>
+    </S.Form>
   );
 };
 
