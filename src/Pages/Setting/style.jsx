@@ -4,7 +4,7 @@ import { basicGreen, lightGreen } from "../../style/color";
 export const SettingWrap = styled.div`
   //   border: 1px solid black;
   border-radius: 10px;
-  margin-top: 5%;
+  margin: 10px;
 `;
 
 export const SettingTitle = styled.div`
