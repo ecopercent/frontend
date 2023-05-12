@@ -54,8 +54,6 @@ export const ItemsUl = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-
-  /* overflow-y: auto; */
 `;
 
 export const ItemLi = styled.li`
