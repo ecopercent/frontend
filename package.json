@@ -25,11 +25,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build_dev": "REACT_APP_ENDPOINT=https://api.ecopercent.com react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "build_dev": "REACT_APP_ENDPOINT=https://api.ecopercent.com craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "format:check": "prettier --check ./src",
     "format:fix": "prettier --write ./src"
   },
@@ -60,5 +60,5 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0"
   },
-  "proxy": "http://15.164.220.23:8080"
+  "proxy": "http://localhost:8080"
 }
