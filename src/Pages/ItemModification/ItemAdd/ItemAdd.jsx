@@ -7,12 +7,12 @@ import React, {
 } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { postItem } from "@api/item";
+import SignUpItemContext from "@hooks/SignUpItemContext";
 import ItemImage from "./ItemAddImage";
 import ItemAddDetail from "./ItemAddDetail";
 import ItemAddHead from "./ItemAddHead";
 import { ItemEditBorder, ItemEditWrap } from "../style";
-import { postItem } from "../../../Api/item";
-import SignUpItemContext from "../../../hooks/SignUpItemContext";
 
 const ItemAdd = () => {
   const item = useLocation().state;

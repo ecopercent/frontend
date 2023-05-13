@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import * as btn from "../../style/button";
-import * as font from "../../style/font";
-import * as color from "../../style/color";
+import * as btn from "@style/button";
+import * as font from "@style/font";
+import * as color from "@style/color";
 
 export const backgroundOverlay = styled.div`
   position: fixed;

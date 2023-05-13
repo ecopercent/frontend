@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { BsPlusCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { getItemList } from "../../../Api/item";
+import { getItemList } from "@api/item";
 import * as S from "./style";
 
 export default function ItemList({ itemListOf, infoItemId, setInfoItemId }) {

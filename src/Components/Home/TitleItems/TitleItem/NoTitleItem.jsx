@@ -1,7 +1,7 @@
 import React from "react";
 import { BsFillPatchExclamationFill } from "react-icons/bs";
+import { basicGreen } from "@style/color";
 import * as S from "./style";
-import { basicGreen } from "../../../../style/color";
 
 export default function NoTitleItem() {
   return (

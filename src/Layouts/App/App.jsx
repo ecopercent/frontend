@@ -3,8 +3,8 @@ import React, { useReducer } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import loadable from "@loadable/component";
 import GlobalStyles from "./style";
-import SignUpItemContext from "../../hooks/SignUpItemContext";
-import signUpItemReducer from "../../hooks/signUpItemReducer";
+import SignUpItemContext from "@hooks/SignUpItemContext";
+import signUpItemReducer from "@hooks/signUpItemReducer";
 
 const Login = loadable(() => {
   return import("../Login/Login");
@@ -16,16 +16,16 @@ const Error = loadable(() => {
   return import("../Error/Error");
 });
 const ItemEdit = loadable(() => {
-  return import("../../Pages/ItemModification/ItemEdit/ItemEdit");
+  return import("@pages/ItemModification/ItemEdit/ItemEdit");
 });
 const ItemAdd = loadable(() => {
-  return import("../../Pages/ItemModification/ItemAdd/ItemAdd");
+  return import("@pages/ItemModification/ItemAdd/ItemAdd");
 });
 const SignUp = loadable(() => {
-  return import("../../Components/SignUp/SignUp");
+  return import("@components/SignUp/SignUp");
 });
 const Welcome = loadable(() => {
-  return import("../../Components/SignUp/Welcome");
+  return import("@components/SignUp/Welcome");
 });
 
 function App() {

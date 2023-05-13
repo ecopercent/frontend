@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import SocialLogin from "../../Components/Login/SocialLogin";
+import SocialLogin from "@components/Login/SocialLogin";
 import * as S from "./style";
-import SignUpItemContext from "../../hooks/SignUpItemContext";
+import SignUpItemContext from "@hooks/SignUpItemContext";
 
 const Login = () => {
   const { state, dispatch } = useContext(SignUpItemContext);

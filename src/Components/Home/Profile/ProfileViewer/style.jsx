@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import * as font from "../../../../style/font";
-import * as btn from "../../../../style/button";
+import * as font from "@style/font";
+import * as btn from "@style/button";
 
 export const ProfileContainer = styled.div`
   display: flex;
@@ -74,4 +74,10 @@ export const ProfileButtonLayout = styled.div`
 export const ProfileEditButton = styled.button`
   ${btn.profile}
   ${font.normalBtn}
+  ${(props) => {
+    if (props.disabled)
+      return `cursor: not-allowed;
+      color: white;`;
+    return null;
+  }}
 `;

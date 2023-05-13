@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import AllInfo from "../../Components/Item/Info/AllInfo";
-import EachInfo from "../../Components/Item/Info/EachInfo";
-import ItemListBox from "../../Components/Item/List/ItemListBox";
+import AllInfo from "@components/Item/Info/AllInfo";
+import EachInfo from "@components/Item/Info/EachInfo";
+import ItemListBox from "@components/Item/List/ItemListBox";
 import * as S from "./style";
 
 const Item = () => {

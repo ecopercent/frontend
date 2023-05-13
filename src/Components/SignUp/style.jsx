@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { BsPatchCheckFill } from "react-icons/bs";
-import * as font from "../../style/font";
-import * as button from "../../style/button";
-import { basicGreen } from "../../style/color";
+import * as font from "@style/font";
+import * as button from "@style/button";
+import { basicGreen } from "@style/color";
 
 export const SignUpLayoutCol = styled.div`
   display: flex;

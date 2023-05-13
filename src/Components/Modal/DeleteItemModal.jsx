@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { deleteItem } from "../../Api/item";
+import { deleteItem } from "@api/item";
 import SmallModal from "./SmallModal";
 import * as S from "./style";
 

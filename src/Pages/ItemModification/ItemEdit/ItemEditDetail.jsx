@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useInput from "@hooks/useInput";
 import * as S from "../style";
-import useInput from "../../../hooks/useInput";
 
 const ItemEditDetail = ({ itemDetail, editCallback }) => {
   const navigate = useNavigate();

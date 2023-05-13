@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import * as font from "../../../../style/font";
-import * as btn from "../../../../style/button";
+import * as font from "@style/font";
+import * as btn from "@style/button";
 
 export const ProfileContainer = styled.div`
   display: flex;

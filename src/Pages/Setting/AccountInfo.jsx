@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "./style";
 import AccountDelete from "./AccountDelete";
-import Error from "../../Layouts/Error/Error";
+import Error from "@layout/Error/Error";
 
 const AccountInfo = () => {
   const { accountDeletePage } = useParams();
