@@ -1,9 +1,9 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getUser } from "../../../../Api/user";
+import { getUser } from "@api/user";
 import * as S from "./style";
 
-export default function ProfileBtns({ handleClick }) {
+export default function ProfileEditBtn({ handleClick }) {
   const userQuery = useQuery({
     queryKey: ["user"],
     queryFn: () => {
@@ -16,7 +16,7 @@ export default function ProfileBtns({ handleClick }) {
       <S.ProfileEditButton
         type="button"
         onClick={handleClick}
-        disabled={userQuery.isLoading || userQuery.isError}
+        disabled={!userQuery.isSuccess}
       >
         프로필 편집
       </S.ProfileEditButton>

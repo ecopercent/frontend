@@ -2,12 +2,12 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
 import { useMutation } from "@tanstack/react-query";
-import { PcPageWrap } from "../../Layouts/Main/style";
-import CancelCheckModal from "../Modal/CancelCheckModal";
+import { PcPageWrap } from "@layout/Main/style";
+import CancelCheckModal from "@modal/CancelCheckModal";
 import SignUpUser from "./Form/SignUpUser";
 import SignUpItems from "./Form/SignUpItems";
-import SignUpItemContext from "../../hooks/SignUpItemContext";
-import { postUserOfKakao, postUserOfApple } from "../../Api/user";
+import SignUpItemContext from "@hooks/SignUpItemContext";
+import { postUserOfKakao, postUserOfApple } from "@api/user";
 import * as S from "./style";
 
 const initialUser = {

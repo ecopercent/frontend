@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import * as font from "../../../style/font";
-import * as color from "../../../style/color";
+import * as font from "@style/font";
+import * as color from "@style/color";
 
 /*
  *          Item List Box

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { basicGreen } from "../../style/color";
+import { basicGreen } from "@style/color";
 
 export const TabBarContainer = styled.div`
   display: flex;

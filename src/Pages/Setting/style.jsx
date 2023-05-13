@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { basicGreen, lightGreen } from "../../style/color";
+import { basicGreen, lightGreen } from "@style/color";
 
 export const SettingWrap = styled.div`
   //   border: 1px solid black;

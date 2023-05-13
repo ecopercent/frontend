@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import cookie from "react-cookies";
-import { scriptLoad } from "../../Utils/script";
+import { scriptLoad } from "@util/script";
 import { LogoImg } from "./style";
 
 export async function kakaoLogin() {

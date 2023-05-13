@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import useOutsideClick from "../../hooks/useOutsideClick";
+import useOutsideClick from "@hooks/useOutsideClick";
 import ModalContainer from "./ModalContainer";
 import * as S from "./style";
 

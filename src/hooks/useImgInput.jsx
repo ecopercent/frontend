@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import cookie from "react-cookies";
 import styled from "@emotion/styled";
-import { imgCompress } from "../Utils/convert";
+import { imgCompress } from "@util/convert";
 
 const ImgLayout = styled.label`
   display: flex;

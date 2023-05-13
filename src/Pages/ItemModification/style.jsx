@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { HiOutlineCamera } from "react-icons/hi";
-import * as btn from "../../style/button";
-import * as font from "../../style/font";
+import * as btn from "@style/button";
+import * as font from "@style/font";
 
 export const ItemEditWrap = styled.div`
   width: 100%;

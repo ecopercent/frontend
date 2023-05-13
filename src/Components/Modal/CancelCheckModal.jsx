@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import useOutsideClick from "../../hooks/useOutsideClick";
+import useOutsideClick from "@hooks/useOutsideClick";
 import SmallModal from "./SmallModal";
 import * as S from "./style";
 

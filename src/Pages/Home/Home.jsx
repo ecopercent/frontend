@@ -1,7 +1,7 @@
 import React from "react";
-import Profile from "../../Components/Home/Profile/Profile";
-import TitleItemBox from "../../Components/Home/TitleItems/TitleItemBox";
-import { setAccessToken } from "../../Api/axiosInterceptor";
+import Profile from "@components/Home/Profile/Profile";
+import TitleItemBox from "@components/Home/TitleItems/TitleItemBox";
+import { setAccessToken } from "@api/axiosInterceptor";
 
 const Home = () => {
   setAccessToken();
