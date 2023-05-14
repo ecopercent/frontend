@@ -1,9 +1,12 @@
-let accessToken;
+import { axios } from "axios";
 
-export function setAccess(newToken) {
+let accessToken = null;
+
+export function setAccessToken(newToken) {
   accessToken = newToken;
+  axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 }
 
-export function getAccess() {
+export function getAccessToken() {
   return accessToken;
 }

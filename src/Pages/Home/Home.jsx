@@ -1,12 +1,11 @@
 import React from "react";
 import cookie from "react-cookies";
-import axios from "axios";
 import Profile from "../../Components/Home/Profile/Profile";
 import TitleItemBox from "../../Components/Home/TitleItems/TitleItemBox";
+import { setAccessToken } from "../../Api/jwt";
 
 const Home = () => {
-  const access = cookie.load("access");
-  axios.defaults.headers.common.Authorization = `Bearer ${access}`;
+  setAccessToken(cookie.load("access"));
 
   return (
     <>
