@@ -1,13 +1,18 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+  useRef,
+} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import ItmeAddImage from "./ItmeAddImage";
+import ItemImage from "./ItemAddImage";
 import ItemAddDetail from "./ItemAddDetail";
 import ItemAddHead from "./ItemAddHead";
 import { ItemEditBorder, ItemEditWrap } from "../style";
 import { postItem } from "../../../Api/item";
 import SignUpItemContext from "../../../hooks/SignUpItemContext";
-import { getUserId } from "../../../Layouts/Login/Login";
 
 const ItemAdd = () => {
   const item = useLocation().state;
@@ -39,25 +44,30 @@ const ItemAdd = () => {
   const queryClient = useQueryClient();
   const itemAddMutation = useMutation({
     mutationFn: postItem,
-    onSuccess: () => {
-      queryClient.refetchQueries([`${item.category}s`, Number(getUserId())]);
+    onSuccess: async (res) => {
+      await queryClient.refetchQueries([`${item.category}`, "list"]);
+      navigate("/item", { state: { item: res.id, category: item.category } });
     },
   });
 
+  const itemImgFile = useRef(null);
+  const setItemImgFile = (set) => {
+    itemImgFile.current = set;
+  };
+
   const addItemOnAuth = useCallback(
     (input) => {
-      itemAddMutation.mutate({
-        itemUserId: Number(getUserId()),
-        itemImage: "이미지피커에서가져올거얏",
-        itemNickname: input.nickname,
-        itemCategory: item.category,
-        itemType: input.type,
-        itemBrand: input.brand,
-        itemPrice: input.price,
-        itemPurchaseDate: input.purchaseDate,
-      });
-
-      navigate(-1);
+      const formData = new FormData();
+      const itemData = {
+        ...input,
+        category: item.category,
+      };
+      formData.append(
+        "itemData",
+        new Blob([JSON.stringify(itemData)], { type: "application/json" })
+      );
+      formData.append("itemImage", itemImgFile.current);
+      itemAddMutation.mutate(formData);
     },
     [item.type]
   );
@@ -67,7 +77,11 @@ const ItemAdd = () => {
     (input) => {
       dispatch({
         type: `${item.category}Submit`,
-        input,
+        input: { ...input, category: item.category },
+      });
+      dispatch({
+        type: `${item.category}Img`,
+        input: itemImgFile.current,
       });
       navigate(-1);
     },
@@ -79,12 +93,13 @@ const ItemAdd = () => {
       <ItemEditBorder width={innerWidth} height={innerHeight}>
         <ItemAddHead item={item} />
         <hr />
-        <ItmeAddImage />
+        <ItemImage setImgFile={setItemImgFile} category={item.category} />
         <hr />
         <ItemAddDetail
           submitCallback={
             item.type === "auth" ? addItemOnAuth : addItemOnUnauth
           }
+          category={item.category}
         />
       </ItemEditBorder>
     </ItemEditWrap>

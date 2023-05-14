@@ -3,11 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import { getUser } from "../../../../Api/user";
 import * as S from "./style";
 
-export default function ProfileBtns({ userId, handleClick }) {
+export default function ProfileBtns({ handleClick }) {
   const userQuery = useQuery({
-    queryKey: ["user", userId],
+    queryKey: ["user"],
     queryFn: () => {
-      return getUser(userId);
+      return getUser();
     },
   });
 

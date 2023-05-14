@@ -3,21 +3,22 @@ import { useQuery } from "@tanstack/react-query";
 import { getUser } from "../../../../Api/user";
 import * as S from "./style";
 
-export default function ProfileImg({ userId }) {
+export default function ProfileImg() {
   const userQuery = useQuery({
-    queryKey: ["user", userId],
+    queryKey: ["user"],
     queryFn: () => {
-      return getUser(userId);
+      return getUser();
     },
   });
 
-  const user = userQuery.data;
   return (
     <S.ProfileImg
       src={
-        userQuery.isLoading || userQuery.isError || user.profileImage === null
-          ? "/img/userLoadingImage.png"
-          : user.profileImage
+        userQuery.isLoading ||
+        userQuery.isError ||
+        !userQuery?.data.profileImage
+          ? "/img/default_user.png"
+          : userQuery?.data.profileImage
       }
       alt="user profile"
     />

@@ -46,7 +46,7 @@ const ItemEditDetail = ({ itemDetail, editCallback }) => {
             placeholder={itemDetail.brand}
           />
           <S.Span>타입</S.Span>
-          <S.Input value={type} onChange={onType} />
+          <S.Input value={type} onChange={onType} maxLength={12} />
           <S.Span>목표횟수</S.Span>
           <S.Input
             style={{ backgroundColor: "lightgray" }}
@@ -58,9 +58,15 @@ const ItemEditDetail = ({ itemDetail, editCallback }) => {
           <S.Span>구입가</S.Span>
           <S.Input
             value={price}
-            onChange={onPrice}
+            onChange={(e) => {
+              e.preventDefault();
+              if (e.target.value.length > e.target.maxLength)
+                e.target.value = e.target.value.slice(0, e.target.maxLength);
+              e.target.value = Number(e.target.value);
+              onPrice(e);
+            }}
+            maxLength={12}
             type="number"
-            placeholder={itemDetail.price}
           />
           <S.Span>구입일</S.Span>
           <S.Input
@@ -82,8 +88,9 @@ const ItemEditDetail = ({ itemDetail, editCallback }) => {
           <S.CancelBtn
             type="reset"
             onClick={() => {
-              navigate(-1);
-              // TODO: 카테고리 탭 유지한 페이지로 돌아가기
+              navigate("/item", {
+                state: { item: itemDetail.id, category: itemDetail.category },
+              });
             }}
           >
             취소

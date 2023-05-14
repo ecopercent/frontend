@@ -1,34 +1,30 @@
 import React, { useState } from "react";
-import { getUserId } from "../../Layouts/Login/Login";
+import { useLocation } from "react-router-dom";
 import AllInfo from "../../Components/Item/Info/AllInfo";
 import EachInfo from "../../Components/Item/Info/EachInfo";
 import ItemListBox from "../../Components/Item/List/ItemListBox";
 import * as S from "./style";
 
 const Item = () => {
-  const userId = getUserId();
-  const [infoItemId, setInfoItemId] = useState(0);
-  const [infoItemCategory, setInfoItemCategory] = useState("tumbler");
+  const { state } = useLocation();
+  const [infoItemId, setInfoItemId] = useState(state?.item || 0);
+  const [itemListOf, setItemListOf] = useState(state?.category || "tumbler");
 
   return (
     <>
       <S.InfoLayout>
         {infoItemId === 0 ? (
-          <AllInfo userId={Number(userId)} />
+          <AllInfo category={itemListOf} />
         ) : (
-          <EachInfo
-            userId={Number(userId)}
-            itemId={infoItemId}
-            itemCategory={infoItemCategory}
-          />
+          <EachInfo itemId={infoItemId} itemCategory={itemListOf} />
         )}
       </S.InfoLayout>
       <S.ListLayout>
         <ItemListBox
-          userId={userId}
           infoItemId={infoItemId}
           setInfoItemId={setInfoItemId}
-          setInfoItemCategory={setInfoItemCategory}
+          itemListOf={itemListOf}
+          setItemListOf={setItemListOf}
         />
       </S.ListLayout>
     </>

@@ -1,31 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import ItemListTabBtns from "./ItemListTabBtns";
 import ItemList from "./ItemList";
 import * as S from "./style";
 
 export default function ItemListBox({
-  userId,
   infoItemId,
   setInfoItemId,
-  setInfoItemCategory,
+  itemListOf,
+  setItemListOf,
 }) {
-  const [itemListOf, setItemListOf] = useState("tumbler");
-
   return (
     <>
       <S.ItemCategoryTabContainer>
         <ItemListTabBtns
           itemListOf={itemListOf}
-          setItemListOf={setItemListOf}
+          setItemListOf={(category) => {
+            setInfoItemId(0);
+            setItemListOf(category);
+          }}
         />
       </S.ItemCategoryTabContainer>
       <S.ItemListContainer>
         <ItemList
-          userId={Number(userId)}
           itemListOf={itemListOf}
           infoItemId={infoItemId}
           setInfoItemId={setInfoItemId}
-          setInfoItemCategory={setInfoItemCategory}
         />
       </S.ItemListContainer>
     </>

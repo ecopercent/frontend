@@ -61,7 +61,7 @@ const oneStrockInfo = [
   },
 ];
 
-const ItmeImageStroke = ({ itemInfo, userId }) => {
+const ItmeImageStroke = ({ itemInfo }) => {
   const divideNum = itemInfo.category === "tumbler" ? 3 : 1;
   const currentUsageCount = checkItemUsageCount(itemInfo.id, divideNum);
   const [usageCount, setUsageCount] = useState(currentUsageCount);
@@ -71,15 +71,9 @@ const ItmeImageStroke = ({ itemInfo, userId }) => {
     onSuccess: () => {
       const newItemInfo = { ...itemInfo };
       newItemInfo.currentUsageCount += 1;
-      queryClient.setQueryData(
-        ["title", `${itemInfo.category}`, Number(userId)],
-        newItemInfo
-      );
-      queryClient.invalidateQueries([
-        "title",
-        `${itemInfo.category}`,
-        Number(userId),
-      ]);
+      queryClient.setQueryData(["title", itemInfo.category], newItemInfo);
+      queryClient.invalidateQueries(["title", itemInfo.category]);
+      queryClient.invalidateQueries([itemInfo.category, "list"]);
     },
   });
   const increaseCount = useCallback(() => {
@@ -103,7 +97,10 @@ const ItmeImageStroke = ({ itemInfo, userId }) => {
     <svg width="200" height="200" viewBox="0 0 200 200" onClick={increaseCount}>
       <g>
         <foreignObject x="25" y="25" width="100%" height="100%">
-          <S.ImageClipper src={itemInfo.image} alt="아이템 이미지" />
+          <S.ImageClipper
+            src={itemInfo.image || `img/default_${itemInfo.category}.png`}
+            alt="아이템 이미지"
+          />
         </foreignObject>
         {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map((element) => {
           if (element.key <= usageCount)

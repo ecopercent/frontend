@@ -7,50 +7,55 @@ import ProfileText from "./ProfileText";
 import ProfileBtns from "./ProfileBtns";
 import * as S from "./style";
 
-export default function ProfileEditor({ userId, setIsEditing }) {
+export default function ProfileEditor({ setIsEditing }) {
   const isMobile = useMediaQuery({
     query: "(max-width:470px)",
   });
   const queryClient = useQueryClient();
   const userQuery = useQuery({
-    queryKey: ["user", userId],
+    queryKey: ["user"],
     queryFn: () => {
-      return getUser(userId);
+      return getUser();
     },
   });
 
   if (userQuery.isError) console.log(JSON.stringify(userQuery.error));
 
-  const [localUser, setLocalUser] = useState({
+  const [userData, setUserData] = useState({
     nickname: userQuery.data.nickname,
     profileMessage: userQuery.data.profileMessage,
-    profileImage: userQuery.data.profileImage,
   });
+  const [userImgFile, setUserImgFile] = useState(userQuery.data.profileImage);
 
   const profileEditMutation = useMutation({
     mutationFn: patchUser,
     onSuccess: (data) => {
-      queryClient.setQueryData(["user", userId], data);
-      queryClient.invalidateQueries(["user", userId]);
+      queryClient.setQueryData(["user"], data);
+      queryClient.refetchQueries(["user"]);
+      setIsEditing();
     },
   });
 
   function handleSubmit() {
-    profileEditMutation.mutate({
-      id: userId,
-      nick: localUser.nickname,
-      msg: localUser.profileMessage,
-      img: localUser.profileImage,
-    });
+    const formData = new FormData();
+    formData.append(
+      "userData",
+      new Blob([JSON.stringify(userData)], { type: "application/json" })
+    );
+    formData.append(
+      "profileImage",
+      typeof userImgFile === "object" ? userImgFile : null
+    );
+    profileEditMutation.mutate(formData);
   }
 
   return (
     <S.ProfileContainer isMobile={isMobile}>
       <S.ProfileImgTextWrapper isMobile={isMobile}>
-        <ProfileImg user={localUser} setUser={setLocalUser} />
+        <ProfileImg imgFile={userImgFile} setImgFile={setUserImgFile} />
         <ProfileText
-          user={localUser}
-          setUser={setLocalUser}
+          userData={userData}
+          setUserData={setUserData}
           isMobile={isMobile}
         />
       </S.ProfileImgTextWrapper>

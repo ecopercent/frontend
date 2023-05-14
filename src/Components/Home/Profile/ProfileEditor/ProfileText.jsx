@@ -1,24 +1,24 @@
 import React from "react";
 import * as S from "./style";
 
-export default function ProfileText({ user, setUser, isMobile }) {
+export default function ProfileText({ userData, setUserData, isMobile }) {
   return (
     <S.ProfileTextForm isMobile={isMobile}>
       <S.ProfileTextarea
-        value={user.nickname}
+        value={userData.nickname}
         onChange={(e) => {
-          setUser({ ...user, nickname: e.target.value });
+          setUserData({ ...userData, nickname: e.target.value });
         }}
-        rows="1"
-        maxLength="8"
+        rows={1}
+        maxLength={8}
       />
       <S.ProfileTextarea
-        value={user.profileMessage}
+        value={userData.profileMessage}
         onChange={(e) => {
-          setUser({ ...user, profileMessage: e.target.value });
+          setUserData({ ...userData, profileMessage: e.target.value });
         }}
-        rows={isMobile ? "4" : "3"}
-        maxLength="70"
+        rows={isMobile ? 4 : 3}
+        maxLength={35}
       />
     </S.ProfileTextForm>
   );

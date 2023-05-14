@@ -57,7 +57,10 @@ export default function SignUpItems({ category, saveUserInput }) {
         )}
       </S.LabelBox>
       {state[category] ? (
-        <SignUpItemPreview initialItem={state[category]} />
+        <SignUpItemPreview
+          initialItem={state[category]}
+          initialImg={state[`${category}Img`]}
+        />
       ) : (
         <S.NoticeText>아이템은 나중에 등록할 수 있습니다.</S.NoticeText>
       )}

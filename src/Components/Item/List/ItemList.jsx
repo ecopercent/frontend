@@ -5,17 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { getItemList } from "../../../Api/item";
 import * as S from "./style";
 
-export default function ItemList({
-  userId,
-  itemListOf,
-  infoItemId,
-  setInfoItemId,
-  setInfoItemCategory,
-}) {
+export default function ItemList({ itemListOf, infoItemId, setInfoItemId }) {
   const itemListQuery = useQuery({
-    queryKey: [`${itemListOf}s`, userId],
+    queryKey: [`${itemListOf}`, "list"],
     queryFn: () => {
-      getItemList(userId, itemListOf);
+      getItemList(itemListOf);
     },
   });
 
@@ -68,15 +62,16 @@ export default function ItemList({
             onClick={() => {
               scrollToId(item.id);
               setInfoItemId(item.id);
-              setInfoItemCategory(item.category);
             }}
             onKeyDown={() => {
               scrollToId(item.id);
               setInfoItemId(item.id);
-              setInfoItemCategory(item.category);
             }}
           >
-            <S.ItemImg src={item.image} alt={item.nickname} />
+            <S.ItemImg
+              src={item.image || `/img/default_${item.category}.png`}
+              alt={item.nickname}
+            />
           </S.ItemLi>
         );
       })}

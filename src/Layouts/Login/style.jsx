@@ -1,36 +1,30 @@
 import styled from "@emotion/styled";
 import * as font from "../../style/font";
 import * as color from "../../style/color";
-import { lightGreen } from "../../style/color";
 
 export const LoginLayout = styled.div`
   height: 100%;
+  width: 100%;
   margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  position: fixed;
 `;
 
-export const TmpLogo = styled.div`
-  position: fixed;
-  top: 100px;
-  left: 50%;
-  transform: translate(-50%, 0%);
-
+export const Logo = styled.img`
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 100px;
-  height: 100px;
-
-  background-color: ${lightGreen};
-  border-radius: 50px;
-  ${font.normalSubheadline};
+  margin-top: 10%;
+  height: 10%;
 `;
 
 export const LoginBox = styled.div`
-  position: fixed;
-  top: 50%;
-  transform: translate(0%, -50%);
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,7 +34,8 @@ export const LoginBox = styled.div`
 `;
 
 export const Line = styled.hr`
-  width: 90%;
+  width: 60%;
+  max-width: 600px;
   margin: 20px 0px;
   border: 0.5px solid ${color.basicGreen};
 `;
@@ -56,8 +51,6 @@ export const ContinueWith = styled.span`
 export const SloganSpan = styled.span`
   ${font.normalSubheadline};
 
-  position: fixed;
-  bottom: 50px;
-  left: 50%;
-  transform: translate(-50%, 0%);
+  height: 3%;
+  margin-top: 17%;
 `;

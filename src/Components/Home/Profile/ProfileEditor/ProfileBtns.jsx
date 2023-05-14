@@ -4,14 +4,7 @@ import * as S from "./style";
 export default function ProfileBtns({ setIsEditing, handleSubmit }) {
   return (
     <S.ProfileBtnContainer>
-      <S.ProfileBtn
-        type="submit"
-        featured
-        onClick={() => {
-          setIsEditing();
-          handleSubmit();
-        }}
-      >
+      <S.ProfileBtn type="submit" featured onClick={handleSubmit}>
         완료
       </S.ProfileBtn>
       <S.ProfileBtn type="button" onClick={setIsEditing}>

@@ -3,7 +3,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../../Components/Modal/Modal";
 import { deleteItem } from "../../../Api/item";
-import { getUserId } from "../../../Layouts/Login/Login";
 import * as S from "../style";
 
 const DeleteItemModal = ({
@@ -16,17 +15,17 @@ const DeleteItemModal = ({
   const queryClient = useQueryClient();
   const itemDeleteMutation = useMutation({
     mutationFn: deleteItem,
-    onSuccess: () => {
-      queryClient.refetchQueries(["item", Number(item.id)]);
-      queryClient.refetchQueries([`${item.category}s`, Number(getUserId())]);
-      queryClient.refetchQueries(["title", item.category, Number(getUserId())]);
+    onSuccess: async () => {
+      await queryClient.refetchQueries([`${item.category}`, "list"]);
+      queryClient.removeQueries(["item", Number(item.id)]);
+      queryClient.refetchQueries(["title", item.category]);
+      setShowdeleteItemModal(false);
+      navigate("/item", { state: { category: item.category } });
     },
   });
   const onDeleteItem = useCallback((e) => {
     e.preventDefault();
     itemDeleteMutation.mutate(item.id);
-    setShowdeleteItemModal(false);
-    navigate(-1);
   }, []);
 
   return (

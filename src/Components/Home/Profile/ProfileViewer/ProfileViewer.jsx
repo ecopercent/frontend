@@ -5,7 +5,7 @@ import ProfileText from "./ProfileText";
 import ProfileBtns from "./ProfileBtns";
 import * as S from "./style";
 
-export default function ProfileViewer({ userId, setIsEditing }) {
+export default function ProfileViewer({ setIsEditing }) {
   const isMobile = useMediaQuery({
     query: "(max-width:470px)",
   });
@@ -13,10 +13,10 @@ export default function ProfileViewer({ userId, setIsEditing }) {
   return (
     <S.ProfileContainer isMobile={isMobile}>
       <S.ProfileImgTextWrapper isMobile={isMobile}>
-        <ProfileImg userId={userId} />
-        <ProfileText userId={userId} isMobile={isMobile} />
+        <ProfileImg />
+        <ProfileText isMobile={isMobile} />
       </S.ProfileImgTextWrapper>
-      <ProfileBtns userId={userId} handleClick={setIsEditing} />
+      <ProfileBtns handleClick={setIsEditing} />
     </S.ProfileContainer>
   );
 }

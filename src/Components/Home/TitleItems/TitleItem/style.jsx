@@ -14,7 +14,7 @@ export const ImageClipper = styled.img`
   position: relative;
   width: 150px;
   height: 150px;
-  object-fit: cover; /* 이미지 비율 유지 */
+  object-fit: cover;
   border-radius: 50%;
   // border: 1px solid;
 `;

@@ -1,12 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import cookie from "react-cookies";
 import SocialLogin from "../../Components/Login/SocialLogin";
 import * as S from "./style";
 import SignUpItemContext from "../../hooks/SignUpItemContext";
-
-export function getUserId() {
-  return cookie.load("userid");
-}
 
 const Login = () => {
   const { state, dispatch } = useContext(SignUpItemContext);
@@ -24,11 +19,10 @@ const Login = () => {
 
   return (
     <S.LoginLayout>
-      <S.TmpLogo>로고</S.TmpLogo>
+      <S.Logo src="/logo.png" alt="eco% 로고" />
       <S.LoginBox>
         <S.Line />
         <S.ContinueWith>Continue With</S.ContinueWith>
-        {/* 소셜 로그인 버튼들 들어갈 곳 */}
         <SocialLogin />
         <S.Line />
       </S.LoginBox>

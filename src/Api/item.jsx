@@ -1,65 +1,36 @@
 import axios from "axios";
+import { base64ToDataUrl } from "../Utils/convert";
 
 export function getItem(id) {
   return axios.get(`/items/${id}`).then((res) => {
+    if (res.data.image) res.data.image = base64ToDataUrl(res.data.image);
     return res.data;
   });
 }
-export function postItem({
-  itemUserId,
-  itemImage,
-  itemNickname,
-  itemCategory,
-  itemType,
-  itemBrand,
-  itemPrice,
-  itemPurchaseDate,
-}) {
-  return axios
-    .post(`/items`, {
-      userId: itemUserId,
-      image: itemImage,
-      nickname: itemNickname,
-      category: itemCategory,
-      type: itemType,
-      brand: itemBrand,
-      price: itemPrice,
-      purchaseDate: itemPurchaseDate,
-    })
-    .then((res) => {
-      return res.data;
-    });
+export function postItem(formData) {
+  return axios.post(`/items`, formData).then((res) => {
+    return res.data;
+  });
 }
 
-export function patchItem({
-  itemId,
-  itemImage,
-  itemNickname,
-  itemType,
-  itemBrand,
-  itemPrice,
-  itemPurchaseDate,
-}) {
-  return axios
-    .patch(`/items/${itemId}`, {
-      image: itemImage,
-      nickname: itemNickname,
-      type: itemType,
-      brand: itemBrand,
-      price: itemPrice,
-      purchaseDate: itemPurchaseDate,
-    })
-    .then((res) => {
-      return res.data;
-    });
+export function patchItem({ formData, id }) {
+  return axios.patch(`/items/${id}`, formData).then((res) => {
+    return res.data;
+  });
 }
 
-export function getItemList(userId, category) {
-  return axios
-    .get(`/items?userId=${userId}&category=${category}`)
-    .then((res) => {
-      return res.data;
+export function getItemList(category) {
+  return axios.get(`/items?category=${category}`).then((res) => {
+    return res.data.map((item) => {
+      if (item.image) {
+        return {
+          ...item,
+          image: base64ToDataUrl(item.image),
+        };
+      }
+      return item;
     });
+  });
 }
 
 export function deleteItem(itemId) {
@@ -69,21 +40,24 @@ export function deleteItem(itemId) {
 }
 
 export function patchUsageCountUp(itemId) {
-  return axios.patch(`/items/${itemId}/up`).then((res) => {
+  return axios.patch(`/items/${itemId}/usage-count`).then((res) => {
     return res.data;
   });
 }
 
-export function getTitleItem(userId, category) {
-  return axios.get(`/users/${userId}/title-${category}`).then((res) => {
+export async function getTitleItem(category) {
+  try {
+    const res = await axios.get(`/users/me/title-${category}`);
+    if (res.data.image) res.data.image = base64ToDataUrl(res.data.image);
     return res.data;
-  });
+  } catch (e) {
+    return null;
+  }
 }
 
-export function patchTitleItem({ userId, itemId, category }) {
-  return axios
-    .patch(`/users/${userId}/items/${itemId}/title-${category}`)
-    .then((res) => {
-      return res.data;
-    });
+export function patchTitleItem({ itemId, category }) {
+  return axios.patch(`/items/${itemId}/title-${category}`).then((res) => {
+    if (res.data.image) res.data.image = base64ToDataUrl(res.data.image);
+    return res.data;
+  });
 }
