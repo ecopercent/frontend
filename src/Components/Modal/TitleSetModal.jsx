@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useRef } from "react";
-import { patchTitleItem } from "@api/item";
-import useOutsideClick from "@hooks/useOutsideClick";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getTitleItem, patchTitleItem } from "../../Api/item";
+import useOutsideClick from "../../hooks/useOutsideClick";
 import SmallModal from "./SmallModal";
 import * as S from "./style";
 
@@ -9,16 +9,24 @@ export default function TitleSetModal({ queryData, onClose }) {
   const modalRef = useRef();
   useOutsideClick(modalRef, onClose);
 
+  const prevTitleId = useQuery({
+    queryKey: ["title", queryData.category],
+    queryFn: () => {
+      getTitleItem(queryData.category);
+    },
+  }).data?.id;
+
   const queryClient = useQueryClient();
   const titleMutation = useMutation({
     mutationFn: () => {
       return patchTitleItem(queryData);
     },
-    onSuccess: (res) => {
-      queryClient.setQueryData(["title", `${queryData.category}`], res);
+    onSuccess: async (res) => {
+      queryClient.setQueryData(["item", res.id], res);
+      queryClient.setQueryData(["title", res.category], res);
+      queryClient.invalidateQueries(["title", res.category]);
+      await queryClient.refetchQueries(["item", prevTitleId]);
       onClose();
-      queryClient.refetchQueries(["title", `${queryData.category}`]);
-      queryClient.refetchQueries([`${queryData.category}`, "list"]);
     },
   });
 
