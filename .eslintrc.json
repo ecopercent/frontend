@@ -39,6 +39,7 @@
 		],
 		// tmp rules. plan to use Typescript
 		"react/prop-types": 1,
-		"react/button-has-type": 1
+		"react/button-has-type": 1,
+		"import/no-unresolved": "off"
 	}
 }
