@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import AccountInfo from "./AccountInfo";
 import Error from "@layout/Error/Error";
 import * as S from "./style";
-import { AuthenticatedContext } from "../../hooks/AuthenticatedContext";
+import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 
 const Setting = () => {
   const { subPage } = useParams();
