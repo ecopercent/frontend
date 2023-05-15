@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import cookie from "react-cookies";
 import AccountInfo from "./AccountInfo";
 import Error from "../../Layouts/Error/Error";
 import * as S from "./style";
@@ -64,6 +65,7 @@ const Setting = () => {
     queryClient.resetQueries(["ecobag"]);
     queryClient.resetQueries(["title"]);
     queryClient.resetQueries(["item"]);
+    cookie.remove("refresh", { path: "/" });
     navigate("/");
   };
 
