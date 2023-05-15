@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getUser } from "../../../../Api/user";
+import { getUser } from "@api/user";
 import * as S from "./style";
 
 export default function ProfileImg() {
@@ -13,13 +13,7 @@ export default function ProfileImg() {
 
   return (
     <S.ProfileImg
-      src={
-        userQuery.isLoading ||
-        userQuery.isError ||
-        !userQuery?.data.profileImage
-          ? "/img/default_user.png"
-          : userQuery?.data.profileImage
-      }
+      src={userQuery.data?.profileImage || "/img/default_user.png"}
       alt="user profile"
     />
   );

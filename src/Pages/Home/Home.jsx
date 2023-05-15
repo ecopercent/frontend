@@ -1,8 +1,8 @@
 import React from "react";
 import cookie from "react-cookies";
 import axios from "axios";
-import Profile from "../../Components/Home/Profile/Profile";
-import TitleItemBox from "../../Components/Home/TitleItems/TitleItemBox";
+import Profile from "@components/Home/Profile/Profile";
+import TitleItemBox from "@components/Home/TitleItems/TitleItemBox";
 
 const Home = () => {
   const access = cookie.load("access");

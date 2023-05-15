@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { patchUsageCountUp } from "../../../../Api/item";
+import { patchUsageCountUp } from "@api/item";
+import { lightGray } from "@style/color";
 import * as S from "./style";
-import { lightGray } from "../../../../style/color";
 
 function toPieChartItemPath(x, y, radiusIn, radiusOut, startAngle, endAngle) {
   function toXY(cX, cY, r, degrees) {

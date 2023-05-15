@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { PcPageWrap } from "../../Layouts/Main/style";
+import { PcPageWrap } from "@layout/Main/style";
 import * as S from "./style";
 
 export default function Welcome() {

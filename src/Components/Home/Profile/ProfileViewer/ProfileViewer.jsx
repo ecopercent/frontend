@@ -1,22 +1,17 @@
 import React from "react";
-import { useMediaQuery } from "react-responsive";
 import ProfileImg from "./ProfileImg";
 import ProfileText from "./ProfileText";
-import ProfileBtns from "./ProfileBtns";
+import ProfileEditBtn from "./ProfileEditBtn";
 import * as S from "./style";
 
 export default function ProfileViewer({ setIsEditing }) {
-  const isMobile = useMediaQuery({
-    query: "(max-width:470px)",
-  });
-
   return (
-    <S.ProfileContainer isMobile={isMobile}>
-      <S.ProfileImgTextWrapper isMobile={isMobile}>
+    <S.ProfileContainer>
+      <S.ProfileImgTextWrapper>
         <ProfileImg />
-        <ProfileText isMobile={isMobile} />
+        <ProfileText />
       </S.ProfileImgTextWrapper>
-      <ProfileBtns handleClick={setIsEditing} />
+      <ProfileEditBtn handleClick={setIsEditing} />
     </S.ProfileContainer>
   );
 }

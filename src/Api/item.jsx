@@ -1,5 +1,5 @@
 import axios from "axios";
-import { base64ToDataUrl } from "../Utils/convert";
+import { base64ToDataUrl } from "@util/convert";
 
 export function getItem(id) {
   return axios.get(`/items/${id}`).then((res) => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getTitleItem } from "../../../Api/item";
+import { getTitleItem } from "@api/item";
 import ConvertButtons from "./ConvertBtn/ConvertButtons";
 import TitleItem from "./TitleItem/TitleItem";
 import NoTitleItem from "./TitleItem/NoTitleItem";

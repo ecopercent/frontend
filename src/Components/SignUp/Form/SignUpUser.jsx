@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import useImgInput from "../../../hooks/useImgInput";
+import useImgInput from "@hooks/useImgInput";
 import * as S from "./style";
 
 function SignUpUser(

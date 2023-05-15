@@ -1,5 +1,5 @@
 import React from "react";
-import useImgInput from "../../../hooks/useImgInput";
+import useImgInput from "@hooks/useImgInput";
 import * as S from "../style";
 
 const ItemImage = ({ imgFile, setImgFile, category, prevPreview }) => {
@@ -7,7 +7,7 @@ const ItemImage = ({ imgFile, setImgFile, category, prevPreview }) => {
     prevImg: imgFile,
     setUploadedFile: setImgFile,
     type: category,
-    prevPreview
+    prevPreview,
   });
 
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import AccountInfo from "./AccountInfo";
-import Error from "../../Layouts/Error/Error";
+import Error from "@layout/Error/Error";
 import * as S from "./style";
 
 const Setting = () => {

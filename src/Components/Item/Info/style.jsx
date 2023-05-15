@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import * as btn from "../../../style/button";
-import * as font from "../../../style/font";
+import * as btn from "@style/button";
+import * as font from "@style/font";
 
 export const InfoContainer = styled.div`
   border: 1px solid;
