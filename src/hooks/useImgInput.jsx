@@ -126,7 +126,7 @@ const useImgInput = ({ prevImg, setUploadedFile, type, prevPreview }) => {
 
   function ImgInputForm() {
     return (
-      <form>
+      <form style={{ position: "relative" }}>
         <ImgLayout htmlFor="imgFile-input">
           <Opacity />
           <Overlay />

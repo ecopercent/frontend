@@ -8,7 +8,6 @@ import * as color from "../../../style/color";
 
 export const ItemCategoryTabContainer = styled.div`
   width: 100%;
-  height: 100%;
   border-bottom: 0.5px solid;
 `;
 
@@ -33,6 +32,7 @@ export const ListTabBtn = styled.button`
 
   ${font.boldBody}
   color: black;
+  cursor: pointer;
 
   ${(props) => {
     return (
@@ -61,6 +61,7 @@ export const ItemLi = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   border-radius: 100px;
   ${(props) => {
@@ -75,6 +76,7 @@ export const ItemAddDiv = styled.li`
   height: 200px;
   border-radius: 100px;
   border: 1px solid;
+  cursor: pointer;
 
   display: flex;
   align-items: center;

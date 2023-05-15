@@ -9,12 +9,15 @@ const TabItem = ({ itemNumber, IconComponent, currTabNumber, page }) => {
   }, []);
   return (
     <TabItemBackGround
+      featured={currTabNumber === itemNumber}
       onClick={tabClickHandler}
-      style={{
-        backgroundColor: `${currTabNumber === itemNumber ? "green" : ""}`,
-      }}
     >
-      <IconComponent />
+      <IconComponent
+        style={{
+          width: "20px",
+          height: "20px",
+        }}
+      />
     </TabItemBackGround>
   );
 };

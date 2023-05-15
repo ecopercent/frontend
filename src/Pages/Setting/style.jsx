@@ -4,7 +4,7 @@ import { basicGreen, lightGreen } from "../../style/color";
 export const SettingWrap = styled.div`
   //   border: 1px solid black;
   border-radius: 10px;
-  margin-top: 5%;
+  margin: 10px;
 `;
 
 export const SettingTitle = styled.div`
@@ -41,6 +41,7 @@ export const Logout = styled.div`
     color: white;
   }
   border-radius: 3px;
+  cursor: pointer;
 `;
 
 export const HoverPlain = styled.div`
@@ -50,6 +51,7 @@ export const HoverPlain = styled.div`
     color: white;
   }
   border-radius: 3px;
+  cursor: pointer;
 `;
 
 export const Plain = styled.div`

@@ -8,12 +8,13 @@ import React, {
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getItem, patchItem } from "../../../Api/item";
-import DeleteItemModal from "./DeleteItemModal";
 import ItemImage from "./ItemEditImage";
 import ItemEditDetail from "./ItemEditDetail";
 import ItemEditHead from "./ItemEditHead";
 import { ItemEditBorder, ItemEditWrap } from "../style";
 import SignUpItemContext from "../../../hooks/SignUpItemContext";
+import DeleteItemModal from "../../../Components/Modal/DeleteItemModal";
+// import SmallModal from "../../../Components/Modal/SmallModal";
 
 const ItemEdit = () => {
   const item = useLocation().state;
@@ -129,12 +130,9 @@ const ItemEdit = () => {
             item.type === "auth" ? editItemOnAuth : editItemOnUnauth
           }
         />
-        <DeleteItemModal
-          show={showdeleteItemModal}
-          onCloseModal={onCloseModal}
-          setShowdeleteItemModal={setShowdeleteItemModal}
-          item={item}
-        />
+        {showdeleteItemModal && (
+          <DeleteItemModal onClose={onCloseModal} item={item} />
+        )}
       </ItemEditBorder>
     </ItemEditWrap>
   );
