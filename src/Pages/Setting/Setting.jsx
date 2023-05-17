@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
-import cookie from "react-cookies";
 import AccountInfo from "./AccountInfo";
 import Error from "../../Layouts/Error/Error";
 import * as S from "./style";
+import { AuthenticatedContext } from "../../hooks/AuthenticatedContext";
 
 const Setting = () => {
   const { subPage } = useParams();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const appArr = [
     {
@@ -59,14 +57,9 @@ const Setting = () => {
     },
   ];
 
+  const { signOut } = useContext(AuthenticatedContext);
   const logOut = () => {
-    queryClient.resetQueries(["user"]);
-    queryClient.resetQueries(["tumbler"]);
-    queryClient.resetQueries(["ecobag"]);
-    queryClient.resetQueries(["title"]);
-    queryClient.resetQueries(["item"]);
-    cookie.remove("refresh", { path: "/" });
-    navigate("/");
+    signOut();
   };
 
   if (subPage) {

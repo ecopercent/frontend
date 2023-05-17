@@ -22,7 +22,7 @@ export async function kakaoLogin() {
   return null;
 }
 
-async function postKakaoToken({ kakaoAccessToken, navigate }) {
+async function postKakaoToken({ kakaoAccessToken, navigate, signIn }) {
   try {
     const response = await axios.post(
       "/login/oauth2/kakao",
@@ -34,10 +34,13 @@ async function postKakaoToken({ kakaoAccessToken, navigate }) {
       }
     );
     if (response.status === 200) {
+      signIn();
       navigate("/home");
     }
   } catch (err) {
+    console.log("카카오 로그인 err", err);
     if (err.response.status === 404) {
+      // TODO: 회원가입 시 액세스 토큰은 어디로?
       cookie.save("oauth_provider", "kakao", { path: "/" });
       navigate("/signup", { state: { access: err.response.data.access } });
     } else {
@@ -47,7 +50,7 @@ async function postKakaoToken({ kakaoAccessToken, navigate }) {
   }
 }
 
-export async function getKakaoToken({ authCode, navigate }) {
+export async function getKakaoToken({ authCode, navigate, signIn }) {
   try {
     const response = await axios.post(
       "https://kauth.kakao.com/oauth/token",
@@ -67,6 +70,7 @@ export async function getKakaoToken({ authCode, navigate }) {
       postKakaoToken({
         kakaoAccessToken: response.data.access_token,
         navigate,
+        signIn,
       });
     } else {
       navigate("/");
@@ -77,10 +81,11 @@ export async function getKakaoToken({ authCode, navigate }) {
   }
 }
 
-export async function getKakaoAuthCode({ searchParams, navigate }) {
+export async function getKakaoAuthCode({ searchParams, navigate, signIn }) {
   const params = new URLSearchParams(searchParams);
+
   if (params.has("code")) {
-    await getKakaoToken({ authCode: params.get("code"), navigate });
+    await getKakaoToken({ authCode: params.get("code"), navigate, signIn });
   }
 }
 
