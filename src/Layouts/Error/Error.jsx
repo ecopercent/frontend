@@ -1,6 +1,7 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 const Error = () => {
-  return <h1>Error test 아마 404일걸?</h1>;
+  return <Navigate to="/" />;
 };
 export default Error;

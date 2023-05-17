@@ -1,10 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { AiFillSetting } from "react-icons/ai";
 import { BiHomeAlt } from "react-icons/bi";
 import { BsFillBoxFill } from "react-icons/bs";
 import TabBar from "@components/TabBar/TabBar";
-import Error from "../Error/Error";
 import Setting from "@pages/Setting/Setting";
 import Home from "@pages/Home/Home";
 import Item from "@pages/Item/Item";
@@ -41,7 +40,7 @@ const Main = () => {
   }, [pageNum]);
 
   if (params === undefined || currTabNumber === -1 || pageNum === -1)
-    return <Error />;
+    return <Navigate to="/home" />;
 
   return (
     <S.PageLayout>
