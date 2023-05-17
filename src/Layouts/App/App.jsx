@@ -1,10 +1,12 @@
 // import logo from './logo.svg';
-import React, { useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import loadable from "@loadable/component";
 import GlobalStyles from "./style";
 import SignUpItemContext from "../../hooks/SignUpItemContext";
 import signUpItemReducer from "../../hooks/signUpItemReducer";
+import RequireAuth from "../../hooks/RequireAuth";
+import { AuthenticatedContext } from "../../hooks/AuthenticatedContext";
 
 const Login = loadable(() => {
   return import("../Login/Login");
@@ -36,6 +38,9 @@ function App() {
   // eslint-disable-next-line react/jsx-no-constructed-context-values
   const signUpItemContext = { state, dispatch };
 
+  // TEST: 확인용 로그
+  console.log(useContext(AuthenticatedContext));
+
   return (
     <>
       <GlobalStyles />
@@ -46,15 +51,33 @@ function App() {
             <Route path="/login/*" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/welcome" element={<Welcome />} />
-            <Route path="/:page" element={<Main />} />
-            <Route path="/:page/:subPage" element={<Main />} />
-            <Route
-              path="/:page/:subPage/:accountDeletePage"
-              element={<Main />}
-            />
             <Route path="/*" element={<Error />} />
             <Route path="/item/edit" element={<ItemEdit />} />
             <Route path="/item/add" element={<ItemAdd />} />
+            <Route
+              path="/:page"
+              element={
+                <RequireAuth>
+                  <Main />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/:page/:subPage"
+              element={
+                <RequireAuth>
+                  <Main />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/:page/:subPage/:accountDeletePage"
+              element={
+                <RequireAuth>
+                  <Main />
+                </RequireAuth>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </SignUpItemContext.Provider>
