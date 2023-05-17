@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
       "@api/*": ["src/Api/*"],
       "@components/*": ["src/Components/*"],
       "@hooks/*": ["src/hooks/*"],
