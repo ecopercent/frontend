@@ -34,7 +34,7 @@ axios.interceptors.response.use(
     if (error.config.url === "/token/access") {
       // TEST: 리프레시 토큰 만료: 로그아웃 처리
       console.log("리프레시 토큰 만료");
-      localStorage.setItem("out", true);
+      localStorage.setItem("in", false);
       return Promise.resolve();
     }
     if (error.response.status === 401 || error.response.status === 403) {

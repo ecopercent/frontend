@@ -5,9 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 export const AuthenticatedContext = createContext(null);
 
 export function AuthenticatedContextProvider({ children }) {
-  const signed = Boolean(
-    localStorage.getItem("out") || localStorage.getItem("in")
-  );
+  const signed = localStorage.getItem("in");
   const [authenticated, setAuthenticated] = useState(signed);
   const queryClient = useQueryClient();
 
@@ -27,7 +25,6 @@ export function AuthenticatedContextProvider({ children }) {
         queryClient.resetQueries(["ecobag"]);
         queryClient.resetQueries(["title"]);
         queryClient.resetQueries(["item"]);
-        localStorage.removeItem("out");
         localStorage.removeItem("in");
         setAuthenticated(false);
       } catch (err) {
