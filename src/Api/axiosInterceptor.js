@@ -30,11 +30,10 @@ axios.interceptors.response.use(
   async (error) => {
     // 엑세스 토큰 만료
     console.log("axios error", error);
-    if (error.config.url === "/signout") return Promise.resolve();
     if (error.config.url === "/token/access") {
       // TEST: 리프레시 토큰 만료: 로그아웃 처리
       console.log("리프레시 토큰 만료");
-      localStorage.setItem("in", false);
+      localStorage.setItem("out", true);
       return Promise.resolve();
     }
     if (error.response.status === 401 || error.response.status === 403) {

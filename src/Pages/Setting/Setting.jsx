@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import AccountInfo from "./AccountInfo";
 import Error from "@layout/Error/Error";
-import * as S from "./style";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
+import * as S from "./style";
 
 const Setting = () => {
   const { subPage } = useParams();
@@ -58,8 +59,13 @@ const Setting = () => {
   ];
 
   const { signOut } = useContext(AuthenticatedContext);
-  const logOut = () => {
-    signOut();
+  const logOut = async () => {
+    try {
+      await axios.post("/signout");
+      signOut();
+    } catch (err) {
+      alert("잠시 후에 다시 시도해주세요.");
+    }
   };
 
   if (subPage) {
