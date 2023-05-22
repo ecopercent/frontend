@@ -6,7 +6,7 @@ import signUpItemReducer from "@hooks/signUpItemReducer";
 import GlobalStyles from "./style";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import PrivateRouter from "@layout/App/PrivateRouter";
-import { useAxiosInterceptor } from "@api/axiosInterceptor";
+import { useAxiosInterceptor } from "@hooks/useAxiosInterceptor";
 
 const Login = loadable(() => {
   return import("../Login/Login");
@@ -25,6 +25,9 @@ const Welcome = loadable(() => {
 });
 const Error = loadable(() => {
   return import("../Error/Error");
+});
+const SignOut = loadable(() => {
+  return import("@layout/Error/SignOut");
 });
 
 function App() {
@@ -52,6 +55,7 @@ function App() {
               <Route path="/welcome" element={<Welcome />} />
               <Route path="/item/edit" element={<ItemEdit />} />
               <Route path="/item/add" element={<ItemAdd />} />
+              <Route path="/signout" element={<SignOut />} />
               <Route path="/*" element={<Error />} />
             </Routes>
           </BrowserRouter>
