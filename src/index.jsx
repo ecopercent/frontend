@@ -5,8 +5,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import App from "./Layouts/App/App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthenticatedContextProvider } from "./hooks/AuthenticatedContext";
-// eslint-disable-next-line no-unused-vars
-import axios from "./Api/axiosInterceptor";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 1000 * 60 * 5 } },

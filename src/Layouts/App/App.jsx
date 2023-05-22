@@ -6,6 +6,7 @@ import signUpItemReducer from "@hooks/signUpItemReducer";
 import GlobalStyles from "./style";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import PrivateRouter from "@layout/App/PrivateRouter";
+import { useAxiosInterceptor } from "@api/axiosInterceptor";
 
 const Login = loadable(() => {
   return import("../Login/Login");
@@ -34,6 +35,7 @@ function App() {
   // eslint-disable-next-line react/jsx-no-constructed-context-values
   const signUpItemContext = { state, dispatch };
   const { authenticated } = useContext(AuthenticatedContext);
+  useAxiosInterceptor();
 
   return (
     <>
