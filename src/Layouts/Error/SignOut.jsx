@@ -1,8 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function SignOut() {
+  const state = localStorage.getItem("out");
+  if (!state) return <Navigate to="/" />;
+
   const { authenticated, signOut } = useContext(AuthenticatedContext);
   const navigate = useNavigate();
 
@@ -10,6 +13,7 @@ export default function SignOut() {
 
   useEffect(() => {
     setTimeout(() => {
+      localStorage.removeItem("out");
       navigate("/");
     }, 2000);
   });

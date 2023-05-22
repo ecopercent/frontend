@@ -1,6 +1,4 @@
-// import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import axios from "axios";
-// import { useContext } from "react";
 import cookie from "react-cookies";
 
 let accessToken = null;
@@ -12,9 +10,6 @@ export function setAccessToken() {
 }
 
 export function useAxiosInterceptor() {
-  // TEST: /signout으로 이동하기 vs signout 함수 실행하기
-  // const { signOut } = useContext(AuthenticatedContext);
-
   function requestConfigHandler(config) {
     if (config.headers && accessToken) {
       const updatedConfig = { ...config };
@@ -53,9 +48,10 @@ export function useAxiosInterceptor() {
       console.log("엑세스 토큰 만료!", error.response.status);
       const res = await axios.post("/token/access");
       console.log("엑세스 토큰 재발급 결과", res);
-      if (res === "SIGNOUT")
-        // return signOut();
+      if (res === "SIGNOUT") {
+        localStorage.setItem("out", true);
         return window.location.replace("/signout");
+      }
       setAccessToken();
       const prevRequest = error.config;
       const response = await axios(prevRequest);
