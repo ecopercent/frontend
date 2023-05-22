@@ -11,6 +11,9 @@ const ItemEdit = loadable(() => {
 const ItemAdd = loadable(() => {
   return import("@pages/ItemModification/ItemAdd/ItemAdd");
 });
+const SignOut = loadable(() => {
+  return import("@layout/Error/SignOut");
+});
 
 export default function PrivateRouter() {
   return (
@@ -21,6 +24,7 @@ export default function PrivateRouter() {
         <Route path="/:page/:subPage/:accountDeletePage" element={<Main />} />
         <Route path="/item/edit" element={<ItemEdit />} />
         <Route path="/item/add" element={<ItemAdd />} />
+        <Route path="/signout" element={<SignOut />} />
         <Route path="/" element={<Main />} />
       </Routes>
     </BrowserRouter>
