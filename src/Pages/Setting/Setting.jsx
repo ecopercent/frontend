@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import AccountInfo from "./AccountInfo";
 import Error from "@layout/Error/Error";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
@@ -9,6 +8,7 @@ import * as S from "./style";
 const Setting = () => {
   const { subPage } = useParams();
   const navigate = useNavigate();
+  const { signOut } = useContext(AuthenticatedContext);
 
   const appArr = [
     {
@@ -58,16 +58,6 @@ const Setting = () => {
     },
   ];
 
-  const { signOut } = useContext(AuthenticatedContext);
-  const logOut = async () => {
-    try {
-      await axios.post("/signout");
-      signOut();
-    } catch (err) {
-      alert("잠시 후에 다시 시도해주세요.");
-    }
-  };
-
   if (subPage) {
     return subPage === "accountInfo" ? <AccountInfo /> : <Error />;
   }
@@ -102,7 +92,7 @@ const Setting = () => {
         );
       })}
       <hr />
-      <S.Logout onClick={logOut}>로그아웃</S.Logout>
+      <S.Logout onClick={signOut}>로그아웃</S.Logout>
     </S.SettingWrap>
   );
 };

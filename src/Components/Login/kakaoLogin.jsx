@@ -35,10 +35,8 @@ async function postKakaoToken({ kakaoAccessToken, navigate, signIn }) {
     );
     if (response.status === 200) {
       signIn();
-      navigate("/home");
     }
   } catch (err) {
-    console.log("카카오 로그인 err", err);
     if (err.response.status === 404) {
       // TODO: 회원가입 시 액세스 토큰은 어디로?
       cookie.save("oauth_provider", "kakao", { path: "/" });
