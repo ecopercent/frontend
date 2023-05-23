@@ -35,11 +35,6 @@ export function useAxiosInterceptor() {
       error.config.url === "/users/apple"
     )
       return Promise.reject(error);
-    if (error.config.url === "/signout" && error.response.status !== 500) {
-      console.log("signout 캐치", error);
-      return Promise.resolve();
-    }
-    // 리프레시 토큰 만료는 로그아웃 처리
     if (error.config.url === "/token/access" && error.response.status !== 500) {
       console.log("리프레시 토큰 유효하지 않음/만료");
       return Promise.resolve("SIGNOUT");
