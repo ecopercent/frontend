@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { patchTitleItem, getTitleItem } from "@api/item";
 import useOutsideClick from "@hooks/useOutsideClick";
 import SmallModal from "./SmallModal";
 import * as S from "./style";
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 
 export default function TitleSetModal({ queryData, onClose }) {
   const modalRef = useRef();
