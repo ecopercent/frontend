@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import loadable from "@loadable/component";
+import { useAxiosInterceptor } from "@hooks/useAxiosInterceptor";
 
 const Main = loadable(() => {
   return import("@layout/Main/Main");
@@ -16,6 +17,8 @@ const SignOut = loadable(() => {
 });
 
 export default function PrivateRouter() {
+  useAxiosInterceptor();
+
   return (
     <BrowserRouter>
       <Routes>

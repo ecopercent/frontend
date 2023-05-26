@@ -1,40 +1,20 @@
 import axios from "axios";
 import cookie from "react-cookies";
 
-let accessToken = null;
-
 export function setAccessToken() {
-  accessToken = cookie.load("access", { path: "/" });
-  axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-  cookie.remove("access", { path: "/" });
+  const accessToken = cookie.load("access", { path: "/" });
+  if (accessToken) {
+    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+    cookie.remove("access", { path: "/" });
+  } else console.log("No Access Token from Server");
 }
 
 export function useAxiosInterceptor() {
-  function requestConfigHandler(config) {
-    if (config.headers && accessToken) {
-      const updatedConfig = { ...config };
-      updatedConfig.headers.Authorization = `Bearer ${accessToken}`;
-      return updatedConfig;
-    }
-    return config;
-  }
-
-  axios.interceptors.request.use(requestConfigHandler, (error) => {
-    return Promise.reject(error);
-  });
-
   function responseHandler(response) {
     return response;
   }
 
   async function errorHandler(error) {
-    console.log("인터셉터 에러", error);
-    // 회원가입 엑세스 토큰 만료(403)는 재발급 X
-    if (
-      error.config.url === "/users/kakao" ||
-      error.config.url === "/users/apple"
-    )
-      return Promise.reject(error);
     if (error.config.url === "/token/access" && error.response.status !== 500) {
       console.log("리프레시 토큰 유효하지 않음/만료");
       return Promise.resolve("SIGNOUT");
@@ -45,7 +25,7 @@ export function useAxiosInterceptor() {
       console.log("엑세스 토큰 재발급 결과", res);
       if (res === "SIGNOUT") {
         localStorage.setItem("out", true);
-        return window.location.replace("/signout");
+        window.location.replace("/signout");
       }
       setAccessToken();
       const prevRequest = error.config;
