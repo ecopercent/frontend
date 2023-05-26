@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getTitleItem, patchTitleItem } from "../../Api/item";
-import useOutsideClick from "../../hooks/useOutsideClick";
+import { patchTitleItem, getTitleItem } from "@api/item";
+import useOutsideClick from "@hooks/useOutsideClick";
 import SmallModal from "./SmallModal";
 import * as S from "./style";
 

@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
 import AccountInfo from "./AccountInfo";
 import Error from "@layout/Error/Error";
+import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import * as S from "./style";
 
 const Setting = () => {
   const { subPage } = useParams();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const { signOut } = useContext(AuthenticatedContext);
 
   const appArr = [
     {
@@ -58,15 +58,6 @@ const Setting = () => {
     },
   ];
 
-  const logOut = () => {
-    queryClient.resetQueries(["user"]);
-    queryClient.resetQueries(["tumbler"]);
-    queryClient.resetQueries(["ecobag"]);
-    queryClient.resetQueries(["title"]);
-    queryClient.resetQueries(["item"]);
-    navigate("/");
-  };
-
   if (subPage) {
     return subPage === "accountInfo" ? <AccountInfo /> : <Error />;
   }
@@ -101,7 +92,7 @@ const Setting = () => {
         );
       })}
       <hr />
-      <S.Logout onClick={logOut}>로그아웃</S.Logout>
+      <S.Logout onClick={signOut}>로그아웃</S.Logout>
     </S.SettingWrap>
   );
 };
