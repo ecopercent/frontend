@@ -1,6 +1,7 @@
 import React, { createContext, useMemo, useState } from "react";
 import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
+import { setAccessToken } from "./useAxiosInterceptor";
 
 export const AuthenticatedContext = createContext(null);
 
@@ -11,6 +12,7 @@ export function AuthenticatedContextProvider({ children }) {
 
   const signIn = useMemo(() => {
     return () => {
+      setAccessToken();
       localStorage.setItem("in", true);
       setAuthenticated(true);
     };

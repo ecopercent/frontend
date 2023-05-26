@@ -8,6 +8,7 @@ import SignUpUser from "./Form/SignUpUser";
 import SignUpItems from "./Form/SignUpItems";
 import SignUpItemContext from "@hooks/SignUpItemContext";
 import { postUserOfKakao, postUserOfApple } from "@api/user";
+import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import * as S from "./style";
 
 const initialUser = {
@@ -74,13 +75,15 @@ export default function SignUp() {
     if (warningText) cookie.save("warning", warningText);
   };
 
+  const { signIn } = useContext(AuthenticatedContext);
   const signUpMutation = useMutation({
     mutationFn:
       cookie.load("oauth_provider") === "kakao"
         ? postUserOfKakao
         : postUserOfApple,
     onSuccess: () => {
-      return navigate("/welcome", { state: true });
+      removeCookies();
+      return signIn();
     },
     onError: (code) => {
       if (code === 403) {

@@ -38,7 +38,6 @@ async function postKakaoToken({ kakaoAccessToken, navigate, signIn }) {
     }
   } catch (err) {
     if (err.response.status === 404) {
-      // TODO: 회원가입 시 액세스 토큰은 어디로?
       cookie.save("oauth_provider", "kakao", { path: "/" });
       navigate("/signup", { state: { access: err.response.data.access } });
     } else {
