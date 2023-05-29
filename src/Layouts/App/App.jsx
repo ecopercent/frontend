@@ -19,9 +19,6 @@ const ItemAdd = loadable(() => {
 const SignUp = loadable(() => {
   return import("@components/SignUp/SignUp");
 });
-const Welcome = loadable(() => {
-  return import("@components/SignUp/Welcome");
-});
 const Error = loadable(() => {
   return import("../Error/Error");
 });
@@ -50,7 +47,6 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path="/login/*" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/welcome" element={<Welcome />} />
               <Route path="/item/edit" element={<ItemEdit />} />
               <Route path="/item/add" element={<ItemAdd />} />
               <Route path="/signout" element={<SignOut />} />
