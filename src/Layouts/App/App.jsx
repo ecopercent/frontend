@@ -23,7 +23,7 @@ const Error = loadable(() => {
   return import("../Error/Error");
 });
 const SignOut = loadable(() => {
-  return import("@layout/Error/SignOut");
+  return import("@layout/Error/TokenExpiration");
 });
 
 function App() {

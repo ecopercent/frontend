@@ -13,7 +13,7 @@ const ItemAdd = loadable(() => {
   return import("@pages/ItemModification/ItemAdd/ItemAdd");
 });
 const SignOut = loadable(() => {
-  return import("@layout/Error/SignOut");
+  return import("@layout/Error/TokenExpiration");
 });
 
 export default function PrivateRouter() {

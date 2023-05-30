@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { PcPageWrap } from "@layout/Main/style";
 import * as S from "./style";
 
-export default function SignOut() {
+export default function TokenExpiration() {
   const state = localStorage.getItem("out");
   if (!state) return <Navigate to="/" />;
 
