@@ -14,11 +14,14 @@ export default function TokenExpiration() {
   if (authenticated) signOut();
 
   useEffect(() => {
-    setTimeout(() => {
-      localStorage.removeItem("out");
+    const timer = setTimeout(() => {
       navigate("/");
     }, 5000);
-  });
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   return (
     <PcPageWrap style={{ height: "100vh", padding: "0" }}>
