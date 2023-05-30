@@ -22,7 +22,7 @@ const SignUp = loadable(() => {
 const Error = loadable(() => {
   return import("../Error/Error");
 });
-const SignOut = loadable(() => {
+const TokenExpiration = loadable(() => {
   return import("@layout/Error/TokenExpiration");
 });
 
@@ -49,7 +49,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/item/edit" element={<ItemEdit />} />
               <Route path="/item/add" element={<ItemAdd />} />
-              <Route path="/signout" element={<SignOut />} />
+              <Route path="/signout" element={<TokenExpiration />} />
               <Route path="/*" element={<Error />} />
             </Routes>
           </BrowserRouter>
