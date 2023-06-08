@@ -37,7 +37,7 @@ export default function SignUp() {
 
   // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
-    if (!access) navigate("/");
+    // if (!access) navigate("/");
 
     if (cookie.load("signup")) {
       setUserInput(cookie.load("signup"));

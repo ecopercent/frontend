@@ -2,28 +2,32 @@ import React, {
   useState,
   useEffect,
   useCallback,
-  useContext,
+  // useContext,
   useRef,
 } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+// import { useNavigate, useLocation } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postItem } from "@api/item";
-import SignUpItemContext from "@hooks/SignUpItemContext";
+// import SignUpItemContext from "@hooks/SignUpItemContext";
 import ItemImage from "./ItemAddImage";
 import ItemAddDetail from "./ItemAddDetail";
 import ItemAddHead from "./ItemAddHead";
 import { ItemEditBorder, ItemEditWrap } from "../style";
 
-const ItemAdd = () => {
-  const item = useLocation().state;
+const ItemAdd = ({ onCancel }) => {
+  // const item = useLocation().state;
   const navigate = useNavigate();
+  const item = {
+    category: "tumbler",
+  };
 
-  useEffect(() => {
-    if (!item) {
-      navigate("/item");
-    }
-  }, [item]);
-  if (!item) return <>로딩</>;
+  // useEffect(() => {
+  //   if (!item) {
+  //     navigate("/item");
+  //   }
+  // }, [item]);
+  // if (!item) return <>로딩</>;
 
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   useEffect(() => {
@@ -72,22 +76,6 @@ const ItemAdd = () => {
     [item.type]
   );
 
-  const { dispatch } = useContext(SignUpItemContext);
-  const addItemOnUnauth = useCallback(
-    (input) => {
-      dispatch({
-        type: `${item.category}Submit`,
-        input: { ...input, category: item.category },
-      });
-      dispatch({
-        type: `${item.category}Img`,
-        input: itemImgFile.current,
-      });
-      navigate(-1);
-    },
-    [dispatch]
-  );
-
   return (
     <ItemEditWrap>
       <ItemEditBorder width={innerWidth} height={innerHeight}>
@@ -96,10 +84,15 @@ const ItemAdd = () => {
         <ItemImage setImgFile={setItemImgFile} category={item.category} />
         <hr />
         <ItemAddDetail
-          submitCallback={
-            item.type === "auth" ? addItemOnAuth : addItemOnUnauth
+          submitCallback={item.type === "auth" ? addItemOnAuth : addItemOnAuth}
+          // category={item.category}
+          // onSubmit
+          onCancel={
+            onCancel ||
+            (() => {
+              navigate("/item", { state: { category: item.category } });
+            })
           }
-          category={item.category}
         />
       </ItemEditBorder>
     </ItemEditWrap>

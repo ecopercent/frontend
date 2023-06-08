@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import CancelCheckModal from "@modal/CancelCheckModal";
 import SignUpItemContext from "@hooks/SignUpItemContext";
 import SignUpItemPreview from "./SignUpItemPreview";
+import useModal from "@hooks/useModal";
+import ItemAdd from "@pages/ItemModification/ItemAdd/ItemAdd";
 import * as S from "./style";
 
 export default function SignUpItems({ category, saveUserInput }) {
@@ -13,10 +15,16 @@ export default function SignUpItems({ category, saveUserInput }) {
     type: "unauth",
     category,
   };
+  const [tumblerModalIsOpen, setTumblerModalIsOpen] = useState(false);
+  const onClose = () => {
+    setTumblerModalIsOpen(false);
+  };
+  const TumblerModal = useModal({ onClose });
 
   const handleAdd = () => {
-    saveUserInput();
-    navigate("/item/add", { state: navigateState });
+    setTumblerModalIsOpen(true);
+    // saveUserInput();
+    // navigate("/item/add", { state: navigateState });
   };
 
   const handleEdit = () => {
@@ -30,6 +38,13 @@ export default function SignUpItems({ category, saveUserInput }) {
 
   return (
     <S.InputItem col>
+      {tumblerModalIsOpen && (
+        <TumblerModal>
+          <div style={{ height: "100vh", backgroundColor: "white" }}>
+            <ItemAdd onCancel={onClose} />
+          </div>
+        </TumblerModal>
+      )}
       {modalIsOpen && (
         <CancelCheckModal
           onConfirm={() => {
