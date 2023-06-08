@@ -1,66 +1,87 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CancelCheckModal from "@modal/CancelCheckModal";
-import SignUpItemContext from "@hooks/SignUpItemContext";
+// import SignUpItemContext from "@hooks/SignUpItemContext";
 import SignUpItemPreview from "./SignUpItemPreview";
 import useModal from "@hooks/useModal";
-import ItemAdd from "@pages/ItemModification/ItemAdd/ItemAdd";
+import { ItemAdd } from "@pages/ItemModification/ItemAdd/ItemAdd";
 import * as S from "./style";
 
-export default function SignUpItems({ category, saveUserInput }) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+export default function SignUpItems({
+  category,
+  // saveUserInput,
+  itemsInfo,
+  setItemsInfo,
+}) {
+  const [itemDeleteModalIsOpen, setItemDeleteModalIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { state, dispatch } = useContext(SignUpItemContext);
+  // const { state, dispatch } = useContext(SignUpItemContext);
   const navigateState = {
     type: "unauth",
     category,
   };
-  const [tumblerModalIsOpen, setTumblerModalIsOpen] = useState(false);
-  const onClose = () => {
-    setTumblerModalIsOpen(false);
+  const [addModalIsOpen, setAddModalIsOpen] = useState(false);
+  const onAddModalClose = () => {
+    setAddModalIsOpen(false);
   };
-  const TumblerModal = useModal({ onClose });
+  const TumblerModal = useModal({ onAddModalClose });
 
   const handleAdd = () => {
-    setTumblerModalIsOpen(true);
+    setAddModalIsOpen(true);
     // saveUserInput();
     // navigate("/item/add", { state: navigateState });
   };
 
   const handleEdit = () => {
-    saveUserInput();
+    // saveUserInput();
     navigate("/item/edit", { state: navigateState });
   };
 
   const handleCancel = () => {
-    setModalIsOpen(true);
+    setItemDeleteModalIsOpen(true);
+  };
+
+  const onItemAdd = (input) => {
+    const newInfo = { ...itemsInfo };
+    newInfo[category] = input;
+    setItemsInfo(newInfo);
+    onAddModalClose();
   };
 
   return (
     <S.InputItem col>
-      {tumblerModalIsOpen && (
+      {addModalIsOpen && (
         <TumblerModal>
           <div style={{ height: "100vh", backgroundColor: "white" }}>
-            <ItemAdd onCancel={onClose} />
+            <ItemAdd
+              category={category}
+              onCancel={onAddModalClose}
+              onSubmit={onItemAdd}
+            />
           </div>
         </TumblerModal>
       )}
-      {modalIsOpen && (
+      {itemDeleteModalIsOpen && (
         <CancelCheckModal
           onConfirm={() => {
-            dispatch({
-              type: `${category}Delete`,
-            });
-            setModalIsOpen(false);
+            setItemsInfo(
+              itemsInfo.filter((savedCategory) => {
+                return savedCategory !== category;
+              })
+            );
+            // dispatch({
+            //   type: `${category}Delete`,
+            // });
+            setItemDeleteModalIsOpen(false);
           }}
           onClose={() => {
-            setModalIsOpen(false);
+            setItemDeleteModalIsOpen(false);
           }}
         />
       )}
       <S.LabelBox>
         <S.Label>{category === "tumbler" ? "텀블러" : "에코백"}</S.Label>
-        {state[category] ? (
+        {itemsInfo[category] ? (
           <>
             <S.Btn warning onClick={handleCancel}>
               등록취소
@@ -71,10 +92,10 @@ export default function SignUpItems({ category, saveUserInput }) {
           <S.Btn onClick={handleAdd}>등록</S.Btn>
         )}
       </S.LabelBox>
-      {state[category] ? (
+      {itemsInfo[category] ? (
         <SignUpItemPreview
-          initialItem={state[category]}
-          initialImg={state[`${category}Img`]}
+          initialItem={itemsInfo[category]}
+          initialImg={itemsInfo[`${category}Img`]}
         />
       ) : (
         <S.NoticeText>아이템은 나중에 등록할 수 있습니다.</S.NoticeText>

@@ -26,6 +26,9 @@ export default function SignUp() {
   const nicknameRef = useRef();
   const [imgFile, setImgFile] = useState(null);
 
+  // 아이템 수정중
+  const [itemsInfo, setItemsInfo] = useState({});
+
   function removeCookies() {
     cookie.remove("signup");
     cookie.remove("warning");
@@ -61,19 +64,19 @@ export default function SignUp() {
     nicknameRef.current.focus();
   }, []);
 
-  const saveUserInput = async () => {
-    cookie.save("signup", userInput);
-    if (imgFile) {
-      // blob 객체는 저장소에 넣을 수 없으므로 페이지 이동 시 dataURL로 변환하여 저장해둠
-      const reader = new FileReader();
-      reader.readAsDataURL(imgFile);
-      reader.onloadend = () => {
-        localStorage.setItem("signupImg", reader.result);
-      };
-      cookie.save("previewUrl", URL.createObjectURL(imgFile));
-    }
-    if (warningText) cookie.save("warning", warningText);
-  };
+  // const saveUserInput = async () => {
+  //   cookie.save("signup", userInput);
+  //   if (imgFile) {
+  //     // blob 객체는 저장소에 넣을 수 없으므로 페이지 이동 시 dataURL로 변환하여 저장해둠
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(imgFile);
+  //     reader.onloadend = () => {
+  //       localStorage.setItem("signupImg", reader.result);
+  //     };
+  //     cookie.save("previewUrl", URL.createObjectURL(imgFile));
+  //   }
+  //   if (warningText) cookie.save("warning", warningText);
+  // };
 
   const { signIn } = useContext(AuthenticatedContext);
   const signUpMutation = useMutation({
@@ -100,6 +103,7 @@ export default function SignUp() {
     },
   });
 
+  // TODO: 삭제 필요
   const { state } = useContext(SignUpItemContext);
   const handleSubmit = () => {
     if (userInput.nickname.length === 0) {
@@ -167,8 +171,18 @@ export default function SignUp() {
             setImgFile={setImgFile}
             ref={nicknameRef}
           />
-          <SignUpItems category="tumbler" saveUserInput={saveUserInput} />
-          <SignUpItems category="ecobag" saveUserInput={saveUserInput} />
+          <SignUpItems
+            category="tumbler"
+            // saveUserInput={saveUserInput}
+            itemsInfo={itemsInfo}
+            setItemsInfo={setItemsInfo}
+          />
+          <SignUpItems
+            category="ecobag"
+            // saveUserInput={saveUserInput}
+            itemsInfo={itemsInfo}
+            setItemsInfo={setItemsInfo}
+          />
         </S.InputList>
         <S.SubmitBtnsBox>
           <S.Btn onClick={handleClick}>취소</S.Btn>
