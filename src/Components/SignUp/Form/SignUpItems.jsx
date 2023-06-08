@@ -10,8 +10,8 @@ import * as S from "./style";
 export default function SignUpItems({
   category,
   // saveUserInput,
-  itemsInfo,
-  setItemsInfo,
+  itemsInput,
+  setItemsInput,
 }) {
   const [itemDeleteModalIsOpen, setItemDeleteModalIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -42,9 +42,11 @@ export default function SignUpItems({
   };
 
   const onItemAdd = (input) => {
-    const newInfo = { ...itemsInfo };
-    newInfo[category] = input;
-    setItemsInfo(newInfo);
+    setItemsInput((prev) => {
+      const newInfo = { ...prev };
+      newInfo[category] = input;
+      return newInfo;
+    });
     onAddModalClose();
   };
 
@@ -64,14 +66,11 @@ export default function SignUpItems({
       {itemDeleteModalIsOpen && (
         <CancelCheckModal
           onConfirm={() => {
-            setItemsInfo(
-              itemsInfo.filter((savedCategory) => {
-                return savedCategory !== category;
-              })
-            );
-            // dispatch({
-            //   type: `${category}Delete`,
-            // });
+            setItemsInput((prev) => {
+              const newInput = { ...prev };
+              delete newInput[`${category}`];
+              return newInput;
+            });
             setItemDeleteModalIsOpen(false);
           }}
           onClose={() => {
@@ -81,7 +80,7 @@ export default function SignUpItems({
       )}
       <S.LabelBox>
         <S.Label>{category === "tumbler" ? "텀블러" : "에코백"}</S.Label>
-        {itemsInfo[category] ? (
+        {itemsInput[category] ? (
           <>
             <S.Btn warning onClick={handleCancel}>
               등록취소
@@ -92,10 +91,10 @@ export default function SignUpItems({
           <S.Btn onClick={handleAdd}>등록</S.Btn>
         )}
       </S.LabelBox>
-      {itemsInfo[category] ? (
+      {itemsInput[category] ? (
         <SignUpItemPreview
-          initialItem={itemsInfo[category]}
-          initialImg={itemsInfo[`${category}Img`]}
+          initialItem={itemsInput[category]}
+          initialImg={itemsInput[`${category}Img`]}
         />
       ) : (
         <S.NoticeText>아이템은 나중에 등록할 수 있습니다.</S.NoticeText>

@@ -26,8 +26,8 @@ export default function SignUp() {
   const nicknameRef = useRef();
   const [imgFile, setImgFile] = useState(null);
 
-  // 아이템 수정중
-  const [itemsInfo, setItemsInfo] = useState({});
+  // TEST: 아이템 수정중
+  const [itemsInput, setItemsInput] = useState({});
 
   function removeCookies() {
     cookie.remove("signup");
@@ -40,6 +40,7 @@ export default function SignUp() {
 
   // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
+    // TEST: 서버 없이 url 다이렉트 진입 개발중
     // if (!access) navigate("/");
 
     if (cookie.load("signup")) {
@@ -174,14 +175,14 @@ export default function SignUp() {
           <SignUpItems
             category="tumbler"
             // saveUserInput={saveUserInput}
-            itemsInfo={itemsInfo}
-            setItemsInfo={setItemsInfo}
+            itemsInput={itemsInput}
+            setItemsInput={setItemsInput}
           />
           <SignUpItems
             category="ecobag"
             // saveUserInput={saveUserInput}
-            itemsInfo={itemsInfo}
-            setItemsInfo={setItemsInfo}
+            itemsInput={itemsInput}
+            setItemsInput={setItemsInput}
           />
         </S.InputList>
         <S.SubmitBtnsBox>
