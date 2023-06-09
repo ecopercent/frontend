@@ -1,22 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import SocialLogin from "@components/Login/SocialLogin";
 import * as S from "./style";
-import SignUpItemContext from "@hooks/SignUpItemContext";
 
 const Login = () => {
-  const { state, dispatch } = useContext(SignUpItemContext);
-
-  useEffect(() => {
-    if (state.tumbler)
-      dispatch({
-        type: "tumblerDelete",
-      });
-    if (state.ecobag)
-      dispatch({
-        type: "ecobagDelete",
-      });
-  });
-
   return (
     <S.LoginLayout>
       <S.Logo src="/logo.png" alt="eco% 로고" />

@@ -6,7 +6,6 @@ import { PcPageWrap } from "@layout/Main/style";
 import CancelCheckModal from "@modal/CancelCheckModal";
 import SignUpUser from "./Form/SignUpUser";
 import SignUpItems from "./Form/SignUpItems";
-import SignUpItemContext from "@hooks/SignUpItemContext";
 import { postUserOfKakao, postUserOfApple } from "@api/user";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import * as S from "./style";
@@ -43,41 +42,10 @@ export default function SignUp() {
     // TEST: 서버 없이 url 다이렉트 진입 개발중
     // if (!access) navigate("/");
 
-    if (cookie.load("signup")) {
-      setUserInput(cookie.load("signup"));
-      cookie.remove("signup");
-    }
-    if (localStorage.getItem("signupImg")) {
-      // blob 객체로 재변환
-      fetch(localStorage.getItem("signupImg"))
-        .then((res) => {
-          return res.blob();
-        })
-        .then((blob) => {
-          return setImgFile(blob);
-        });
-      localStorage.removeItem("signupImg");
-    }
-    if (cookie.load("warning")) {
-      setWarningText(cookie.load("warning"));
-      cookie.remove("warning");
-    }
     nicknameRef.current.focus();
   }, []);
 
-  // const saveUserInput = async () => {
-  //   cookie.save("signup", userInput);
-  //   if (imgFile) {
-  //     // blob 객체는 저장소에 넣을 수 없으므로 페이지 이동 시 dataURL로 변환하여 저장해둠
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(imgFile);
-  //     reader.onloadend = () => {
-  //       localStorage.setItem("signupImg", reader.result);
-  //     };
-  //     cookie.save("previewUrl", URL.createObjectURL(imgFile));
-  //   }
-  //   if (warningText) cookie.save("warning", warningText);
-  // };
+  console.log("회원가입 메인", itemsInput);
 
   const { signIn } = useContext(AuthenticatedContext);
   const signUpMutation = useMutation({
@@ -105,7 +73,6 @@ export default function SignUp() {
   });
 
   // TODO: 삭제 필요
-  const { state } = useContext(SignUpItemContext);
   const handleSubmit = () => {
     if (userInput.nickname.length === 0) {
       nicknameRef.current.focus();
@@ -126,19 +93,23 @@ export default function SignUp() {
       )
     );
     formData.append("profileImage", imgFile);
-    if (state.tumbler) {
+    if (itemsInput.tumbler) {
       formData.append(
         "tumblerData",
-        new Blob([JSON.stringify(state.tumbler)], { type: "application/json" })
+        new Blob([JSON.stringify(itemsInput.tumbler)], {
+          type: "application/json",
+        })
       );
-      formData.append("tumblerImage", state.tumblerImg);
+      formData.append("tumblerImage", itemsInput.tumblerImg);
     }
-    if (state.ecobag) {
+    if (itemsInput.ecobag) {
       formData.append(
         "ecobagData",
-        new Blob([JSON.stringify(state.ecobag)], { type: "application/json" })
+        new Blob([JSON.stringify(itemsInput.ecobag)], {
+          type: "application/json",
+        })
       );
-      formData.append("ecobagImage", state.ecobagImg);
+      formData.append("ecobagImage", itemsInput.ecobagImg);
     }
 
     return signUpMutation.mutate({ formData, access: access.access });
@@ -174,13 +145,11 @@ export default function SignUp() {
           />
           <SignUpItems
             category="tumbler"
-            // saveUserInput={saveUserInput}
             itemsInput={itemsInput}
             setItemsInput={setItemsInput}
           />
           <SignUpItems
             category="ecobag"
-            // saveUserInput={saveUserInput}
             itemsInput={itemsInput}
             setItemsInput={setItemsInput}
           />
