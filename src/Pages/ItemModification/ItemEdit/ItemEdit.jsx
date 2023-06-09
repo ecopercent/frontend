@@ -1,56 +1,23 @@
-import React, {
-  useCallback,
-  useState,
-  useEffect,
-  useContext,
-  useRef,
-} from "react";
+import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getItem, patchItem } from "@api/item";
-import SignUpItemContext from "@hooks/SignUpItemContext";
 import DeleteItemModal from "@components/Modal/DeleteItemModal";
 import ItemImage from "./ItemEditImage";
 import ItemEditDetail from "./ItemEditDetail";
 import ItemEditHead from "./ItemEditHead";
 import { ItemEditBorder, ItemEditWrap } from "../style";
-// import SmallModal from "@components/Modal/SmallModal";
 
-const ItemEdit = () => {
+const ItemEditOnAuth = () => {
   const item = useLocation().state;
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!item) navigate("/item");
-  }, [item]);
-  if (!item) return <>로딩</>;
 
-  const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
-  const onCloseModal = useCallback(() => {
-    setShowdeleteItemModal(false);
-  }, []);
-
-  const itemDetailQuery = useQuery({
+  const prevItemInfoQuery = useQuery({
     queryKey: ["item", Number(item.id)],
     queryFn: () => {
       return getItem(item.id);
     },
     enabled: item.type === "auth",
-  });
-
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const resizeListener = () => {
-      setInnerWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", resizeListener);
-  });
-
-  const [innerHeight, setInnerHeight] = useState(window.innerHeight);
-  useEffect(() => {
-    const resizeListener = () => {
-      setInnerHeight(window.innerHeight);
-    };
-    window.addEventListener("resize", resizeListener);
   });
 
   const queryClient = useQueryClient();
@@ -65,8 +32,8 @@ const ItemEdit = () => {
   });
 
   const itemImgFile = useRef(null);
-  const setItemImgFile = (set) => {
-    itemImgFile.current = set;
+  const setItemImgFile = (img) => {
+    itemImgFile.current = img;
   };
 
   const editItemOnAuth = useCallback(
@@ -86,25 +53,58 @@ const ItemEdit = () => {
     [itemEditMutation]
   );
 
-  const { state, dispatch } = useContext(SignUpItemContext);
-  const editItemOnUnauth = useCallback((input) => {
-    dispatch({
-      type: `${item.category}Submit`,
-      input: { ...input, category: item.category },
+  const hancleCancel = () => {
+    navigate("/item", {
+      state: { item: item.id, category: item.category },
     });
-    if (itemImgFile.current) {
-      dispatch({
-        type: `${item.category}Img`,
-        input: itemImgFile.current,
-      });
-    }
-    navigate(-1);
+  };
+
+  return (
+    <ItemEdit
+      category={item.category}
+      item={prevItemInfoQuery.data}
+      onCancel={hancleCancel}
+      onSubmit={editItemOnAuth}
+      onUploadImg={setItemImgFile}
+    />
+  );
+};
+
+export const ItemEdit = ({
+  category,
+  item,
+  onCancel,
+  onSubmit,
+  onUploadImg,
+}) => {
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (!item) navigate("/item");
+  // }, [item]);
+  // if (!item) return <>로딩</>;
+
+  const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
+  const onCloseModal = useCallback(() => {
+    setShowdeleteItemModal(false);
+  }, []);
+
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const resizeListener = () => {
+      setInnerWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", resizeListener);
   });
 
-  const itemDetail =
-    item.type === "auth" ? itemDetailQuery.data : state[item.category];
+  const [innerHeight, setInnerHeight] = useState(window.innerHeight);
+  useEffect(() => {
+    const resizeListener = () => {
+      setInnerHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", resizeListener);
+  });
 
-  if (!itemDetail) return <h1>로딩중화면으로대체될글</h1>;
+  if (!item) return <h1>로딩중화면으로대체될글</h1>;
   return (
     <ItemEditWrap>
       <ItemEditBorder width={innerWidth} height={innerHeight}>
@@ -114,21 +114,20 @@ const ItemEdit = () => {
         />
         <hr />
         <ItemImage
-          imgFile={itemDetail.image}
-          setImgFile={setItemImgFile}
-          category={item.category}
+          imgFile={item.image}
+          setImgFile={onUploadImg}
+          category={category}
           prevPreview={
-            (state[`${item.category}Img`] &&
-              URL.createObjectURL(state[`${item.category}Img`])) ||
+            (item[`${category}Img`] &&
+              URL.createObjectURL(item[`${category}Img`])) ||
             null
           }
         />
         <hr />
         <ItemEditDetail
-          itemDetail={itemDetail}
-          editCallback={
-            item.type === "auth" ? editItemOnAuth : editItemOnUnauth
-          }
+          itemDetail={item}
+          editCallback={onSubmit}
+          onCancel={onCancel}
         />
         {showdeleteItemModal && (
           <DeleteItemModal onClose={onCloseModal} item={item} />
@@ -138,4 +137,4 @@ const ItemEdit = () => {
   );
 };
 
-export default ItemEdit;
+export default ItemEditOnAuth;

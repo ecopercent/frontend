@@ -1,68 +1,76 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useRef, useState } from "react";
 import CancelCheckModal from "@modal/CancelCheckModal";
-// import SignUpItemContext from "@hooks/SignUpItemContext";
 import SignUpItemPreview from "./SignUpItemPreview";
 import useModal from "@hooks/useModal";
 import { ItemAdd } from "@pages/ItemModification/ItemAdd/ItemAdd";
+import { ItemEdit } from "@pages/ItemModification/ItemEdit/ItemEdit";
 import * as S from "./style";
 
-export default function SignUpItems({
-  category,
-  // saveUserInput,
-  itemsInput,
-  setItemsInput,
-}) {
+export default function SignUpItems({ category, itemsInput, setItemsInput }) {
+  const [itemModalIsOpen, setItemModalIsOpen] = useState("");
   const [itemDeleteModalIsOpen, setItemDeleteModalIsOpen] = useState(false);
-  const navigate = useNavigate();
-  // const { state, dispatch } = useContext(SignUpItemContext);
-  const navigateState = {
-    type: "unauth",
-    category,
+
+  const onItemModalClose = () => {
+    setItemModalIsOpen("");
   };
-  const [addModalIsOpen, setAddModalIsOpen] = useState(false);
-  const onAddModalClose = () => {
-    setAddModalIsOpen(false);
-  };
-  const TumblerModal = useModal({ onAddModalClose });
+  const ItemModal = useModal({ onItemModalClose });
 
   const handleAdd = () => {
-    setAddModalIsOpen(true);
-    // saveUserInput();
-    // navigate("/item/add", { state: navigateState });
+    setItemModalIsOpen("add");
   };
 
   const handleEdit = () => {
-    // saveUserInput();
-    navigate("/item/edit", { state: navigateState });
+    setItemModalIsOpen("edit");
   };
 
   const handleCancel = () => {
     setItemDeleteModalIsOpen(true);
   };
 
+  const imgFile = useRef();
+  const setImgFile = (img) => {
+    imgFile.current = img;
+  };
+
+  console.log("아이템 추가 메인", itemsInput, "\nitems img", imgFile.current);
+
   const onItemAdd = (input) => {
     setItemsInput((prev) => {
       const newInfo = { ...prev };
       newInfo[category] = input;
+      newInfo[`${category}Img`] = imgFile.current;
       return newInfo;
     });
-    onAddModalClose();
+    onItemModalClose();
   };
 
   return (
     <S.InputItem col>
-      {addModalIsOpen && (
-        <TumblerModal>
-          <div style={{ height: "100vh", backgroundColor: "white" }}>
-            <ItemAdd
-              category={category}
-              onCancel={onAddModalClose}
-              onSubmit={onItemAdd}
-            />
-          </div>
-        </TumblerModal>
-      )}
+      {itemModalIsOpen === "" ||
+        (itemModalIsOpen === "add" ? (
+          <ItemModal>
+            <div style={{ height: "100vh", backgroundColor: "white" }}>
+              <ItemAdd
+                category={category}
+                onCancel={onItemModalClose}
+                onSubmit={onItemAdd}
+                onUploadImg={setImgFile}
+              />
+            </div>
+          </ItemModal>
+        ) : (
+          <ItemModal>
+            <div style={{ height: "100vh", backgroundColor: "white" }}>
+              <ItemEdit
+                category={category}
+                item={itemsInput[category]}
+                onCancel={onItemModalClose}
+                onSubmit={onItemAdd}
+                onUploadImg={setImgFile}
+              />
+            </div>
+          </ItemModal>
+        ))}
       {itemDeleteModalIsOpen && (
         <CancelCheckModal
           onConfirm={() => {
