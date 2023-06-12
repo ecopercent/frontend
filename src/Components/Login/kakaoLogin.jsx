@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import cookie from "react-cookies";
 import { scriptLoad } from "@util/script";
 import { LogoImg } from "./style";
 
@@ -38,8 +37,9 @@ async function postKakaoToken({ kakaoAccessToken, navigate, signIn }) {
     }
   } catch (err) {
     if (err.response.status === 404) {
-      cookie.save("oauth_provider", "kakao", { path: "/" });
-      navigate("/signup", { state: { access: err.response.data.access } });
+      navigate("/signup", {
+        state: { access: err.response.data.access, oAuthProvider: "kakao" },
+      });
     } else {
       // 서버 안될 때
       navigate("/");

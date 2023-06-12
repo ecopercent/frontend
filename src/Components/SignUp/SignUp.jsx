@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import cookie from "react-cookies";
 import { useMutation } from "@tanstack/react-query";
 import { PcPageWrap } from "@layout/Main/style";
 import CancelCheckModal from "@modal/CancelCheckModal";
@@ -17,21 +16,15 @@ const initialUser = {
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const access = useLocation().state;
+  const { access, oAuthProvider } = useLocation().state;
 
   const [cancelCheckModalIsOpen, setCancelCheckModalIsOpen] = useState(false);
-  const [userInput, setUserInput] = useState(initialUser);
   const [warningText, setWarningText] = useState(null);
   const nicknameRef = useRef();
+
+  const [userInput, setUserInput] = useState(initialUser);
   const [imgFile, setImgFile] = useState(null);
-
-  // TEST: 아이템 수정중
   const [itemsInput, setItemsInput] = useState({});
-
-  function removeCookies() {
-    // TODO: oauth_provider state로 받기
-    cookie.remove("oauth_provider", { path: "/" });
-  }
 
   useEffect(() => {
     // TEST: 서버 없이 url 다이렉트 진입 개발중
@@ -40,24 +33,16 @@ export default function SignUp() {
     nicknameRef.current.focus();
   }, []);
 
-  console.log("회원가입 메인", itemsInput);
-
   const { signIn } = useContext(AuthenticatedContext);
   const signUpMutation = useMutation({
-    mutationFn:
-      // TODO: oauth_provider state로 받기
-      cookie.load("oauth_provider") === "kakao"
-        ? postUserOfKakao
-        : postUserOfApple,
+    mutationFn: oAuthProvider === "kakao" ? postUserOfKakao : postUserOfApple,
     onSuccess: () => {
-      removeCookies();
       return signIn();
     },
     onError: (code) => {
       if (code === 403) {
         // TODO: 모달로?
         alert("세션이 만료되었습니다.");
-        removeCookies();
         return navigate("/");
       }
       if (code === 409) {
@@ -81,7 +66,7 @@ export default function SignUp() {
         [
           JSON.stringify({
             ...userInput,
-            oAuthProvider: cookie.load("oauth_provider"),
+            oAuthProvider: oAuthProvider || "apple",
           }),
         ],
         { type: "application/json" }
@@ -123,7 +108,6 @@ export default function SignUp() {
           }}
           onConfirm={() => {
             setCancelCheckModalIsOpen(false);
-            removeCookies();
             navigate("/");
           }}
         />
