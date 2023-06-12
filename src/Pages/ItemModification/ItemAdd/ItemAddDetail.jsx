@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import useInput from "@hooks/useInput";
 import * as S from "../style";
 
-const ItemAddDetail = ({ submitCallback, onCancel }) => {
-  // const navigate = useNavigate();
+const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
   const [isError, setIsError] = useState(false);
   const [nickname, onNickname] = useInput("");
   const [brand, onBrand] = useInput("");
@@ -20,7 +18,7 @@ const ItemAddDetail = ({ submitCallback, onCancel }) => {
       return;
     }
     setIsError(false);
-    submitCallback({ nickname, brand, price, purchaseDate, type });
+    submitCallback({ category, nickname, brand, price, purchaseDate, type });
   };
 
   return (
