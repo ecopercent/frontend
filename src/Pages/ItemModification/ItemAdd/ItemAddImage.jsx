@@ -3,15 +3,15 @@ import useImgInput from "@hooks/useImgInput";
 import * as S from "../style";
 
 const ItemImage = ({ setImgFile, category }) => {
-  const Form = useImgInput({
-    prevImgFile: null,
+  const ImgForm = useImgInput({
+    prevImg: null,
     setUploadedFile: setImgFile,
     type: category,
   });
 
   return (
     <S.ItemImageWrap>
-      <Form />
+      <ImgForm />
     </S.ItemImageWrap>
   );
 };
