@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import useOutsideClick from "@hooks/useOutsideClick";
 import styled from "@emotion/styled";
 import { createPortal } from "react-dom";
@@ -17,15 +17,17 @@ export default function useModal({ onClose }) {
     };
   });
 
-  const Modal = ({ children }) => {
-    return (
-      <ModalContainer>
-        <BackgroundOverlay>
-          <div ref={modalRef}>{children}</div>
-        </BackgroundOverlay>
-      </ModalContainer>
-    );
-  };
+  const Modal = useMemo(() => {
+    return function ({ children }) {
+      return (
+        <ModalContainer>
+          <BackgroundOverlay>
+            <div ref={modalRef}>{children}</div>
+          </BackgroundOverlay>
+        </ModalContainer>
+      );
+    };
+  }, []);
 
   return Modal;
 }
