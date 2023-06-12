@@ -19,7 +19,7 @@ export default function SignUp() {
   const navigate = useNavigate();
   const access = useLocation().state;
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [cancelCheckModalIsOpen, setCancelCheckModalIsOpen] = useState(false);
   const [userInput, setUserInput] = useState(initialUser);
   const [warningText, setWarningText] = useState(null);
   const nicknameRef = useRef();
@@ -29,15 +29,10 @@ export default function SignUp() {
   const [itemsInput, setItemsInput] = useState({});
 
   function removeCookies() {
-    cookie.remove("signup");
-    cookie.remove("warning");
-    URL.revokeObjectURL(cookie.load("previewUrl"));
-    cookie.remove("previewUrl");
-    localStorage.removeItem("signupImg");
+    // TODO: oauth_provider state로 받기
     cookie.remove("oauth_provider", { path: "/" });
   }
 
-  // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
     // TEST: 서버 없이 url 다이렉트 진입 개발중
     // if (!access) navigate("/");
@@ -50,6 +45,7 @@ export default function SignUp() {
   const { signIn } = useContext(AuthenticatedContext);
   const signUpMutation = useMutation({
     mutationFn:
+      // TODO: oauth_provider state로 받기
       cookie.load("oauth_provider") === "kakao"
         ? postUserOfKakao
         : postUserOfApple,
@@ -72,7 +68,6 @@ export default function SignUp() {
     },
   });
 
-  // TODO: 삭제 필요
   const handleSubmit = () => {
     if (userInput.nickname.length === 0) {
       nicknameRef.current.focus();
@@ -116,18 +111,18 @@ export default function SignUp() {
   };
 
   const handleClick = () => {
-    setModalIsOpen(true);
+    setCancelCheckModalIsOpen(true);
   };
 
   return (
     <PcPageWrap style={{ paddingBottom: "0" }}>
-      {modalIsOpen && (
+      {cancelCheckModalIsOpen && (
         <CancelCheckModal
           onClose={() => {
-            setModalIsOpen(false);
+            setCancelCheckModalIsOpen(false);
           }}
           onConfirm={() => {
-            setModalIsOpen(false);
+            setCancelCheckModalIsOpen(false);
             removeCookies();
             navigate("/");
           }}

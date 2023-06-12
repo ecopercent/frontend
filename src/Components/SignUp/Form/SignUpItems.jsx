@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import CancelCheckModal from "@modal/CancelCheckModal";
 import SignUpItemPreview from "./SignUpItemPreview";
 import useModal from "@hooks/useModal";
@@ -7,47 +7,52 @@ import { ItemEdit } from "@pages/ItemModification/ItemEdit/ItemEdit";
 import * as S from "./style";
 
 export default function SignUpItems({ category, itemsInput, setItemsInput }) {
-  const [itemModalIsOpen, setItemModalIsOpen] = useState("");
+  const [openedModal, setOpenedModal] = useState("");
   const [itemDeleteModalIsOpen, setItemDeleteModalIsOpen] = useState(false);
 
-  const onItemModalClose = () => {
-    setItemModalIsOpen("");
-  };
-  const ItemModal = useModal({ onItemModalClose });
+  const onItemModalClose = useMemo(() => {
+    return () => {
+      setOpenedModal("");
+    };
+  }, []);
 
   const handleAdd = () => {
-    setItemModalIsOpen("add");
+    setOpenedModal("add");
   };
 
   const handleEdit = () => {
-    setItemModalIsOpen("edit");
+    setOpenedModal("edit");
   };
 
   const handleCancel = () => {
     setItemDeleteModalIsOpen(true);
   };
 
-  const imgFile = useRef();
-  const setImgFile = (img) => {
-    imgFile.current = img;
-  };
+  const ItemModal = useModal({ onItemModalClose });
 
-  console.log("아이템 추가 메인", itemsInput, "\nitems img", imgFile.current);
+  const imgFile = useRef(null);
+  const setImgFile = useMemo(() => {
+    return (img) => {
+      imgFile.current = img;
+    };
+  }, []);
 
-  const onItemAdd = (input) => {
-    setItemsInput((prev) => {
-      const newInfo = { ...prev };
-      newInfo[category] = input;
-      newInfo[`${category}Img`] = imgFile.current;
-      return newInfo;
-    });
-    onItemModalClose();
-  };
+  const onItemAdd = useMemo(() => {
+    return (input) => {
+      setItemsInput((prev) => {
+        const newInfo = { ...prev };
+        newInfo[category] = input;
+        newInfo[`${category}Img`] = imgFile.current;
+        return newInfo;
+      });
+      onItemModalClose();
+    };
+  }, []);
 
   return (
     <S.InputItem col>
-      {itemModalIsOpen === "" ||
-        (itemModalIsOpen === "add" ? (
+      {openedModal === "" ||
+        (openedModal === "add" ? (
           <ItemModal>
             <div style={{ height: "100vh", backgroundColor: "white" }}>
               <ItemAdd
@@ -64,6 +69,7 @@ export default function SignUpItems({ category, itemsInput, setItemsInput }) {
               <ItemEdit
                 category={category}
                 item={itemsInput[category]}
+                itemImg={itemsInput[`${category}Img`]}
                 onCancel={onItemModalClose}
                 onSubmit={onItemAdd}
                 onUploadImg={setImgFile}
