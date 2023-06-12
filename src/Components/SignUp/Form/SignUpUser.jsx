@@ -10,7 +10,6 @@ function SignUpUser(
     prevImg: null,
     setUploadedFile: setImgFile,
     type: "signUpUser",
-    prevPreview: localStorage.getItem("signupImg"),
   });
 
   const lengthSliceInKorean = (e) => {

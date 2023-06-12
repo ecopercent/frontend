@@ -73,6 +73,7 @@ const ItemEditOnAuth = () => {
 export const ItemEdit = ({
   category,
   item,
+  itemImg = item.image,
   onCancel,
   onSubmit,
   onUploadImg,
@@ -114,14 +115,9 @@ export const ItemEdit = ({
         />
         <hr />
         <ItemImage
-          imgFile={item.image}
+          imgFile={itemImg}
           setImgFile={onUploadImg}
           category={category}
-          prevPreview={
-            (item[`${category}Img`] &&
-              URL.createObjectURL(item[`${category}Img`])) ||
-            null
-          }
         />
         <hr />
         <ItemEditDetail
