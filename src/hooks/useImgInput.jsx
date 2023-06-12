@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import cookie from "react-cookies";
 import styled from "@emotion/styled";
 import { imgCompress } from "@util/convert";
 
@@ -66,21 +65,18 @@ const ImgPreview = styled.img`
   object-fit: cover;
 `;
 
-const useImgInput = ({ prevImg, setUploadedFile, type, prevPreview }) => {
-  const [preview, setPreview] = useState(prevPreview);
+const useImgInput = ({ prevImg, setUploadedFile, type }) => {
+  const [preview, setPreview] = useState(null);
   let defaultImg;
   if (type === "tumbler") defaultImg = "/img/default_tumbler.png";
   else if (type === "ecobag") defaultImg = "/img/default_ecobag.png";
   else defaultImg = "/img/default_user.png";
 
   const onUpload = async (e) => {
-    if (prevPreview) {
-      URL.revokeObjectURL(cookie.load("signupImg"));
-      cookie.remove("signupImg", { path: "/" });
-    }
     const uploadedImg = e.target.files[0];
     const reader = new FileReader();
     const compressedImg = await imgCompress(uploadedImg);
+
     setUploadedFile(compressedImg);
 
     reader.readAsDataURL(compressedImg);
@@ -104,14 +100,7 @@ const useImgInput = ({ prevImg, setUploadedFile, type, prevPreview }) => {
   }
 
   function ImgInput() {
-    return (
-      <Input
-        id="imgFile-input"
-        type="file"
-        accept="image/*"
-        onChange={onUpload}
-      />
-    );
+    return <Input id={type} type="file" accept="image/*" onChange={onUpload} />;
   }
 
   function Preview() {
@@ -124,10 +113,10 @@ const useImgInput = ({ prevImg, setUploadedFile, type, prevPreview }) => {
     );
   }
 
-  function ImgInputForm() {
+  const ImgInputForm = () => {
     return (
       <form style={{ position: "relative" }}>
-        <ImgLayout htmlFor="imgFile-input">
+        <ImgLayout htmlFor={type}>
           <Opacity />
           <Overlay />
           <Preview />
@@ -135,7 +124,7 @@ const useImgInput = ({ prevImg, setUploadedFile, type, prevPreview }) => {
         <ImgInput />
       </form>
     );
-  }
+  };
 
   return ImgInputForm;
 };
