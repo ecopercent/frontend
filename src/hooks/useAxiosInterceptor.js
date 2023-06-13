@@ -36,8 +36,7 @@ export function useAxiosInterceptor() {
     if (error.response.status === 403) {
       const res = await axios.post("/token/access");
       if (res === "SIGNOUT") {
-        // TODO: 다른 방법 생각하기
-        // localStorage.setItem("out", true);
+        localStorage.setItem("expired", true);
         window.location.replace("/signout");
       }
       setAccessToken();

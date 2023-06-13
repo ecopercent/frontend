@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import SocialLogin from "@components/Login/SocialLogin";
-import * as S from "./style";
 import SignUpItemContext from "@hooks/SignUpItemContext";
+import * as S from "./style";
 
 const Login = () => {
   const { state, dispatch } = useContext(SignUpItemContext);
+
+  if (localStorage.getItem("expired")) localStorage.removeItem("expired");
 
   useEffect(() => {
     if (state.tumbler)

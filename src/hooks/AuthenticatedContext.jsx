@@ -28,7 +28,6 @@ export function AuthenticatedContextProvider({ children }) {
         queryClient.resetQueries(["title"]);
         queryClient.resetQueries(["item"]);
         localStorage.removeItem("in");
-        localStorage.removeItem("out");
         setAuthenticated(false);
       } catch (err) {
         alert("잠시 후에 다시 시도해주세요.");

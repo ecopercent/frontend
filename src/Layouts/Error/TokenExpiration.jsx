@@ -5,8 +5,8 @@ import { PcPageWrap } from "@layout/Main/style";
 import * as S from "./style";
 
 export default function TokenExpiration() {
-  const state = localStorage.getItem("out");
-  if (!state) return <Navigate to="/" />;
+  const expired = localStorage.getItem("expired");
+  if (!expired) return <Navigate to="/" />;
 
   const { authenticated, signOut } = useContext(AuthenticatedContext);
   const navigate = useNavigate();
