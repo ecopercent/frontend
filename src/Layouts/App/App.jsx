@@ -17,14 +17,11 @@ const ItemAdd = loadable(() => {
 const SignUp = loadable(() => {
   return import("@components/SignUp/SignUp");
 });
-const Welcome = loadable(() => {
-  return import("@components/SignUp/Welcome");
-});
 const Error = loadable(() => {
   return import("../Error/Error");
 });
-const SignOut = loadable(() => {
-  return import("@layout/Error/SignOut");
+const TokenExpiration = loadable(() => {
+  return import("@layout/Error/TokenExpiration");
 });
 
 function App() {

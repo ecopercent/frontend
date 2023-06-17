@@ -3,6 +3,8 @@ import SocialLogin from "@components/Login/SocialLogin";
 import * as S from "./style";
 
 const Login = () => {
+  if (localStorage.getItem("expired")) localStorage.removeItem("expired");
+
   return (
     <S.LoginLayout>
       <S.Logo src="/logo.png" alt="eco% 로고" />

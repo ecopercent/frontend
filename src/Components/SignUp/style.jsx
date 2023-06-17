@@ -1,8 +1,5 @@
 import styled from "@emotion/styled";
-import { BsPatchCheckFill } from "react-icons/bs";
-import * as font from "@style/font";
 import * as button from "@style/button";
-import { basicGreen } from "@style/color";
 
 export const SignUpLayoutCol = styled.div`
   display: flex;
@@ -61,44 +58,4 @@ export const Btn = styled.button`
   }`;
     return null;
   }}
-`;
-
-/*
- *      Welcome page
- */
-
-export const WelcomeIcon = styled(BsPatchCheckFill)`
-  width: 50px;
-  height: 50px;
-  color: ${basicGreen};
-  margin: 20px;
-`;
-
-export const WelcomLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto 0;
-`;
-
-export const Headline = styled.h2`
-  ${font.boldBody}
-  font-size: 30px;
-`;
-
-export const WelcomeText = styled.span`
-  ${font.boldHeadline};
-  font-weight: 400;
-  margin: 40px;
-`;
-
-export const GoHomeBtn = styled.button`
-  ${button.profileGreen};
-  ${font.normalSubheadline}
-  height: 40px;
-  width: 100px;
-
-  :hover {
-    background: ${basicGreen};
-  }
 `;
