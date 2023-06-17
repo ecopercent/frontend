@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postItem } from "@api/item";
 import ItemImage from "./ItemAddImage";
@@ -9,6 +9,8 @@ import { ItemEditBorder, ItemEditWrap } from "../style";
 
 const ItemAddOnAuth = () => {
   const item = useLocation().state;
+  if (!item) return <Navigate to="/item" />;
+
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
@@ -36,7 +38,6 @@ const ItemAddOnAuth = () => {
         "itemData",
         new Blob([JSON.stringify(itemData)], { type: "application/json" })
       );
-      // TODO: 이미지 저장 처리
       formData.append("itemImage", itemImgFile.current);
       itemAddMutation.mutate(formData);
     },
@@ -58,13 +59,6 @@ const ItemAddOnAuth = () => {
 };
 
 export const ItemAdd = ({ category, onCancel, onSubmit, onUploadImg }) => {
-  // useEffect(() => {
-  //   if (!item) {
-  //     navigate("/item");
-  //   }
-  // }, [item]);
-  // if (!item) return <>로딩</>;
-
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   useEffect(() => {
     const resizeListener = () => {
@@ -91,7 +85,6 @@ export const ItemAdd = ({ category, onCancel, onSubmit, onUploadImg }) => {
         <ItemAddDetail
           category={category}
           submitCallback={onSubmit}
-          // category={item.category}
           onCancel={onCancel}
         />
       </ItemEditBorder>

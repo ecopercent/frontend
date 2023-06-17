@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { getItem, patchItem } from "@api/item";
 import DeleteItemModal from "@components/Modal/DeleteItemModal";
 import ItemImage from "./ItemEditImage";
@@ -10,6 +10,8 @@ import { ItemEditBorder, ItemEditWrap } from "../style";
 
 const ItemEditOnAuth = () => {
   const item = useLocation().state;
+  if (!item) return <Navigate to="/item" />;
+
   const navigate = useNavigate();
 
   const prevItemInfoQuery = useQuery({
@@ -78,12 +80,6 @@ export const ItemEdit = ({
   onSubmit,
   onUploadImg,
 }) => {
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!item) navigate("/item");
-  // }, [item]);
-  // if (!item) return <>로딩</>;
-
   const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
   const onCloseModal = useCallback(() => {
     setShowdeleteItemModal(false);
@@ -105,7 +101,6 @@ export const ItemEdit = ({
     window.addEventListener("resize", resizeListener);
   });
 
-  if (!item) return <h1>로딩중화면으로대체될글</h1>;
   return (
     <ItemEditWrap>
       <ItemEditBorder width={innerWidth} height={innerHeight}>
