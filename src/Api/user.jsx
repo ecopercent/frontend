@@ -42,3 +42,7 @@ export function patchUser(formData) {
     return res.data;
   });
 }
+
+export function deleteUser() {
+  return axios.delete("/users");
+}

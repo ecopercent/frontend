@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./style";
+import { deleteUser } from "@api/user";
+import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 
 const AccountDelete = () => {
   const navigate = useNavigate();
+  const { authenticated, signOut } = useContext(AuthenticatedContext);
+
   return (
     <S.SettingWrap>
       <S.HoverSettingTitle
@@ -22,6 +26,16 @@ const AccountDelete = () => {
         <S.Plain>auth 끝나고 채울 예정 </S.Plain>
         <S.Category>정말 지구를 죽이면서까지 탈퇴하시겠습니까?</S.Category>
         <S.Plain>auth 끝나고 채울 예정 </S.Plain>
+        {/* TEST: 회원가입 테스트용 탈퇴 버튼 */}
+        <button
+          type="button"
+          onClick={() => {
+            deleteUser();
+            if (authenticated) signOut();
+          }}
+        >
+          탈퇴
+        </button>
       </form>
     </S.SettingWrap>
   );
