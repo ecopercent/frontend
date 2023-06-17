@@ -23,7 +23,7 @@ export default function SignUp() {
   const nicknameRef = useRef();
 
   const [userInput, setUserInput] = useState(initialUser);
-  const [imgFile, setImgFile] = useState(null);
+  const [userImg, setUserImg] = useState(null);
   const [itemsInput, setItemsInput] = useState({});
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function SignUp() {
         { type: "application/json" }
       )
     );
-    formData.append("profileImage", imgFile);
+    formData.append("profileImage", userImg);
     if (itemsInput.tumbler) {
       formData.append(
         "tumblerData",
@@ -92,7 +92,7 @@ export default function SignUp() {
       formData.append("ecobagImage", itemsInput.ecobagImg);
     }
 
-    return signUpMutation.mutate({ formData, access: access.access });
+    return signUpMutation.mutate({ formData, access });
   };
 
   const handleClick = () => {
@@ -119,7 +119,7 @@ export default function SignUp() {
             setUserInput={setUserInput}
             warningText={warningText}
             setWarningText={setWarningText}
-            setImgFile={setImgFile}
+            setUserImg={setUserImg}
             ref={nicknameRef}
           />
           <SignUpItems
