@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { PcPageWrap } from "@layout/Main/style";
 import CancelCheckModal from "@modal/CancelCheckModal";
@@ -16,7 +16,8 @@ const initialUser = {
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const { access, oAuthProvider } = useLocation().state;
+  const state = useLocation()?.state;
+  if (!state) return <Navigate to="/" />;
 
   const [cancelCheckModalIsOpen, setCancelCheckModalIsOpen] = useState(false);
   const [warningText, setWarningText] = useState(null);
@@ -27,15 +28,13 @@ export default function SignUp() {
   const [itemsInput, setItemsInput] = useState({});
 
   useEffect(() => {
-    // TEST: 서버 없이 url 다이렉트 진입 개발중
-    // if (!access) navigate("/");
-
     nicknameRef.current.focus();
   }, []);
 
   const { signIn } = useContext(AuthenticatedContext);
   const signUpMutation = useMutation({
-    mutationFn: oAuthProvider === "kakao" ? postUserOfKakao : postUserOfApple,
+    mutationFn:
+      state.oAuthProvider === "kakao" ? postUserOfKakao : postUserOfApple,
     onSuccess: () => {
       return signIn();
     },
@@ -66,7 +65,7 @@ export default function SignUp() {
         [
           JSON.stringify({
             ...userInput,
-            oAuthProvider: oAuthProvider || "apple",
+            oAuthProvider: state.oAuthProvider || "apple",
           }),
         ],
         { type: "application/json" }
@@ -92,7 +91,7 @@ export default function SignUp() {
       formData.append("ecobagImage", itemsInput.ecobagImg);
     }
 
-    return signUpMutation.mutate({ formData, access });
+    return signUpMutation.mutate({ formData, access: state.access });
   };
 
   const handleClick = () => {
