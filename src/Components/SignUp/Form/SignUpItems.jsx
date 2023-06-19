@@ -49,6 +49,16 @@ export default function SignUpItems({ category, itemsInput, setItemsInput }) {
     };
   }, []);
 
+  const onItemDelete = () => {
+    setItemsInput((prev) => {
+      const newInput = { ...prev };
+      delete newInput[`${category}`];
+      imgFile.current = null;
+      return newInput;
+    });
+    setItemDeleteModalIsOpen(false);
+  };
+
   return (
     <S.InputItem col>
       {openedModal === "" ||
@@ -79,15 +89,7 @@ export default function SignUpItems({ category, itemsInput, setItemsInput }) {
         ))}
       {itemDeleteModalIsOpen && (
         <CancelCheckModal
-          onConfirm={() => {
-            setItemsInput((prev) => {
-              const newInput = { ...prev };
-              delete newInput[`${category}`];
-              imgFile.current = null;
-              return newInput;
-            });
-            setItemDeleteModalIsOpen(false);
-          }}
+          onConfirm={onItemDelete}
           onClose={() => {
             setItemDeleteModalIsOpen(false);
           }}
