@@ -83,6 +83,7 @@ export default function SignUpItems({ category, itemsInput, setItemsInput }) {
             setItemsInput((prev) => {
               const newInput = { ...prev };
               delete newInput[`${category}`];
+              imgFile.current = null;
               return newInput;
             });
             setItemDeleteModalIsOpen(false);
