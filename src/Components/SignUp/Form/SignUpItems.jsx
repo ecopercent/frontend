@@ -41,7 +41,7 @@ export default function SignUpItems({ category, itemsInput, setItemsInput }) {
     return (input) => {
       setItemsInput((prev) => {
         const newInfo = { ...prev };
-        newInfo[category] = input;
+        newInfo[category] = { ...input, category };
         newInfo[`${category}Img`] = imgFile.current;
         return newInfo;
       });
