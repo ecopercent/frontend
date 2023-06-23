@@ -1,45 +1,17 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useContext,
-  useRef,
-} from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postItem } from "@api/item";
-import SignUpItemContext from "@hooks/SignUpItemContext";
 import ItemImage from "./ItemAddImage";
 import ItemAddDetail from "./ItemAddDetail";
 import ItemAddHead from "./ItemAddHead";
 import { ItemEditBorder, ItemEditWrap } from "../style";
 
-const ItemAdd = () => {
+const ItemAddOnAuth = () => {
   const item = useLocation().state;
+  if (!item) return <Navigate to="/item" />;
+
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!item) {
-      navigate("/item");
-    }
-  }, [item]);
-  if (!item) return <>로딩</>;
-
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const resizeListener = () => {
-      setInnerWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", resizeListener);
-  });
-
-  const [innerHeight, setInnerHeight] = useState(window.innerHeight);
-  useEffect(() => {
-    const resizeListener = () => {
-      setInnerHeight(window.innerHeight);
-    };
-    window.addEventListener("resize", resizeListener);
-  });
 
   const queryClient = useQueryClient();
   const itemAddMutation = useMutation({
@@ -51,8 +23,8 @@ const ItemAdd = () => {
   });
 
   const itemImgFile = useRef(null);
-  const setItemImgFile = (set) => {
-    itemImgFile.current = set;
+  const setItemImgFile = (img) => {
+    itemImgFile.current = img;
   };
 
   const addItemOnAuth = useCallback(
@@ -72,38 +44,52 @@ const ItemAdd = () => {
     [item.type]
   );
 
-  const { dispatch } = useContext(SignUpItemContext);
-  const addItemOnUnauth = useCallback(
-    (input) => {
-      dispatch({
-        type: `${item.category}Submit`,
-        input: { ...input, category: item.category },
-      });
-      dispatch({
-        type: `${item.category}Img`,
-        input: itemImgFile.current,
-      });
-      navigate(-1);
-    },
-    [dispatch]
+  const hancleCancel = () => {
+    navigate("/item", { state: { category: item.category } });
+  };
+
+  return (
+    <ItemAdd
+      category={item.category}
+      onCancel={hancleCancel}
+      onSubmit={addItemOnAuth}
+      onUploadImg={setItemImgFile}
+    />
   );
+};
+
+export const ItemAdd = ({ category, onCancel, onSubmit, onUploadImg }) => {
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const resizeListener = () => {
+      setInnerWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", resizeListener);
+  });
+
+  const [innerHeight, setInnerHeight] = useState(window.innerHeight);
+  useEffect(() => {
+    const resizeListener = () => {
+      setInnerHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", resizeListener);
+  });
 
   return (
     <ItemEditWrap>
       <ItemEditBorder width={innerWidth} height={innerHeight}>
-        <ItemAddHead item={item} />
+        <ItemAddHead category={category} />
         <hr />
-        <ItemImage setImgFile={setItemImgFile} category={item.category} />
+        <ItemImage setImgFile={onUploadImg} category={category} />
         <hr />
         <ItemAddDetail
-          submitCallback={
-            item.type === "auth" ? addItemOnAuth : addItemOnUnauth
-          }
-          category={item.category}
+          category={category}
+          submitCallback={onSubmit}
+          onCancel={onCancel}
         />
       </ItemEditBorder>
     </ItemEditWrap>
   );
 };
 
-export default ItemAdd;
+export default ItemAddOnAuth;

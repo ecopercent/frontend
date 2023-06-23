@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import useInput from "@hooks/useInput";
 import * as S from "../style";
 
-const ItemAddDetail = ({ submitCallback, category }) => {
-  const navigate = useNavigate();
+const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
   const [isError, setIsError] = useState(false);
   const [nickname, onNickname] = useInput("");
   const [brand, onBrand] = useInput("");
@@ -20,7 +18,7 @@ const ItemAddDetail = ({ submitCallback, category }) => {
       return;
     }
     setIsError(false);
-    submitCallback({ nickname, brand, price, purchaseDate, type });
+    submitCallback({ category, nickname, brand, price, purchaseDate, type });
   };
 
   return (
@@ -83,12 +81,7 @@ const ItemAddDetail = ({ submitCallback, category }) => {
         {isError && <S.Error>닉네임, 브랜드는 필수입니다.</S.Error>}
       </div>
       <S.ButtonWrapper>
-        <S.CancelBtn
-          type="reset"
-          onClick={() => {
-            navigate("/item", { state: { category } });
-          }}
-        >
+        <S.CancelBtn type="reset" onClick={onCancel}>
           취소
         </S.CancelBtn>
         <S.SubmitBtn type="submit">저장</S.SubmitBtn>

@@ -1,12 +1,10 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import cookie from "react-cookies";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { PcPageWrap } from "@layout/Main/style";
 import CancelCheckModal from "@modal/CancelCheckModal";
 import SignUpUser from "./Form/SignUpUser";
 import SignUpItems from "./Form/SignUpItems";
-import SignUpItemContext from "@hooks/SignUpItemContext";
 import { postUserOfKakao, postUserOfApple } from "@api/user";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import * as S from "./style";
@@ -18,78 +16,32 @@ const initialUser = {
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const access = useLocation().state;
+  const state = useLocation()?.state;
+  if (!state) return <Navigate to="/" />;
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [userInput, setUserInput] = useState(initialUser);
+  const [cancelCheckModalIsOpen, setCancelCheckModalIsOpen] = useState(false);
   const [warningText, setWarningText] = useState(null);
   const nicknameRef = useRef();
-  const [imgFile, setImgFile] = useState(null);
 
-  function removeCookies() {
-    cookie.remove("signup");
-    cookie.remove("warning");
-    URL.revokeObjectURL(cookie.load("previewUrl"));
-    cookie.remove("previewUrl");
-    localStorage.removeItem("signupImg");
-    cookie.remove("oauth_provider", { path: "/" });
-  }
+  const [userInput, setUserInput] = useState(initialUser);
+  const [userImg, setUserImg] = useState(null);
+  const [itemsInput, setItemsInput] = useState({});
 
-  // TODO: 페이지 이탈 확인 -> 아이템 context, 유저 쿠키 삭제
   useEffect(() => {
-    if (!access) navigate("/");
-
-    if (cookie.load("signup")) {
-      setUserInput(cookie.load("signup"));
-      cookie.remove("signup");
-    }
-    if (localStorage.getItem("signupImg")) {
-      // blob 객체로 재변환
-      fetch(localStorage.getItem("signupImg"))
-        .then((res) => {
-          return res.blob();
-        })
-        .then((blob) => {
-          return setImgFile(blob);
-        });
-      localStorage.removeItem("signupImg");
-    }
-    if (cookie.load("warning")) {
-      setWarningText(cookie.load("warning"));
-      cookie.remove("warning");
-    }
     nicknameRef.current.focus();
   }, []);
-
-  const saveUserInput = async () => {
-    cookie.save("signup", userInput);
-    if (imgFile) {
-      // blob 객체는 저장소에 넣을 수 없으므로 페이지 이동 시 dataURL로 변환하여 저장해둠
-      const reader = new FileReader();
-      reader.readAsDataURL(imgFile);
-      reader.onloadend = () => {
-        localStorage.setItem("signupImg", reader.result);
-      };
-      cookie.save("previewUrl", URL.createObjectURL(imgFile));
-    }
-    if (warningText) cookie.save("warning", warningText);
-  };
 
   const { signIn } = useContext(AuthenticatedContext);
   const signUpMutation = useMutation({
     mutationFn:
-      cookie.load("oauth_provider") === "kakao"
-        ? postUserOfKakao
-        : postUserOfApple,
+      state.oAuthProvider === "kakao" ? postUserOfKakao : postUserOfApple,
     onSuccess: () => {
-      removeCookies();
       return signIn();
     },
     onError: (code) => {
       if (code === 403) {
         // TODO: 모달로?
         alert("세션이 만료되었습니다.");
-        removeCookies();
         return navigate("/");
       }
       if (code === 409) {
@@ -100,7 +52,6 @@ export default function SignUp() {
     },
   });
 
-  const { state } = useContext(SignUpItemContext);
   const handleSubmit = () => {
     if (userInput.nickname.length === 0) {
       nicknameRef.current.focus();
@@ -114,45 +65,48 @@ export default function SignUp() {
         [
           JSON.stringify({
             ...userInput,
-            oAuthProvider: cookie.load("oauth_provider"),
+            oAuthProvider: state.oAuthProvider || "apple",
           }),
         ],
         { type: "application/json" }
       )
     );
-    formData.append("profileImage", imgFile);
-    if (state.tumbler) {
+    formData.append("profileImage", userImg);
+    if (itemsInput.tumbler) {
       formData.append(
         "tumblerData",
-        new Blob([JSON.stringify(state.tumbler)], { type: "application/json" })
+        new Blob([JSON.stringify(itemsInput.tumbler)], {
+          type: "application/json",
+        })
       );
-      formData.append("tumblerImage", state.tumblerImg);
+      formData.append("tumblerImage", itemsInput.tumblerImg);
     }
-    if (state.ecobag) {
+    if (itemsInput.ecobag) {
       formData.append(
         "ecobagData",
-        new Blob([JSON.stringify(state.ecobag)], { type: "application/json" })
+        new Blob([JSON.stringify(itemsInput.ecobag)], {
+          type: "application/json",
+        })
       );
-      formData.append("ecobagImage", state.ecobagImg);
+      formData.append("ecobagImage", itemsInput.ecobagImg);
     }
 
-    return signUpMutation.mutate({ formData, access: access.access });
+    return signUpMutation.mutate({ formData, access: state.access });
   };
 
   const handleClick = () => {
-    setModalIsOpen(true);
+    setCancelCheckModalIsOpen(true);
   };
 
   return (
     <PcPageWrap style={{ paddingBottom: "0" }}>
-      {modalIsOpen && (
+      {cancelCheckModalIsOpen && (
         <CancelCheckModal
           onClose={() => {
-            setModalIsOpen(false);
+            setCancelCheckModalIsOpen(false);
           }}
           onConfirm={() => {
-            setModalIsOpen(false);
-            removeCookies();
+            setCancelCheckModalIsOpen(false);
             navigate("/");
           }}
         />
@@ -164,11 +118,19 @@ export default function SignUp() {
             setUserInput={setUserInput}
             warningText={warningText}
             setWarningText={setWarningText}
-            setImgFile={setImgFile}
+            setUserImg={setUserImg}
             ref={nicknameRef}
           />
-          <SignUpItems category="tumbler" saveUserInput={saveUserInput} />
-          <SignUpItems category="ecobag" saveUserInput={saveUserInput} />
+          <SignUpItems
+            category="tumbler"
+            itemsInput={itemsInput}
+            setItemsInput={setItemsInput}
+          />
+          <SignUpItems
+            category="ecobag"
+            itemsInput={itemsInput}
+            setItemsInput={setItemsInput}
+          />
         </S.InputList>
         <S.SubmitBtnsBox>
           <S.Btn onClick={handleClick}>취소</S.Btn>

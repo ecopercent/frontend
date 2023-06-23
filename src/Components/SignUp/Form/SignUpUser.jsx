@@ -3,14 +3,13 @@ import useImgInput from "@hooks/useImgInput";
 import * as S from "./style";
 
 function SignUpUser(
-  { userInput, setUserInput, warningText, setWarningText, setImgFile },
+  { userInput, setUserInput, warningText, setWarningText, setUserImg },
   ref
 ) {
   const ImgInputForm = useImgInput({
     prevImg: null,
-    setUploadedFile: setImgFile,
+    setUploadedFile: setUserImg,
     type: "signUpUser",
-    prevPreview: localStorage.getItem("signupImg"),
   });
 
   const lengthSliceInKorean = (e) => {

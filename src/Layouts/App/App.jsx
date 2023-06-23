@@ -1,8 +1,6 @@
-import React, { useContext, useReducer } from "react";
+import React, { useContext } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import loadable from "@loadable/component";
-import SignUpItemContext from "@hooks/SignUpItemContext";
-import signUpItemReducer from "@hooks/signUpItemReducer";
 import GlobalStyles from "./style";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import PrivateRouter from "@layout/App/PrivateRouter";
@@ -22,39 +20,32 @@ const SignUp = loadable(() => {
 const Error = loadable(() => {
   return import("../Error/Error");
 });
-const TokenExpiration = loadable(() => {
+const SignOut = loadable(() => {
   return import("@layout/Error/TokenExpiration");
 });
 
 function App() {
-  const [state, dispatch] = useReducer(signUpItemReducer, {
-    tumbler: null,
-    ecobag: null,
-  });
   // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const signUpItemContext = { state, dispatch };
   const { authenticated } = useContext(AuthenticatedContext);
 
   return (
     <>
       <GlobalStyles />
-      <SignUpItemContext.Provider value={signUpItemContext}>
-        {authenticated ? (
-          <PrivateRouter />
-        ) : (
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/login/*" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/item/edit" element={<ItemEdit />} />
-              <Route path="/item/add" element={<ItemAdd />} />
-              <Route path="/signout" element={<TokenExpiration />} />
-              <Route path="/*" element={<Error />} />
-            </Routes>
-          </BrowserRouter>
-        )}
-      </SignUpItemContext.Provider>
+      {authenticated ? (
+        <PrivateRouter />
+      ) : (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/login/*" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/item/edit" element={<ItemEdit />} />
+            <Route path="/item/add" element={<ItemAdd />} />
+            <Route path="/signout" element={<SignOut />} />
+            <Route path="/*" element={<Error />} />
+          </Routes>
+        </BrowserRouter>
+      )}
     </>
   );
 }

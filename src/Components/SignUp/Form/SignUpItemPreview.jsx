@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./style";
 
 export default function SignUpItemPreview({ initialItem, initialImg }) {
-  let url;
-  if (initialImg) url = URL.createObjectURL(initialImg);
+  const [preview, setPreview] = useState(null);
 
   useEffect(() => {
+    let url;
+    if (initialImg) url = URL.createObjectURL(initialImg);
+    setPreview(url);
+
     return () => {
       URL.revokeObjectURL(url);
     };
@@ -14,7 +17,9 @@ export default function SignUpItemPreview({ initialItem, initialImg }) {
   return (
     <S.ItemPreviewBox>
       <S.SetBox>
-        <S.ItemImg src={url || `/img/default_${initialItem.category}.png`} />
+        <S.ItemImg
+          src={preview || `/img/default_${initialItem.category}.png`}
+        />
         <span>{initialItem.nickname}</span>
       </S.SetBox>
       <S.BundleOfTwoBox>
