@@ -5,6 +5,7 @@ export const SettingWrap = styled.div`
   //   border: 1px solid black;
   border-radius: 10px;
   margin: 10px;
+  overflow-y: auto;
 `;
 
 export const SettingTitle = styled.div`
