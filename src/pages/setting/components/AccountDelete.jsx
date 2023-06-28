@@ -49,10 +49,9 @@ const AccountDelete = () => {
     }
   }, [tumblerListQuery, ecobagListQuery]);
 
-  const onDeleteUser = () => {
-    deleteUser().then(() => {
-      if (authenticated) signOut();
-    });
+  const onDeleteUser = async () => {
+    await deleteUser();
+    if (authenticated) signOut();
   };
 
   return (
