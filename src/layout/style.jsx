@@ -12,23 +12,24 @@ export const Layout = styled.div`
   display: flex;
   flex-direction: column;
 
+  /* TODO: width에 따른 반응형 탭바 구현해보기 */
   @media ${media.desktop} {
-    background-color: lightblue;
+    /* background-color: lightblue; */
   }
 
   @media ${media.tabletM} {
-    background-color: lightcoral;
+    /* background-color: lightcoral; */
   }
 
   @media ${media.tabletS} {
-    background-color: lightgreen;
+    /* background-color: lightgreen; */
   }
 
   @media ${media.mobile} {
     height: -webkit-fill-available;
     height: fill-available;
 
-    background-color: lightyellow;
+    /* background-color: lightyellow; */
   }
 `;
 
