@@ -4,7 +4,7 @@ import loadable from "@loadable/component";
 import { useAxiosInterceptor } from "@hooks/useAxiosInterceptor";
 
 const Main = loadable(() => {
-  return import("src/layouts/Main/Main");
+  return import("src/layout/Main/Main");
 });
 const ItemEdit = loadable(() => {
   return import("src/pages/itemModification/ItemEdit/ItemEdit");

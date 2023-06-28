@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { imgCompress } from "@util/convert";
+import { imgCompress } from "src/utils/convert";
 
 const ImgLayout = styled.label`
   display: flex;

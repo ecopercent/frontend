@@ -15,7 +15,7 @@ const ItemAdd = loadable(() => {
   return import("src/pages/itemModification/ItemAdd/ItemAdd");
 });
 const SignUp = loadable(() => {
-  return import("@components/SignUp/SignUp");
+  return import("src/components/SignUp/SignUp");
 });
 const Error = loadable(() => {
   return import("src/pages/error/Error");

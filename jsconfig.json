@@ -2,14 +2,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@api/*": ["src/Api/*"],
-      "@components/*": ["src/Components/*"],
+      "@api/*": ["src/api/*"],
+      "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@layout/*": ["src/layouts/*"],
+      "@layout/*": ["src/layout/*"],
       "@pages/*": ["src/pages/*"],
       "@style/*": ["src/style/*"],
-      "@util/*": ["src/Utils/*"],
-      "@modal/*": ["src/Components/Modal/*"]
+      "@util/*": ["src/utils/*"],
+      "@modal/*": ["src/components/Modal/*"]
     }
   }
 }

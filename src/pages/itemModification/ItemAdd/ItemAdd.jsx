@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { postItem } from "@api/item";
+import { postItem } from "src/api/item";
 import ItemImage from "./ItemAddImage";
 import ItemAddDetail from "./ItemAddDetail";
 import ItemAddHead from "./ItemAddHead";

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { AiFillSetting } from "react-icons/ai";
 import { BiHomeAlt } from "react-icons/bi";
 import { BsFillBoxFill } from "react-icons/bs";
-import TabBar from "@components/TabBar/TabBar";
+import TabBar from "src/components/TabBar/TabBar";
 import Setting from "src/pages/setting/Setting";
 import Home from "src/pages/home/Home";
 import Item from "src/pages/item/Item";
