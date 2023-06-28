@@ -20,7 +20,7 @@ export const Logo = styled.img`
   align-items: center;
   justify-content: center;
 
-  margin-top: 10%;
+  margin-top: 10vh;
   height: 10%;
 `;
 
@@ -52,7 +52,7 @@ export const SloganSpan = styled.span`
   ${font.normalSubheadline};
 
   height: 3%;
-  margin-top: 17%;
+  margin-top: 17vh;
 `;
 
 export const ButtonBox = styled.div`
