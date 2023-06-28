@@ -37,7 +37,7 @@ export function useAxiosInterceptor() {
       const res = await axios.post("/token/access");
       if (res === "SIGNOUT") {
         localStorage.setItem("expired", true);
-        window.location.replace("/signout");
+        window.location.replace("/expire");
       }
       setAccessToken();
       const prevRequest = error.config;

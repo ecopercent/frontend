@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 import TabBar from "@components/TabBar/TabBar";
 
@@ -7,6 +7,9 @@ import { Pc, Mobile } from "../MediaQuery";
 import * as S from "../style";
 
 const PrivateLayout = () => {
+  const { pathname } = useLocation();
+  if (pathname === "/") return <Navigate to="/home" />;
+
   return (
     <S.PageLayout>
       <Pc>
