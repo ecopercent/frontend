@@ -10,7 +10,6 @@ import { getItemList } from "@api/item";
 const countUsageCount = (itemList) => {
   let sum = 0;
   itemList.forEach((eachItem) => {
-    console.log("Tet", eachItem, eachItem.currentUsageCount);
     sum += eachItem.currentUsageCount;
   });
   return sum;
