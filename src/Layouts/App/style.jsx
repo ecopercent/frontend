@@ -10,6 +10,9 @@ const style = css`
 
   #root {
     height: 100vh;
+    @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
   }
 
   * {
