@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import { Navigate, useNavigate } from "react-router-dom";
-import { PcPageWrap } from "@layout/private/style";
+import { PcPageWrap } from "@layout/style";
 import * as S from "../error/style";
 
 export default function TokenExpiration() {

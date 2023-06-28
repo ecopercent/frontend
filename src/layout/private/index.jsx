@@ -1,8 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+
 import TabBar from "@components/TabBar/TabBar";
+
 import { Pc, Mobile } from "../MediaQuery";
-import * as S from "./style";
+import * as S from "../style";
 
 const PrivateLayout = () => {
   return (
@@ -11,7 +13,7 @@ const PrivateLayout = () => {
         <S.PcLayout>
           <h3 style={{ position: "absolute", left: 20 }}>pc</h3>
           <S.PcPageWrap>
-            <Outlet />{" "}
+            <Outlet />
           </S.PcPageWrap>
           <S.FooterWrap>
             <TabBar />

@@ -5,6 +5,7 @@ import GlobalStyles from "./style";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import PrivateRouter from "./PrivateRouter";
 import { Login, SignUp, Error } from "@pages";
+import { PublicLayout } from "@layout";
 
 // TODO: 모달로 변경될 예정, 변경되면 components 디렉토리로 이동하기!
 const ItemEdit = loadable(() => {
@@ -29,13 +30,15 @@ function App() {
       ) : (
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/login/*" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/item/edit" element={<ItemEdit />} />
-            <Route path="/item/add" element={<ItemAdd />} />
-            <Route path="/expire" element={<Expire />} />
-            <Route path="/*" element={<Error />} />
+            <Route path="/" element={<PublicLayout />}>
+              <Route index element={<Login />} />
+              <Route path="/login/*" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/item/edit" element={<ItemEdit />} />
+              <Route path="/item/add" element={<ItemAdd />} />
+              <Route path="/expire" element={<Expire />} />
+              <Route path="/*" element={<Error />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       )}
