@@ -77,7 +77,7 @@ export const boldHeadline = `
 `;
 
 export const boldPercent = `
-  font-family: 'SF Pro Display';
+  font-family: "SF Pro Display";
   font-style: normal;
   font-weight: 900;
   font-size: 50px;
