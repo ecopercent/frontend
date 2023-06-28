@@ -15,9 +15,9 @@ const PrivateLayout = () => {
       <Pc>
         <S.PcLayout>
           <h3 style={{ position: "absolute", left: 20 }}>pc</h3>
-          <S.PcPageWrap>
+          <S.PcWidthFixedWrapper>
             <Outlet />
-          </S.PcPageWrap>
+          </S.PcWidthFixedWrapper>
           <S.FooterWrap>
             <TabBar />
           </S.FooterWrap>

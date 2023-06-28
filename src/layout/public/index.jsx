@@ -10,9 +10,7 @@ const PublicLayout = () => {
       <Pc>
         <S.PcLayout>
           <h3 style={{ position: "absolute", left: 20 }}>pc</h3>
-          <S.PcPageWrap>
-            <Outlet />
-          </S.PcPageWrap>
+          <Outlet />
         </S.PcLayout>
       </Pc>
       <Mobile>

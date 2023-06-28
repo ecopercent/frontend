@@ -12,7 +12,7 @@ export const SignUpLayoutCol = styled.div`
   height: calc(100vh - 20px);
 
   border: 1px solid;
-  border-radius: 5px;
+  border-radius: 10px;
 `;
 
 export const InputList = styled.ul`

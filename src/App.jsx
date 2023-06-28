@@ -43,6 +43,11 @@ function PrivateRouter() {
           <Route path="/home" element={<Home />} />
           <Route path="/item" element={<Item />} />
           <Route path="/setting" element={<Setting />} />
+          <Route path="/setting/:subPage" element={<Setting />} />
+          <Route
+            path="/setting/:subPage/:accountDeletePage"
+            element={<Setting />}
+          />
           {/* TODO: 아이템 조작 관련 페이지 모달로 바뀔 예정 */}
           <Route path="/item/edit" element={<ItemEdit />} />
           <Route path="/item/add" element={<ItemAdd />} />

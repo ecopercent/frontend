@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import { Navigate, useNavigate } from "react-router-dom";
-import { PcPageWrap } from "@layout/style";
+
+import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
+
 import * as S from "../error/style";
 
 export default function TokenExpiration() {
@@ -24,19 +25,17 @@ export default function TokenExpiration() {
   }, []);
 
   return (
-    <PcPageWrap style={{ height: "100vh", padding: "0" }}>
-      <S.PageLayout>
-        <S.WarningIcon />
-        <S.Headline>세션이 만료되었습니다.</S.Headline>
-        <S.NotificationText>잠시 후 메인으로 이동합니다.</S.NotificationText>
-        <S.GoHomeBtn
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          메인 화면
-        </S.GoHomeBtn>
-      </S.PageLayout>
-    </PcPageWrap>
+    <S.PageLayout>
+      <S.WarningIcon />
+      <S.Headline>세션이 만료되었습니다.</S.Headline>
+      <S.NotificationText>잠시 후 메인으로 이동합니다.</S.NotificationText>
+      <S.GoHomeBtn
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        메인 화면
+      </S.GoHomeBtn>
+    </S.PageLayout>
   );
 }

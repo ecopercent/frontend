@@ -1,18 +1,16 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { PcPageWrap } from "@layout/style";
-import CancelCheckModal from "src/components/Modal/CancelCheckModal";
+
 import SignUpUser from "./Form/SignUpUser";
 import SignUpItems from "./Form/SignUpItems";
+import CancelCheckModal from "src/components/Modal/CancelCheckModal";
+
 import { postUserOfKakao, postUserOfApple } from "src/api/user";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
-import * as S from "./style";
 
-const initialUser = {
-  nickname: "",
-  profileMessage: "",
-};
+import { PcWidthFixedWrapper } from "@layout/style";
+import * as S from "./style";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -23,7 +21,10 @@ export default function SignUp() {
   const [warningText, setWarningText] = useState(null);
   const nicknameRef = useRef();
 
-  const [userInput, setUserInput] = useState(initialUser);
+  const [userInput, setUserInput] = useState({
+    nickname: "",
+    profileMessage: "",
+  });
   const [userImg, setUserImg] = useState(null);
   const [itemsInput, setItemsInput] = useState({});
 
@@ -99,7 +100,7 @@ export default function SignUp() {
   };
 
   return (
-    <PcPageWrap style={{ paddingBottom: "0" }}>
+    <PcWidthFixedWrapper style={{ maxHeight: "100%", paddingBottom: "0" }}>
       {cancelCheckModalIsOpen && (
         <CancelCheckModal
           onClose={() => {
@@ -139,6 +140,6 @@ export default function SignUp() {
           </S.Btn>
         </S.SubmitBtnsBox>
       </S.SignUpLayoutCol>
-    </PcPageWrap>
+    </PcWidthFixedWrapper>
   );
 }

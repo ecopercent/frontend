@@ -12,7 +12,7 @@ export const PcLayout = styled.div`
   flex-direction: column;
 `;
 
-export const PcPageWrap = styled.div`
+export const PcWidthFixedWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
