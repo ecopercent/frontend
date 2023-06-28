@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ProfileViewer from "./ProfileViewer/ProfileViewer";
-import ProfileEditor from "./ProfileEditor/ProfileEditor";
+import ProfileViewer from "./viewer/ProfileViewer";
+import ProfileEditor from "./editor/ProfileEditor";
 
 export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import SocialLogin from "src/components/Login/SocialLogin";
+import SocialLogin from "./components/SocialLogin";
 import * as S from "./style";
 
 const Login = () => {

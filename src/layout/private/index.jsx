@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
-import TabBar from "@components/TabBar/TabBar";
+import TabBar from "./tabBar/TabBar";
 
 import { Pc, Mobile } from "../mediaQuery";
 import * as S from "../style";

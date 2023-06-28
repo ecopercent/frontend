@@ -1,6 +1,6 @@
 import React from "react";
-import Profile from "src/components/Home/Profile/Profile";
-import TitleItemBox from "src/components/Home/TitleItems/TitleItemBox";
+import Profile from "./components/profile/Profile";
+import TitleItemBox from "./components/titleItem/TitleItemBox";
 
 const Home = () => {
   return (

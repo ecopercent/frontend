@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
-import SignUpUser from "./Form/SignUpUser";
-import SignUpItems from "./Form/SignUpItems";
-import CancelCheckModal from "src/components/Modal/CancelCheckModal";
+import SignUpUser from "./components/SignUpUser";
+import SignUpItems from "./components/SignUpItems";
+import CancelCheckModal from "@modal/CancelCheckModal";
 
 import { postUserOfKakao, postUserOfApple } from "src/api/user";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";

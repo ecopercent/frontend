@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import * as S from "./style";
+import * as S from "../style";
 import AccountDelete from "./AccountDelete";
 import Error from "@pages/error";
 

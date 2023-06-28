@@ -2,8 +2,8 @@ import React, { useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getKakaoAuthCode, KakaoLoginButton } from "./kakaoLogin";
 import AppleLoginButton from "./appleLogin";
-import { AuthenticatedContext } from "../../hooks/AuthenticatedContext";
-import * as S from "./style";
+import { AuthenticatedContext } from "../../../hooks/AuthenticatedContext";
+import * as S from "../style";
 
 export default function SocialLogin() {
   const location = useLocation();

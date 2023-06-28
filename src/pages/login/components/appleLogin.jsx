@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import * as S from "./style";
+import * as S from "../style";
 
 const AppleLoginButton = () => {
   const clientId = `${process.env.REACT_APP_APPLE_CLIENT_ID}`;

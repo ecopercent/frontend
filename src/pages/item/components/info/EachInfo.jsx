@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { getItem } from "src/api/item";
-import TitleSetModal from "src/components/Modal/TitleSetModal";
+import TitleSetModal from "@components/modal/TitleSetModal";
 import * as S from "./style";
 
 export default function EachInfo({ itemId, itemCategory }) {

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getTitleItem } from "src/api/item";
-import ConvertButtons from "./ConvertBtn/ConvertButtons";
-import TitleItem from "./TitleItem/TitleItem";
-import NoTitleItem from "./TitleItem/NoTitleItem";
+import ConvertButtons from "./convertBtn/ConvertButtons";
+import TitleItem from "./titleItem/TitleItem";
+import NoTitleItem from "./titleItem/NoTitleItem";
 import * as S from "./style";
 
 export default function TitleItemBox() {

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { scriptLoad } from "src/utils/script";
-import { LogoImg } from "./style";
+import { LogoImg } from "../style";
 
 export async function kakaoLogin() {
   const src = "https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js";

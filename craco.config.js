@@ -10,7 +10,7 @@ module.exports = {
       "@pages": path.resolve(__dirname, "src/pages"),
       "@style": path.resolve(__dirname, "src/style"),
       "@util": path.resolve(__dirname, "src/utils"),
-      "@modal": path.resolve(__dirname, "src/components/Modal"),
+      "@modal": path.resolve(__dirname, "src/components/modal"),
     },
   },
 };

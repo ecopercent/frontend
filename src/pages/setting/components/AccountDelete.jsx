@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import * as S from "./style";
+import * as S from "../style";
 import { deleteUser } from "src/api/user";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 

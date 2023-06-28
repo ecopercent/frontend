@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { getItem, patchItem } from "src/api/item";
-import DeleteItemModal from "src/components/Modal/DeleteItemModal";
+import DeleteItemModal from "@components/modal/DeleteItemModal";
 import ItemImage from "./ItemEditImage";
 import ItemEditDetail from "./ItemEditDetail";
 import ItemEditHead from "./ItemEditHead";

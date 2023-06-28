@@ -16,10 +16,10 @@ const Expire = loadable(() => {
 
 // TODO: 모달로 변경될 예정, 변경되면 삭제!
 const ItemEdit = loadable(() => {
-  return import("@components/itemModification/ItemEdit/ItemEdit");
+  return import("@pages/item/components/modification/ItemEdit/ItemEdit");
 });
 const ItemAdd = loadable(() => {
-  return import("@components/itemModification/ItemAdd/ItemAdd");
+  return import("@pages/item/components/modification/ItemAdd/ItemAdd");
 });
 
 function App() {
