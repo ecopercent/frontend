@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { getItem, patchItem } from "src/api/item";
@@ -85,25 +85,9 @@ export const ItemEdit = ({
     setShowdeleteItemModal(false);
   }, []);
 
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const resizeListener = () => {
-      setInnerWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", resizeListener);
-  });
-
-  const [innerHeight, setInnerHeight] = useState(window.innerHeight);
-  useEffect(() => {
-    const resizeListener = () => {
-      setInnerHeight(window.innerHeight);
-    };
-    window.addEventListener("resize", resizeListener);
-  });
-
   return (
     <ItemEditWrap>
-      <ItemEditBorder width={innerWidth} height={innerHeight}>
+      <ItemEditBorder>
         <ItemEditHead
           item={item}
           setShowdeleteItemModal={setShowdeleteItemModal}
