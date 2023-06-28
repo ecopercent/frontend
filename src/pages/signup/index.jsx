@@ -9,7 +9,7 @@ import CancelCheckModal from "@modal/CancelCheckModal";
 import { postUserOfKakao, postUserOfApple } from "src/api/user";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 
-import { PcWidthFixedWrapper } from "@layout/style";
+import { OutletWrapper } from "@layout/style";
 import * as S from "./style";
 
 export default function SignUp() {
@@ -100,7 +100,7 @@ export default function SignUp() {
   };
 
   return (
-    <PcWidthFixedWrapper style={{ maxHeight: "100%", paddingBottom: "0" }}>
+    <OutletWrapper fixedWidth>
       {cancelCheckModalIsOpen && (
         <CancelCheckModal
           onClose={() => {
@@ -140,6 +140,6 @@ export default function SignUp() {
           </S.Btn>
         </S.SubmitBtnsBox>
       </S.SignUpLayoutCol>
-    </PcWidthFixedWrapper>
+    </OutletWrapper>
   );
 }
