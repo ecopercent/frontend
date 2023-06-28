@@ -7,7 +7,7 @@ export const ProfileContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 15px 25px;
+  padding: 15px 24px;
   gap: 16px;
 
   width: 100%;
@@ -27,8 +27,8 @@ export const ProfileImgTextWrapper = styled.div`
 `;
 
 export const ProfileImg = styled.img`
-  height: 100px;
-  width: 100px;
+  height: 100.5px;
+  width: 100.5px;
   flex-shrink: 0;
 
   border-radius: 50%;
