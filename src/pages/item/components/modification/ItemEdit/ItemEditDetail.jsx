@@ -28,7 +28,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
       <S.FormInnerWrapper>
         <S.LabelInputSet>
           <S.Span>
-            닉네임<span style={{ color: "red" }}>*</span>
+            닉네임 <span style={{ color: "red" }}>*</span>
           </S.Span>
           <S.Input
             value={nickname}
