@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-import { Pc, Mobile } from "../MediaQuery";
+import { Pc, Mobile } from "../mediaQuery";
 import * as S from "../style";
 
 const PublicLayout = () => {

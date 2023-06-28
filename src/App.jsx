@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import loadable from "@loadable/component";
 
-import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
-import { useAxiosInterceptor } from "@hooks/useAxiosInterceptor";
-
 import { Home, Item, Setting, Login, SignUp, Error } from "@pages";
 import { PrivateLayout, PublicLayout } from "@layout";
+
+import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
+import { useAxiosInterceptor } from "@hooks/useAxiosInterceptor";
 
 import GlobalStyles from "./style";
 
@@ -14,12 +14,12 @@ const Expire = loadable(() => {
   return import("@pages/expire");
 });
 
-// TODO: 모달로 변경될 예정, 변경되면 components 디렉토리로 이동하기!
+// TODO: 모달로 변경될 예정, 변경되면 삭제!
 const ItemEdit = loadable(() => {
-  return import("src/pages/itemModification/ItemEdit/ItemEdit");
+  return import("@components/itemModification/ItemEdit/ItemEdit");
 });
 const ItemAdd = loadable(() => {
-  return import("src/pages/itemModification/ItemAdd/ItemAdd");
+  return import("@components/itemModification/ItemAdd/ItemAdd");
 });
 
 function App() {
@@ -43,12 +43,12 @@ function PrivateRouter() {
           <Route path="/home" element={<Home />} />
           <Route path="/item" element={<Item />} />
           <Route path="/setting" element={<Setting />} />
-          <Route path="/expire" element={<Expire />} />
-          <Route path="/*" element={<Error />} />
           {/* TODO: 아이템 조작 관련 페이지 모달로 바뀔 예정 */}
           <Route path="/item/edit" element={<ItemEdit />} />
           <Route path="/item/add" element={<ItemAdd />} />
         </Route>
+        <Route path="/expire" element={<Expire />} />
+        <Route path="/*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );

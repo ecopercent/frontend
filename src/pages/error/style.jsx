@@ -15,6 +15,7 @@ export const PageLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* TODO: 마진 확인하기 */
   margin: auto 0;
 `;
 

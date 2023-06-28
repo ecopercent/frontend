@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 import TabBar from "@components/TabBar/TabBar";
 
-import { Pc, Mobile } from "../MediaQuery";
+import { Pc, Mobile } from "../mediaQuery";
 import * as S from "../style";
 
 const PrivateLayout = () => {
