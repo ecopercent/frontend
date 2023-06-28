@@ -33,7 +33,7 @@ export const HoverSettingTitle = styled.div`
   }
 `;
 
-export const Logout = styled.div`
+export const Highlight = styled.div`
   padding: 3%;
   color: ${basicGreen};
   :hover {
@@ -42,6 +42,10 @@ export const Logout = styled.div`
   }
   border-radius: 3px;
   cursor: pointer;
+`;
+
+export const ColorPlain = styled.span`
+  color: ${basicGreen};
 `;
 
 export const HoverPlain = styled.div`
