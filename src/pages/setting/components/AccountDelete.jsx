@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../style";
+import DeleteUserModal from "@components/modal/DeleteUserModal";
 import { deleteUser } from "src/api/user";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import { useQuery } from "@tanstack/react-query";
@@ -34,6 +35,10 @@ const AccountDelete = () => {
   const [ecobagUsageCount, setEcobagUsageCount] = useState(0);
   const [tumblerCount, setTumblerCount] = useState(0);
   const [ecobagCount, setEcobagCount] = useState(0);
+  const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
+  const onCloseModal = useCallback(() => {
+    setShowDeleteUserModal(false);
+  }, []);
 
   useEffect(() => {
     if (tumblerListQuery?.isSuccess && ecobagListQuery?.isSuccess) {
@@ -45,8 +50,9 @@ const AccountDelete = () => {
   }, [tumblerListQuery, ecobagListQuery]);
 
   const onDeleteUser = () => {
-    deleteUser();
-    if (authenticated) signOut();
+    deleteUser().then(() => {
+      if (authenticated) signOut();
+    });
   };
 
   return (
@@ -80,8 +86,17 @@ const AccountDelete = () => {
           번의 순간들
         </S.Plain>
         <S.Category>정말 지구를 죽이면서까지 탈퇴하시겠습니까?</S.Category>
-        <S.Highlight onClick={onDeleteUser}>그럼요</S.Highlight>
+        <S.Highlight
+          onClick={() => {
+            setShowDeleteUserModal(true);
+          }}
+        >
+          그럼요
+        </S.Highlight>
       </form>
+      {showDeleteUserModal && (
+        <DeleteUserModal onClose={onCloseModal} onCheckDelete={onDeleteUser} />
+      )}
     </S.SettingWrap>
   );
 };
