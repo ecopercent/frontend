@@ -3,10 +3,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../style";
 import AccountDelete from "./AccountDelete";
 import Error from "@pages/error";
+import { useQuery } from "@tanstack/react-query";
+import { getUser } from "@api/user";
 
 const AccountInfo = () => {
   const { accountDeletePage } = useParams();
   const navigate = useNavigate();
+
+  const userQuery = useQuery({
+    queryKey: ["user"],
+    queryFn: () => {
+      return getUser();
+    },
+  });
+
   if (accountDeletePage) {
     return accountDeletePage === "accountDelete" ? (
       <AccountDelete />
@@ -21,25 +31,28 @@ const AccountInfo = () => {
           navigate(-1);
         }}
       >
-        <span style={{ marginRight: "1%" }}>{"<"}</span> 회원 정보
+        <span>{"<"}</span> 회원 정보
       </S.HoverSettingTitle>
       <S.Category>연동 소셜</S.Category>
-      <S.Plain>auth 끝나고 채울 예정</S.Plain>
+      <S.Plain>{`${userQuery.data?.oauthProvider} (${userQuery.data?.email})`}</S.Plain>
       <hr />
       <S.Category>닉네임</S.Category>
-      <S.Plain>auth 끝나고 채울 예정</S.Plain>
+      <S.Plain>{userQuery.data?.nickname}</S.Plain>
       <hr />
-      <S.Category>가입일</S.Category>
-      <S.Plain>auth 끝나고 채울 예정</S.Plain>
-      <hr />
+      {/*
+      TODO: 가입일: 가입일 정보가 DB에 없어서 백에 요청만 한 상태
+      당장은 없이 완성하라고 함
+       <S.Category>가입일</S.Category>
+      <S.Plain>{userQuery.data?.teste}</S.Plain>
+      <hr /> */}
       <S.Category>계정 설정</S.Category>
-      <S.Logout
+      <S.Highlight
         onClick={() => {
           navigate("accountDelete");
         }}
       >
         회원탈퇴
-      </S.Logout>
+      </S.Highlight>
     </S.SettingWrap>
   );
 };

@@ -92,7 +92,7 @@ const Setting = () => {
         );
       })}
       <hr />
-      <S.Logout onClick={signOut}>로그아웃</S.Logout>
+      <S.Highlight onClick={signOut}>로그아웃</S.Highlight>
     </S.SettingWrap>
   );
 };
