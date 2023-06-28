@@ -5,12 +5,12 @@ import { BiHomeAlt } from "react-icons/bi";
 import { BsFillBoxFill } from "react-icons/bs";
 import TabBar from "src/components/TabBar/TabBar";
 import Setting from "src/pages/setting/Setting";
-import Home from "src/pages/home/Home";
-import Item from "src/pages/item/Item";
+import Home from "@pages/home";
+import Item from "@pages/item";
 import * as S from "./style";
 import { Pc, Mobile } from "../MediaQuery";
 
-const Main = () => {
+const PrivateLayout = () => {
   const routeInfo = [
     {
       page: "setting",
@@ -66,4 +66,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default PrivateLayout;

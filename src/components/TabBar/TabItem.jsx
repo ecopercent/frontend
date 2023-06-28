@@ -7,6 +7,7 @@ const TabItem = ({ itemNumber, IconComponent, currTabNumber, page }) => {
   const tabClickHandler = useCallback(() => {
     navigate(`/${page}`);
   }, []);
+
   return (
     <TabItemBackGround
       featured={currTabNumber === itemNumber}

@@ -4,24 +4,19 @@ import loadable from "@loadable/component";
 import GlobalStyles from "./style";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import PrivateRouter from "./PrivateRouter";
+import { Login, SignUp } from "@pages";
 
-const Login = loadable(() => {
-  return import("src/pages/login/Login");
-});
 const ItemEdit = loadable(() => {
   return import("src/pages/itemModification/ItemEdit/ItemEdit");
 });
 const ItemAdd = loadable(() => {
   return import("src/pages/itemModification/ItemAdd/ItemAdd");
 });
-const SignUp = loadable(() => {
-  return import("src/components/SignUp/SignUp");
-});
 const Error = loadable(() => {
   return import("src/pages/error/Error");
 });
 const SignOut = loadable(() => {
-  return import("src/pages/error/TokenExpiration");
+  return import("@pages/expire/TokenExpiration");
 });
 
 function App() {

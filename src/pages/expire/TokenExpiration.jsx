@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import { Navigate, useNavigate } from "react-router-dom";
-import { PcPageWrap } from "src/layout/Main/style";
-import * as S from "./style";
+import { PcPageWrap } from "@layout/private/style";
+import * as S from "../error/style";
 
 export default function TokenExpiration() {
   const expired = localStorage.getItem("expired");
