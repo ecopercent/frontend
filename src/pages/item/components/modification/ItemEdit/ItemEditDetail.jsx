@@ -41,7 +41,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>
-            브랜드<span style={{ color: "red" }}>*</span>
+            브랜드 <span style={{ color: "red" }}>*</span>
           </S.Span>
           <S.Input
             value={brand}
