@@ -7,7 +7,9 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
   const [nickname, onNickname] = useInput(itemDetail.nickname);
   const [brand, onBrand] = useInput(itemDetail.brand);
   const [price, onPrice] = useInput(itemDetail.price);
-  const [purchaseDate, onPurchaseData] = useInput(itemDetail.purchaseDate);
+  const [purchaseDate, onPurchaseData] = useInput(
+    itemDetail.purchaseDate ?? ""
+  );
   const [type, onType] = useInput(itemDetail.type);
   const targetGoalUsageCount = itemDetail.goalUsageCount;
 
@@ -25,7 +27,9 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
     <S.Form onSubmit={handleSubmit}>
       <S.FormInnerWrapper>
         <S.LabelInputSet>
-          <S.Span>닉네임</S.Span>
+          <S.Span>
+            닉네임<span style={{ color: "red" }}>*</span>
+          </S.Span>
           <S.Input
             value={nickname}
             onChange={onNickname}
@@ -36,7 +40,9 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
           />
         </S.LabelInputSet>
         <S.LabelInputSet>
-          <S.Span>브랜드</S.Span>
+          <S.Span>
+            브랜드<span style={{ color: "red" }}>*</span>
+          </S.Span>
           <S.Input
             value={brand}
             onChange={onBrand}
@@ -84,7 +90,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
           />
         </S.LabelInputSet>
       </S.FormInnerWrapper>
-      {isError && <S.Error>닉네임, 브랜드는 필수입니다.</S.Error>}
+      {isError && <S.Error>닉네임과 브랜드는 꼭 작성해주세요!</S.Error>}
       <S.ButtonWrapper>
         <S.CancelBtn type="reset" onClick={onCancel}>
           취소

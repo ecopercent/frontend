@@ -68,7 +68,7 @@ export const LabelInputSet = styled.div`
 `;
 
 export const Span = styled.span`
-  width: 70px;
+  width: 80px;
   ${font.boldBody};
 `;
 

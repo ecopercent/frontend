@@ -25,7 +25,9 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
     <S.Form onSubmit={handleSubmit}>
       <S.FormInnerWrapper>
         <S.LabelInputSet>
-          <S.Span>닉네임</S.Span>
+          <S.Span>
+            닉네임 <span style={{ color: "red" }}>*</span>
+          </S.Span>
           <S.Input
             value={nickname}
             onChange={onNickname}
@@ -35,7 +37,9 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
           />
         </S.LabelInputSet>
         <S.LabelInputSet>
-          <S.Span>브랜드</S.Span>
+          <S.Span>
+            브랜드 <span style={{ color: "red" }}>*</span>
+          </S.Span>
           <S.Input
             value={brand}
             onChange={onBrand}
@@ -78,7 +82,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
           marginTop: "1%",
         }}
       >
-        {isError && <S.Error>닉네임, 브랜드는 필수입니다.</S.Error>}
+        {isError && <S.Error>닉네임과 브랜드는 꼭 작성해주세요!</S.Error>}
       </div>
       <S.ButtonWrapper>
         <S.CancelBtn type="reset" onClick={onCancel}>

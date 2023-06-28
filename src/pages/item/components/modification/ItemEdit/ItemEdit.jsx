@@ -64,7 +64,7 @@ const ItemEditOnAuth = () => {
   return (
     <ItemEdit
       category={item.category}
-      item={prevItemInfoQuery.data}
+      item={{ ...prevItemInfoQuery.data, type: item.type }}
       onCancel={hancleCancel}
       onSubmit={editItemOnAuth}
       onUploadImg={setItemImgFile}

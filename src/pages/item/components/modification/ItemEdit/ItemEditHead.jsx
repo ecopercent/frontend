@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { ItemEditHeadWrapper, DeleteBtn } from "../style";
+import { ItemEditHeadWrapper, DeleteBtn, Span } from "../style";
 
 const ItemEditHead = ({ item, setShowdeleteItemModal }) => {
   const onclickDeleteItemModal = useCallback((e) => {
@@ -11,7 +11,7 @@ const ItemEditHead = ({ item, setShowdeleteItemModal }) => {
 
   return (
     <ItemEditHeadWrapper>
-      {item.category === "tumbler" ? "텀블러 수정" : "에코백 수정"}
+      <Span>{item.category === "tumbler" ? "텀블러 수정" : "에코백 수정"}</Span>
       {item.type === "auth" && (
         <DeleteBtn onClick={onclickDeleteItemModal}>삭제</DeleteBtn>
       )}
