@@ -100,7 +100,7 @@ export default function SignUp() {
   };
 
   return (
-    <OutletWrapper fixedWidth>
+    <OutletWrapper fixedWidth fullHeight>
       {cancelCheckModalIsOpen && (
         <CancelCheckModal
           onClose={() => {

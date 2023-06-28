@@ -40,8 +40,11 @@ export const OutletWrapper = styled.div`
 
   @media not ${media.mobile} {
     ${(props) => {
-      if (props.fixedWidth)
-        return `width: 500px; margin: 0 auto; max-height: 100vh;`;
+      if (props.fixedWidth) return `width: 500px; margin: 0 auto;`;
+      return ``;
+    }}
+    ${(props) => {
+      if (props.fullHeight) return `height: 100vh;`;
       return ``;
     }}
   }
