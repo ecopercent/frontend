@@ -86,13 +86,13 @@ const AccountDelete = () => {
           번의 순간들
         </S.Plain>
         <S.Category>정말 지구를 죽이면서까지 탈퇴하시겠습니까?</S.Category>
-        <S.Highlight
+        <S.HighlightPinkHover
           onClick={() => {
             setShowDeleteUserModal(true);
           }}
         >
           그럼요
-        </S.Highlight>
+        </S.HighlightPinkHover>
       </form>
       {showDeleteUserModal && (
         <DeleteUserModal onClose={onCloseModal} onCheckDelete={onDeleteUser} />

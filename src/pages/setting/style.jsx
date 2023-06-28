@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { basicGreen, lightGreen } from "@style/color";
+import { basicGreen, lightGreen, basicPink } from "@style/color";
 
 export const SettingWrap = styled.div`
   //   border: 1px solid black;
@@ -38,6 +38,17 @@ export const Highlight = styled.div`
   color: ${basicGreen};
   :hover {
     background: ${basicGreen};
+    color: white;
+  }
+  border-radius: 3px;
+  cursor: pointer;
+`;
+
+export const HighlightPinkHover = styled.div`
+  padding: 3%;
+  color: ${basicGreen};
+  :hover {
+    background: ${basicPink};
     color: white;
   }
   border-radius: 3px;
