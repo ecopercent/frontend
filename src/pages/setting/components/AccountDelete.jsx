@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useCallback } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../style";
 import DeleteUserModal from "@components/modal/DeleteUserModal";
@@ -30,23 +30,10 @@ const AccountDelete = () => {
       return getItemList("ecobag");
     },
   });
-  const [tumblerUsageCount, setTumblerUsageCount] = useState(0);
-  const [ecobagUsageCount, setEcobagUsageCount] = useState(0);
-  const [tumblerCount, setTumblerCount] = useState(0);
-  const [ecobagCount, setEcobagCount] = useState(0);
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
   const onCloseModal = useCallback(() => {
     setShowDeleteUserModal(false);
   }, []);
-
-  useEffect(() => {
-    if (tumblerListQuery?.isSuccess && ecobagListQuery?.isSuccess) {
-      setTumblerCount(tumblerListQuery?.data.length);
-      setEcobagCount(ecobagListQuery?.data.length);
-      setTumblerUsageCount(countUsageCount(tumblerListQuery?.data));
-      setEcobagUsageCount(countUsageCount(ecobagListQuery?.data));
-    }
-  }, [tumblerListQuery, ecobagListQuery]);
 
   const onDeleteUser = async () => {
     await deleteUser();
@@ -72,15 +59,28 @@ const AccountDelete = () => {
         </S.Plain>
         <S.Category>텀블러</S.Category>
         <S.Plain>
-          <S.ColorPlain>{tumblerCount}</S.ColorPlain> 개와
+          <S.ColorPlain>
+            {tumblerListQuery.isSuccess
+              ? tumblerListQuery?.data.length
+              : "여러"}
+          </S.ColorPlain>{" "}
+          개와
         </S.Plain>
         <S.Category>에코백</S.Category>
         <S.Plain>
-          <S.ColorPlain>{ecobagCount}</S.ColorPlain> 개로
+          <S.ColorPlain>
+            {ecobagListQuery.isSuccess ? ecobagListQuery?.data.length : "여러"}
+          </S.ColorPlain>{" "}
+          개로
         </S.Plain>
         <S.Category>지구를 지켰던</S.Category>
         <S.Plain>
-          <S.ColorPlain>{tumblerUsageCount + ecobagUsageCount}</S.ColorPlain>{" "}
+          <S.ColorPlain>
+            {tumblerListQuery.isSuccess && ecobagListQuery.isSuccess
+              ? countUsageCount(tumblerListQuery?.data) +
+                countUsageCount(ecobagListQuery?.data)
+              : "여러"}
+          </S.ColorPlain>{" "}
           번의 순간들
         </S.Plain>
         <S.Category>정말 지구를 죽이면서까지 탈퇴하시겠습니까?</S.Category>
