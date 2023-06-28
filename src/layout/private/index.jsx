@@ -1,14 +1,14 @@
-import { useParams, Navigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Outlet, useParams } from "react-router-dom";
 import { AiFillSetting } from "react-icons/ai";
 import { BiHomeAlt } from "react-icons/bi";
 import { BsFillBoxFill } from "react-icons/bs";
-import TabBar from "src/components/TabBar/TabBar";
-import Setting from "src/pages/setting/Setting";
+import Setting from "@pages/setting";
 import Home from "@pages/home";
 import Item from "@pages/item";
-import * as S from "./style";
+import TabBar from "../../components/TabBar/TabBar";
 import { Pc, Mobile } from "../MediaQuery";
+import * as S from "./style";
 
 const PrivateLayout = () => {
   const routeInfo = [
@@ -33,21 +33,24 @@ const PrivateLayout = () => {
   const pageNum = routeInfo.findIndex((info) => {
     return info.page === params.page;
   });
-  const [currTabNumber, setCurrTabNumber] = useState(pageNum);
+  // const [currTabNumber, setCurrTabNumber] = useState(pageNum);
+  const currTabNumber = pageNum;
 
-  useEffect(() => {
-    setCurrTabNumber(pageNum);
-  }, [pageNum]);
+  // useEffect(() => {
+  //   setCurrTabNumber(pageNum);
+  // }, [pageNum]);
 
-  if (params === undefined || currTabNumber === -1 || pageNum === -1)
-    return <Navigate to="/home" />;
+  // if (params === undefined || currTabNumber === -1 || pageNum === -1)
+  //   return <Navigate to="/home" />;
 
   return (
     <S.PageLayout>
       <Pc>
         <S.PcLayout>
           <h3 style={{ position: "absolute", left: 20 }}>pc</h3>
-          <S.PcPageWrap>{routeInfo[currTabNumber].jsx} </S.PcPageWrap>
+          <S.PcPageWrap>
+            <Outlet />{" "}
+          </S.PcPageWrap>
           <S.FooterWrap>
             <TabBar currTabNumber={currTabNumber} routeInfo={routeInfo} />
           </S.FooterWrap>
@@ -56,7 +59,9 @@ const PrivateLayout = () => {
       <Mobile>
         <S.MobileLayout>
           <h3 style={{ position: "absolute", left: 20 }}>모바일</h3>
-          <S.MobilePageWrap>{routeInfo[currTabNumber].jsx}</S.MobilePageWrap>
+          <S.MobilePageWrap>
+            <Outlet />
+          </S.MobilePageWrap>
           <S.FooterWrap>
             <TabBar currTabNumber={currTabNumber} routeInfo={routeInfo} />
           </S.FooterWrap>

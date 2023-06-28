@@ -4,19 +4,17 @@ import loadable from "@loadable/component";
 import GlobalStyles from "./style";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import PrivateRouter from "./PrivateRouter";
-import { Login, SignUp } from "@pages";
+import { Login, SignUp, Error } from "@pages";
 
+// TODO: 모달로 변경될 예정, 변경되면 components 디렉토리로 이동하기!
 const ItemEdit = loadable(() => {
   return import("src/pages/itemModification/ItemEdit/ItemEdit");
 });
 const ItemAdd = loadable(() => {
   return import("src/pages/itemModification/ItemAdd/ItemAdd");
 });
-const Error = loadable(() => {
-  return import("src/pages/error/Error");
-});
-const SignOut = loadable(() => {
-  return import("@pages/expire/TokenExpiration");
+const Expire = loadable(() => {
+  return import("@pages/expire");
 });
 
 function App() {
@@ -36,7 +34,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/item/edit" element={<ItemEdit />} />
             <Route path="/item/add" element={<ItemAdd />} />
-            <Route path="/signout" element={<SignOut />} />
+            <Route path="/expire" element={<Expire />} />
             <Route path="/*" element={<Error />} />
           </Routes>
         </BrowserRouter>

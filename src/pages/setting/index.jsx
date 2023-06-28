@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AccountInfo from "./AccountInfo";
-import Error from "src/pages/error/Error";
+import Error from "@pages/error";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import * as S from "./style";
 

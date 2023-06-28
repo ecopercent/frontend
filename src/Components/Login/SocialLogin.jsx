@@ -11,6 +11,7 @@ export default function SocialLogin() {
   const { signIn } = useContext(AuthenticatedContext);
 
   useEffect(() => {
+    console.log("location", location);
     if (location.pathname.split("/")[2] === "kakao")
       getKakaoAuthCode({ searchParams: location.search, navigate, signIn });
   }, [location]);
