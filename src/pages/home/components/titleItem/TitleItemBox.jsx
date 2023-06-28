@@ -38,7 +38,11 @@ export default function TitleItemBox() {
       ) : (
         <>
           <S.TabContainer>
-            <ConvertButtons hasBoth={hasBoth} setItemTab={setItemTab} />
+            <ConvertButtons
+              hasBoth={hasBoth}
+              itemTab={itemTab}
+              setItemTab={setItemTab}
+            />
           </S.TabContainer>
           <S.TitleItemContainer>
             {itemTab.tumbler && titleTumblerQuery?.data && (

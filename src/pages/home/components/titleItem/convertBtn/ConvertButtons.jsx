@@ -3,7 +3,7 @@ import { MdOutlineViewCarousel, MdOutlineShoppingBag } from "react-icons/md";
 import { TbCup } from "react-icons/tb";
 import * as S from "./style";
 
-export default function ConvertButtons({ hasBoth, setItemTab }) {
+export default function ConvertButtons({ hasBoth, itemTab, setItemTab }) {
   const [tryConvert, setTryConvert] = useState(false);
 
   function handleClick(tumblerValue, ecobagValue) {
@@ -23,6 +23,7 @@ export default function ConvertButtons({ hasBoth, setItemTab }) {
           <S.BothItemBtn
             id="both"
             type="button"
+            featured={itemTab.tumbler && itemTab.ecobag}
             onClick={() => {
               handleClick(true, true);
             }}
@@ -39,6 +40,7 @@ export default function ConvertButtons({ hasBoth, setItemTab }) {
           <S.MainSetBtn
             id="tumbler"
             type="button"
+            featured={itemTab.tumbler && !itemTab.ecobag}
             onClick={() => {
               handleClick(true, false);
             }}
@@ -48,6 +50,7 @@ export default function ConvertButtons({ hasBoth, setItemTab }) {
           <S.MainSetBtn
             id="ecobag"
             type="button"
+            featured={!itemTab.tumbler && itemTab.ecobag}
             onClick={() => {
               handleClick(false, true);
             }}
