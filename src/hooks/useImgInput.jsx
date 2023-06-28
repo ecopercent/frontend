@@ -18,12 +18,10 @@ const ImgOpacity = styled.div`
   ${(props) => {
     if (props.type === "user")
       return `height: 100.5px;
-              width: 100.5px;
-              border-radius: 50%;`;
+              width: 100.5px;`;
     if (props.type === "signUpUser")
       return `height: 150.5px;
-              width: 150.5px;
-              border-radius: 50%;`;
+              width: 150.5px;`;
     return `height: 200.5px;
             width: 160.5px;
             border-radius: 100px;`;
@@ -47,20 +45,20 @@ const Input = styled.input`
 `;
 
 const ImgPreview = styled.img`
+  border: 0.5px solid;
+  border-radius: 50%;
+
   ${(props) => {
     if (props.type === "user")
       return `height: 100.5px;
-              width: 100.5px;
-              border-radius: 50%;`;
+              width: 100.5px;`;
     if (props.type === "signUpUser")
       return `height: 150.5px;
-              width: 150.5px;
-              border-radius: 50%;`;
+              width: 150.5px;`;
     return `height: 200.5px;
             width: 160.5px;
             border-radius: 100px;`;
   }}
-  border: 0.5px solid;
   cursor: pointer;
   object-fit: cover;
 `;
