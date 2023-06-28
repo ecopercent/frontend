@@ -9,9 +9,9 @@ import { getItemList } from "@api/item";
 
 const countUsageCount = (itemList) => {
   let sum = 0;
-  itemList.forEach((ecahItem) => {
-    console.log("Tet", ecahItem, ecahItem.currentUsageCount);
-    sum += ecahItem.currentUsageCount;
+  itemList.forEach((eachItem) => {
+    console.log("Tet", eachItem, eachItem.currentUsageCount);
+    sum += eachItem.currentUsageCount;
   });
   return sum;
 };
@@ -49,10 +49,9 @@ const AccountDelete = () => {
     }
   }, [tumblerListQuery, ecobagListQuery]);
 
-  const onDeleteUser = () => {
-    deleteUser().then(() => {
-      if (authenticated) signOut();
-    });
+  const onDeleteUser = async () => {
+    await deleteUser();
+    if (authenticated) signOut();
   };
 
   return (
