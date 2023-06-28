@@ -5,8 +5,8 @@
       "@api/*": ["src/Api/*"],
       "@components/*": ["src/Components/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@layout/*": ["src/Layouts/*"],
-      "@pages/*": ["src/Pages/*"],
+      "@layout/*": ["src/layouts/*"],
+      "@pages/*": ["src/pages/*"],
       "@style/*": ["src/style/*"],
       "@util/*": ["src/Utils/*"],
       "@modal/*": ["src/Components/Modal/*"]

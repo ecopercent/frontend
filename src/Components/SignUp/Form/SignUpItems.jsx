@@ -2,8 +2,8 @@ import React, { useMemo, useRef, useState } from "react";
 import CancelCheckModal from "@modal/CancelCheckModal";
 import SignUpItemPreview from "./SignUpItemPreview";
 import useModal from "@hooks/useModal";
-import { ItemAdd } from "@pages/ItemModification/ItemAdd/ItemAdd";
-import { ItemEdit } from "@pages/ItemModification/ItemEdit/ItemEdit";
+import { ItemAdd } from "src/pages/itemModification/ItemAdd/ItemAdd";
+import { ItemEdit } from "src/pages/itemModification/ItemEdit/ItemEdit";
 import * as S from "./style";
 
 export default function SignUpItems({ category, itemsInput, setItemsInput }) {

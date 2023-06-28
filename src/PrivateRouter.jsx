@@ -4,16 +4,16 @@ import loadable from "@loadable/component";
 import { useAxiosInterceptor } from "@hooks/useAxiosInterceptor";
 
 const Main = loadable(() => {
-  return import("@layout/Main/Main");
+  return import("src/layouts/Main/Main");
 });
 const ItemEdit = loadable(() => {
-  return import("@pages/ItemModification/ItemEdit/ItemEdit");
+  return import("src/pages/itemModification/ItemEdit/ItemEdit");
 });
 const ItemAdd = loadable(() => {
-  return import("@pages/ItemModification/ItemAdd/ItemAdd");
+  return import("src/pages/itemModification/ItemAdd/ItemAdd");
 });
 const TokenExpiration = loadable(() => {
-  return import("@layout/Error/TokenExpiration");
+  return import("src/pages/error/TokenExpiration");
 });
 
 export default function PrivateRouter() {

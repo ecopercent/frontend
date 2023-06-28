@@ -3,25 +3,25 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import loadable from "@loadable/component";
 import GlobalStyles from "./style";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
-import PrivateRouter from "@layout/App/PrivateRouter";
+import PrivateRouter from "./PrivateRouter";
 
 const Login = loadable(() => {
-  return import("../Login/Login");
+  return import("src/pages/login/Login");
 });
 const ItemEdit = loadable(() => {
-  return import("@pages/ItemModification/ItemEdit/ItemEdit");
+  return import("src/pages/itemModification/ItemEdit/ItemEdit");
 });
 const ItemAdd = loadable(() => {
-  return import("@pages/ItemModification/ItemAdd/ItemAdd");
+  return import("src/pages/itemModification/ItemAdd/ItemAdd");
 });
 const SignUp = loadable(() => {
   return import("@components/SignUp/SignUp");
 });
 const Error = loadable(() => {
-  return import("../Error/Error");
+  return import("src/pages/error/Error");
 });
 const SignOut = loadable(() => {
-  return import("@layout/Error/TokenExpiration");
+  return import("src/pages/error/TokenExpiration");
 });
 
 function App() {
