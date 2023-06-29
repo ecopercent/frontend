@@ -39,7 +39,6 @@ const style = css`
     -moz-appearance: none;
     -webkit-appearance: none;
     -webkit-border-radius: 0;
-    color: black;
   }
 `;
 

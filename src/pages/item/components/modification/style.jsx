@@ -106,6 +106,7 @@ export const Input = styled.input`
     border: 0;
   }
   background-color: white;
+  color: black;
 `;
 
 export const Select = styled.select`
