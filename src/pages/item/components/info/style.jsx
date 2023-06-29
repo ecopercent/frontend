@@ -49,10 +49,10 @@ export const TitleSetBtn = styled.button`
   padding: 0px;
   ${(props) => {
     return (
-      props.isTitle &&
+      props.disabled &&
       `letter-spacing: -1px;
-	  font-size: 12px;
-	  color: gray;`
+      font-size: 12px;
+      color: gray;`
     );
   }}
 `;

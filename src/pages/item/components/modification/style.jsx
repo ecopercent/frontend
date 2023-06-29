@@ -12,6 +12,7 @@ export const ItemEditWrap = styled.div`
 `;
 
 export const ItemEditBorder = styled.div`
+  padding: 20px 20px 40px;
   border: 1px solid black;
   border-radius: 10px;
   height: 100%;
@@ -28,7 +29,11 @@ export const ItemEditHeadWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px 0;
+  height: 10px;
+`;
+
+export const ItemEditHead3 = styled.h3`
+  margin: 0;
 `;
 
 export const ImageClipper = styled.img`
@@ -50,9 +55,12 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  align-items: center;
 `;
 
 export const FormInnerWrapper = styled.div`
+  width: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,7 +77,7 @@ export const LabelInputSet = styled.div`
 `;
 
 export const Span = styled.span`
-  width: 80px;
+  width: 70px;
   ${font.boldBody};
 `;
 
@@ -108,10 +116,10 @@ export const Error = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
-  padding: 15px 20px;
+  margin-top: 10px;
 `;
 
 export const SubmitBtn = styled.button`

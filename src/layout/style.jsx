@@ -51,6 +51,10 @@ export const OutletWrapper = styled.div`
 
   @media ${media.mobile} {
     height: calc(var(--vh, 1vh) * 100 - 48px);
+    ${(props) => {
+      if (props.fullHeight) return `height: calc(var(--vh, 1vh) * 100);`;
+      return ``;
+    }}
   }
 `;
 

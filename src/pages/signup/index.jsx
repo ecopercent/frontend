@@ -112,34 +112,36 @@ export default function SignUp() {
           }}
         />
       )}
-      <S.SignUpLayoutCol>
-        <S.InputList>
-          <SignUpUser
-            userInput={userInput}
-            setUserInput={setUserInput}
-            warningText={warningText}
-            setWarningText={setWarningText}
-            setUserImg={setUserImg}
-            ref={nicknameRef}
-          />
-          <SignUpItems
-            category="tumbler"
-            itemsInput={itemsInput}
-            setItemsInput={setItemsInput}
-          />
-          <SignUpItems
-            category="ecobag"
-            itemsInput={itemsInput}
-            setItemsInput={setItemsInput}
-          />
-        </S.InputList>
-        <S.SubmitBtnsBox>
-          <S.Btn onClick={handleClick}>취소</S.Btn>
-          <S.Btn featured onClick={handleSubmit}>
-            등록
-          </S.Btn>
-        </S.SubmitBtnsBox>
-      </S.SignUpLayoutCol>
+      <S.SignUpContainer>
+        <S.SignUpLayoutCol>
+          <S.InputList>
+            <SignUpUser
+              userInput={userInput}
+              setUserInput={setUserInput}
+              warningText={warningText}
+              setWarningText={setWarningText}
+              setUserImg={setUserImg}
+              ref={nicknameRef}
+            />
+            <SignUpItems
+              category="tumbler"
+              itemsInput={itemsInput}
+              setItemsInput={setItemsInput}
+            />
+            <SignUpItems
+              category="ecobag"
+              itemsInput={itemsInput}
+              setItemsInput={setItemsInput}
+            />
+            <S.SubmitBtnsBox>
+              <S.Btn onClick={handleClick}>취소</S.Btn>
+              <S.Btn featured onClick={handleSubmit}>
+                등록
+              </S.Btn>
+            </S.SubmitBtnsBox>
+          </S.InputList>
+        </S.SignUpLayoutCol>
+      </S.SignUpContainer>
     </OutletWrapper>
   );
 }
