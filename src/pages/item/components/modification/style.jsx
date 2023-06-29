@@ -78,6 +78,10 @@ export const FormInnerWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  @media ${media.mobile} {
+    gap: 15px;
+  }
+
   flex: 1 1 auto;
   margin-bottom: 20px;
 `;
