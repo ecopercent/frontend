@@ -14,7 +14,7 @@ export const InputItem = styled.li`
 `;
 
 export const Label = styled.label`
-  width: 50px;
+  width: 60px;
   padding: 5px 0 0;
 
   ${font.boldBody}
@@ -60,10 +60,10 @@ export const TextareaHr = styled.hr`
   display: block;
   position: absolute;
   top: 16px;
-  left: 60px;
+  left: 70px;
   width: 200px;
   border: 0;
-  height: 1.5px;
+  height: 1.3px;
   background: black;
 `;
 
