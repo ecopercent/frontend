@@ -52,8 +52,10 @@ export const LinkWrapper = styled.div`
     gap: 8px;
 
     border-radius: 20px;
-    :hover {
-      background-color: ${lightGreen};
+    @media (hover: hover) and (pointer: fine) {
+      :hover {
+        background-color: ${lightGreen};
+      }
     }
     cursor: pointer;
   }
@@ -84,9 +86,11 @@ export const TabItemBackGround = styled.div`
   @media ${media.mobile}, ${media.tabletSmallMin} and ${media.tabletSmallMax} {
     width: 100%;
 
-    :hover {
-      background-color: ${basicGreen};
-      color: white;
+    @media (hover: hover) and (pointer: fine) {
+      :hover {
+        background-color: ${basicGreen};
+        color: white;
+      }
     }
   }
 `;

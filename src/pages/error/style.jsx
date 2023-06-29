@@ -39,7 +39,9 @@ export const GoHomeBtn = styled.button`
   height: 40px;
   width: 100px;
 
-  :hover {
-    background: ${basicGreen};
+  @media (hover: hover) and (pointer: fine) {
+    :hover {
+      background: ${basicGreen};
+    }
   }
 `;
