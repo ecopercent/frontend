@@ -83,6 +83,7 @@ export const Input = styled.input`
   :read-only {
     border: 0;
   }
+  background-color: white;
 `;
 
 export const Select = styled.select`
