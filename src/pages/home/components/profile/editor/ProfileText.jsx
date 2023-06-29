@@ -1,9 +1,9 @@
 import React from "react";
 import * as S from "./style";
 
-export default function ProfileText({ userData, setUserData, isMobile }) {
+export default function ProfileText({ userData, setUserData }) {
   return (
-    <S.ProfileTextForm isMobile={isMobile}>
+    <S.ProfileTextForm>
       <S.ProfileTextarea
         value={userData.nickname}
         onChange={(e) => {
@@ -17,7 +17,7 @@ export default function ProfileText({ userData, setUserData, isMobile }) {
         onChange={(e) => {
           setUserData({ ...userData, profileMessage: e.target.value });
         }}
-        rows={isMobile ? 4 : 3}
+        rows={4}
         maxLength={35}
       />
     </S.ProfileTextForm>

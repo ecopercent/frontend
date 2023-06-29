@@ -12,10 +12,13 @@ export const WarningIcon = styled(BsFillPatchExclamationFill)`
 `;
 
 export const PageLayout = styled.div`
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* TODO: 마진 확인하기 */
+  justify-content: center;
+
   margin: auto 0;
 `;
 

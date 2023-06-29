@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { HiOutlineCamera } from "react-icons/hi";
 import * as btn from "@style/button";
 import * as font from "@style/font";
+import media from "@style/media";
 
 export const ItemEditWrap = styled.div`
   width: 100%;
@@ -19,14 +20,29 @@ export const ItemEditBorder = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  gap: 10px;
+  /* gap: 10px; */
+
+  overflow-y: auto;
+
+  padding: 20px 20px 40px;
+  @media ${media.mobile} {
+    padding: 20px 20px 30px;
+  }
 `;
 
 export const ItemEditHeadWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px 0;
+  height: 20px;
+  @media ${media.mobile} {
+    height: 10px;
+  }
+`;
+
+export const ItemEditHead3 = styled.h3`
+  margin: 0;
+  ${font.boldBody}
 `;
 
 export const ImageClipper = styled.img`
@@ -48,16 +64,22 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  overflow-y: auto;
+  align-items: center;
+
+  @media not ${media.mobile} {
+    margin-top: 30px;
+  }
 `;
 
 export const FormInnerWrapper = styled.div`
+  width: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   flex: 1 1 auto;
-  overflow-y: auto;
+  margin-bottom: 20px;
 `;
 
 export const LabelInputSet = styled.div`
@@ -68,7 +90,7 @@ export const LabelInputSet = styled.div`
 `;
 
 export const Span = styled.span`
-  width: 80px;
+  width: 70px;
   ${font.boldBody};
 `;
 
@@ -83,6 +105,8 @@ export const Input = styled.input`
   :read-only {
     border: 0;
   }
+  background-color: white;
+  color: black;
 `;
 
 export const Select = styled.select`
@@ -106,10 +130,10 @@ export const Error = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
-  padding: 15px 20px;
+  margin-top: 10px;
 `;
 
 export const SubmitBtn = styled.button`

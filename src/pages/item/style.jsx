@@ -16,6 +16,6 @@ export const ListLayout = styled.div`
 
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: 1 1 0;
   overflow-y: auto;
 `;

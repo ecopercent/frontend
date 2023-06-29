@@ -1,18 +1,28 @@
 import React from "react";
 import { Global, css } from "@emotion/react";
+import media from "@style/media";
 
 const style = css`
   body {
     font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
     margin: 0;
     height: 100%;
+    width: 100%;
+
+    overflow: hidden;
+    touch-action: none;
+
+    @media ${media.mobile} {
+      position: fixed;
+      top: 0;
+    }
   }
 
   #root {
     height: 100vh;
     @supports (-webkit-touch-callout: none) {
-    height: -webkit-fill-available;
-  }
+      height: -webkit-fill-available;
+    }
   }
 
   * {
@@ -22,8 +32,13 @@ const style = css`
     -moz-box-sizing: border-box;
     // 웹킷 & 크롬
     -webkit-box-sizing: border-box;
-    // iOS 사파리 기본 스타일 제거
+
+    // 기본 스타일 제거
+    appearance: none;
+    border-radius: 0;
+    -moz-appearance: none;
     -webkit-appearance: none;
+    -webkit-border-radius: 0;
   }
 `;
 

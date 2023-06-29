@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
-import { useMediaQuery } from "react-responsive";
 import { getUser, patchUser } from "src/api/user";
 import ProfileImg from "./ProfileImg";
 import ProfileText from "./ProfileText";
 import ProfileBtns from "./ProfileBtns";
-import * as S from "./style";
+import * as S from "../style";
 
 export default function ProfileEditor({ setIsEditing }) {
-  const isMobile = useMediaQuery({
-    query: "(max-width:470px)",
-  });
   const queryClient = useQueryClient();
   const userQuery = useQuery({
     queryKey: ["user"],
@@ -50,14 +46,10 @@ export default function ProfileEditor({ setIsEditing }) {
   }
 
   return (
-    <S.ProfileContainer isMobile={isMobile}>
-      <S.ProfileImgTextWrapper isMobile={isMobile}>
+    <S.ProfileContainer>
+      <S.ProfileImgTextWrapper>
         <ProfileImg imgFile={userImgFile} setImgFile={setUserImgFile} />
-        <ProfileText
-          userData={userData}
-          setUserData={setUserData}
-          isMobile={isMobile}
-        />
+        <ProfileText userData={userData} setUserData={setUserData} />
       </S.ProfileImgTextWrapper>
       <ProfileBtns
         setIsEditing={setIsEditing}

@@ -1,31 +1,42 @@
 import styled from "@emotion/styled";
 import * as button from "@style/button";
+import media from "@style/media";
 
-export const SignUpLayoutCol = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-
+export const SignUpContainer = styled.div`
+  height: calc(100% - 20px);
   margin: 10px 10px;
   padding: 40px 20px;
-  height: calc(100vh - 20px);
+  @media ${media.mobile} {
+    padding: 30px 20px;
+  }
 
   border: 1px solid;
   border-radius: 10px;
 `;
 
+export const SignUpLayoutCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+`;
+
 export const InputList = styled.ul`
   display: flex;
-  width: 90%;
   flex-direction: column;
+
+  min-height: 100%;
+  width: 90%;
   gap: 40px;
+  @media ${media.mobile} {
+    gap: 30px;
+  }
 
   margin: 0;
   padding: 0;
-
-  height: 90%;
-  overflow: auto;
 `;
 
 /*
@@ -33,14 +44,11 @@ export const InputList = styled.ul`
  */
 
 export const SubmitBtnsBox = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
 
   justify-content: space-between;
-  position: absolute;
-  bottom: 20px;
-
-  margin: 30px 0 0;
+  margin-top: auto;
 `;
 
 export const Btn = styled.button`

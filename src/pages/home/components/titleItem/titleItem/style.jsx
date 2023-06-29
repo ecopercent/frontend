@@ -2,21 +2,12 @@ import styled from "@emotion/styled";
 import * as font from "@style/font";
 import * as color from "@style/color";
 
-export const Spacer = styled.span`
-  display: block;
-  width: 30px;
-  min-width: 30px;
-  height: 30px;
-  min-height: 30px;
-`;
-
 export const ImageClipper = styled.img`
   position: relative;
   width: 150px;
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
-  // border: 1px solid;
 `;
 
 export const StrokePath = styled.path`
