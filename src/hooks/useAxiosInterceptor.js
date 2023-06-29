@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "@api/axiosInstance";
 import cookie from "react-cookies";
 
 let accessToken = null;
@@ -30,6 +30,8 @@ export function useAxiosInterceptor() {
   }
 
   async function errorHandler(error) {
+    // TODO: 서버 에러 페이지 만들기?
+    // if (error.response.status >= 500) window.location.replace("/500");
     if (error.config.url === "/signout") return Promise.resolve("SIGNOUT");
     if (error.config.url === "/token/access" && error.response.status !== 500) {
       return Promise.resolve("SIGNOUT");
