@@ -1,23 +1,30 @@
 import React from "react";
 import { TabBarContainer } from "./style";
 import TabItem from "./TabItem";
-import { AiFillSetting } from "react-icons/ai";
-import { BiHomeAlt } from "react-icons/bi";
-import { BsFillBoxFill } from "react-icons/bs";
+import {
+  AiFillHome,
+  AiOutlineHome,
+  AiFillSetting,
+  AiOutlineSetting,
+} from "react-icons/ai";
+import { BsBox, BsFillBoxFill } from "react-icons/bs";
 
 const TabBar = () => {
   const routeInfo = [
     {
       page: "/setting",
-      icon: AiFillSetting,
+      icon: AiOutlineSetting,
+      iconClicked: AiFillSetting,
     },
     {
       page: "/home",
-      icon: BiHomeAlt,
+      icon: AiOutlineHome,
+      iconClicked: AiFillHome,
     },
     {
       page: "/item",
-      icon: BsFillBoxFill,
+      icon: BsBox,
+      iconClicked: BsFillBoxFill,
     },
   ];
 
@@ -28,6 +35,7 @@ const TabBar = () => {
           <TabItem
             key={element.page}
             IconComponent={element.icon}
+            ClickedComponent={element.iconClicked}
             page={element.page}
           />
         );
