@@ -45,12 +45,12 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
             onChange={onBrand}
             type="text"
             minLength={1}
-            maxLength={12}
+            maxLength={10}
           />
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>타입</S.Span>
-          <S.Input value={type} onChange={onType} maxLength={12} />
+          <S.Input value={type} onChange={onType} maxLength={10} />
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>목표횟수</S.Span>
