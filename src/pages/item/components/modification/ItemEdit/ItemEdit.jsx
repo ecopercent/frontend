@@ -64,10 +64,11 @@ const ItemEditOnAuth = () => {
   return (
     <ItemEdit
       category={item.category}
-      item={prevItemInfoQuery.data}
+      item={{ ...prevItemInfoQuery.data }}
       onCancel={hancleCancel}
       onSubmit={editItemOnAuth}
       onUploadImg={setItemImgFile}
+      displayDeleteBtn
     />
   );
 };
@@ -79,6 +80,7 @@ export const ItemEdit = ({
   onCancel,
   onSubmit,
   onUploadImg,
+  displayDeleteBtn,
 }) => {
   const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
   const onCloseModal = useCallback(() => {
@@ -91,6 +93,7 @@ export const ItemEdit = ({
         <ItemEditHead
           item={item}
           setShowdeleteItemModal={setShowdeleteItemModal}
+          displayDeleteBtn={displayDeleteBtn}
         />
         <ItemImage
           imgFile={itemImg}

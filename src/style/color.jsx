@@ -3,6 +3,7 @@ export const lightGray = "#D9D9D9";
 export const ivory = "#FFFBF1";
 export const basicGreen = "#679855";
 export const lightPink = "#FFD4D4";
+export const basicPink = "#FF7373";
 
 export const lowGreen = "#AACB73";
 export const mediumGreen = "#7DA340";

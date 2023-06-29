@@ -30,6 +30,7 @@ export function useAxiosInterceptor() {
   }
 
   async function errorHandler(error) {
+    if (error.config.url === "/signout") return Promise.resolve("SIGNOUT");
     if (error.config.url === "/token/access" && error.response.status !== 500) {
       return Promise.resolve("SIGNOUT");
     }
