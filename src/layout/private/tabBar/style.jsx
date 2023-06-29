@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { basicGreen } from "@style/color";
+import { lightGreen, basicGreen } from "@style/color";
 import media from "@style/media";
 
 export const TabBarContainer = styled.div`
@@ -18,23 +18,50 @@ export const TabBarContainer = styled.div`
 
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     border-right: 0.5px solid;
+  }
+
+  @media ${media.desktop} {
+    width: 220px;
   }
 `;
 
 export const LogoWrapper = styled.div`
-  width: 50px;
+  width: 100%;
+  margin: 30px 0 30px 30px;
+  padding: 0 5px;
 
   @media ${media.mobile}, ${media.tabletSmallMin} and ${media.tabletSmallMax} {
     display: none;
   }
-  margin: 30px 0;
-  padding: 0 5px;
 `;
 
 export const Logo = styled.img`
-  width: 100%;
+  width: 35px;
+`;
+
+export const LinkWrapper = styled.div`
+  @media ${media.desktop}, ${media.tabletMin} and ${media.tabletMax} {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    width: calc(100% - 20px);
+    padding: 5px 0;
+    padding-left: 6px;
+    gap: 8px;
+
+    border-radius: 20px;
+    :hover {
+      background-color: ${lightGreen};
+    }
+    cursor: pointer;
+  }
+
+  @media ${media.mobile}, ${media.tabletSmallMin} and ${media.tabletSmallMax} {
+    display: flex;
+    width: calc(100% / 3);
+  }
 `;
 
 export const TabItemBackGround = styled.div`
@@ -42,14 +69,11 @@ export const TabItemBackGround = styled.div`
   align-items: center;
   justify-content: center;
 
+  cursor: pointer;
+
   ${(props) => {
     return props.featured ? `color: ${basicGreen};` : "";
   }}
-
-  :hover {
-    background-color: ${basicGreen};
-    color: white;
-  }
 
   @media ${media.desktop}, ${media.tabletMin} and ${media.tabletMax} {
     border-radius: 50%;
@@ -58,8 +82,19 @@ export const TabItemBackGround = styled.div`
   }
 
   @media ${media.mobile}, ${media.tabletSmallMin} and ${media.tabletSmallMax} {
-    width: calc(100% / 3);
-  }
+    width: 100%;
 
-  cursor: pointer;
+    :hover {
+      background-color: ${basicGreen};
+      color: white;
+    }
+  }
+`;
+
+export const Description = styled.span`
+  display: none;
+
+  @media ${media.desktop} {
+    display: inline;
+  }
 `;

@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { TabItemBackGround } from "./style";
+import { LinkWrapper, TabItemBackGround, Description } from "./style";
 import styled from "@emotion/styled";
 import media from "@style/media";
 
-const TabItem = ({ IconComponent, ClickedComponent, page }) => {
+const TabItem = ({ IconComponent, ClickedComponent, page, description }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const tabClickHandler = useCallback(() => {
@@ -32,9 +32,12 @@ const TabItem = ({ IconComponent, ClickedComponent, page }) => {
   `;
 
   return (
-    <TabItemBackGround featured={pathname === page} onClick={tabClickHandler}>
-      {pathname === page ? <ClickedIcon /> : <UnclickedIcon />}
-    </TabItemBackGround>
+    <LinkWrapper onClick={tabClickHandler}>
+      <TabItemBackGround featured={pathname === page}>
+        {pathname === page ? <ClickedIcon /> : <UnclickedIcon />}
+      </TabItemBackGround>
+      <Description>{description}</Description>
+    </LinkWrapper>
   );
 };
 

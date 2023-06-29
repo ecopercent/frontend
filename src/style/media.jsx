@@ -1,6 +1,6 @@
 const size = {
-  desktop: "1264px",
-  tabletMax: "1263px",
+  desktop: "1000px",
+  tabletMax: "999px",
   tabletMin: "761px",
   tabletSmallMax: "760px",
   tabletSmallMin: "471px",

@@ -12,19 +12,22 @@ import { HiOutlineArchive, HiArchive } from "react-icons/hi";
 const TabBar = () => {
   const routeInfo = [
     {
-      page: "/setting",
-      icon: AiOutlineSetting,
-      iconClicked: AiFillSetting,
-    },
-    {
       page: "/home",
       icon: AiOutlineHome,
       iconClicked: AiFillHome,
+      description: "홈",
     },
     {
       page: "/item",
       icon: HiOutlineArchive,
       iconClicked: HiArchive,
+      description: "아이템",
+    },
+    {
+      page: "/setting",
+      icon: AiOutlineSetting,
+      iconClicked: AiFillSetting,
+      description: "설정",
     },
   ];
 
@@ -40,6 +43,7 @@ const TabBar = () => {
             IconComponent={element.icon}
             ClickedComponent={element.iconClicked}
             page={element.page}
+            description={element.description}
           />
         );
       })}
