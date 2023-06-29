@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "@api/axiosInstance";
 import { base64ToDataUrl } from "src/utils/convert";
 
 export async function postUserOfKakao({ formData, access }) {
