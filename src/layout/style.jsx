@@ -26,8 +26,7 @@ export const Layout = styled.div`
   }
 
   @media ${media.mobile} {
-    height: -webkit-fill-available;
-    height: fill-available;
+    height: calc(var(--vh, 1vh) * 100);
 
     /* background-color: lightyellow; */
   }
@@ -37,7 +36,7 @@ export const OutletWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
-  max-height: calc(100% - 48px);
+  height: calc(100% - 48px);
 
   @media not ${media.mobile} {
     ${(props) => {
@@ -45,9 +44,13 @@ export const OutletWrapper = styled.div`
       return ``;
     }}
     ${(props) => {
-      if (props.fullHeight) return `max-height: 100vh;`;
+      if (props.fullHeight) return `height: 100%;`;
       return ``;
     }}
+  }
+
+  @media ${media.mobile} {
+    height: calc(var(--vh, 1vh) * 100 - 48px);
   }
 `;
 

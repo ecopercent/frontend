@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef } from "react";
 import useOutsideClick from "@hooks/useOutsideClick";
 import styled from "@emotion/styled";
 import { createPortal } from "react-dom";
+import media from "@style/media";
 
 export default function useModal({ onClose }) {
   const modalRef = useRef();
@@ -22,7 +23,7 @@ export default function useModal({ onClose }) {
       return (
         <ModalContainer>
           <BackgroundOverlay>
-            <div ref={modalRef}>{children}</div>
+            <ModalContentBox ref={modalRef}>{children}</ModalContentBox>
           </BackgroundOverlay>
         </ModalContainer>
       );
@@ -33,7 +34,7 @@ export default function useModal({ onClose }) {
 }
 
 function ModalContainer({ children }) {
-  return createPortal(<div>{children}</div>, document.getElementById("modal"));
+  return createPortal(children, document.getElementById("modal"));
 }
 
 const BackgroundOverlay = styled.div`
@@ -43,4 +44,14 @@ const BackgroundOverlay = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
+`;
+
+const ModalContentBox = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: white;
+
+  @media ${media.mobile} {
+    height: calc(var(--vh, 1vh) * 100);
+  }
 `;

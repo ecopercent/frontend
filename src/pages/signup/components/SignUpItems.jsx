@@ -64,27 +64,23 @@ export default function SignUpItems({ category, itemsInput, setItemsInput }) {
       {openedModal === "" ||
         (openedModal === "add" ? (
           <ItemModal>
-            <div style={{ height: "100vh", backgroundColor: "white" }}>
-              <ItemAdd
-                category={category}
-                onCancel={onItemModalClose}
-                onSubmit={onItemAdd}
-                onUploadImg={setImgFile}
-              />
-            </div>
+            <ItemAdd
+              category={category}
+              onCancel={onItemModalClose}
+              onSubmit={onItemAdd}
+              onUploadImg={setImgFile}
+            />
           </ItemModal>
         ) : (
           <ItemModal>
-            <div style={{ height: "100vh", backgroundColor: "white" }}>
-              <ItemEdit
-                category={category}
-                item={itemsInput[category]}
-                itemImg={itemsInput[`${category}Img`]}
-                onCancel={onItemModalClose}
-                onSubmit={onItemAdd}
-                onUploadImg={setImgFile}
-              />
-            </div>
+            <ItemEdit
+              category={category}
+              item={itemsInput[category]}
+              itemImg={itemsInput[`${category}Img`]}
+              onCancel={onItemModalClose}
+              onSubmit={onItemAdd}
+              onUploadImg={setImgFile}
+            />
           </ItemModal>
         ))}
       {itemDeleteModalIsOpen && (
