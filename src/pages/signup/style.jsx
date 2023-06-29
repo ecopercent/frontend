@@ -1,10 +1,14 @@
 import styled from "@emotion/styled";
 import * as button from "@style/button";
+import media from "@style/media";
 
 export const SignUpContainer = styled.div`
   height: calc(100% - 20px);
   margin: 10px 10px;
   padding: 40px 20px;
+  @media ${media.mobile} {
+    padding: 30px 20px;
+  }
 
   border: 1px solid;
   border-radius: 10px;
@@ -27,6 +31,9 @@ export const InputList = styled.ul`
   min-height: 100%;
   width: 90%;
   gap: 40px;
+  @media ${media.mobile} {
+    gap: 30px;
+  }
 
   margin: 0;
   padding: 0;

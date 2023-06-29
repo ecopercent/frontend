@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { HiOutlineCamera } from "react-icons/hi";
 import * as btn from "@style/button";
 import * as font from "@style/font";
+import media from "@style/media";
 
 export const ItemEditWrap = styled.div`
   width: 100%;
@@ -12,7 +13,6 @@ export const ItemEditWrap = styled.div`
 `;
 
 export const ItemEditBorder = styled.div`
-  padding: 20px 20px 40px;
   border: 1px solid black;
   border-radius: 10px;
   height: 100%;
@@ -20,20 +20,29 @@ export const ItemEditBorder = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  gap: 10px;
+  /* gap: 10px; */
 
   overflow-y: auto;
+
+  padding: 20px 20px 40px;
+  @media ${media.mobile} {
+    padding: 20px 20px 30px;
+  }
 `;
 
 export const ItemEditHeadWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 10px;
+  height: 20px;
+  @media ${media.mobile} {
+    height: 10px;
+  }
 `;
 
 export const ItemEditHead3 = styled.h3`
   margin: 0;
+  ${font.boldBody}
 `;
 
 export const ImageClipper = styled.img`
@@ -56,6 +65,10 @@ export const Form = styled.form`
   flex-direction: column;
   flex: 1 1 auto;
   align-items: center;
+
+  @media not ${media.mobile} {
+    margin-top: 30px;
+  }
 `;
 
 export const FormInnerWrapper = styled.div`
