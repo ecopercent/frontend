@@ -1,11 +1,21 @@
 import React from "react";
 import { Global, css } from "@emotion/react";
+import media from "@style/media";
 
 const style = css`
   body {
     font-family: "AppleSDGothicNeo", "Noto Sans KR", sans-serif;
     margin: 0;
     height: 100%;
+    width: 100%;
+
+    overflow: hidden;
+    touch-action: none;
+
+    @media ${media.mobile} {
+      position: fixed;
+      top: 0;
+    }
   }
 
   #root {
