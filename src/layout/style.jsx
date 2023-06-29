@@ -45,7 +45,7 @@ export const OutletWrapper = styled.div`
       return ``;
     }}
     ${(props) => {
-      if (props.fullHeight) return `height: 100vh;`;
+      if (props.fullHeight) return `max-height: 100vh;`;
       return ``;
     }}
   }
