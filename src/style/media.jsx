@@ -1,14 +1,18 @@
 const size = {
   desktop: "1264px",
-  tabletM: "1263px",
-  tabletS: "770px",
+  tabletMax: "1263px",
+  tabletMin: "761px",
+  tabletSmallMax: "760px",
+  tabletSmallMin: "471px",
   mobile: "470px",
 };
 
 const media = {
   desktop: `(min-width: ${size.desktop})`,
-  tabletM: `(max-width: ${size.tabletM})`,
-  tabletS: `(max-width: ${size.tabletS})`,
+  tabletMax: `(max-width: ${size.tabletMax})`,
+  tabletMin: `(min-width: ${size.tabletMin})`,
+  tabletSmallMax: `(max-width: ${size.tabletSmallMax})`,
+  tabletSmallMin: `(min-width: ${size.tabletSmallMin})`,
   mobile: `(max-width: ${size.mobile})`,
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { TabBarContainer } from "./style";
+import { TabBarContainer, LogoWrapper, Logo } from "./style";
 import TabItem from "./TabItem";
 import {
   AiFillHome,
@@ -7,7 +7,7 @@ import {
   AiFillSetting,
   AiOutlineSetting,
 } from "react-icons/ai";
-import { BsBox, BsFillBoxFill } from "react-icons/bs";
+import { HiOutlineArchive, HiArchive } from "react-icons/hi";
 
 const TabBar = () => {
   const routeInfo = [
@@ -23,13 +23,16 @@ const TabBar = () => {
     },
     {
       page: "/item",
-      icon: BsBox,
-      iconClicked: BsFillBoxFill,
+      icon: HiOutlineArchive,
+      iconClicked: HiArchive,
     },
   ];
 
   return (
     <TabBarContainer>
+      <LogoWrapper>
+        <Logo src="/logo.png" alt="ecopercent" />
+      </LogoWrapper>
       {routeInfo.map((element) => {
         return (
           <TabItem
