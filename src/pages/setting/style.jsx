@@ -28,18 +28,23 @@ export const HoverSettingTitle = styled.div`
   margin-bottom: 2.5%;
   font-size: 22px;
   font-weight: bold;
-  :hover {
-    background: ${basicGreen};
-    color: white;
+
+  @media (hover: hover) and (pointer: fine) {
+    :hover {
+      background: ${basicGreen};
+      color: white;
+    }
   }
 `;
 
 export const Highlight = styled.div`
   padding: 3%;
   color: ${basicGreen};
-  :hover {
-    background: ${basicGreen};
-    color: white;
+  @media (hover: hover) and (pointer: fine) {
+    :hover {
+      background: ${basicGreen};
+      color: white;
+    }
   }
   border-radius: 3px;
   cursor: pointer;
@@ -48,9 +53,11 @@ export const Highlight = styled.div`
 export const HighlightPinkHover = styled.div`
   padding: 3%;
   color: ${basicGreen};
-  :hover {
-    background: ${basicPink};
-    color: white;
+  @media (hover: hover) and (pointer: fine) {
+    :hover {
+      background: ${basicPink};
+      color: white;
+    }
   }
   border-radius: 3px;
   cursor: pointer;
@@ -62,9 +69,11 @@ export const ColorPlain = styled.span`
 
 export const HoverPlain = styled.div`
   padding: 3%;
-  :hover {
-    background: ${basicGreen};
-    color: white;
+  @media (hover: hover) and (pointer: fine) {
+    :hover {
+      background: ${basicGreen};
+      color: white;
+    }
   }
   border-radius: 3px;
   cursor: pointer;
@@ -72,10 +81,6 @@ export const HoverPlain = styled.div`
 
 export const Plain = styled.div`
   padding: 3%;
-  // :hover {
-  //   background: ${basicGreen};
-  //   color: white;
-  // }
   border-radius: 3px;
 `;
 
