@@ -63,7 +63,6 @@ export const ItemAdd = ({ category, onCancel, onSubmit, onUploadImg }) => {
     <ItemEditWrap>
       <ItemEditBorder>
         <ItemAddHead category={category} />
-        <hr />
         <ItemImage setImgFile={onUploadImg} category={category} />
         <hr />
         <ItemAddDetail

@@ -20,6 +20,8 @@ export const ItemEditBorder = styled.div`
   flex-direction: column;
   flex: 1 1 auto;
   gap: 10px;
+
+  overflow-y: auto;
 `;
 
 export const ItemEditHeadWrapper = styled.div`
@@ -48,7 +50,6 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  overflow-y: auto;
 `;
 
 export const FormInnerWrapper = styled.div`
@@ -57,7 +58,7 @@ export const FormInnerWrapper = styled.div`
   align-items: center;
   gap: 20px;
   flex: 1 1 auto;
-  overflow-y: auto;
+  margin-bottom: 20px;
 `;
 
 export const LabelInputSet = styled.div`

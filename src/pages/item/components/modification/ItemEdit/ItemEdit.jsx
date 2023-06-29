@@ -92,7 +92,6 @@ export const ItemEdit = ({
           item={item}
           setShowdeleteItemModal={setShowdeleteItemModal}
         />
-        <hr />
         <ItemImage
           imgFile={itemImg}
           setImgFile={onUploadImg}

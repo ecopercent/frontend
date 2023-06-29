@@ -5,7 +5,6 @@ export const SignUpLayoutCol = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
 
   margin: 10px 10px;
   padding: 40px 20px;
@@ -13,19 +12,18 @@ export const SignUpLayoutCol = styled.div`
 
   border: 1px solid;
   border-radius: 10px;
+  overflow-y: auto;
 `;
 
 export const InputList = styled.ul`
   display: flex;
+  height: 100%;
   width: 90%;
   flex-direction: column;
   gap: 40px;
 
   margin: 0;
   padding: 0;
-
-  height: 90%;
-  overflow: auto;
 `;
 
 /*
@@ -37,8 +35,6 @@ export const SubmitBtnsBox = styled.div`
   display: flex;
 
   justify-content: space-between;
-  position: absolute;
-  bottom: 20px;
 
   margin: 30px 0 0;
 `;
