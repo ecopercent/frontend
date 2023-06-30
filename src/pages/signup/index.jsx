@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useContext,
+  useCallback,
+} from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
@@ -8,6 +14,8 @@ import CancelCheckModal from "@modal/CancelCheckModal";
 
 import { postUserOfKakao, postUserOfApple } from "src/api/user";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
+
+import CheckTermOfUseModal from "@components/modal/CheckTermOfUseModal";
 
 import { PcWidthFixedWrapper } from "@layout/style";
 import * as S from "./style";
@@ -20,6 +28,11 @@ export default function SignUp() {
   const [cancelCheckModalIsOpen, setCancelCheckModalIsOpen] = useState(false);
   const [warningText, setWarningText] = useState(null);
   const nicknameRef = useRef();
+
+  const [showCheckTermOfUseModal, setShowCheckTermOfUseModal] = useState(false);
+  const onCloseCheckTermOfUseModal = useCallback(() => {
+    setShowCheckTermOfUseModal(false);
+  }, []);
 
   const [userInput, setUserInput] = useState({
     nickname: "",
@@ -52,13 +65,15 @@ export default function SignUp() {
       return code;
     },
   });
-
-  const handleSubmit = () => {
+  const onShowCloseCheckTermOfUseModal = () => {
     if (userInput.nickname.length === 0) {
       nicknameRef.current.focus();
       return setWarningText("닉네임을 입력하세요.");
     }
+    return setShowCheckTermOfUseModal(true);
+  };
 
+  const handleSubmit = () => {
     const formData = new FormData();
     formData.append(
       "userData",
@@ -91,7 +106,6 @@ export default function SignUp() {
       );
       formData.append("ecobagImage", itemsInput.ecobagImg);
     }
-
     return signUpMutation.mutate({ formData, access: state.access });
   };
 
@@ -135,11 +149,17 @@ export default function SignUp() {
         </S.InputList>
         <S.SubmitBtnsBox>
           <S.Btn onClick={handleClick}>취소</S.Btn>
-          <S.Btn featured onClick={handleSubmit}>
+          <S.Btn featured onClick={onShowCloseCheckTermOfUseModal}>
             등록
           </S.Btn>
         </S.SubmitBtnsBox>
       </S.SignUpLayoutCol>
+      {showCheckTermOfUseModal && (
+        <CheckTermOfUseModal
+          onClose={onCloseCheckTermOfUseModal}
+          onSubmit={handleSubmit}
+        />
+      )}
     </PcWidthFixedWrapper>
   );
 }
