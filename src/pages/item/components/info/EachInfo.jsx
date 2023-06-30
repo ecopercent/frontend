@@ -40,7 +40,6 @@ export default function EachInfo({ itemId, itemCategory }) {
           <span>{itemQuery.data?.nickname}</span>
           <S.InfoBtnContainer>
             <S.TitleSetBtn
-              isTitle={itemQuery.data?.isTitle}
               disabled={itemQuery.data?.isTitle}
               type="button"
               onClick={() => {

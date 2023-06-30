@@ -34,7 +34,10 @@ export default function ItemList({ itemListOf, infoItemId, setInfoItemId }) {
   const ulRef = useRef();
 
   useEffect(() => {
-    ulRef?.current?.firstChild.scrollIntoView();
+    ulRef?.current?.firstChild.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
   }, [itemListOf]);
 
   const navigate = useNavigate();

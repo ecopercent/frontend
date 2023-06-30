@@ -2,12 +2,12 @@ import React from "react";
 import ProfileImg from "./ProfileImg";
 import ProfileText from "./ProfileText";
 import ProfileEditBtn from "./ProfileEditBtn";
-import * as S from "./style";
+import * as S from "../style";
 
 export default function ProfileViewer({ setIsEditing }) {
   return (
     <S.ProfileContainer>
-      <S.ProfileImgTextWrapper>
+      <S.ProfileImgTextWrapper isViewer>
         <ProfileImg />
         <ProfileText />
       </S.ProfileImgTextWrapper>

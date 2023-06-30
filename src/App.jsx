@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import loadable from "@loadable/component";
 
@@ -7,6 +7,7 @@ import { PrivateLayout, PublicLayout } from "@layout";
 
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 import { useAxiosInterceptor } from "@hooks/useAxiosInterceptor";
+import isiPhoneOriPad from "@util/userAgent";
 
 import GlobalStyles from "./style";
 
@@ -24,6 +25,13 @@ const ItemAdd = loadable(() => {
 
 function App() {
   const { authenticated } = useContext(AuthenticatedContext);
+
+  useEffect(() => {
+    if (isiPhoneOriPad())
+      // TODO: 앱스토어 주소 나오면 url 변경
+      window.location.href =
+        "https://apps.apple.com/kr/app/%ED%95%9C%EB%93%A4/id1619947572";
+  }, []);
 
   return (
     <>

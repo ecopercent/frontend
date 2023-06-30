@@ -2,33 +2,9 @@ import styled from "@emotion/styled";
 import * as font from "@style/font";
 import * as btn from "@style/button";
 
-export const ProfileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 15px 25px;
-  gap: 16px;
-
-  width: 100%;
-  height: 180px;
-  margin: 0 auto;
-  border-bottom: 0.5px solid;
-`;
-
-export const ProfileImgTextWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 20px;
-
-  width: 100%;
-  height: 100px;
-`;
-
 export const ProfileImg = styled.img`
-  height: 100px;
-  width: 100px;
+  height: 100.5px;
+  width: 100.5px;
   flex-shrink: 0;
 
   border-radius: 50%;

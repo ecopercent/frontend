@@ -16,8 +16,7 @@ import { postUserOfKakao, postUserOfApple } from "src/api/user";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 
 import CheckTermOfUseModal from "@components/modal/CheckTermOfUseModal";
-
-import { PcWidthFixedWrapper } from "@layout/style";
+import { OutletWrapper } from "@layout/style";
 import * as S from "./style";
 
 export default function SignUp() {
@@ -114,7 +113,7 @@ export default function SignUp() {
   };
 
   return (
-    <PcWidthFixedWrapper style={{ maxHeight: "100%", paddingBottom: "0" }}>
+    <OutletWrapper fixedWidth fullHeight>
       {cancelCheckModalIsOpen && (
         <CancelCheckModal
           onClose={() => {
@@ -126,40 +125,43 @@ export default function SignUp() {
           }}
         />
       )}
-      <S.SignUpLayoutCol>
-        <S.InputList>
-          <SignUpUser
-            userInput={userInput}
-            setUserInput={setUserInput}
-            warningText={warningText}
-            setWarningText={setWarningText}
-            setUserImg={setUserImg}
-            ref={nicknameRef}
+
+      <S.SignUpContainer>
+        <S.SignUpLayoutCol>
+          <S.InputList>
+            <SignUpUser
+              userInput={userInput}
+              setUserInput={setUserInput}
+              warningText={warningText}
+              setWarningText={setWarningText}
+              setUserImg={setUserImg}
+              ref={nicknameRef}
+            />
+            <SignUpItems
+              category="tumbler"
+              itemsInput={itemsInput}
+              setItemsInput={setItemsInput}
+            />
+            <SignUpItems
+              category="ecobag"
+              itemsInput={itemsInput}
+              setItemsInput={setItemsInput}
+            />
+            <S.SubmitBtnsBox>
+              <S.Btn onClick={handleClick}>취소</S.Btn>
+              <S.Btn featured onClick={onShowCloseCheckTermOfUseModal}>
+                등록
+              </S.Btn>
+            </S.SubmitBtnsBox>
+          </S.InputList>
+        </S.SignUpLayoutCol>
+        {showCheckTermOfUseModal && (
+          <CheckTermOfUseModal
+            onClose={onCloseCheckTermOfUseModal}
+            onSubmit={handleSubmit}
           />
-          <SignUpItems
-            category="tumbler"
-            itemsInput={itemsInput}
-            setItemsInput={setItemsInput}
-          />
-          <SignUpItems
-            category="ecobag"
-            itemsInput={itemsInput}
-            setItemsInput={setItemsInput}
-          />
-        </S.InputList>
-        <S.SubmitBtnsBox>
-          <S.Btn onClick={handleClick}>취소</S.Btn>
-          <S.Btn featured onClick={onShowCloseCheckTermOfUseModal}>
-            등록
-          </S.Btn>
-        </S.SubmitBtnsBox>
-      </S.SignUpLayoutCol>
-      {showCheckTermOfUseModal && (
-        <CheckTermOfUseModal
-          onClose={onCloseCheckTermOfUseModal}
-          onSubmit={handleSubmit}
-        />
-      )}
-    </PcWidthFixedWrapper>
+        )}
+      </S.SignUpContainer>
+    </OutletWrapper>
   );
 }

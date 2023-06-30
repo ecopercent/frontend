@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postItem } from "src/api/item";
@@ -59,27 +59,10 @@ const ItemAddOnAuth = () => {
 };
 
 export const ItemAdd = ({ category, onCancel, onSubmit, onUploadImg }) => {
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const resizeListener = () => {
-      setInnerWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", resizeListener);
-  });
-
-  const [innerHeight, setInnerHeight] = useState(window.innerHeight);
-  useEffect(() => {
-    const resizeListener = () => {
-      setInnerHeight(window.innerHeight);
-    };
-    window.addEventListener("resize", resizeListener);
-  });
-
   return (
     <ItemEditWrap>
-      <ItemEditBorder width={innerWidth} height={innerHeight}>
+      <ItemEditBorder>
         <ItemAddHead category={category} />
-        <hr />
         <ItemImage setImgFile={onUploadImg} category={category} />
         <hr />
         <ItemAddDetail
