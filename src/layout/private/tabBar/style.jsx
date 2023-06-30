@@ -100,5 +100,6 @@ export const Description = styled.span`
 
   @media ${media.desktop} {
     display: inline;
+    vertical-align: middle;
   }
 `;
