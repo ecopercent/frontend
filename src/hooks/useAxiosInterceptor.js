@@ -22,8 +22,8 @@ async function onAccessTokenExpire() {
 
 export function useAxiosInterceptor() {
   async function requestHandler(config) {
-    if (config.headers) {
-      if (!accessToken && config.url !== "/token/access") onAccessTokenExpire();
+    if (config.headers && config.url !== "/token/access") {
+      if (!accessToken) await onAccessTokenExpire();
       const updatedConfig = { ...config };
       updatedConfig.headers.Authorization = `Bearer ${accessToken}`;
       return updatedConfig;
