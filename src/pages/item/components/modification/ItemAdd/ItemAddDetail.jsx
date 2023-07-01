@@ -57,7 +57,11 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
           <S.Select onChange={onType}>
             <option value={null}>재질을 선택하세요.</option>
             {typeOptions[category].map((option) => {
-              return <option value={option}>{option}</option>;
+              return (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              );
             })}
           </S.Select>
         </S.LabelInputSet>
