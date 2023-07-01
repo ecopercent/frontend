@@ -80,7 +80,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
               e.target.value = Number(e.target.value);
               onPrice(e);
             }}
-            maxLength={12}
+            maxLength={8}
             type="number"
           />
         </S.LabelInputSet>
