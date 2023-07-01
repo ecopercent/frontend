@@ -99,12 +99,11 @@ export const Span = styled.span`
 `;
 
 export const Input = styled.input`
-  width: 80%;
+  width: 70%;
   ${font.normalSmall};
   line-height: 1;
   border: 0;
   border-bottom: 2px solid;
-  -webkit-appearance: none;
   outline: none;
   :read-only {
     border: 0;
@@ -114,14 +113,19 @@ export const Input = styled.input`
 `;
 
 export const Select = styled.select`
-  font-size: 15px;
-  line-height: 1;
-  padding-left: 5%;
-  border-radius: 6px;
-  --saf-0: rgba(var(--sk_foreground_high_solid, 134, 134, 134), 1);
-  border: 1px solid var(--saf-0);
-  transition: border 80ms ease-out, box-shadow 80ms ease-out;
-  margin-bottom: 5px;
+  ${font.normalSmall};
+  line-height: 1.5;
+  color: black;
+
+  width: 70%;
+  padding-left: 2px;
+  outline: 0;
+  border: 0;
+  border-bottom: 2px solid black;
+
+  background: no-repeat url("/img/selectArrow.png");
+  background-size: 6%;
+  background-position: 98% 60%;
 `;
 
 export const Error = styled.div`

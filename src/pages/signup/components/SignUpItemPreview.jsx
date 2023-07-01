@@ -29,7 +29,7 @@ export default function SignUpItemPreview({ initialItem, initialImg }) {
         </S.SetBox>
         {initialItem.type && (
           <S.SetBox>
-            <S.LabelText>타입</S.LabelText>
+            <S.LabelText>재질</S.LabelText>
             <S.ContentText>{initialItem.type}</S.ContentText>
           </S.SetBox>
         )}

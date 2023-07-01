@@ -10,6 +10,10 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
   const [purchaseDate, onPurchaseData] = useInput("");
   const [type, onType] = useInput("");
   const targetGoalUsageCount = 100;
+  const typeOptions = {
+    tumbler: ["플라스틱", "스테인리스", "유리", "실리콘", "기타"],
+    ecobag: ["면", "PVC", "기타"],
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,8 +53,13 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
           />
         </S.LabelInputSet>
         <S.LabelInputSet>
-          <S.Span>타입</S.Span>
-          <S.Input value={type} onChange={onType} maxLength={10} />
+          <S.Span>재질</S.Span>
+          <S.Select onChange={onType}>
+            <option value={null}>재질을 선택하세요.</option>
+            {typeOptions[category].map((option) => {
+              return <option value={option}>{option}</option>;
+            })}
+          </S.Select>
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>목표횟수</S.Span>
