@@ -2,15 +2,15 @@ import styled from "@emotion/styled";
 import { basicGreen, lightGreen, basicPink } from "@style/color";
 
 export const SettingWrap = styled.div`
-  //   border: 1px solid black;
-  border-radius: 10px;
+  /* border: 1px solid black; */
+  border-radius: 10px 10px 3px 3px;
   margin: 10px;
   overflow-y: auto;
 `;
 
 export const SettingTitle = styled.div`
   background: ${lightGreen};
-  border-radius: 5px;
+  border-radius: 10px;
   padding-left: 2%;
   padding-bottom: 2.5%;
   padding-top: 2.5%;
