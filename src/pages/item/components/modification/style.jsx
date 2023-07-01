@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { HiOutlineCamera } from "react-icons/hi";
 import * as btn from "@style/button";
 import * as font from "@style/font";
 import media from "@style/media";
@@ -20,13 +19,12 @@ export const ItemEditBorder = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  /* gap: 10px; */
 
   overflow-y: auto;
 
   padding: 20px 20px 40px;
   @media ${media.mobile} {
-    padding: 20px 20px 30px;
+    padding-bottom: 30px;
   }
 `;
 
@@ -102,12 +100,18 @@ export const Input = styled.input`
   width: 70%;
   ${font.normalSmall};
   line-height: 1;
+  ::-webkit-date-and-time-value {
+    text-align: left;
+    padding-bottom: 3px;
+  }
+
   border: 0;
-  border-bottom: 2px solid;
+  border-bottom: 1.5px solid;
   outline: none;
   :read-only {
     border: 0;
   }
+
   background-color: white;
   color: black;
 `;
@@ -121,7 +125,10 @@ export const Select = styled.select`
   padding-left: 2px;
   outline: 0;
   border: 0;
-  border-bottom: 2px solid black;
+  border-bottom: 1.5px solid black;
+  @media ${media.mobile} {
+    padding: 4px 7px;
+  }
 
   background: no-repeat url("/img/selectArrow.png");
   background-size: 6%;
@@ -157,16 +164,4 @@ export const CancelBtn = styled.button`
 export const DeleteBtn = styled.button`
   ${btn.pink}
   ${font.normalBtn}
-`;
-
-export const CameraIcon = styled(HiOutlineCamera)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 120px;
-  height: 150px;
-  border-radius: 45%;
-  padding: 30px 30px;
-  background: rgba(0, 0, 0, 0.2);
-  color: white;
 `;
