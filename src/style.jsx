@@ -1,6 +1,5 @@
 import React from "react";
 import { Global, css } from "@emotion/react";
-import media from "@style/media";
 
 const style = css`
   @import url("https://fonts.cdnfonts.com/css/sf-pro-display");
@@ -114,10 +113,8 @@ const style = css`
     overflow: hidden;
     touch-action: none;
 
-    @media ${media.mobile} {
-      position: fixed;
-      top: 0;
-    }
+    position: fixed;
+    top: 0;
   }
 
   #root {
