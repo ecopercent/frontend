@@ -37,13 +37,13 @@ export default function SignUpItemPreview({ initialItem, initialImg }) {
       <S.BundleOfTwoBox>
         {initialItem.price !== 0 && (
           <S.SetBox>
-            <S.LabelText>구매가</S.LabelText>
+            <S.LabelText>구입가</S.LabelText>
             <S.ContentText>{initialItem.price}</S.ContentText>
           </S.SetBox>
         )}
         {initialItem.purchaseDate && (
           <S.SetBox>
-            <S.LabelText>구매일</S.LabelText>
+            <S.LabelText>구입일</S.LabelText>
             <S.ContentText>{initialItem.purchaseDate}</S.ContentText>
           </S.SetBox>
         )}
