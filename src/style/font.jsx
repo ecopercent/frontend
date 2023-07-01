@@ -38,8 +38,8 @@ export const normalTitle3 = `
 `;
 
 export const boldTitle3 = `
-${normalTitle3}
-font-weight: 600;
+  ${normalTitle3}
+  font-weight: 600;
 `;
 
 export const normalTextarea = `
