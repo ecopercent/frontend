@@ -8,12 +8,23 @@ export function setAccessToken() {
   if (newAccessToken) {
     accessToken = newAccessToken;
     cookie.remove("access", { path: "/" });
-  } else console.log("No Access Token from Server");
+  }
+}
+
+async function onAccessTokenExpire() {
+  const res = await axios.post("/token/access");
+  if (res === "SIGNOUT") {
+    localStorage.setItem("expired", true);
+    window.location.replace("/expire");
+  }
+  setAccessToken();
 }
 
 export function useAxiosInterceptor() {
-  function requestHandler(config) {
-    if (config.headers && accessToken) {
+  async function requestHandler(config) {
+    if (config.headers && config.url !== "/token/access") {
+      if (!accessToken && config.url !== "/signout")
+        await onAccessTokenExpire();
       const updatedConfig = { ...config };
       updatedConfig.headers.Authorization = `Bearer ${accessToken}`;
       return updatedConfig;
@@ -39,12 +50,7 @@ export function useAxiosInterceptor() {
     )
       return Promise.resolve("SIGNOUT");
     if (error.response.status === 403) {
-      const res = await axios.post("/token/access");
-      if (res === "SIGNOUT") {
-        localStorage.setItem("expired", true);
-        window.location.replace("/expire");
-      }
-      setAccessToken();
+      onAccessTokenExpire();
       const prevRequest = error.config;
       const response = await axios(prevRequest);
       return response;
