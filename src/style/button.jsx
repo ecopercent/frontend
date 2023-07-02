@@ -19,8 +19,10 @@ export const normal = `
 
   ${font.normalBtn};
 
-  :hover {
-    opacity: 0.7;
+  @media (hover: hover) and (pointer: fine) {
+    :hover {
+      opacity: 0.7;
+    }
   }
 `;
 

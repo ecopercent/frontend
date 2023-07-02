@@ -61,9 +61,9 @@ export const Btn = styled.button`
 
   ${(props) => {
     if (!props.disabled)
-      return `:hover {
-    opacity: 0.7;
-  }`;
+      return `@media (hover: hover) and (pointer: fine) {
+                :hover { opacity: 0.7; }
+              }`;
     return null;
   }}
 `;

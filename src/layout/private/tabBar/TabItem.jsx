@@ -1,23 +1,43 @@
 import React, { useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { TabItemBackGround } from "./style";
+import { LinkWrapper, TabItemBackGround, Description } from "./style";
+import styled from "@emotion/styled";
+import media from "@style/media";
 
-const TabItem = ({ IconComponent, page }) => {
+const TabItem = ({ IconComponent, ClickedComponent, page, description }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const tabClickHandler = useCallback(() => {
     navigate(`${page}`);
   }, []);
 
+  const ClickedIcon = styled(ClickedComponent)`
+    width: 30px;
+    height: 30px;
+
+    @media ${media.mobile} {
+      width: 25px;
+      height: 25px;
+    }
+  `;
+
+  const UnclickedIcon = styled(IconComponent)`
+    width: 30px;
+    height: 30px;
+
+    @media ${media.mobile} {
+      width: 25px;
+      height: 25px;
+    }
+  `;
+
   return (
-    <TabItemBackGround featured={pathname === page} onClick={tabClickHandler}>
-      <IconComponent
-        style={{
-          width: "20px",
-          height: "20px",
-        }}
-      />
-    </TabItemBackGround>
+    <LinkWrapper onClick={tabClickHandler}>
+      <TabItemBackGround featured={pathname === page}>
+        {pathname === page ? <ClickedIcon /> : <UnclickedIcon />}
+      </TabItemBackGround>
+      <Description>{description}</Description>
+    </LinkWrapper>
   );
 };
 

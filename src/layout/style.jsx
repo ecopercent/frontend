@@ -12,23 +12,8 @@ export const Layout = styled.div`
   display: flex;
   flex-direction: column;
 
-  /* TODO: width에 따른 반응형 탭바 구현해보기 */
-  @media ${media.desktop} {
-    /* background-color: lightblue; */
-  }
-
-  @media ${media.tabletM} {
-    /* background-color: lightcoral; */
-  }
-
-  @media ${media.tabletS} {
-    /* background-color: lightgreen; */
-  }
-
   @media ${media.mobile} {
     height: calc(var(--vh, 1vh) * 100);
-
-    /* background-color: lightyellow; */
   }
 `;
 
@@ -36,25 +21,22 @@ export const OutletWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
-  height: calc(100% - 48px);
+  height: calc(var(--vh, 1vh) * 100 - 48px);
 
   @media not ${media.mobile} {
     ${(props) => {
       if (props.fixedWidth) return `width: 500px; margin: 0 auto;`;
       return ``;
     }}
-    ${(props) => {
-      if (props.fullHeight) return `height: 100%;`;
-      return ``;
-    }}
   }
 
-  @media ${media.mobile} {
-    height: calc(var(--vh, 1vh) * 100 - 48px);
-    ${(props) => {
-      if (props.fullHeight) return `height: calc(var(--vh, 1vh) * 100);`;
-      return ``;
-    }}
+  ${(props) => {
+    if (props.fullHeight) return `height: calc(var(--vh, 1vh) * 100);`;
+    return ``;
+  }}
+
+  @media ${media.desktop}, ${media.tabletMin} and ${media.tabletMax} {
+    height: calc(var(--vh, 1vh) * 100);
   }
 `;
 
