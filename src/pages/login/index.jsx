@@ -14,7 +14,15 @@ const Login = () => {
         <SocialLogin />
         <S.Line />
       </S.LoginBox>
-      <S.SloganSpan>에코퍼센트 슬로건 한줄.</S.SloganSpan>
+      <S.SloganWrapper>
+        <S.SloganSpan>
+          매일 자연스럽게, 자연을 위한 에코퍼센트
+          <br />
+        </S.SloganSpan>
+        <S.SloganSpan sub>
+          every day naturally, ecopercent for nature
+        </S.SloganSpan>
+      </S.SloganWrapper>
     </S.LoginLayout>
   );
 };

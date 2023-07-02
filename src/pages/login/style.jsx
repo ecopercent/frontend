@@ -48,11 +48,19 @@ export const ContinueWith = styled.span`
   line-height: 20px;
 `;
 
+export const SloganWrapper = styled.div`
+  height: 5%;
+  margin-top: 17vh;
+  text-align: center;
+`;
+
 export const SloganSpan = styled.span`
   ${font.normalSubheadline};
 
-  height: 3%;
-  margin-top: 17vh;
+  ${(props) => {
+    if (props.sub) return `color: gray; font-style: italic;`;
+    return ``;
+  }}
 `;
 
 export const ButtonBox = styled.div`

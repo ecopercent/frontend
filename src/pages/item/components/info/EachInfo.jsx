@@ -63,7 +63,7 @@ export default function EachInfo({ itemId, itemCategory }) {
             <S.InfoLabel>
               브랜드
               <br />
-              {itemQuery.data?.type !== "" ? "타입" : ""}
+              {itemQuery.data?.type !== "" ? "재질" : ""}
               <br />
               {itemQuery.data?.price ? "구입가" : ""}
               <br />

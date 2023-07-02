@@ -7,7 +7,7 @@ export function base64ToDataUrl(base64String) {
 export async function imgCompress(img) {
   const options = {
     maxSizeMB: 0.2,
-    maxWidthOrHeight: 1200,
+    maxWidthOrHeight: 600,
     useWebWorker: true,
   };
 

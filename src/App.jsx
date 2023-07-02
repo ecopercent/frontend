@@ -27,10 +27,10 @@ function App() {
   const { authenticated } = useContext(AuthenticatedContext);
 
   useEffect(() => {
-    if (isiPhoneOriPad())
-      // TODO: 앱스토어 주소 나오면 url 변경
-      window.location.href =
-        "https://apps.apple.com/kr/app/%ED%95%9C%EB%93%A4/id1619947572";
+    if (isiPhoneOriPad()) console.log("i");
+    // TODO: 앱스토어 주소 나오면 url 변경
+    // window.location.href =
+    //   "https://apps.apple.com/kr/app/%ED%95%9C%EB%93%A4/id1619947572";
   }, []);
 
   return (

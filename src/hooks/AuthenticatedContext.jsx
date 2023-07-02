@@ -1,5 +1,5 @@
 import React, { createContext, useMemo, useState } from "react";
-import axios from "axios";
+import axios from "@api/axiosInstance";
 import { useQueryClient } from "@tanstack/react-query";
 import { setAccessToken } from "./useAxiosInterceptor";
 

@@ -50,7 +50,7 @@ export default function AllInfo({ category }) {
             <br />
           </S.InfoLabel>
           <S.InfoValue>
-            {itemsQuery.data?.length}개<br />
+            {itemsQuery.data?.length || "0"}개<br />
             {total.achivedCnt}개<br />
             {Number.isNaN(total.achivedPercent) ? "0" : total.achivedPercent}%
           </S.InfoValue>

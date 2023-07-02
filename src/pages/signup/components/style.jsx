@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import * as font from "@style/font";
 import * as button from "@style/button";
+import media from "@style/media";
 
 export const InputItem = styled.li`
   display: flex;
@@ -96,12 +97,11 @@ export const Btn = styled.button`
   }}
 
   ${(props) => {
-    if (!props.disabled)
-      return `:hover {
-    opacity: 0.7;
-  }`;
+    if (!props.disabled) return `:hover { opacity: 0.7; }`;
     return null;
   }}
+  
+  padding: 0;
 `;
 
 /*
@@ -112,8 +112,10 @@ export const ItemPreviewBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  /* padding: 10px 10px 0px; */
   padding: 15px 20px;
+  @media ${media.mobile} {
+    padding: 15px 15px 20px;
+  }
   margin-top: 5px;
 
   border: 1px solid gray;
@@ -131,6 +133,7 @@ export const SetBox = styled.div`
   display: flex;
   gap: 5px;
   align-items: center;
+  width: 50%;
 `;
 
 export const ItemImg = styled.img`
@@ -143,7 +146,11 @@ export const ItemImg = styled.img`
 `;
 
 export const LabelText = styled.span`
-  width: 40px;
+  width: 30%;
+  @media ${media.mobile} {
+    width: 35%;
+  }
+
   padding: 5px 0 0;
 
   ${font.boldSmall}
@@ -151,7 +158,10 @@ export const LabelText = styled.span`
 `;
 
 export const ContentText = styled.span`
-  width: 150px;
+  width: 70%;
+  @media ${media.mobile} {
+    width: 65%;
+  }
   padding: 5px 0 0;
 
   ${font.normalSmall}

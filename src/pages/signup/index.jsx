@@ -52,9 +52,13 @@ export default function SignUp() {
       return signIn();
     },
     onError: (code) => {
+      if (code === 400) {
+        alert("이미 가입된 계정입니다.");
+        return navigate("/");
+      }
       if (code === 403) {
         // TODO: 모달로?
-        alert("세션이 만료되었습니다.");
+        alert("회원가입 유효 시간이 만료되었습니다.");
         return navigate("/");
       }
       if (code === 409) {

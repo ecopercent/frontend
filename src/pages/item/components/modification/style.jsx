@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { HiOutlineCamera } from "react-icons/hi";
 import * as btn from "@style/button";
 import * as font from "@style/font";
 import media from "@style/media";
@@ -20,13 +19,12 @@ export const ItemEditBorder = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  /* gap: 10px; */
 
   overflow-y: auto;
 
   padding: 20px 20px 40px;
   @media ${media.mobile} {
-    padding: 20px 20px 30px;
+    padding-bottom: 30px;
   }
 `;
 
@@ -78,6 +76,10 @@ export const FormInnerWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  @media ${media.mobile} {
+    gap: 15px;
+  }
+
   flex: 1 1 auto;
   margin-bottom: 20px;
 `;
@@ -95,29 +97,42 @@ export const Span = styled.span`
 `;
 
 export const Input = styled.input`
-  width: 80%;
+  width: 70%;
   ${font.normalSmall};
   line-height: 1;
+  ::-webkit-date-and-time-value {
+    text-align: left;
+    padding-bottom: 3px;
+  }
+
   border: 0;
-  border-bottom: 2px solid;
-  -webkit-appearance: none;
+  border-bottom: 1.5px solid;
   outline: none;
   :read-only {
     border: 0;
   }
+
   background-color: white;
   color: black;
 `;
 
 export const Select = styled.select`
-  font-size: 15px;
-  line-height: 1;
-  padding-left: 5%;
-  border-radius: 6px;
-  --saf-0: rgba(var(--sk_foreground_high_solid, 134, 134, 134), 1);
-  border: 1px solid var(--saf-0);
-  transition: border 80ms ease-out, box-shadow 80ms ease-out;
-  margin-bottom: 5px;
+  ${font.normalSmall};
+  line-height: 1.5;
+  color: black;
+
+  width: 70%;
+  padding-left: 2px;
+  outline: 0;
+  border: 0;
+  border-bottom: 1.5px solid black;
+  @media ${media.mobile} {
+    padding: 4px 7px;
+  }
+
+  background: no-repeat url("/img/selectArrow.png");
+  background-size: 6%;
+  background-position: 98% 60%;
 `;
 
 export const Error = styled.div`
@@ -149,16 +164,4 @@ export const CancelBtn = styled.button`
 export const DeleteBtn = styled.button`
   ${btn.pink}
   ${font.normalBtn}
-`;
-
-export const CameraIcon = styled(HiOutlineCamera)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 120px;
-  height: 150px;
-  border-radius: 45%;
-  padding: 30px 30px;
-  background: rgba(0, 0, 0, 0.2);
-  color: white;
 `;

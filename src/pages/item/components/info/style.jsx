@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import * as btn from "@style/button";
 import * as font from "@style/font";
+import media from "@style/media";
 
 export const InfoContainer = styled.div`
   border: 1px solid;
@@ -11,8 +12,11 @@ export const InfoHeaderDiv = styled.div`
   width: 100%;
   height: 44px;
   padding: 10px 20px;
-  border-bottom: 0.5px solid;
+  @media ${media.mobile} {
+    padding: 10px 15px;
+  }
 
+  border-bottom: 0.5px solid;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,6 +27,9 @@ export const InfoHeaderDiv = styled.div`
 export const InfoContentsDiv = styled.div`
   width: 100%;
   padding: 10px 20px;
+  @media ${media.mobile} {
+    padding: 10px 15px;
+  }
 
   display: flex;
   justify-content: space-between;
@@ -62,9 +69,13 @@ export const TitleSetBtn = styled.button`
  */
 
 export const ContentPart = styled.div`
-  width: 40%;
   display: flex;
   justify-content: space-between;
+
+  width: 40%;
+  @media ${media.mobile} {
+    width: 48%;
+  }
 `;
 
 export const InfoLabel = styled.span`
