@@ -50,22 +50,15 @@ const ItmeImageStroke = ({ itemInfo }) => {
   const queryClient = useQueryClient();
   const upUsageCountMutation = useMutation({
     mutationFn: patchUsageCountUp,
-    onSuccess: () => {
-      const newItemInfo = { ...itemInfo };
-      newItemInfo.currentUsageCount += 1;
-      newItemInfo.usageCountPerDay += 1;
-      queryClient.setQueryData(["title", itemInfo.category], newItemInfo);
-      queryClient.invalidateQueries(["title", itemInfo.category]);
+    onSuccess: (updatedItemInfo) => {
+      setUsageCount(updatedItemInfo.usageCountPerDay);
+      queryClient.setQueryData(["title", itemInfo.category], updatedItemInfo);
+      queryClient.refetchQueries(["title", itemInfo.category]);
       queryClient.invalidateQueries([itemInfo.category, "list"]);
     },
   });
   const increaseCount = useCallback(() => {
-    if (usageCount < divideNum) {
-      setUsageCount((currUsageCount) => {
-        return currUsageCount + 1;
-      });
-      upUsageCountMutation.mutate(itemInfo.id);
-    }
+    if (usageCount < divideNum) upUsageCountMutation.mutate(itemInfo.id);
   }, [usageCount]);
 
   return (
@@ -78,7 +71,7 @@ const ItmeImageStroke = ({ itemInfo }) => {
           />
         </foreignObject>
         {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map((element) => {
-          if (element.key <= divideNum - usageCount)
+          if (element.key <= divideNum - itemInfo.usageCountPerDay)
             return <S.StrokePath d={element.d} key={element.key} />;
           return (
             <S.StrokePath
