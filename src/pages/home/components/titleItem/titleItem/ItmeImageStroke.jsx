@@ -71,7 +71,7 @@ const ItmeImageStroke = ({ itemInfo }) => {
           />
         </foreignObject>
         {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map((element) => {
-          if (element.key <= divideNum - itemInfo.usageCountPerDay)
+          if (element.key <= divideNum - usageCount)
             return <S.StrokePath d={element.d} key={element.key} />;
           return (
             <S.StrokePath
