@@ -6,18 +6,31 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
   const [showType, setShowType] = useState("");
   const [allChecked, setAllChecked] = useState(false);
   const [termChecked, setTermChecked] = useState(false);
-  const [locationChecked, setLocationChecked] = useState(false);
+  const [agreeChecked, setAgreeChecked] = useState(false);
   const [privacyChecked, setPrivacyChecked] = useState(false);
   const [validatedCheck, setValidatedCheck] = useState(false);
   const validateCheck = useCallback(() => {
-    if (termChecked && locationChecked && privacyChecked) onSubmit();
+    if (termChecked && agreeChecked && privacyChecked) onSubmit();
     else setValidatedCheck(false);
-  }, [termChecked, privacyChecked, locationChecked]);
+  }, [termChecked, privacyChecked, agreeChecked]);
   useEffect(() => {
     setValidatedCheck(true);
-    if (termChecked && privacyChecked && locationChecked) setAllChecked(true);
+    if (termChecked && privacyChecked && agreeChecked) setAllChecked(true);
     else setAllChecked(false);
-  }, [termChecked, privacyChecked, locationChecked]);
+  }, [termChecked, privacyChecked, agreeChecked]);
+  const onAllCheck = useCallback(() => {
+    if (!allChecked) {
+      setTermChecked(true);
+      setPrivacyChecked(true);
+      setAgreeChecked(true);
+      setAllChecked(!allChecked);
+    } else {
+      setAllChecked(!allChecked);
+      setTermChecked(false);
+      setPrivacyChecked(false);
+      setAgreeChecked(false);
+    }
+  }, [allChecked]);
 
   switch (showType) {
     case "term":
@@ -90,21 +103,9 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
                 <S.CheckBox
                   type="checkbox"
                   checked={allChecked}
-                  onChange={() => {
-                    if (!allChecked) {
-                      setTermChecked(true);
-                      setPrivacyChecked(true);
-                      setLocationChecked(true);
-                      setAllChecked(!allChecked);
-                    } else {
-                      setAllChecked(!allChecked);
-                      setTermChecked(false);
-                      setPrivacyChecked(false);
-                      setLocationChecked(false);
-                    }
-                  }}
+                  onChange={onAllCheck}
                 />
-                <S.Plain>전체동의</S.Plain>
+                <S.Plain onClick={onAllCheck}>전체동의</S.Plain>
               </S.LabelInputSet>
               <hr style={{ width: "100%" }} />
               <S.LabelInputSet>
@@ -142,9 +143,9 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
               <S.LabelInputSet>
                 <S.CheckBox
                   type="checkbox"
-                  checked={locationChecked}
+                  checked={agreeChecked}
                   onChange={() => {
-                    setLocationChecked(!locationChecked);
+                    setAgreeChecked(!agreeChecked);
                   }}
                 />
                 <S.HoverPlain
