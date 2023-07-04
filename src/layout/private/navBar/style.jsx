@@ -46,10 +46,6 @@ export const LogoWrapper = styled.div`
   }
 `;
 
-export const Logo = styled.img`
-  width: 35px;
-`;
-
 export const LinkWrapper = styled.div`
   @media ${media.desktop}, ${media.tabletMin} and ${media.tabletMax} {
     display: flex;

@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import NabItem from "./NabItem";
+import Logo from "@components/logo/Logo";
 
 import {
   AiFillHome,
@@ -42,7 +43,7 @@ const NabBar = () => {
           navigate("/home");
         }}
       >
-        <S.Logo src="/logo.png" alt="ecopercent" />
+        <Logo />
       </S.LogoWrapper>
       {routeInfo.map((element) => {
         return (

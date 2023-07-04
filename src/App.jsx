@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import loadable from "@loadable/component";
 
-import { Home, Item, Setting, Login, SignUp, Error } from "@pages";
+import { Home, Item, Setting, Login, SignUp, Error, ServerError } from "@pages";
 import { PrivateLayout, PublicLayout } from "@layout";
 
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
@@ -61,6 +61,7 @@ function PrivateRouter() {
           <Route path="/item/add" element={<ItemAdd />} />
         </Route>
         <Route path="/expire" element={<Expire />} />
+        <Route path="/500" element={<ServerError />} />
         <Route path="/*" element={<Error />} />
       </Routes>
     </BrowserRouter>
@@ -76,6 +77,7 @@ function PublicRouter() {
           <Route path="/login/*" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/expire" element={<Expire />} />
+          <Route path="/500" element={<ServerError />} />
           <Route path="/*" element={<Error />} />
           {/* TODO: 아이템 조작 관련 페이지 모달로 바뀔 예정 */}
           <Route path="/item/edit" element={<ItemEdit />} />

@@ -41,13 +41,8 @@ export function useAxiosInterceptor() {
   }
 
   async function errorHandler(error) {
-    // TODO: 서버 에러 페이지 만들기?
-    // if (error.response.status >= 500) window.location.replace("/500");
-    if (
-      (error.config.url === "/signout" ||
-        error.config.url === "/token/access") &&
-      error.response.status !== 500
-    )
+    if (error.response.status >= 500) window.location.href = "/500";
+    if (error.config.url === "/signout" || error.config.url === "/token/access")
       return Promise.resolve("SIGNOUT");
     if (error.response.status === 403) {
       onAccessTokenExpire();
