@@ -36,18 +36,18 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
     case "term":
       return (
         <LargeModal onClose={onClose}>
-          <button
+          <S.HoverPlain
             onClick={() => {
               setShowType("");
             }}
           >
-            뒤로가기
-          </button>
+            {"< 이용약관"}
+          </S.HoverPlain>
           <iframe
             style={{ backgroundColor: "white" }}
             src="/docs/term.html"
             title="이용약관"
-            height="440"
+            height="410"
             width="320"
           />
         </LargeModal>
@@ -55,18 +55,18 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
     case "privacy":
       return (
         <LargeModal onClose={onClose}>
-          <button
+          <S.HoverPlain
             onClick={() => {
               setShowType("");
             }}
           >
-            뒤로가기
-          </button>
+            {"< 개인정보 처리 방침"}
+          </S.HoverPlain>
           <iframe
             style={{ backgroundColor: "white" }}
             src="/docs/privacy.html"
             title="개인정보처리방침"
-            height="440"
+            height="410"
             width="320"
           />
         </LargeModal>
@@ -74,18 +74,18 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
     case "agree":
       return (
         <LargeModal onClose={onClose}>
-          <button
+          <S.HoverPlain
             onClick={() => {
               setShowType("");
             }}
           >
-            뒤로가기
-          </button>
+            {"< 개인정보 수집 및 이용"}
+          </S.HoverPlain>
           <iframe
             style={{ backgroundColor: "white" }}
             src="/docs/agree.html"
             title="개인정보처리동의"
-            height="440"
+            height="410"
             width="320"
           />
         </LargeModal>
