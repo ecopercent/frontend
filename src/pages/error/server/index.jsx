@@ -15,8 +15,7 @@ export default function ServerError() {
         문제가 지속되는 경우 개발팀에 문의해 주세요.
       </S.NotificationText>
       <S.Line />
-      {/* TODO: 고객 지원 페이지 연결 */}
-      <S.Anchor href="https://github.com/ecopercent">Support</S.Anchor>
+      <S.Anchor href="mailto:ecopercent@gmail.com">Support</S.Anchor>
       <LogoBox
         handleClick={() => {
           navigate("/");
