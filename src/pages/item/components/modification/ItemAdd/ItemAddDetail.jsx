@@ -9,10 +9,23 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
   const [price, onPrice] = useInput(0);
   const [purchaseDate, onPurchaseData] = useInput("");
   const [type, onType] = useInput("");
-  const targetGoalUsageCount = 100;
+  const [usageGoal, onUsageGoal] = useInput(0);
+  const usageGoalOptions = {
+    tumbler: {
+      플라스틱: 110,
+      스테인리스: 220,
+      유리: 100,
+      실리콘: 100,
+    },
+    ecobag: {
+      면: 131,
+      PVC: 37,
+      종이: 43,
+    },
+  };
   const typeOptions = {
     tumbler: ["플라스틱", "스테인리스", "유리", "실리콘", "기타"],
-    ecobag: ["면", "PVC", "기타"],
+    ecobag: ["면", "PVC", "종이", "기타"],
   };
 
   const handleSubmit = (e) => {
@@ -55,7 +68,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
         <S.LabelInputSet>
           <S.Span>재질</S.Span>
           <S.Select onChange={onType}>
-            <option value={null}>재질을 선택하세요.</option>
+            <option value="">재질을 선택하세요.</option>
             {typeOptions[category].map((option) => {
               return (
                 <option key={option} value={option}>
@@ -67,7 +80,11 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>목표횟수</S.Span>
-          <S.Input value={targetGoalUsageCount} type="number" readOnly />
+          {type === "기타" ? (
+            <S.Input value={usageGoal} type="number" />
+          ) : (
+            <S.Input value={usageGoal} type="number" readOnly />
+          )}
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>구입가</S.Span>
