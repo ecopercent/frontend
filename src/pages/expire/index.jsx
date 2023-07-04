@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 
+import LogoBox from "@components/logo/LogoBox";
 import * as S from "../error/style";
 
 export default function TokenExpiration() {
@@ -36,6 +37,11 @@ export default function TokenExpiration() {
       >
         메인 화면
       </S.GoHomeBtn>
+      <LogoBox
+        handleClick={() => {
+          navigate("/");
+        }}
+      />
     </S.PageLayout>
   );
 }
