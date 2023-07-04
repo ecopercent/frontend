@@ -65,7 +65,7 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
           <iframe
             style={{ backgroundColor: "white" }}
             src="/docs/privacy.html"
-            title="개인정보처리방침"
+            title="개인정보 처리 방침"
             height="410"
             width="320"
           />
@@ -84,7 +84,7 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
           <iframe
             style={{ backgroundColor: "white" }}
             src="/docs/agree.html"
-            title="개인정보처리동의"
+            title="개인정보 처리 동의"
             height="410"
             width="320"
           />

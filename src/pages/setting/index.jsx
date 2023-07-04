@@ -43,7 +43,7 @@ const Setting = () => {
       },
     },
     {
-      label: "개인정보처리방침",
+      label: "개인정보 처리 방침",
       style: S.HoverPlain,
       onClickHandler: () => {
         window.location.href = "/docs/privacy.html";
