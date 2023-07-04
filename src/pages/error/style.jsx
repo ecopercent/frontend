@@ -12,7 +12,7 @@ export const WarningIcon = styled(BsFillPatchExclamationFill)`
 `;
 
 export const PageLayout = styled.div`
-  height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
 
   display: flex;
   flex-direction: column;
@@ -30,7 +30,8 @@ export const Headline = styled.h2`
 export const NotificationText = styled.span`
   ${font.boldHeadline};
   font-weight: 400;
-  margin: 40px;
+  margin: 40px 0;
+  line-height: 2;
 `;
 
 export const GoHomeBtn = styled.button`
@@ -42,6 +43,30 @@ export const GoHomeBtn = styled.button`
   @media (hover: hover) and (pointer: fine) {
     :hover {
       background: ${basicGreen};
+    }
+  }
+`;
+
+export const Line = styled.div`
+  margin-top: 20px;
+  height: 1px;
+  width: 150px;
+  background-color: black;
+`;
+
+export const Anchor = styled.a`
+  color: gray;
+  text-decoration: none;
+  text-align: center;
+
+  width: 80px;
+  background-color: white;
+  translate: 0 -50%;
+
+  @media (hover: hover) and (pointer: fine) {
+    :hover {
+      cursor: pointer;
+      text-decoration: underline;
     }
   }
 `;
