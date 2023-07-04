@@ -1,10 +1,11 @@
 import React, { useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LinkWrapper, TabItemBackGround, Description } from "./style";
+
 import styled from "@emotion/styled";
 import media from "@style/media";
+import * as S from "./style";
 
-const TabItem = ({ IconComponent, ClickedComponent, page, description }) => {
+const NabItem = ({ IconComponent, ClickedComponent, page, description }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const tabClickHandler = useCallback(() => {
@@ -31,17 +32,17 @@ const TabItem = ({ IconComponent, ClickedComponent, page, description }) => {
     }
   `;
   return (
-    <LinkWrapper onClick={tabClickHandler}>
-      <TabItemBackGround featured={`/${pathname.split("/")[1]}` === page}>
+    <S.LinkWrapper onClick={tabClickHandler}>
+      <S.TabItemBackGround featured={`/${pathname.split("/")[1]}` === page}>
         {`/${pathname.split("/")[1]}` === page ? (
           <ClickedIcon />
         ) : (
           <UnclickedIcon />
         )}
-      </TabItemBackGround>
-      <Description>{description}</Description>
-    </LinkWrapper>
+      </S.TabItemBackGround>
+      <S.Description>{description}</S.Description>
+    </S.LinkWrapper>
   );
 };
 
-export default TabItem;
+export default NabItem;

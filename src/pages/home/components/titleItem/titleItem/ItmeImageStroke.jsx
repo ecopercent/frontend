@@ -22,23 +22,6 @@ function toPieChartItemPath(x, y, radiusIn, radiusOut, startAngle, endAngle) {
   return d;
 }
 
-const makeDateStr = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = `0${date.getMonth() + 1}`.slice(-2);
-  const day = `0${date.getDate()}`.slice(-2);
-  const dateStr = `${year}-${month}-${day}`;
-  return dateStr;
-};
-
-const checkItemUsageCount = (id, divideNum) => {
-  const itemCountObj = JSON.parse(localStorage.getItem(`item/${id}`));
-  if (itemCountObj && makeDateStr() === itemCountObj.dateStr) {
-    return itemCountObj.count;
-  }
-  return divideNum;
-};
-
 const threeStrockInfo = [
   {
     key: 1,
@@ -63,34 +46,19 @@ const oneStrockInfo = [
 
 const ItmeImageStroke = ({ itemInfo }) => {
   const divideNum = itemInfo.category === "tumbler" ? 3 : 1;
-  const currentUsageCount = checkItemUsageCount(itemInfo.id, divideNum);
-  const [usageCount, setUsageCount] = useState(currentUsageCount);
+  const [usageCount, setUsageCount] = useState(itemInfo.usageCountPerDay);
   const queryClient = useQueryClient();
   const upUsageCountMutation = useMutation({
     mutationFn: patchUsageCountUp,
-    onSuccess: () => {
-      const newItemInfo = { ...itemInfo };
-      newItemInfo.currentUsageCount += 1;
-      queryClient.setQueryData(["title", itemInfo.category], newItemInfo);
-      queryClient.invalidateQueries(["title", itemInfo.category]);
+    onSuccess: (updatedItemInfo) => {
+      setUsageCount(updatedItemInfo.usageCountPerDay);
+      queryClient.setQueryData(["title", itemInfo.category], updatedItemInfo);
+      queryClient.refetchQueries(["title", itemInfo.category]);
       queryClient.invalidateQueries([itemInfo.category, "list"]);
     },
   });
   const increaseCount = useCallback(() => {
-    if (usageCount > 0) {
-      setUsageCount((currUsageCount) => {
-        const changeCout = currUsageCount > 1 ? currUsageCount - 1 : 0;
-        localStorage.setItem(
-          `item/${itemInfo.id}`,
-          JSON.stringify({
-            count: changeCout,
-            dateStr: makeDateStr(),
-          })
-        );
-        return changeCout;
-      });
-      upUsageCountMutation.mutate(itemInfo.id);
-    }
+    if (usageCount < divideNum) upUsageCountMutation.mutate(itemInfo.id);
   }, [usageCount]);
 
   return (
@@ -103,7 +71,7 @@ const ItmeImageStroke = ({ itemInfo }) => {
           />
         </foreignObject>
         {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map((element) => {
-          if (element.key <= usageCount)
+          if (element.key <= divideNum - usageCount)
             return <S.StrokePath d={element.d} key={element.key} />;
           return (
             <S.StrokePath

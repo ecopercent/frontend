@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { lightGreen, basicGreen } from "@style/color";
 import media from "@style/media";
 
-export const TabBarContainer = styled.div`
+export const NabBarContainer = styled.div`
   display: flex;
   height: 100%;
 
@@ -28,9 +28,18 @@ export const TabBarContainer = styled.div`
 `;
 
 export const LogoWrapper = styled.div`
-  width: 100%;
+  display: flex;
+  align-items: center;
   margin: 30px 0 30px 30px;
   padding: 0 5px;
+  width: 100%;
+  height: 40px;
+
+  @media (hover: hover) and (pointer: fine) {
+    :hover {
+      cursor: pointer;
+    }
+  }
 
   @media ${media.mobile}, ${media.tabletSmallMin} and ${media.tabletSmallMax} {
     display: none;

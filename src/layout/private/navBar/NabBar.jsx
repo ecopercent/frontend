@@ -1,6 +1,8 @@
 import React from "react";
-import { TabBarContainer, LogoWrapper, Logo } from "./style";
-import TabItem from "./TabItem";
+import { useNavigate } from "react-router-dom";
+
+import NabItem from "./NabItem";
+
 import {
   AiFillHome,
   AiOutlineHome,
@@ -8,8 +10,9 @@ import {
   AiOutlineSetting,
 } from "react-icons/ai";
 import { HiOutlineArchive, HiArchive } from "react-icons/hi";
+import * as S from "./style";
 
-const TabBar = () => {
+const NabBar = () => {
   const routeInfo = [
     {
       page: "/home",
@@ -30,15 +33,20 @@ const TabBar = () => {
       description: "설정",
     },
   ];
+  const navigate = useNavigate();
 
   return (
-    <TabBarContainer>
-      <LogoWrapper>
-        <Logo src="/logo.png" alt="ecopercent" />
-      </LogoWrapper>
+    <S.NabBarContainer>
+      <S.LogoWrapper
+        onClick={() => {
+          navigate("/home");
+        }}
+      >
+        <S.Logo src="/logo.png" alt="ecopercent" />
+      </S.LogoWrapper>
       {routeInfo.map((element) => {
         return (
-          <TabItem
+          <NabItem
             key={element.page}
             IconComponent={element.icon}
             ClickedComponent={element.iconClicked}
@@ -47,8 +55,8 @@ const TabBar = () => {
           />
         );
       })}
-    </TabBarContainer>
+    </S.NabBarContainer>
   );
 };
 
-export default TabBar;
+export default NabBar;
