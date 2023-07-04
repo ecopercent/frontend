@@ -36,17 +36,17 @@ const Setting = () => {
 
   const notificationArr = [
     {
-      label: "운영방침",
+      label: "이용약관",
       style: S.HoverPlain,
       onClickHandler: () => {
-        console.log("노션 페이지로 리디렉션");
+        window.location.href = "/docs/term.html";
       },
     },
     {
       label: "개인정보처리방침",
       style: S.HoverPlain,
       onClickHandler: () => {
-        console.log("노션 페이지로 리디렉션");
+        window.location.href = "/docs/privacy.html";
       },
     },
     {

@@ -30,7 +30,6 @@ const TabItem = ({ IconComponent, ClickedComponent, page, description }) => {
       height: 25px;
     }
   `;
-  console.log("Te", pathname.split("/")[1], page);
   return (
     <LinkWrapper onClick={tabClickHandler}>
       <TabItemBackGround featured={`/${pathname.split("/")[1]}` === page}>

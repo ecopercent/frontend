@@ -30,7 +30,13 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
           >
             뒤로가기
           </button>
-          <h1>{showType}내용 혹은 리다이렉트</h1>
+          <iframe
+            style={{ backgroundColor: "white" }}
+            src="/docs/term.html"
+            title="이용약관"
+            height="440"
+            width="320"
+          />
         </LargeModal>
       );
     case "privacy":
@@ -43,10 +49,16 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
           >
             뒤로가기
           </button>
-          <h1>{showType}내용 혹은 리다이렉트</h1>
+          <iframe
+            style={{ backgroundColor: "white" }}
+            src="/docs/privacy.html"
+            title="개인정보처리방침"
+            height="440"
+            width="320"
+          />
         </LargeModal>
       );
-    case "location":
+    case "agree":
       return (
         <LargeModal onClose={onClose}>
           <button
@@ -56,7 +68,13 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
           >
             뒤로가기
           </button>
-          <h1>{showType}내용 혹은 리다이렉트</h1>
+          <iframe
+            style={{ backgroundColor: "white" }}
+            src="/docs/agree.html"
+            title="개인정보처리동의"
+            height="440"
+            width="320"
+          />
         </LargeModal>
       );
     case "":
@@ -102,7 +120,7 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
                     setShowType("term");
                   }}
                 >
-                  이용약관 동의(필수)
+                  이용약관 동의 (필수)
                 </S.HoverPlain>
               </S.LabelInputSet>
               <S.LabelInputSet>
@@ -118,7 +136,7 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
                     setShowType("privacy");
                   }}
                 >
-                  개인정보 수집 및 이용 동의(필수)
+                  개인정보 처리 방침 동의 (필수)
                 </S.HoverPlain>
               </S.LabelInputSet>
               <S.LabelInputSet>
@@ -131,10 +149,10 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
                 />
                 <S.HoverPlain
                   onClick={() => {
-                    setShowType("location");
+                    setShowType("agree");
                   }}
                 >
-                  위치 기반 서비스 약관 동의(필수)
+                  개인정보 수집 및 이용 동의 (필수)
                 </S.HoverPlain>
               </S.LabelInputSet>
             </form>
