@@ -52,9 +52,13 @@ const ItmeImageStroke = ({ itemInfo }) => {
     mutationFn: patchUsageCountUp,
     onSuccess: (updatedItemInfo) => {
       setUsageCount(updatedItemInfo.usageCountPerDay);
-      queryClient.setQueryData(["title", itemInfo.category], updatedItemInfo);
-      queryClient.refetchQueries(["title", itemInfo.category]);
-      queryClient.invalidateQueries([itemInfo.category, "list"]);
+      queryClient.setQueryData(
+        ["title", updatedItemInfo.category],
+        updatedItemInfo
+      );
+      queryClient.refetchQueries(["title", updatedItemInfo.category]);
+      queryClient.invalidateQueries([updatedItemInfo.category, "list"]);
+      queryClient.invalidateQueries(["item", updatedItemInfo.id]);
     },
   });
   const increaseCount = useCallback(() => {
