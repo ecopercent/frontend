@@ -7,6 +7,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
   const [nickname, onNickname] = useInput("");
   const [brand, onBrand] = useInput("");
   const [price, onPrice] = useInput(0);
+  const priceRegExp = /^\d{0,8}$/;
   const [purchaseDate, onPurchaseData] = useInput("");
   const [type, onType] = useInput("");
   const targetGoalUsageCount = 100;
@@ -74,13 +75,9 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
           <S.Input
             value={price}
             onChange={(e) => {
-              e.preventDefault();
-              if (e.target.value.length > e.target.maxLength)
-                e.target.value = e.target.value.slice(0, e.target.maxLength);
-              e.target.value = Number(e.target.value);
-              onPrice(e);
+              if (priceRegExp.test(e.target.value)) onPrice(e);
             }}
-            maxLength={8}
+            step="1000"
             type="number"
           />
         </S.LabelInputSet>
