@@ -20,13 +20,13 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
       스테인리스: 220,
       유리: 100,
       실리콘: 100,
-      기타: 100,
+      기타: "",
     },
     ecobag: {
       면: 131,
       PVC: 37,
       종이: 43,
-      기타: 100,
+      기타: "",
     },
   };
   const typeOptions = {
@@ -104,6 +104,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
               min="100"
               max="3000"
               type="number"
+              placeholder="100 ~ 3000"
             />
           ) : (
             <S.Input value={goalUsageCount} type="number" readOnly />
