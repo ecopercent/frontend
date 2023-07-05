@@ -36,6 +36,8 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
         <S.ModalTitle>환영합니다</S.ModalTitle>
         <S.ModalTitle>에코퍼센트 이용을 위해</S.ModalTitle>
         <S.ModalTitle>아래 약관에 동의해주세요.</S.ModalTitle>
+      </S.TextContainer>
+      <S.TextContainer>
         <form>
           <S.LabelInputSet>
             <S.CheckBox
@@ -95,7 +97,7 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
         <S.Btn type="reset" onClick={onClose}>
           취소
         </S.Btn>
-        <S.Btn warning onClick={validateCheck}>
+        <S.Btn featured onClick={validateCheck}>
           등록
         </S.Btn>
       </S.BtnContainer>

@@ -52,7 +52,7 @@ export const Highlight = styled.div`
 
 export const HighlightPinkHover = styled.div`
   padding: 3%;
-  color: ${basicGreen};
+  color: ${basicPink};
   @media (hover: hover) and (pointer: fine) {
     :hover {
       background: ${basicPink};

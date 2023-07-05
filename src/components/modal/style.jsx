@@ -84,7 +84,7 @@ export const LabelInputSet = styled.div`
 `;
 
 export const ErrorContainer = styled.div`
-  height: 10px;
+  height: 30px;
 `;
 
 export const ErrorText = styled.div`
