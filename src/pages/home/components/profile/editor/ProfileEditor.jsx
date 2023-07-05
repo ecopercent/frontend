@@ -46,7 +46,7 @@ export default function ProfileEditor({ setIsEditing }) {
     );
     formData.append(
       "profileImage",
-      typeof userImgFile === "object" ? userImgFile : null
+      typeof userImgFile.current === "object" ? userImgFile.current : null
     );
     return profileEditMutation.mutate(formData);
   };
