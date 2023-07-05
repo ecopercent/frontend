@@ -91,3 +91,6 @@ export const Category = styled.div`
   font-size: 20px;
   font-weight: bold;
 `;
+export const Span = styled.span`
+  padding-left: 50%;
+`;

@@ -12,25 +12,30 @@ const Setting = () => {
 
   const appArr = [
     {
-      label: "앱 소개",
+      label: "공지사항",
       style: S.HoverPlain,
       onClickHandler: () => {
-        console.log("노션 페이지로 리디렉션");
+        window.open(
+          "https://ecopercent.notion.site/ecopercent/eco-3932cd03b235420197d6c81094e4b0e1",
+          "_blank"
+        );
       },
     },
     {
-      label: "개발팀",
+      label: "Q & A",
       style: S.HoverPlain,
       onClickHandler: () => {
-        console.log("노션 페이지로 리디렉션");
+        window.open(
+          "https://ecopercent.notion.site/ecopercent/eco-3932cd03b235420197d6c81094e4b0e1",
+          "_blank"
+        );
       },
     },
     {
-      label: "도움말",
-      style: S.HoverPlain,
-      onClickHandler: () => {
-        console.log("노션 페이지로 리디렉션");
-      },
+      label: "문의처",
+      style: S.Plain,
+      additionalLabel: "ecopercent@gmail.com",
+      onClickHandler: () => {},
     },
   ];
 
@@ -39,21 +44,30 @@ const Setting = () => {
       label: "이용약관",
       style: S.HoverPlain,
       onClickHandler: () => {
-        window.location.href = "/docs/term.html";
+        window.open(
+          "https://ecopercent.notion.site/962969ee318545cf9dc2b70b5067fcb2",
+          "_blank"
+        );
       },
     },
     {
       label: "개인정보 처리 방침",
       style: S.HoverPlain,
       onClickHandler: () => {
-        window.location.href = "/docs/privacy.html";
+        window.open(
+          "https://ecopercent.notion.site/e6f6485b4f8e4aafb178ab08c935a756",
+          "_blank"
+        );
       },
     },
     {
-      label: "문의처",
+      label: "개인정보 수집 및 이용 동의서",
       style: S.HoverPlain,
       onClickHandler: () => {
-        console.log("노션 페이지로 리디렉션");
+        window.open(
+          "https://ecopercent.notion.site/c7b9f6b4b8894c7881dbb846d26ec15f",
+          "_blank"
+        );
       },
     },
   ];
@@ -76,9 +90,13 @@ const Setting = () => {
       <hr />
       <S.Category>앱</S.Category>
       {appArr.map((element) => {
+        console.log("eee", element.additionalLabel);
         return (
           <element.style key={element.label} onClick={element.onClickHandler}>
-            {element.label}
+            {element.label}{" "}
+            {element.additionalLabel && (
+              <S.Span>{element.additionalLabel}</S.Span>
+            )}
           </element.style>
         );
       })}
