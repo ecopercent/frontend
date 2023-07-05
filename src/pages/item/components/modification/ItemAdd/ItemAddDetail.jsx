@@ -8,7 +8,8 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
   const [brand, onBrand] = useInput("");
   const [price, onPrice] = useInput(0);
   const priceRegExp = /^\d{0,8}$/;
-  const [purchaseDate, onPurchaseData] = useInput("");
+  const [purchaseDate, onPurchaseDate, setPurchaseDate] = useInput("");
+  const today = new Date().toISOString().slice(0, 10);
   const [type, onType] = useInput("");
   const targetGoalUsageCount = 100;
   const typeOptions = {
@@ -34,11 +35,11 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
             닉네임 <span style={{ color: "red" }}>*</span>
           </S.Span>
           <S.Input
+            type="text"
             value={nickname}
             onChange={onNickname}
-            type="text"
-            maxLength={8}
             minLength={2}
+            maxLength={8}
           />
         </S.LabelInputSet>
         <S.LabelInputSet>
@@ -46,9 +47,9 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
             브랜드 <span style={{ color: "red" }}>*</span>
           </S.Span>
           <S.Input
+            type="text"
             value={brand}
             onChange={onBrand}
-            type="text"
             minLength={1}
             maxLength={10}
           />
@@ -68,22 +69,30 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>목표횟수</S.Span>
-          <S.Input value={targetGoalUsageCount} type="number" readOnly />
+          <S.Input type="number" value={targetGoalUsageCount} readOnly />
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>구입가</S.Span>
           <S.Input
+            type="number"
             value={price}
             onChange={(e) => {
               if (priceRegExp.test(e.target.value)) onPrice(e);
             }}
             step="1000"
-            type="number"
           />
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>구입일</S.Span>
-          <S.Input value={purchaseDate} onChange={onPurchaseData} type="date" />
+          <S.Input
+            type="date"
+            max={today}
+            value={purchaseDate}
+            onChange={(e) => {
+              if (e.target.value <= today) onPurchaseDate(e);
+              else setPurchaseDate(today);
+            }}
+          />
         </S.LabelInputSet>
       </S.FormInnerWrapper>
       <div
