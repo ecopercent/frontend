@@ -54,7 +54,9 @@ const ItmeImageStroke = ({ itemInfo }) => {
       setUsageCount(updatedItemInfo.usageCountPerDay);
       queryClient.setQueryData(["title", itemInfo.category], updatedItemInfo);
       queryClient.refetchQueries(["title", itemInfo.category]);
-      queryClient.invalidateQueries([itemInfo.category, "list"]);
+      queryClient.refetchQueries(["item", updatedItemInfo.id]);
+      queryClient.refetchQueries([updatedItemInfo.category, "list"]);
+      // queryClient.invalidateQueries([itemInfo.category, "list"]);
     },
   });
   const increaseCount = useCallback(() => {
