@@ -70,7 +70,11 @@ export default function ProfileEditor({ setIsEditing }) {
           ref={nicknameRef}
         />
       </S.ProfileImgTextWrapper>
-      <ProfileBtns setIsEditing={setIsEditing} handleSubmit={handleSubmit} />
+      <ProfileBtns
+        setIsEditing={setIsEditing}
+        handleSubmit={handleSubmit}
+        isMutating={profileEditMutation.isLoading}
+      />
     </S.ProfileForm>
   );
 }

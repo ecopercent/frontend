@@ -49,4 +49,8 @@ export const ProfileBtn = styled.button`
   ${(props) => {
     return props.featured && font.boldBtn;
   }};
+
+  ${(props) => {
+    return props.disabled && btn.profileDisabled;
+  }};
 `;
