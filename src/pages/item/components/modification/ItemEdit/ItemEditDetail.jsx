@@ -11,10 +11,27 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
     itemDetail.purchaseDate ?? ""
   );
   const [type, onType] = useInput(itemDetail.type);
-  const targetGoalUsageCount = itemDetail.goalUsageCount ?? 100;
+  const [goalUsageCount, onGoalUsageCount, setGoalUsageCount] = useInput(
+    itemDetail.goalUsageCount
+  );
+  const goalUsageCountOptions = {
+    tumbler: {
+      플라스틱: 110,
+      스테인리스: 220,
+      유리: 100,
+      실리콘: 100,
+      기타: 100,
+    },
+    ecobag: {
+      면: 131,
+      PVC: 37,
+      종이: 43,
+      기타: 100,
+    },
+  };
   const typeOptions = {
     tumbler: ["플라스틱", "스테인리스", "유리", "실리콘", "기타"],
-    ecobag: ["면", "PVC", "기타"],
+    ecobag: ["면", "PVC", "종이", "기타"],
   };
 
   const handleSubmit = (e) => {
@@ -58,7 +75,16 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>재질</S.Span>
-          <S.Select onChange={onType} value={type}>
+          <S.Select
+            onChange={(e) => {
+              onType(e);
+              setGoalUsageCount(
+                goalUsageCountOptions[itemDetail.category][e.target.value] ??
+                  100
+              );
+            }}
+            value={type}
+          >
             <option value="">재질을 선택하세요.</option>
             {typeOptions[itemDetail.category].map((option) => {
               return (
@@ -71,7 +97,17 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>목표횟수</S.Span>
-          <S.Input value={targetGoalUsageCount} type="number" readOnly />
+          {type === "기타" ? (
+            <S.Input
+              value={goalUsageCount}
+              onChange={onGoalUsageCount}
+              min="100"
+              max="3000"
+              type="number"
+            />
+          ) : (
+            <S.Input value={goalUsageCount} type="number" readOnly />
+          )}
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>구입가</S.Span>
