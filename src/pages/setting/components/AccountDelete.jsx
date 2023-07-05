@@ -50,13 +50,14 @@ const AccountDelete = () => {
         <span>{"<"}</span> 회원 탈퇴
       </S.HoverSettingTitle>
       <form>
-        <S.Category>에코퍼센트와 함께</S.Category>
-        <S.Plain>
-          {/* TODO: 최초 회원가입 ~ 현재까지 시간 안내하주고싶은데
+        {/* <S.Category>에코퍼센트와 함께</S.Category> */}
+        {/* <S.Plain> */}
+        {/* TODO: 최초 회원가입 ~ 현재까지 시간 안내하주고싶은데
           가입일정보가 없어서 마찬가지로 현재는 불가능 
           */}
-          <S.ColorPlain>10</S.ColorPlain> 일 동안
-        </S.Plain>
+
+        {/* <S.ColorPlain>10</S.ColorPlain> 일 동안 */}
+        {/* </S.Plain> */}
         <S.Category>텀블러</S.Category>
         <S.Plain>
           <S.ColorPlain>

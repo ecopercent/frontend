@@ -52,7 +52,7 @@ export const Highlight = styled.div`
 
 export const HighlightPinkHover = styled.div`
   padding: 3%;
-  color: ${basicGreen};
+  color: ${basicPink};
   @media (hover: hover) and (pointer: fine) {
     :hover {
       background: ${basicPink};
@@ -90,4 +90,7 @@ export const Category = styled.div`
   margin-top: 3%;
   font-size: 20px;
   font-weight: bold;
+`;
+export const Span = styled.span`
+  padding-left: 50%;
 `;
