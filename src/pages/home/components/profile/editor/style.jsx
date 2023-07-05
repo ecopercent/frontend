@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import * as font from "@style/font";
 import * as btn from "@style/button";
 
-export const ProfileTextForm = styled.form`
+export const ProfileTextBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -13,10 +13,19 @@ export const ProfileTextForm = styled.form`
   height: 100%;
 `;
 
+export const ProfileText = styled.input`
+  width: 100%;
+  outline: none;
+  border: 1px solid;
+
+  ${font.normalTextarea}
+`;
+
 export const ProfileTextarea = styled.textarea`
   width: 100%;
   resize: none;
   outline: none;
+  border: 1px solid;
 
   ${font.normalTextarea}
 `;
