@@ -79,6 +79,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
             value={price}
             onChange={(e) => {
               e.preventDefault();
+              e.target.value = Math.floor(Number(e.target.value));
               if (e.target.value.length > e.target.maxLength)
                 e.target.value = e.target.value.slice(0, e.target.maxLength);
               e.target.value = Number(e.target.value);
