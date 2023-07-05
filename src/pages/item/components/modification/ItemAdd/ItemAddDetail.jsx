@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useInput from "@hooks/useInput";
 import * as S from "../style";
 
-const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
+const ItemAddDetail = ({ category, submitCallback, onCancel, isMutating }) => {
   const [isError, setIsError] = useState(false);
   const [nickname, onNickname] = useInput("");
   const [brand, onBrand] = useInput("");
@@ -104,10 +104,12 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
         {isError && <S.Error>닉네임과 브랜드는 꼭 작성해주세요!</S.Error>}
       </div>
       <S.ButtonWrapper>
-        <S.CancelBtn type="reset" onClick={onCancel}>
+        <S.CancelBtn type="reset" onClick={onCancel} disabled={isMutating}>
           취소
         </S.CancelBtn>
-        <S.SubmitBtn type="submit">저장</S.SubmitBtn>
+        <S.SubmitBtn type="submit" disabled={isMutating}>
+          저장
+        </S.SubmitBtn>
       </S.ButtonWrapper>
     </S.Form>
   );

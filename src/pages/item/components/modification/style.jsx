@@ -153,15 +153,24 @@ export const ButtonWrapper = styled.div`
 
 export const SubmitBtn = styled.button`
   ${btn.green}
-  ${font.normalBtn}
+
+  ${(props) => {
+    return props.disabled && btn.disabled;
+  }}
 `;
 
 export const CancelBtn = styled.button`
   ${btn.normal}
-  ${font.normalBtn}
+
+  ${(props) => {
+    return props.disabled && btn.disabled;
+  }}
 `;
 
 export const DeleteBtn = styled.button`
   ${btn.pink}
-  ${font.normalBtn}
+
+  ${(props) => {
+    return props.disabled && btn.disabled;
+  }}
 `;
