@@ -77,7 +77,7 @@ export const FormInnerWrapper = styled.div`
   align-items: center;
   gap: 20px;
   @media ${media.mobile} {
-    gap: 15px;
+    gap: 12px;
   }
 
   flex: 1 1 auto;
