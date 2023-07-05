@@ -67,7 +67,7 @@ export default function AllInfo({ category }) {
           <S.InfoValue>
             {total.usageCnt}회<br />
             {total.goalUsageCnt}회<br />
-            {Number.isNaN(total.achivedPercent) ? "0" : total.achivedPercent}%
+            {Number.isNaN(total.usagePercent) ? "0" : total.usagePercent}%
             <br />
           </S.InfoValue>
         </S.ContentPart>
