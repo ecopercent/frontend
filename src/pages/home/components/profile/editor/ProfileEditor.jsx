@@ -20,7 +20,7 @@ export default function ProfileEditor({ setIsEditing }) {
     profileMessage: userQuery.data.profileMessage,
   });
   const nicknameRef = useRef();
-  const [userImgFile, setUserImgFile] = useState(userQuery.data.profileImage);
+  const userImgFile = useRef(userQuery.data.profileImage);
 
   const profileEditMutation = useMutation({
     mutationFn: patchUser,
@@ -58,7 +58,12 @@ export default function ProfileEditor({ setIsEditing }) {
   return (
     <S.ProfileForm>
       <S.ProfileImgTextWrapper>
-        <ProfileImg imgFile={userImgFile} setImgFile={setUserImgFile} />
+        <ProfileImg
+          imgFile={userImgFile.current}
+          setImgFile={(newImg) => {
+            userImgFile.current = newImg;
+          }}
+        />
         <ProfileText
           userData={userData}
           setUserData={setUserData}
