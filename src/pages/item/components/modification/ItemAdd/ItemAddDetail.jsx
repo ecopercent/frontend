@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import useInput from "@hooks/useInput";
 import * as S from "../style";
 
@@ -24,7 +24,20 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
     setIsError(false);
     submitCallback({ category, nickname, brand, price, purchaseDate, type });
   };
-
+  const handleDateChange = useCallback(
+    (e) => {
+      const selectedDate = new Date(e.target.value);
+      const currentDate = new Date();
+      if (selectedDate > currentDate) {
+        e.target.value = currentDate.toISOString().slice(0, 10);
+        onPurchaseData(e);
+      } else {
+        e.target.value = selectedDate.toISOString().slice(0, 10);
+        onPurchaseData(e);
+      }
+    },
+    [purchaseDate]
+  );
   return (
     <S.Form onSubmit={handleSubmit}>
       <S.FormInnerWrapper>
@@ -87,7 +100,11 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>구입일</S.Span>
-          <S.Input value={purchaseDate} onChange={onPurchaseData} type="date" />
+          <S.Input
+            value={purchaseDate}
+            onChange={handleDateChange}
+            type="date"
+          />
         </S.LabelInputSet>
       </S.FormInnerWrapper>
       <div

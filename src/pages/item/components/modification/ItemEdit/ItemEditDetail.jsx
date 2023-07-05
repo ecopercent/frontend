@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import useInput from "@hooks/useInput";
 import * as S from "../style";
 
@@ -26,6 +26,21 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
     setIsError(false);
     editCallback({ nickname, type, brand, price, purchaseDate });
   };
+
+  const handleDateChange = useCallback(
+    (e) => {
+      const selectedDate = new Date(e.target.value);
+      const currentDate = new Date();
+      if (selectedDate > currentDate) {
+        e.target.value = currentDate.toISOString().slice(0, 10);
+        onPurchaseData(e);
+      } else {
+        e.target.value = selectedDate.toISOString().slice(0, 10);
+        onPurchaseData(e);
+      }
+    },
+    [purchaseDate]
+  );
 
   return (
     <S.Form onSubmit={handleSubmit}>
@@ -93,7 +108,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
           <S.Span>구입일</S.Span>
           <S.Input
             value={purchaseDate}
-            onChange={onPurchaseData}
+            onChange={handleDateChange}
             type="date"
             placeholder={itemDetail.purchaseDate}
           />
