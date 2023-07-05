@@ -96,7 +96,9 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
           </S.Select>
         </S.LabelInputSet>
         <S.LabelInputSet>
-          <S.Span>목표횟수</S.Span>
+          <S.Span>
+            목표횟수 <span style={{ color: "red" }}>*</span>
+          </S.Span>
           {type === "기타" ? (
             <S.Input
               value={goalUsageCount}
@@ -105,6 +107,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
               max="3000"
               type="number"
               placeholder="100 ~ 3000"
+              required
             />
           ) : (
             <S.Input value={goalUsageCount} type="number" readOnly />

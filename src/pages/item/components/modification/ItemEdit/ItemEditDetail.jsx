@@ -41,7 +41,14 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
       return;
     }
     setIsError(false);
-    editCallback({ nickname, type, brand, price, purchaseDate });
+    editCallback({
+      nickname,
+      type,
+      brand,
+      price,
+      purchaseDate,
+      goalUsageCount,
+    });
   };
 
   return (
@@ -96,7 +103,9 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
           </S.Select>
         </S.LabelInputSet>
         <S.LabelInputSet>
-          <S.Span>목표횟수</S.Span>
+          <S.Span>
+            목표횟수 <span style={{ color: "red" }}>*</span>
+          </S.Span>
           {type === "기타" ? (
             <S.Input
               value={goalUsageCount}
@@ -105,6 +114,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
               max="3000"
               type="number"
               placeholder="100 ~ 3000"
+              required
             />
           ) : (
             <S.Input value={goalUsageCount} type="number" readOnly />
