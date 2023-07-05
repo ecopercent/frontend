@@ -95,13 +95,17 @@ export default function SignUpItems({ category, itemsInput, setItemsInput }) {
         <S.Label>{category === "tumbler" ? "텀블러" : "에코백"}</S.Label>
         {itemsInput[category] ? (
           <>
-            <S.Btn warning onClick={handleCancel}>
+            <S.Btn type="reset" warning onClick={handleCancel}>
               등록취소
             </S.Btn>
-            <S.Btn onClick={handleEdit}>수정</S.Btn>
+            <S.Btn type="button" onClick={handleEdit}>
+              수정
+            </S.Btn>
           </>
         ) : (
-          <S.Btn onClick={handleAdd}>등록</S.Btn>
+          <S.Btn type="button" onClick={handleAdd}>
+            등록
+          </S.Btn>
         )}
       </S.LabelBox>
       {itemsInput[category] ? (
