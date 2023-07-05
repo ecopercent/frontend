@@ -9,18 +9,20 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
   const [price, onPrice] = useInput(0);
   const [purchaseDate, onPurchaseData] = useInput("");
   const [type, onType] = useInput("");
-  const [usageGoal, onUsageGoal] = useInput(0);
-  const usageGoalOptions = {
+  const [goalUsageCount, onGoalUsageCount, setGoalUsageCount] = useInput(100);
+  const goalUsageCountOptions = {
     tumbler: {
       플라스틱: 110,
       스테인리스: 220,
       유리: 100,
       실리콘: 100,
+      기타: 100,
     },
     ecobag: {
       면: 131,
       PVC: 37,
       종이: 43,
+      기타: 100,
     },
   };
   const typeOptions = {
@@ -35,7 +37,15 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
       return;
     }
     setIsError(false);
-    submitCallback({ category, nickname, brand, price, purchaseDate, type });
+    submitCallback({
+      category,
+      nickname,
+      brand,
+      price,
+      purchaseDate,
+      type,
+      goalUsageCount,
+    });
   };
 
   return (
@@ -67,7 +77,14 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>재질</S.Span>
-          <S.Select onChange={onType}>
+          <S.Select
+            onChange={(e) => {
+              onType(e);
+              setGoalUsageCount(
+                goalUsageCountOptions[category][e.target.value] ?? 100
+              );
+            }}
+          >
             <option value="">재질을 선택하세요.</option>
             {typeOptions[category].map((option) => {
               return (
@@ -81,9 +98,15 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
         <S.LabelInputSet>
           <S.Span>목표횟수</S.Span>
           {type === "기타" ? (
-            <S.Input value={usageGoal} type="number" />
+            <S.Input
+              value={goalUsageCount}
+              onChange={onGoalUsageCount}
+              min="100"
+              max="3000"
+              type="number"
+            />
           ) : (
-            <S.Input value={usageGoal} type="number" readOnly />
+            <S.Input value={goalUsageCount} type="number" readOnly />
           )}
         </S.LabelInputSet>
         <S.LabelInputSet>
