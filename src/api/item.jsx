@@ -39,10 +39,10 @@ export function deleteItem(itemId) {
   });
 }
 
-export function patchUsageCountUp(itemId) {
-  return axios.patch(`/items/${itemId}/usage-count`).then((res) => {
-    return res.data;
-  });
+export async function patchUsageCountUp(itemId) {
+  const res = await axios.patch(`/items/${itemId}/usage-count`);
+  if (res.data.image) res.data.image = base64ToDataUrl(res.data.image);
+  return res.data;
 }
 
 export async function getTitleItem(category) {
