@@ -47,19 +47,34 @@ export const LargeModalLayout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
 `;
+
+/*
+ *      Check Term Of Use Modal
+ */
 
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  margin: 10px 0;
+`;
+
+export const TermsForm = styled.form`
+  width: 85%;
+  padding: 10px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 15px 0;
 `;
 
 export const ModalTitle = styled.h2`
-  margin: 0;
   ${font.boldTitle3}
+  margin: 0;
+  text-align: center;
 `;
 
 export const ModalContent = styled.span`
@@ -79,12 +94,14 @@ export const BtnContainer = styled.div`
 export const LabelInputSet = styled.div`
   display: flex;
   align-items: center;
-  // gap: 10px;
+  justify-content: center;
+  gap: 10px;
   width: 100%;
+  padding: 0 10px;
 `;
 
 export const ErrorContainer = styled.div`
-  height: 10px;
+  height: 30px;
 `;
 
 export const ErrorText = styled.div`
@@ -96,23 +113,20 @@ export const ErrorText = styled.div`
   width: 100%;
 `;
 
-export const HoverPlain = styled.div`
+export const HoverPlain = styled.span`
   ${font.normalSmall}
+  height: 22px;
   width: 90%;
-  height: 50px;
-  padding: 15px;
   :hover {
-    background: ${color.basicGreen};
-    color: white;
+    text-decoration: underline;
+    color: gray;
   }
   border-radius: 3px;
   cursor: pointer;
 `;
 
-export const Plain = styled.div`
+export const Plain = styled.span`
   width: 90%;
-  height: 50px;
-  padding: 15px;
   border-radius: 3px;
   cursor: pointer;
 `;

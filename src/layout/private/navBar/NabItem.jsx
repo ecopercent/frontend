@@ -31,11 +31,14 @@ const NabItem = ({ IconComponent, ClickedComponent, page, description }) => {
       height: 25px;
     }
   `;
-
   return (
     <S.LinkWrapper onClick={tabClickHandler}>
-      <S.TabItemBackGround featured={pathname === page}>
-        {pathname === page ? <ClickedIcon /> : <UnclickedIcon />}
+      <S.TabItemBackGround featured={`/${pathname.split("/")[1]}` === page}>
+        {`/${pathname.split("/")[1]}` === page ? (
+          <ClickedIcon />
+        ) : (
+          <UnclickedIcon />
+        )}
       </S.TabItemBackGround>
       <S.Description>{description}</S.Description>
     </S.LinkWrapper>
