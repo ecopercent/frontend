@@ -92,26 +92,32 @@ export const ItemEdit = ({
   return (
     <ItemEditWrap>
       <ItemEditBorder>
-        <ItemEditHead
-          item={item}
-          setShowdeleteItemModal={setShowdeleteItemModal}
-          displayDeleteBtn={displayDeleteBtn}
-          isMutating={isMutating}
-        />
-        <ItemImage
-          imgFile={itemImg}
-          setImgFile={onUploadImg}
-          category={category}
-        />
-        <hr />
-        <ItemEditDetail
-          itemDetail={item}
-          editCallback={onSubmit}
-          onCancel={onCancel}
-          isMutating={isMutating}
-        />
-        {showdeleteItemModal && (
-          <DeleteItemModal onClose={onCloseModal} item={item} />
+        {category ? (
+          <>
+            <ItemEditHead
+              item={item}
+              setShowdeleteItemModal={setShowdeleteItemModal}
+              displayDeleteBtn={displayDeleteBtn}
+              isMutating={isMutating}
+            />
+            <ItemImage
+              imgFile={itemImg}
+              setImgFile={onUploadImg}
+              category={category}
+            />
+            <hr />
+            <ItemEditDetail
+              itemDetail={item}
+              editCallback={onSubmit}
+              onCancel={onCancel}
+              isMutating={isMutating}
+            />
+            {showdeleteItemModal && (
+              <DeleteItemModal onClose={onCloseModal} item={item} />
+            )}
+          </>
+        ) : (
+          <Spinner size="50px" />
         )}
       </ItemEditBorder>
     </ItemEditWrap>
