@@ -90,7 +90,6 @@ const Setting = () => {
       <hr />
       <S.Category>앱</S.Category>
       {appArr.map((element) => {
-        console.log("eee", element.additionalLabel);
         return (
           <element.style key={element.label} onClick={element.onClickHandler}>
             {element.label}{" "}
