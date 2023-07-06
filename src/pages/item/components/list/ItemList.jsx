@@ -9,7 +9,7 @@ export default function ItemList({ itemListOf, infoItemId, setInfoItemId }) {
   const itemListQuery = useQuery({
     queryKey: [`${itemListOf}`, "list"],
     queryFn: () => {
-      getItemList(itemListOf);
+      return getItemList(itemListOf);
     },
   });
 
@@ -45,6 +45,7 @@ export default function ItemList({ itemListOf, infoItemId, setInfoItemId }) {
     category: itemListOf,
   };
 
+  if (itemListQuery.isLoading) return null;
   return (
     <S.ItemsUl ref={ulRef}>
       {itemListQuery.data?.map((item) => {
