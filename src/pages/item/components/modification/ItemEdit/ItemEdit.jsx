@@ -19,7 +19,6 @@ const ItemEditOnAuth = () => {
     queryFn: () => {
       return getItem(item.id);
     },
-    enabled: item.type === "auth",
   });
 
   const queryClient = useQueryClient();
@@ -61,21 +60,23 @@ const ItemEditOnAuth = () => {
     });
   };
 
-  return (
-    <ItemEdit
-      category={item.category}
-      item={{ ...prevItemInfoQuery.data }}
-      onCancel={hancleCancel}
-      onSubmit={editItemOnAuth}
-      onUploadImg={setItemImgFile}
-      displayDeleteBtn
-    />
-  );
+  if (prevItemInfoQuery.isSuccess)
+    return (
+      <ItemEdit
+        item={{ ...prevItemInfoQuery.data }}
+        onCancel={hancleCancel}
+        onSubmit={editItemOnAuth}
+        onUploadImg={setItemImgFile}
+        displayDeleteBtn
+      />
+    );
+
+  return null;
 };
 
 export const ItemEdit = ({
-  category,
   item,
+  category = item.category,
   itemImg = item.image,
   onCancel,
   onSubmit,
