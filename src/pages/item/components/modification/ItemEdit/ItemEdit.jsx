@@ -1,11 +1,15 @@
 import React, { useCallback, useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
+
 import { getItem, patchItem } from "src/api/item";
-import DeleteItemModal from "@components/modal/DeleteItemModal";
+
 import ItemImage from "./ItemEditImage";
 import ItemEditDetail from "./ItemEditDetail";
 import ItemEditHead from "./ItemEditHead";
+import Spinner from "@components/Spinner";
+import DeleteItemModal from "@components/modal/DeleteItemModal";
+
 import { ItemEditBorder, ItemEditWrap } from "../style";
 
 const ItemEditOnAuth = () => {
@@ -58,17 +62,6 @@ const ItemEditOnAuth = () => {
     });
   };
 
-  if (prevItemInfoQuery.isLoading)
-    return (
-      <ItemEdit
-        item={{ category: item.category }}
-        onCancel={hancleCancel}
-        onSubmit={editItemOnAuth}
-        onUploadImg={setItemImgFile}
-        displayDeleteBtn
-      />
-    );
-
   return (
     <ItemEdit
       item={{ ...prevItemInfoQuery.data }}
@@ -97,29 +90,30 @@ export const ItemEdit = ({
   return (
     <ItemEditWrap>
       <ItemEditBorder>
-        <ItemEditHead
-          item={item}
-          setShowdeleteItemModal={setShowdeleteItemModal}
-          displayDeleteBtn={displayDeleteBtn}
-        />
-        <ItemImage
-          imgFile={itemImg}
-          setImgFile={onUploadImg}
-          category={category}
-        />
-        <hr />
-        {itemImg ? (
-          <ItemEditDetail
-            key="isSuccess"
-            itemDetail={item}
-            editCallback={onSubmit}
-            onCancel={onCancel}
-          />
+        {category ? (
+          <>
+            <ItemEditHead
+              item={item}
+              setShowdeleteItemModal={setShowdeleteItemModal}
+              displayDeleteBtn={displayDeleteBtn}
+            />
+            <ItemImage
+              imgFile={itemImg}
+              setImgFile={onUploadImg}
+              category={category}
+            />
+            <hr />
+            <ItemEditDetail
+              itemDetail={item}
+              editCallback={onSubmit}
+              onCancel={onCancel}
+            />
+            {showdeleteItemModal && (
+              <DeleteItemModal onClose={onCloseModal} item={item} />
+            )}
+          </>
         ) : (
-          <ItemEditDetail key="isLoading" itemDetail={item} />
-        )}
-        {showdeleteItemModal && (
-          <DeleteItemModal onClose={onCloseModal} item={item} />
+          <Spinner size="50px" />
         )}
       </ItemEditBorder>
     </ItemEditWrap>
