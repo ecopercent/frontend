@@ -18,7 +18,6 @@ export default function EachInfo({ itemId, itemCategory }) {
 
   const editObj = {
     id: itemId,
-    type: "auth",
     category: itemCategory,
   };
 

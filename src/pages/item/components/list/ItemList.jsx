@@ -42,7 +42,6 @@ export default function ItemList({ itemListOf, infoItemId, setInfoItemId }) {
 
   const navigate = useNavigate();
   const addObj = {
-    type: "auth",
     category: itemListOf,
   };
 
