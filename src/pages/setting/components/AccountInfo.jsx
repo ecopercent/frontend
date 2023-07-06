@@ -34,10 +34,13 @@ const AccountInfo = () => {
         <span>{"<"}</span> 회원 정보
       </S.HoverSettingTitle>
       <S.Category>연동 소셜</S.Category>
-      <S.Plain>{`${userQuery.data?.oauthProvider} (${userQuery.data?.email})`}</S.Plain>
+      <S.Plain>
+        {userQuery.isSuccess &&
+          `${userQuery?.data?.oauthProvider} (${userQuery?.data?.email})`}
+      </S.Plain>
       <hr />
       <S.Category>닉네임</S.Category>
-      <S.Plain>{userQuery.data?.nickname}</S.Plain>
+      <S.Plain>{userQuery?.data?.nickname}</S.Plain>
       <hr />
       {/*
       TODO: 가입일: 가입일 정보가 DB에 없어서 백에 요청만 한 상태
