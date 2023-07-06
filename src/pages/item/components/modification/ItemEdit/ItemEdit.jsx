@@ -24,10 +24,11 @@ const ItemEditOnAuth = () => {
   const queryClient = useQueryClient();
   const itemEditMutation = useMutation({
     mutationFn: patchItem,
-    onSuccess: async () => {
-      await queryClient.refetchQueries([`${item.category}`, "list"]);
+    onSuccess: (res) => {
+      queryClient.setQueryData(["item", Number(item.id)], res);
       queryClient.refetchQueries(["item", Number(item.id)]);
-      queryClient.refetchQueries(["title", item.category]);
+      if (res.isTitle) queryClient.invalidateQueries(["title", item.category]);
+      queryClient.invalidateQueries([`${item.category}`, "list"]);
       navigate("/item", { state: { item: item.id, category: item.category } });
     },
   });
@@ -37,22 +38,19 @@ const ItemEditOnAuth = () => {
     itemImgFile.current = img;
   };
 
-  const editItemOnAuth = useCallback(
-    (input) => {
-      const formData = new FormData();
-      const itemData = {
-        ...input,
-        category: item.category,
-      };
-      formData.append(
-        "itemData",
-        new Blob([JSON.stringify(itemData)], { type: "application/json" })
-      );
-      formData.append("itemImage", itemImgFile.current);
-      itemEditMutation.mutate({ formData, id: item.id });
-    },
-    [itemEditMutation]
-  );
+  const editItemOnAuth = useCallback((input) => {
+    const formData = new FormData();
+    const itemData = {
+      ...input,
+      category: item.category,
+    };
+    formData.append(
+      "itemData",
+      new Blob([JSON.stringify(itemData)], { type: "application/json" })
+    );
+    formData.append("itemImage", itemImgFile.current);
+    itemEditMutation.mutate({ formData, id: item.id });
+  }, []);
 
   const hancleCancel = () => {
     navigate("/item", {
@@ -110,11 +108,16 @@ export const ItemEdit = ({
           category={category}
         />
         <hr />
-        <ItemEditDetail
-          itemDetail={item}
-          editCallback={onSubmit}
-          onCancel={onCancel}
-        />
+        {itemImg ? (
+          <ItemEditDetail
+            key="isSuccess"
+            itemDetail={item}
+            editCallback={onSubmit}
+            onCancel={onCancel}
+          />
+        ) : (
+          <ItemEditDetail key="isLoading" itemDetail={item} />
+        )}
         {showdeleteItemModal && (
           <DeleteItemModal onClose={onCloseModal} item={item} />
         )}
