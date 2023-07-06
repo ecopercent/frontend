@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { patchUsageCountUp } from "src/api/item";
 import { lightGray } from "@style/color";
 import * as S from "./style";
+import Spinner from "@components/Spinner";
 
 function toPieChartItemPath(x, y, radiusIn, radiusOut, startAngle, endAngle) {
   function toXY(cX, cY, r, degrees) {
@@ -66,27 +67,39 @@ const ItmeImageStroke = ({ itemInfo }) => {
   }, [usageCount]);
 
   return (
-    <svg width="200" height="200" viewBox="0 0 200 200" onClick={increaseCount}>
-      <g>
-        <foreignObject x="25" y="25" width="100%" height="100%">
-          <S.ImageClipper
-            src={itemInfo.image || `img/default_${itemInfo.category}.png`}
-            alt="아이템 이미지"
-          />
-        </foreignObject>
-        {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map((element) => {
-          if (element.key <= divideNum - usageCount)
-            return <S.StrokePath d={element.d} key={element.key} />;
-          return (
-            <S.StrokePath
-              d={element.d}
-              style={{ fill: lightGray }}
-              key={element.key}
+    <>
+      <svg
+        width="200"
+        height="200"
+        viewBox="0 0 200 200"
+        onClick={increaseCount}
+      >
+        <g>
+          <foreignObject x="25" y="25" width="100%" height="100%">
+            <S.ImageClipper
+              src={itemInfo.image || `img/default_${itemInfo.category}.png`}
+              alt="아이템 이미지"
             />
-          );
-        })}
-      </g>
-    </svg>
+          </foreignObject>
+          {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map(
+            (element) => {
+              if (element.key <= divideNum - usageCount)
+                return <S.StrokePath d={element.d} key={element.key} />;
+              return (
+                <S.StrokePath
+                  d={element.d}
+                  style={{ fill: lightGray }}
+                  key={element.key}
+                />
+              );
+            }
+          )}
+        </g>
+      </svg>
+      {(upUsageCountMutation.isLoading || upUsageCountMutation.isPaused) && (
+        <Spinner size="50px" />
+      )}
+    </>
   );
 };
 
