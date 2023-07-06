@@ -109,7 +109,7 @@ export const Input = styled.input`
   border-bottom: 1.5px solid;
   outline: none;
   :read-only {
-    border: 0;
+    border-color: white;
   }
 
   background-color: white;

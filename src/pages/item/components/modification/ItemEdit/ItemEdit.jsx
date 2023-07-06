@@ -1,11 +1,15 @@
 import React, { useCallback, useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
+
 import { getItem, patchItem } from "src/api/item";
-import DeleteItemModal from "@components/modal/DeleteItemModal";
+
 import ItemImage from "./ItemEditImage";
 import ItemEditDetail from "./ItemEditDetail";
 import ItemEditHead from "./ItemEditHead";
+import Spinner from "@components/Spinner";
+import DeleteItemModal from "@components/modal/DeleteItemModal";
+
 import { ItemEditBorder, ItemEditWrap } from "../style";
 
 const ItemEditOnAuth = () => {
@@ -19,16 +23,16 @@ const ItemEditOnAuth = () => {
     queryFn: () => {
       return getItem(item.id);
     },
-    enabled: item.type === "auth",
   });
 
   const queryClient = useQueryClient();
   const itemEditMutation = useMutation({
     mutationFn: patchItem,
-    onSuccess: async () => {
-      await queryClient.refetchQueries([`${item.category}`, "list"]);
+    onSuccess: (res) => {
+      queryClient.setQueryData(["item", Number(item.id)], res);
       queryClient.refetchQueries(["item", Number(item.id)]);
-      queryClient.refetchQueries(["title", item.category]);
+      if (res.isTitle) queryClient.invalidateQueries(["title", item.category]);
+      queryClient.invalidateQueries([`${item.category}`, "list"]);
       navigate("/item", { state: { item: item.id, category: item.category } });
     },
   });
@@ -38,22 +42,19 @@ const ItemEditOnAuth = () => {
     itemImgFile.current = img;
   };
 
-  const editItemOnAuth = useCallback(
-    (input) => {
-      const formData = new FormData();
-      const itemData = {
-        ...input,
-        category: item.category,
-      };
-      formData.append(
-        "itemData",
-        new Blob([JSON.stringify(itemData)], { type: "application/json" })
-      );
-      formData.append("itemImage", itemImgFile.current);
-      itemEditMutation.mutate({ formData, id: item.id });
-    },
-    [itemEditMutation]
-  );
+  const editItemOnAuth = useCallback((input) => {
+    const formData = new FormData();
+    const itemData = {
+      ...input,
+      category: item.category,
+    };
+    formData.append(
+      "itemData",
+      new Blob([JSON.stringify(itemData)], { type: "application/json" })
+    );
+    formData.append("itemImage", itemImgFile.current);
+    itemEditMutation.mutate({ formData, id: item.id });
+  }, []);
 
   const hancleCancel = () => {
     navigate("/item", {
@@ -63,7 +64,6 @@ const ItemEditOnAuth = () => {
 
   return (
     <ItemEdit
-      category={item.category}
       item={{ ...prevItemInfoQuery.data }}
       onCancel={hancleCancel}
       onSubmit={editItemOnAuth}
@@ -75,8 +75,8 @@ const ItemEditOnAuth = () => {
 };
 
 export const ItemEdit = ({
-  category,
   item,
+  category = item.category,
   itemImg = item.image,
   onCancel,
   onSubmit,
