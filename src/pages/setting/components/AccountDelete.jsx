@@ -15,7 +15,7 @@ const countUsageCount = (itemList) => {
   return sum;
 };
 
-const AccountDelete = () => {
+const AccountDelete = ({ userName }) => {
   const navigate = useNavigate();
   const { authenticated, signOut } = useContext(AuthenticatedContext);
   const tumblerListQuery = useQuery({
@@ -84,13 +84,16 @@ const AccountDelete = () => {
           </S.ColorPlain>{" "}
           번의 순간들
         </S.Plain>
-        <S.Category>정말 지구를 죽이면서까지 탈퇴하시겠습니까?</S.Category>
+        <S.Category>
+          <S.ColorPlain>{!userName ? "사용자" : userName}</S.ColorPlain> 님만의
+          추억으로 간직하시겠습니까?
+        </S.Category>
         <S.HighlightPinkHover
           onClick={() => {
             setShowDeleteUserModal(true);
           }}
         >
-          그럼요
+          회원탈퇴
         </S.HighlightPinkHover>
       </form>
       {showDeleteUserModal && (

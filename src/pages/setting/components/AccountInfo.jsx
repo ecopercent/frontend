@@ -19,7 +19,7 @@ const AccountInfo = () => {
 
   if (accountDeletePage) {
     return accountDeletePage === "accountDelete" ? (
-      <AccountDelete />
+      <AccountDelete userName={userQuery?.data?.nickname} />
     ) : (
       <Error />
     );
