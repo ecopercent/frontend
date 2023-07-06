@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useInput from "@hooks/useInput";
 import * as S from "../style";
 
 const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
   const [isError, setIsError] = useState(false);
-  const [nickname, onNickname] = useInput(itemDetail.nickname);
-  const [brand, onBrand] = useInput(itemDetail.brand);
-  const [price, onPrice] = useInput(itemDetail.price);
-  const [purchaseDate, onPurchaseData] = useInput(
+  const [nickname, onNickname, setNickname] = useInput(itemDetail.nickname);
+  const [brand, onBrand, setBrand] = useInput(itemDetail.brand);
+  const [price, onPrice, setPrice] = useInput(itemDetail.price);
+  const [purchaseDate, onPurchaseDate, setPurchaseDate] = useInput(
     itemDetail.purchaseDate ?? ""
   );
-  const [type, onType] = useInput(itemDetail.type);
+  const [type, onType, setType] = useInput(itemDetail.type);
   const [goalUsageCount, onGoalUsageCount, setGoalUsageCount] = useInput(
     itemDetail.goalUsageCount
   );
@@ -50,6 +50,15 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
       goalUsageCount,
     });
   };
+
+  useEffect(() => {
+    setNickname(itemDetail.nickname);
+    setBrand(itemDetail.brand);
+    setPrice(itemDetail.price);
+    setType(itemDetail.type);
+    setPurchaseDate(itemDetail.purchaseDate);
+    setGoalUsageCount(itemDetail.goalUsageCount);
+  }, [itemDetail]);
 
   return (
     <S.Form onSubmit={handleSubmit}>
@@ -139,7 +148,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
           <S.Span>구입일</S.Span>
           <S.Input
             value={purchaseDate}
-            onChange={onPurchaseData}
+            onChange={onPurchaseDate}
             type="date"
             placeholder={itemDetail.purchaseDate}
           />

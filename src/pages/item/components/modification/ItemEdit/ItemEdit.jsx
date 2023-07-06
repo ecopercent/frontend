@@ -60,10 +60,10 @@ const ItemEditOnAuth = () => {
     });
   };
 
-  if (prevItemInfoQuery.isSuccess)
+  if (prevItemInfoQuery.isLoading)
     return (
       <ItemEdit
-        item={{ ...prevItemInfoQuery.data }}
+        item={{ category: item.category }}
         onCancel={hancleCancel}
         onSubmit={editItemOnAuth}
         onUploadImg={setItemImgFile}
@@ -71,7 +71,15 @@ const ItemEditOnAuth = () => {
       />
     );
 
-  return null;
+  return (
+    <ItemEdit
+      item={{ ...prevItemInfoQuery.data }}
+      onCancel={hancleCancel}
+      onSubmit={editItemOnAuth}
+      onUploadImg={setItemImgFile}
+      displayDeleteBtn
+    />
+  );
 };
 
 export const ItemEdit = ({
