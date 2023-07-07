@@ -8,14 +8,15 @@ import React, {
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
+import Spinner from "@components/Spinner";
 import SignUpUser from "./components/SignUpUser";
 import SignUpItems from "./components/SignUpItems";
 import CancelCheckModal from "@modal/CancelCheckModal";
 
+import CheckTermOfUseModal from "@components/modal/CheckTermOfUseModal";
 import { postUserOfKakao, postUserOfApple } from "src/api/user";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 
-import CheckTermOfUseModal from "@components/modal/CheckTermOfUseModal";
 import { OutletWrapper } from "@layout/style";
 import * as S from "./style";
 
@@ -118,7 +119,9 @@ export default function SignUp() {
     setCancelCheckModalIsOpen(true);
   };
 
-  return (
+  return signUpMutation.isLoading || signUpMutation.isPaused ? (
+    <Spinner size="50px" />
+  ) : (
     <OutletWrapper fixedWidth fullHeight>
       {cancelCheckModalIsOpen && (
         <CancelCheckModal
