@@ -94,7 +94,9 @@ const Setting = () => {
           <element.style key={element.label} onClick={element.onClickHandler}>
             {element.label}{" "}
             {element.additionalLabel && (
-              <S.Span>{element.additionalLabel}</S.Span>
+              <S.Span href={`mailto:${element.additionalLabel}`}>
+                {element.additionalLabel}
+              </S.Span>
             )}
           </element.style>
         );
