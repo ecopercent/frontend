@@ -4,6 +4,7 @@ import { BsPlusCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { getItemList } from "src/api/item";
 import * as S from "./style";
+import Spinner from "@components/Spinner";
 
 export default function ItemList({ itemListOf, infoItemId, setInfoItemId }) {
   const itemListQuery = useQuery({
@@ -45,7 +46,7 @@ export default function ItemList({ itemListOf, infoItemId, setInfoItemId }) {
     category: itemListOf,
   };
 
-  if (itemListQuery.isLoading) return null;
+  if (itemListQuery.isLoading) return <Spinner size="50px" />;
   return (
     <S.ItemsUl ref={ulRef}>
       {itemListQuery.data?.map((item) => {
