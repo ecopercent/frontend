@@ -46,7 +46,16 @@ const oneStrockInfo = [
 ];
 
 const ItmeImageStroke = ({ itemInfo }) => {
-  const divideNum = itemInfo.category === "tumbler" ? 3 : 1;
+  const infoPerCategory =
+    itemInfo.category === "tumbler"
+      ? {
+          name: "텀블러",
+          maxCount: 3,
+        }
+      : {
+          name: "에코백",
+          maxCount: 1,
+        };
   const [usageCount, setUsageCount] = useState(itemInfo.usageCountPerDay);
   const queryClient = useQueryClient();
   const upUsageCountMutation = useMutation({
@@ -63,7 +72,12 @@ const ItmeImageStroke = ({ itemInfo }) => {
     },
   });
   const increaseCount = useCallback(() => {
-    if (usageCount < divideNum) upUsageCountMutation.mutate(itemInfo.id);
+    if (usageCount < infoPerCategory.maxCount)
+      upUsageCountMutation.mutate(itemInfo.id);
+    else
+      alert(
+        `${infoPerCategory.name} 하루 최대 사용 횟수는 ${infoPerCategory.maxCount}회입니다.`
+      );
   }, [usageCount]);
 
   return (
@@ -81,19 +95,20 @@ const ItmeImageStroke = ({ itemInfo }) => {
               alt="아이템 이미지"
             />
           </foreignObject>
-          {(divideNum === 3 ? threeStrockInfo : oneStrockInfo).map(
-            (element) => {
-              if (element.key <= divideNum - usageCount)
-                return <S.StrokePath d={element.d} key={element.key} />;
-              return (
-                <S.StrokePath
-                  d={element.d}
-                  style={{ fill: lightGray }}
-                  key={element.key}
-                />
-              );
-            }
-          )}
+          {(infoPerCategory.maxCount === 3
+            ? threeStrockInfo
+            : oneStrockInfo
+          ).map((element) => {
+            if (element.key <= infoPerCategory.maxCount - usageCount)
+              return <S.StrokePath d={element.d} key={element.key} />;
+            return (
+              <S.StrokePath
+                d={element.d}
+                style={{ fill: lightGray }}
+                key={element.key}
+              />
+            );
+          })}
         </g>
       </svg>
       {(upUsageCountMutation.isLoading || upUsageCountMutation.isPaused) && (
