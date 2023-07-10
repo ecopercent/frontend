@@ -23,7 +23,7 @@ export default function AllInfo({ category }) {
     total.achivedCnt = itemsQuery.data.filter((item) => {
       total.usageCnt += Number(item.currentUsageCount);
       total.goalUsageCnt += Number(item.goalUsageCount);
-      return item.usageCount >= item.goalUsageCount;
+      return item.currentUsageCount >= item.goalUsageCount;
     }).length;
     total.usagePercent = Math.round(
       (total.usageCnt / total.goalUsageCnt) * 100
