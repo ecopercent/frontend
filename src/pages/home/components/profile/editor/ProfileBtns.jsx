@@ -8,6 +8,9 @@ export default function ProfileBtns({
 }) {
   return (
     <S.ProfileBtnContainer>
+      <S.ProfileBtn type="button" onClick={setIsEditing} disabled={isMutating}>
+        취소
+      </S.ProfileBtn>
       <S.ProfileBtn
         type="submit"
         featured
@@ -15,9 +18,6 @@ export default function ProfileBtns({
         disabled={isMutating}
       >
         완료
-      </S.ProfileBtn>
-      <S.ProfileBtn type="button" onClick={setIsEditing} disabled={isMutating}>
-        취소
       </S.ProfileBtn>
     </S.ProfileBtnContainer>
   );
