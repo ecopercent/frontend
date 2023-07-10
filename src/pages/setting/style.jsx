@@ -79,12 +79,17 @@ export const HoverPlain = styled.div`
   cursor: pointer;
 `;
 
-export const Plain = styled.div`
+export const SpaceBetweenPlain = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 3%;
   border-radius: 3px;
-`;
+  `;
+  
+export const Plain = styled.div`
+  padding: 3%;
+  border-radius: 3px;
+  `;
 
 export const Category = styled.div`
   padding-left: 2%;

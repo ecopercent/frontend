@@ -33,7 +33,7 @@ const Setting = () => {
     },
     {
       label: "문의처",
-      style: S.Plain,
+      style: S.SpaceBetweenPlain,
       additionalLabel: "ecopercent@gmail.com",
       onClickHandler: () => {},
     },

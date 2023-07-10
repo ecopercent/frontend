@@ -82,7 +82,7 @@ const AccountDelete = ({ userName }) => {
                 countUsageCount(ecobagListQuery?.data)
               : "여러"}
           </S.ColorPlain>{" "}
-          번의 순간들
+          번의 순간들을
         </S.Plain>
         <S.Category>
           <S.ColorPlain>{!userName ? "사용자" : userName}</S.ColorPlain> 님만의
