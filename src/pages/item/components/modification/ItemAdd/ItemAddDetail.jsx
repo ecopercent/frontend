@@ -34,7 +34,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel, isMutating }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!nickname || !nickname.trim() || !brand || !brand.trim()) {
+    if (!nickname || !nickname.trim()) {
       setIsError(true);
       return;
     }
@@ -66,9 +66,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel, isMutating }) => {
           />
         </S.LabelInputSet>
         <S.LabelInputSet>
-          <S.Span>
-            브랜드 <span style={{ color: "red" }}>*</span>
-          </S.Span>
+          <S.Span>브랜드</S.Span>
           <S.Input
             type="text"
             value={brand}
@@ -145,7 +143,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel, isMutating }) => {
           marginTop: "1%",
         }}
       >
-        {isError && <S.Error>닉네임과 브랜드는 꼭 작성해주세요!</S.Error>}
+        {isError && <S.Error>닉네임은 꼭 작성해주세요!</S.Error>}
       </div>
       <S.ButtonWrapper>
         <S.CancelBtn type="reset" onClick={onCancel} disabled={isMutating}>

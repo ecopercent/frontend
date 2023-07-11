@@ -61,7 +61,7 @@ export default function EachInfo({ itemId, itemCategory }) {
         <S.InfoContentsDiv>
           <S.ContentPart>
             <S.InfoLabel>
-              브랜드
+              {itemQuery.data?.brand !== "" ? "브랜드" : ""}
               <br />
               {itemQuery.data?.type !== "" ? "재질" : ""}
               <br />
