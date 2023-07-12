@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import * as font from "@style/font";
 import * as btn from "@style/button";
 
-export const ProfileTextForm = styled.form`
+export const ProfileTextBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -13,10 +13,19 @@ export const ProfileTextForm = styled.form`
   height: 100%;
 `;
 
+export const ProfileText = styled.input`
+  width: 100%;
+  outline: none;
+  border: 1px solid;
+
+  ${font.normalTextarea}
+`;
+
 export const ProfileTextarea = styled.textarea`
   width: 100%;
   resize: none;
   outline: none;
+  border: 1px solid;
 
   ${font.normalTextarea}
 `;
@@ -26,7 +35,7 @@ export const ProfileBtnContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0px 8px;
+  padding: 0px 6px;
 
   width: 100%;
   height: 24px;
@@ -39,5 +48,9 @@ export const ProfileBtn = styled.button`
 
   ${(props) => {
     return props.featured && font.boldBtn;
+  }};
+
+  ${(props) => {
+    return props.disabled && btn.profileDisabled;
   }};
 `;

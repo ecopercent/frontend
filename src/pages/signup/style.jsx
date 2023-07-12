@@ -24,7 +24,7 @@ export const SignUpLayoutCol = styled.div`
   overflow-y: auto;
 `;
 
-export const InputList = styled.ul`
+export const SignUpForm = styled.form`
   display: flex;
   flex-direction: column;
 

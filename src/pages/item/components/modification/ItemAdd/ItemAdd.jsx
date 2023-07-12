@@ -54,11 +54,18 @@ const ItemAddOnAuth = () => {
       onCancel={hancleCancel}
       onSubmit={addItemOnAuth}
       onUploadImg={setItemImgFile}
+      isMutating={itemAddMutation.isLoading}
     />
   );
 };
 
-export const ItemAdd = ({ category, onCancel, onSubmit, onUploadImg }) => {
+export const ItemAdd = ({
+  category,
+  onCancel,
+  onSubmit,
+  onUploadImg,
+  isMutating,
+}) => {
   return (
     <ItemEditWrap>
       <ItemEditBorder>
@@ -69,6 +76,7 @@ export const ItemAdd = ({ category, onCancel, onSubmit, onUploadImg }) => {
           category={category}
           submitCallback={onSubmit}
           onCancel={onCancel}
+          isMutating={isMutating}
         />
       </ItemEditBorder>
     </ItemEditWrap>

@@ -39,11 +39,11 @@ export default function EachInfo({ itemId, itemCategory }) {
           <span>{itemQuery.data?.nickname}</span>
           <S.InfoBtnContainer>
             <S.TitleSetBtn
-              disabled={itemQuery.data?.isTitle}
               type="button"
               onClick={() => {
                 setModalIsOpen(true);
               }}
+              disabled={itemQuery.data?.isTitle || itemQuery.isLoading}
             >
               {itemQuery.data?.isTitle ? "대표아이템" : "대표 설정"}
             </S.TitleSetBtn>
@@ -52,6 +52,7 @@ export default function EachInfo({ itemId, itemCategory }) {
               onClick={() => {
                 navigate("/item/edit", { state: editObj });
               }}
+              disabled={itemQuery.isLoading}
             >
               수정
             </S.ModifyBtn>
@@ -60,7 +61,7 @@ export default function EachInfo({ itemId, itemCategory }) {
         <S.InfoContentsDiv>
           <S.ContentPart>
             <S.InfoLabel>
-              브랜드
+              {itemQuery.data?.brand !== "" ? "브랜드" : ""}
               <br />
               {itemQuery.data?.type !== "" ? "재질" : ""}
               <br />

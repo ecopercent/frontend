@@ -72,13 +72,12 @@ const useImgInput = ({ prevImg, setUploadedFile, type }) => {
 
   const onUpload = async (e) => {
     const uploadedImg = e.target.files[0];
-    const reader = new FileReader();
     const compressedImg = await imgCompress(uploadedImg);
-
     setUploadedFile(compressedImg);
 
+    const reader = new FileReader();
     reader.readAsDataURL(compressedImg);
-    reader.onloadend = () => {
+    reader.onload = () => {
       setPreview(reader.result);
     };
   };
@@ -113,14 +112,14 @@ const useImgInput = ({ prevImg, setUploadedFile, type }) => {
 
   const ImgInputForm = () => {
     return (
-      <form style={{ position: "relative" }}>
+      <div style={{ position: "relative" }}>
         <ImgLayout htmlFor={type}>
           <Opacity />
           <Overlay />
           <Preview />
         </ImgLayout>
         <ImgInput />
-      </form>
+      </div>
     );
   };
 

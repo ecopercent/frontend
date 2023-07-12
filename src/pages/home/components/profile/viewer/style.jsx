@@ -42,7 +42,7 @@ export const ProfileButtonLayout = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0px 8px;
+  padding: 0px 6px;
 
   height: 24px;
 `;
