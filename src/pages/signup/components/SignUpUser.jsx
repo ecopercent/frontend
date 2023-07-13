@@ -18,7 +18,9 @@ function SignUpUser(
   };
 
   const handleNicknameInput = (e) => {
+    const inputException = /((?![ㄱ-ㅎ|ㅏ-ㅣ|가-힣]|[a-zA-Z]).)|\n|$/g;
     lengthSliceInKorean(e);
+    e.target.value = e.target.value.replace(inputException, "");
     setUserInput({ ...userInput, nickname: e.target.value });
     if (warningText) setWarningText(null);
   };
