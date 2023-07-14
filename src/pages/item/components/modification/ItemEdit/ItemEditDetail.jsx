@@ -42,13 +42,17 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
     }
     setIsError(false);
     editCallback({
-      nickname,
+      nickname: nickname.trim(),
       type,
-      brand,
+      brand: brand.trim(),
       price,
       purchaseDate,
       goalUsageCount,
     });
+  };
+  const handleInputBlur = (e) => {
+    e.preventDefault();
+    e.target.value = e.target.value.trim();
   };
 
   return (
@@ -61,6 +65,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
           <S.Input
             value={nickname}
             onChange={onNickname}
+            onBlur={handleInputBlur}
             type="text"
             maxLength={8}
             minLength={2}
@@ -74,6 +79,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
           <S.Input
             value={brand}
             onChange={onBrand}
+            onBlur={handleInputBlur}
             type="text"
             minLength={1}
             maxLength={10}

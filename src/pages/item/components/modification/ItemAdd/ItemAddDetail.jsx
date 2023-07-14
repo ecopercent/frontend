@@ -39,13 +39,17 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
     setIsError(false);
     submitCallback({
       category,
-      nickname,
-      brand,
+      nickname: nickname.trim(),
+      brand: brand.trim(),
       price,
       purchaseDate,
       type,
       goalUsageCount,
     });
+  };
+  const handleInputBlur = (e) => {
+    e.preventDefault();
+    e.target.value = e.target.value.trim();
   };
 
   return (
@@ -58,6 +62,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
           <S.Input
             value={nickname}
             onChange={onNickname}
+            onBlur={handleInputBlur}
             type="text"
             maxLength={8}
             minLength={2}
@@ -70,6 +75,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel }) => {
           <S.Input
             value={brand}
             onChange={onBrand}
+            onBlur={handleInputBlur}
             type="text"
             minLength={1}
             maxLength={10}
