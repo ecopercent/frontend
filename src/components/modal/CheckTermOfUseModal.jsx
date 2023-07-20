@@ -7,10 +7,12 @@ const CheckTermOfUseModal = ({ onClose, onSubmit }) => {
   const [termChecked, setTermChecked] = useState(false);
   const [agreeChecked, setAgreeChecked] = useState(false);
   // const [privacyChecked, setPrivacyChecked] = useState(false);
-  const [validatedCheck, setValidatedCheck] = useState(false);
+  const [validatedCheck, setValidatedCheck] = useState(true);
   const validateCheck = useCallback(() => {
-    if (termChecked && agreeChecked) onSubmit();
-    else setValidatedCheck(false);
+    if (termChecked && agreeChecked) {
+      onClose();
+      onSubmit();
+    } else setValidatedCheck(false);
   }, [termChecked, agreeChecked]);
   useEffect(() => {
     setValidatedCheck(true);

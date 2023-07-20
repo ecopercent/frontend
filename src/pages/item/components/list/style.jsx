@@ -8,10 +8,11 @@ import * as color from "@style/color";
 
 export const ItemCategoryTabContainer = styled.div`
   width: 100%;
-  border-bottom: 0.5px solid;
 `;
 
 export const ItemListContainer = styled.div`
+  border-top: 0.5px solid;
+
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -25,6 +25,11 @@ function SignUpUser(
     if (warningText) setWarningText(null);
   };
 
+  const handleMessageInput = (e) => {
+    lengthSliceInKorean(e);
+    setUserInput({ ...userInput, profileMessage: e.target.value });
+  };
+
   return (
     <>
       <ImgInputForm />
@@ -34,7 +39,6 @@ function SignUpUser(
         </S.Label>
         <S.Input
           ref={ref}
-          minLength={2}
           maxLength={8}
           type="text"
           value={userInput.nickname}
@@ -49,10 +53,7 @@ function SignUpUser(
           type="textarea"
           maxLength={35}
           value={userInput.profileMessage}
-          onChange={(e) => {
-            lengthSliceInKorean(e);
-            setUserInput({ ...userInput, profileMessage: e.target.value });
-          }}
+          onChange={handleMessageInput}
         />
         <S.NoticeText msg>{userInput.profileMessage.length}/35</S.NoticeText>
       </S.InputItem>

@@ -23,7 +23,7 @@ export default function AllInfo({ category }) {
     total.achivedCnt = itemsQuery.data.filter((item) => {
       total.usageCnt += Number(item.currentUsageCount);
       total.goalUsageCnt += Number(item.goalUsageCount);
-      return item.usageCount >= item.goalUsageCount;
+      return item.currentUsageCount >= item.goalUsageCount;
     }).length;
     total.usagePercent = Math.round(
       (total.usageCnt / total.goalUsageCnt) * 100
@@ -67,7 +67,7 @@ export default function AllInfo({ category }) {
           <S.InfoValue>
             {total.usageCnt}회<br />
             {total.goalUsageCnt}회<br />
-            {Number.isNaN(total.achivedPercent) ? "0" : total.achivedPercent}%
+            {Number.isNaN(total.usagePercent) ? "0" : total.usagePercent}%
             <br />
           </S.InfoValue>
         </S.ContentPart>

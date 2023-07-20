@@ -77,7 +77,7 @@ export const FormInnerWrapper = styled.div`
   align-items: center;
   gap: 20px;
   @media ${media.mobile} {
-    gap: 15px;
+    gap: 12px;
   }
 
   flex: 1 1 auto;
@@ -153,15 +153,24 @@ export const ButtonWrapper = styled.div`
 
 export const SubmitBtn = styled.button`
   ${btn.green}
-  ${font.normalBtn}
+
+  ${(props) => {
+    return props.disabled && btn.disabled;
+  }}
 `;
 
 export const CancelBtn = styled.button`
   ${btn.normal}
-  ${font.normalBtn}
+
+  ${(props) => {
+    return props.disabled && btn.disabled;
+  }}
 `;
 
 export const DeleteBtn = styled.button`
   ${btn.pink}
-  ${font.normalBtn}
+
+  ${(props) => {
+    return props.disabled && btn.disabled;
+  }}
 `;

@@ -47,6 +47,10 @@ export const InfoBtnContainer = styled.div`
 export const ModifyBtn = styled.button`
   ${btn.normal}
   ${font.normalBtn}
+
+  ${(props) => {
+    return props.disabled && `color: gray; opacity: 0.7; cursor: not-allowed;`;
+  }}
 `;
 
 export const TitleSetBtn = styled.button`
@@ -57,9 +61,7 @@ export const TitleSetBtn = styled.button`
   ${(props) => {
     return (
       props.disabled &&
-      `letter-spacing: -1px;
-      font-size: 12px;
-      color: gray;`
+      `letter-spacing: -1px; font-size: 12px; color: gray; opacity: 0.7; cursor: not-allowed;`
     );
   }}
 `;

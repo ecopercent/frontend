@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import useInput from "@hooks/useInput";
 import * as S from "../style";
 
-const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
+const ItemEditDetail = ({ itemDetail, editCallback, onCancel, isMutating }) => {
   const [isError, setIsError] = useState(false);
   const [nickname, onNickname] = useInput(itemDetail.nickname);
   const [brand, onBrand] = useInput(itemDetail.brand);
-  const [price, onPrice] = useInput(itemDetail.price ?? 0);
-  const [purchaseDate, onPurchaseDate] = useInput(
+  const [price, onPrice] = useInput(itemDetail.price);
+  const priceRegExp = /^\d{0,8}$/;
+  const [purchaseDate, onPurchaseDate, setPurchaseDate] = useInput(
     itemDetail.purchaseDate ?? ""
   );
+  const today = new Date().toISOString().slice(0, 10);
   const [type, onType] = useInput(itemDetail.type ?? "");
   const [goalUsageCount, onGoalUsageCount, setGoalUsageCount] = useInput(
     itemDetail.goalUsageCount
@@ -36,7 +38,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!nickname || !nickname.trim() || !brand || !brand.trim()) {
+    if (!nickname || !nickname.trim()) {
       setIsError(true);
       return;
     }
@@ -63,24 +65,22 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
             닉네임 <span style={{ color: "red" }}>*</span>
           </S.Span>
           <S.Input
+            type="text"
             value={nickname}
             onChange={onNickname}
-            onBlur={handleInputBlur}
-            type="text"
-            maxLength={8}
+            onBlur={handleInputBlur} 
             minLength={2}
+            maxLength={8}
             placeholder={itemDetail.nickname}
           />
         </S.LabelInputSet>
         <S.LabelInputSet>
-          <S.Span>
-            브랜드 <span style={{ color: "red" }}>*</span>
-          </S.Span>
+          <S.Span>브랜드</S.Span>
           <S.Input
+            type="text"
             value={brand}
             onChange={onBrand}
             onBlur={handleInputBlur}
-            type="text"
             minLength={1}
             maxLength={10}
             placeholder={itemDetail.brand}
@@ -134,34 +134,35 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel }) => {
         <S.LabelInputSet>
           <S.Span>구입가</S.Span>
           <S.Input
+            type="number"
             value={price}
             onChange={(e) => {
-              e.preventDefault();
-              if (e.target.value.length > e.target.maxLength)
-                e.target.value = e.target.value.slice(0, e.target.maxLength);
-              e.target.value = Number(e.target.value);
-              onPrice(e);
+              if (priceRegExp.test(e.target.value)) onPrice(e);
             }}
-            maxLength={8}
-            type="number"
+            step="1000"
           />
         </S.LabelInputSet>
         <S.LabelInputSet>
           <S.Span>구입일</S.Span>
           <S.Input
-            value={purchaseDate}
-            onChange={onPurchaseDate}
             type="date"
+            value={purchaseDate}
+            onChange={(e) => {
+              if (e.target.value <= today) onPurchaseDate(e);
+              else setPurchaseDate(today);
+            }}
             placeholder={itemDetail.purchaseDate}
           />
         </S.LabelInputSet>
       </S.FormInnerWrapper>
-      {isError && <S.Error>닉네임과 브랜드는 꼭 작성해주세요!</S.Error>}
+      {isError && <S.Error>닉네임은 꼭 작성해주세요!</S.Error>}
       <S.ButtonWrapper>
-        <S.CancelBtn type="reset" onClick={onCancel}>
+        <S.CancelBtn type="reset" onClick={onCancel} disabled={isMutating}>
           취소
         </S.CancelBtn>
-        <S.SubmitBtn type="submit">저장</S.SubmitBtn>
+        <S.SubmitBtn type="submit" disabled={isMutating}>
+          저장
+        </S.SubmitBtn>
       </S.ButtonWrapper>
     </S.Form>
   );

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import * as S from "./style";
 
-export default function ProfileText({ userData, setUserData }) {
+function ProfileText({ userData, setUserData }, ref) {
   return (
-    <S.ProfileTextForm>
-      <S.ProfileTextarea
+    <S.ProfileTextBox>
+      <S.ProfileText
         value={userData.nickname}
         onChange={(e) => {
           e.preventDefault();
@@ -16,6 +16,7 @@ export default function ProfileText({ userData, setUserData }) {
         }}
         rows={1}
         maxLength={8}
+        ref={ref}
       />
       <S.ProfileTextarea
         value={userData.profileMessage}
@@ -25,6 +26,8 @@ export default function ProfileText({ userData, setUserData }) {
         rows={4}
         maxLength={35}
       />
-    </S.ProfileTextForm>
+    </S.ProfileTextBox>
   );
 }
+
+export default forwardRef(ProfileText);

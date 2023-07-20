@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { getUser, patchUser } from "src/api/user";
 import ProfileImg from "./ProfileImg";
@@ -10,9 +10,7 @@ export default function ProfileEditor({ setIsEditing }) {
   const queryClient = useQueryClient();
   const userQuery = useQuery({
     queryKey: ["user"],
-    queryFn: () => {
-      return getUser();
-    },
+    queryFn: getUser,
   });
 
   if (userQuery.isError) console.log(JSON.stringify(userQuery.error));
@@ -21,7 +19,8 @@ export default function ProfileEditor({ setIsEditing }) {
     nickname: userQuery.data.nickname,
     profileMessage: userQuery.data.profileMessage,
   });
-  const [userImgFile, setUserImgFile] = useState(userQuery.data.profileImage);
+  const nicknameRef = useRef();
+  const userImgFile = useRef(userQuery.data.profileImage);
 
   const profileEditMutation = useMutation({
     mutationFn: patchUser,
@@ -32,7 +31,14 @@ export default function ProfileEditor({ setIsEditing }) {
     },
   });
 
-  function handleSubmit() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (userData.nickname.trim().length < 2) {
+      nicknameRef.current.focus();
+      return alert("닉네임을 2자 이상 입력하세요.");
+    }
+
     const formData = new FormData();
     formData.append(
       "userData",
@@ -40,23 +46,35 @@ export default function ProfileEditor({ setIsEditing }) {
     );
     formData.append(
       "profileImage",
-      typeof userImgFile === "object" ? userImgFile : null
+      typeof userImgFile.current === "object" ? userImgFile.current : null
     );
-    profileEditMutation.mutate(formData);
-  }
+    return profileEditMutation.mutate(formData);
+  };
+
+  useEffect(() => {
+    nicknameRef.current.focus();
+  }, []);
 
   return (
-    <S.ProfileContainer>
+    <S.ProfileForm>
       <S.ProfileImgTextWrapper>
-        <ProfileImg imgFile={userImgFile} setImgFile={setUserImgFile} />
-        <ProfileText userData={userData} setUserData={setUserData} />
+        <ProfileImg
+          imgFile={userImgFile.current}
+          setImgFile={(newImg) => {
+            userImgFile.current = newImg;
+          }}
+        />
+        <ProfileText
+          userData={userData}
+          setUserData={setUserData}
+          ref={nicknameRef}
+        />
       </S.ProfileImgTextWrapper>
       <ProfileBtns
         setIsEditing={setIsEditing}
-        handleSubmit={() => {
-          return handleSubmit();
-        }}
+        handleSubmit={handleSubmit}
+        isMutating={profileEditMutation.isLoading}
       />
-    </S.ProfileContainer>
+    </S.ProfileForm>
   );
 }

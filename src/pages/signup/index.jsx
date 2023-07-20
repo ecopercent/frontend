@@ -8,14 +8,15 @@ import React, {
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
+import Spinner from "@components/Spinner";
 import SignUpUser from "./components/SignUpUser";
 import SignUpItems from "./components/SignUpItems";
 import CancelCheckModal from "@modal/CancelCheckModal";
 
+import CheckTermOfUseModal from "@components/modal/CheckTermOfUseModal";
 import { postUserOfKakao, postUserOfApple } from "src/api/user";
 import { AuthenticatedContext } from "@hooks/AuthenticatedContext";
 
-import CheckTermOfUseModal from "@components/modal/CheckTermOfUseModal";
 import { OutletWrapper } from "@layout/style";
 import * as S from "./style";
 
@@ -57,7 +58,6 @@ export default function SignUp() {
         return navigate("/");
       }
       if (code === 403) {
-        // TODO: 모달로?
         alert("회원가입 유효 시간이 만료되었습니다.");
         return navigate("/");
       }
@@ -68,15 +68,18 @@ export default function SignUp() {
       return code;
     },
   });
-  const onShowCloseCheckTermOfUseModal = () => {
-    if (userInput.nickname.length === 0) {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (userInput.nickname.trim().length < 2) {
       nicknameRef.current.focus();
-      return setWarningText("닉네임을 입력하세요.");
+      return setWarningText("닉네임을 2자 이상 입력하세요.");
     }
     return setShowCheckTermOfUseModal(true);
   };
 
-  const handleSubmit = () => {
+  const handleMutate = () => {
     const formData = new FormData();
     formData.append(
       "userData",
@@ -116,7 +119,9 @@ export default function SignUp() {
     setCancelCheckModalIsOpen(true);
   };
 
-  return (
+  return signUpMutation.isLoading || signUpMutation.isPaused ? (
+    <Spinner size="50px" />
+  ) : (
     <OutletWrapper fixedWidth fullHeight>
       {cancelCheckModalIsOpen && (
         <CancelCheckModal
@@ -132,7 +137,7 @@ export default function SignUp() {
 
       <S.SignUpContainer>
         <S.SignUpLayoutCol>
-          <S.InputList>
+          <S.SignUpForm onSubmit={handleSubmit}>
             <SignUpUser
               userInput={userInput}
               setUserInput={setUserInput}
@@ -152,17 +157,17 @@ export default function SignUp() {
               setItemsInput={setItemsInput}
             />
             <S.SubmitBtnsBox>
-              <S.Btn onClick={handleClick}>취소</S.Btn>
-              <S.Btn featured onClick={onShowCloseCheckTermOfUseModal}>
-                등록
+              <S.Btn type="reset" onClick={handleClick}>
+                취소
               </S.Btn>
+              <S.Btn featured>등록</S.Btn>
             </S.SubmitBtnsBox>
-          </S.InputList>
+          </S.SignUpForm>
         </S.SignUpLayoutCol>
         {showCheckTermOfUseModal && (
           <CheckTermOfUseModal
             onClose={onCloseCheckTermOfUseModal}
-            onSubmit={handleSubmit}
+            onSubmit={handleMutate}
           />
         )}
       </S.SignUpContainer>

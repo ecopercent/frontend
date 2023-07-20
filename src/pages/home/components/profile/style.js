@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const ProfileContainer = styled.div`
+const ProfileLayout = `
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,6 +12,14 @@ export const ProfileContainer = styled.div`
   height: 180px;
   margin: 0 auto;
   border-bottom: 0.5px solid;
+`;
+
+export const ProfileContainer = styled.div`
+  ${ProfileLayout}
+`;
+
+export const ProfileForm = styled.form`
+  ${ProfileLayout}
 `;
 
 export const ProfileImgTextWrapper = styled.div`

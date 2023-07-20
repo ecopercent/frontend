@@ -28,7 +28,7 @@ export const normal = `
 
 export const disabled = `
   ${normal}
-  opacity: 0.5;
+  opacity: 0.7;
   color: gray;
   cursor: not-allowed;
 `;
@@ -51,4 +51,11 @@ export const profile = `
 export const profileGreen = `
   ${profile}
   background: ${color.lightGreen};
+`;
+
+export const profileDisabled = `
+  ${profile}
+  opacity: 0.7;
+  color: gray;
+  cursor: not-allowed;
 `;

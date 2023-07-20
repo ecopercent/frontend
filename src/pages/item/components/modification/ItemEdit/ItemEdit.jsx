@@ -69,6 +69,7 @@ const ItemEditOnAuth = () => {
       onSubmit={editItemOnAuth}
       onUploadImg={setItemImgFile}
       displayDeleteBtn
+      isMutating={itemEditMutation.isLoading}
     />
   );
 };
@@ -81,6 +82,7 @@ export const ItemEdit = ({
   onSubmit,
   onUploadImg,
   displayDeleteBtn,
+  isMutating,
 }) => {
   const [showdeleteItemModal, setShowdeleteItemModal] = useState(false);
   const onCloseModal = useCallback(() => {
@@ -96,6 +98,7 @@ export const ItemEdit = ({
               item={item}
               setShowdeleteItemModal={setShowdeleteItemModal}
               displayDeleteBtn={displayDeleteBtn}
+              isMutating={isMutating}
             />
             <ItemImage
               imgFile={itemImg}
@@ -107,6 +110,7 @@ export const ItemEdit = ({
               itemDetail={item}
               editCallback={onSubmit}
               onCancel={onCancel}
+              isMutating={isMutating}
             />
             {showdeleteItemModal && (
               <DeleteItemModal onClose={onCloseModal} item={item} />
