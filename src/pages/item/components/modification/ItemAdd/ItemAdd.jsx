@@ -20,6 +20,11 @@ const ItemAddOnAuth = () => {
       await queryClient.refetchQueries([`${item.category}`, "list"]);
       navigate("/item", { state: { item: res.id, category: item.category } });
     },
+    onError: (code) => {
+      if (code.response.status === 400) {
+        alert("잘못된 양식을 제출했어요!");
+      }
+    },
   });
 
   const itemImgFile = useRef(null);
