@@ -44,13 +44,16 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel, isMutating }) => {
     }
     setIsError(false);
     editCallback({
-      nickname,
+      nickname: nickname.trim(),
       type,
-      brand,
+      brand: brand.trim(),
       price,
       purchaseDate,
       goalUsageCount,
     });
+  };
+  const handleInputBlur = (e) => {
+    e.target.value = e.target.value.trim();
   };
 
   return (
@@ -64,6 +67,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel, isMutating }) => {
             type="text"
             value={nickname}
             onChange={onNickname}
+            onBlur={handleInputBlur} 
             minLength={2}
             maxLength={8}
             placeholder={itemDetail.nickname}
@@ -75,6 +79,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel, isMutating }) => {
             type="text"
             value={brand}
             onChange={onBrand}
+            onBlur={handleInputBlur}
             minLength={1}
             maxLength={10}
             placeholder={itemDetail.brand}

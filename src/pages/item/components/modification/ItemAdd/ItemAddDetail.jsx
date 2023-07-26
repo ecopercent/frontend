@@ -41,13 +41,17 @@ const ItemAddDetail = ({ category, submitCallback, onCancel, isMutating }) => {
     setIsError(false);
     submitCallback({
       category,
-      nickname,
-      brand,
+      nickname: nickname.trim(),
+      brand: brand.trim(),
       price,
       purchaseDate,
       type,
       goalUsageCount,
     });
+  };
+  const handleInputBlur = (e) => {
+    e.preventDefault();
+    e.target.value = e.target.value.trim();
   };
 
   return (
@@ -61,6 +65,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel, isMutating }) => {
             type="text"
             value={nickname}
             onChange={onNickname}
+            onBlur={handleInputBlur}
             minLength={2}
             maxLength={8}
           />
@@ -71,6 +76,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel, isMutating }) => {
             type="text"
             value={brand}
             onChange={onBrand}
+            onBlur={handleInputBlur}
             minLength={1}
             maxLength={10}
           />

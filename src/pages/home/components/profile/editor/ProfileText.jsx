@@ -7,6 +7,11 @@ function ProfileText({ userData, setUserData }, ref) {
       <S.ProfileText
         value={userData.nickname}
         onChange={(e) => {
+          e.preventDefault();
+          const inputException = /((?![ㄱ-ㅎ|ㅏ-ㅣ|가-힣]|[a-zA-Z]).)|\n|$/g;
+          if (e.target.value.length > 8)
+            e.target.value = e.target.value.slice(0, 8);
+          e.target.value = e.target.value.replace(inputException, "");
           setUserData({ ...userData, nickname: e.target.value });
         }}
         rows={1}

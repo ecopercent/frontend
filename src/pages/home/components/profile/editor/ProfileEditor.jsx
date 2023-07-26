@@ -29,6 +29,11 @@ export default function ProfileEditor({ setIsEditing }) {
       queryClient.refetchQueries(["user"]);
       setIsEditing();
     },
+    onError: (code) => {
+      if (code.response.status === 400) {
+        alert("잘못된 양식을 제출했어요!");
+      }
+    },
   });
 
   const handleSubmit = (e) => {
