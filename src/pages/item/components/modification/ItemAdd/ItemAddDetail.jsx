@@ -128,7 +128,7 @@ const ItemAddDetail = ({ category, submitCallback, onCancel, isMutating }) => {
           <S.Span>구입일</S.Span>
           <S.Input
             type="date"
-            max={today}
+            max="9999-01-01"
             value={purchaseDate}
             onChange={(e) => {
               if (e.target.value <= today) onPurchaseDate(e);

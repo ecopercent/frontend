@@ -141,6 +141,7 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel, isMutating }) => {
           <S.Input
             type="date"
             value={purchaseDate}
+            max="9999-01-01"
             onChange={(e) => {
               if (e.target.value <= today) onPurchaseDate(e);
               else setPurchaseDate(today);
