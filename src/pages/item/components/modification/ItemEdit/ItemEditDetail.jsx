@@ -53,7 +53,6 @@ const ItemEditDetail = ({ itemDetail, editCallback, onCancel, isMutating }) => {
     });
   };
   const handleInputBlur = (e) => {
-    e.preventDefault();
     e.target.value = e.target.value.trim();
   };
 
